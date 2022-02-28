@@ -8,7 +8,7 @@ class Login extends React.Component {
       <div className="login">
         <h1 className="logo">
           <GiThreeFriends className="icon" />
-          Fresher Friend.
+          Fresher Friend
         </h1>
         <h2>Connecting UoB students</h2>
         <form className="loginForm">
@@ -26,7 +26,7 @@ class Login extends React.Component {
               placeholder="Password"
             />
           </div>
-          <button type="submit" class="btn btn-primary">Log In</button>
+          <button type="submit" class="loginButton btn btn-primary">Log In</button>
           <p><a href="#">Forgot password</a></p>
         </form>
         <hr/>
