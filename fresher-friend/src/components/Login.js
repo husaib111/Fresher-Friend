@@ -8,6 +8,8 @@ class Login extends React.Component {
       <div className="login">
         <h1 className="logo">
           <GiThreeFriends className="icon" />
+        </h1>
+        <h1>
           Fresher Friend
         </h1>
         <h2>Connecting UoB students</h2>
