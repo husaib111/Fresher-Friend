@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import AccountCreation from "./components/AccountCreation";
+//import AccountCreation from "./components/AccountCreation";
 
 ReactDOM.render(
   <React.StrictMode>
