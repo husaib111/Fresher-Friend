@@ -32,7 +32,7 @@ class Login extends React.Component {
         <hr/>
         <div className="createAccount">
           <p>New here?</p>
-          <button class="btn btn-primary">Create an Account</button>
+          <button className="btn btn-primary">Create an Account</button>
         </div>
       </div>
     );
