@@ -1,42 +1,42 @@
 * {
-  !font-family: "Fredoka", sans-serif;
+  font-family: "Fredoka", sans-serif;
   font-weight: 300;
 }
-.login{
+.login {
   text-align: center;
 }
 
-.logo{
-  font-size:4em;
+.logo {
+  font-size: 4em;
 }
-.loginForm{
-  margin:0 auto;
-  padding:4% 3% 1% 3%;
-  width:90%;
-  background-color:#dddddd;
+.loginForm {
+  margin: 0 auto;
+  padding: 4% 3% 1% 3%;
+  width: 90%;
+  background-color: #dddddd;
   border-radius: 10%;
 }
 
-.loginButton{
-  margin:2%;
+.loginButton {
+  margin: 2%;
 }
 
-hr{
-  width:95%;
-  margin:3% auto;
+hr {
+  width: 95%;
+  margin: 3% auto;
 }
 
 /* for desktop: */
 @media only screen and (min-width: 768px) {
-  .loginForm{
-    margin:0 auto;
-    padding:2% 3%;
-    width:50%;
-    background-color:#dddddd;
+  .loginForm {
+    margin: 0 auto;
+    padding: 2% 3%;
+    width: 50%;
+    background-color: #dddddd;
     border-radius: 10%;
   }
-  hr{
-    width:70%;
-    margin:2% auto;
+  hr {
+    width: 70%;
+    margin: 2% auto;
   }
 }
