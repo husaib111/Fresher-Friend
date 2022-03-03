@@ -20,7 +20,7 @@ build-server-job:
   script:
     - echo "Compiling the server code..."
     - cd server
-    - npm --version
+#    - npm --version
     - echo "Done"
 build-client-job: # This job runs in the build stage, which runs first.
   stage: build
