@@ -2,8 +2,6 @@
 # It demonstrates a basic 3 stage CI/CD pipeline. Instead of real tests or scripts,
 # it uses echo commands to simulate the pipeline execution.
 
-image: node:latest
-
 # services:
 #   - postgres:latest
 
