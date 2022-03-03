@@ -2,8 +2,6 @@
 # It demonstrates a basic 3 stage CI/CD pipeline. Instead of real tests or scripts,
 # it uses echo commands to simulate the pipeline execution.
 
-# image: node:17.5.0
-
 # services:
 #   - postgres:latest
 
@@ -15,15 +13,13 @@ stages: # List of stages for jobs, and their order of execution
 - build
 - test
 - deploy
-build-server-job: # This job runs in the build stage, which runs first.
+build-server-job:
   stage: build
   script:
     - echo "Compiling the server code..."
-    - npm --version
     - cd server
-    - npm --version
-    - npm install
-    - echo "Compile complete."
+#    - npm --version
+    - echo "Done"
 build-client-job: # This job runs in the build stage, which runs first.
   stage: build
   script:
@@ -48,5 +44,6 @@ deploy-job: # This job runs in the deploy stage.
   script:
   - echo "Deploying application..."
   - cd client
+  - npm install
   - serve -s build
   - echo "Application successfully deployed."
