@@ -21,7 +21,6 @@ build-server-job: # This job runs in the build stage, which runs first.
     - echo "Compiling the server code..."
     - cd server
     - npm install
-    - node index
     - echo "Compile complete."
 build-client-job: # This job runs in the build stage, which runs first.
   stage: build
