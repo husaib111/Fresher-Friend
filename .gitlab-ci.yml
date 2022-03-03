@@ -44,5 +44,6 @@ deploy-job: # This job runs in the deploy stage.
   script:
   - echo "Deploying application..."
   - cd client
+  - npm install
   - serve -s build
   - echo "Application successfully deployed."
