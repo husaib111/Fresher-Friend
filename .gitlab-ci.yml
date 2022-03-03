@@ -27,7 +27,7 @@ build-client-job: # This job runs in the build stage, which runs first.
   stage: build
   script:
     - echo "Compiling the client code..."
-      cd client
+    - cd client
     - npm install
     - npm run build
     - echo "Compile complete."
