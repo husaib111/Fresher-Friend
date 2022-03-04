@@ -54,9 +54,6 @@ lint-test-job: # This job also runs in the test stage.
 #    - ssh -o StrictHostKeyChecking=no root@$SSH_IP cd /var/www
  
 deploy_production:
-  only:
-    refs:
-      - master
   stage: deploy
   environment: Production
   script:
