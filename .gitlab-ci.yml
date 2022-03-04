@@ -1,7 +1,7 @@
 # This is a sample GitLab CI/CD configuration file that should run without any modifications.
 # It demonstrates a basic 3 stage CI/CD pipeline. Instead of real tests or scripts,
 # it uses echo commands to simulate the pipeline execution.
-image: node:latest-alpine
+image: node:latest
 
 # services:
 #   - postgres:latest
