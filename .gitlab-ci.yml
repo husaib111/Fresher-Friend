@@ -48,6 +48,5 @@ deploy-job: # This job runs in the deploy stage.
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - ssh-add 
-    - ssh -o StrictHostKeyChecking=no root@$SERVER_IP
-    - ls -la
+    - ssh -o StrictHostKeyChecking=no root@$SERVER_IP "ls -la"
 
