@@ -3,7 +3,7 @@ const pg = require("pg");
 
 const config = {
   user: "api",
-  host: "postgres",
+  host: "localhost",
   database: "api",
   password: "password",
   port: 5432,
@@ -17,7 +17,7 @@ const getUsers = (request, response) => {
       console.log(pool);
       throw err;
     }
-    response.json(JSON.stringify(results.rows));
+    response.status(200).json(results.rows);
   });
 };
 
