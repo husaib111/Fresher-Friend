@@ -43,4 +43,4 @@ deploy-job: # This job runs in the deploy stage.
   script:
     - cd server
     - npm install
-    - node server/index.js
+    - node index.js
