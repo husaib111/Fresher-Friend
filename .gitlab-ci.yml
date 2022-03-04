@@ -40,10 +40,6 @@ deploy-job: # This job runs in the deploy stage.
   stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
   environment:
     name: production
-    url: https://46.101.81.7/
+    url: http://46.101.81.7/
   script:
-    - echo "Deploying application..."
-    - cd client
-    - npm install
-    - npx pm2 serve build 8082 --spa
-    - echo "Application successfully deployed."
+    - bash deploy/deploy.sh
