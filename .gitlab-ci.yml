@@ -7,7 +7,7 @@ image: node:alpine
 
 stages:
   - build
-  - test
+#  - test
   - deploy
 
 build-server-job:
@@ -26,20 +26,20 @@ build-client-job: # This job runs in the build stage, which runs first.
     - npm install
     - npm run build
     - echo "Compile complete."
-unit-test-job: # This job runs in the test stage.
-  stage: test # It only starts when the job in the build stage completes successfully.
-  script:
-    - echo "Unit tests would go here..."
-lint-test-job: # This job also runs in the test stage.
-  stage: test # It can run at the same time as unit-test-job (in parallel).
-  script:
-    - echo "Linting code... This will take about 10 seconds."
-    - sleep 10
-    - echo "No lint issues found."
+#unit-test-job: # This job runs in the test stage.
+#  stage: test # It only starts when the job in the build stage completes successfully.
+#  script:
+#    - echo "Unit tests would go here..."
+#lint-test-job: # This job also runs in the test stage.
+#  stage: test # It can run at the same time as unit-test-job (in parallel).
+#  script:
+#    - echo "Linting code... This will take about 10 seconds."
+#    - sleep 10
+#    - echo "No lint issues found."
 deploy-job: # This job runs in the deploy stage.
   stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
   environment:
     name: production
     url: http://46.101.81.7/
   script:
-    - bash server/deploy/deploy.sh
+    - ./server/deploy/deploy.sh
