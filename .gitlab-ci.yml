@@ -44,7 +44,8 @@ before_script:
   - eval $(ssh-agent -s)
   - ssh-add <(echo "$SSH_PRIVATE_KEY")
   - mkdir -p ~/.ssh
-  - apt install npm -y
+  - apt install curl
+  - curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
 deploy-job: # This job runs in the deploy stage.
