@@ -42,4 +42,4 @@ deploy-job: # This job runs in the deploy stage.
     name: production
     url: http://46.101.81.7/
   script:
-    - bash deploy/deploy.sh
+    - bash server/deploy/deploy.sh
