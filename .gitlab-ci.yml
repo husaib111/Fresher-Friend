@@ -1,49 +1,90 @@
-# This is a sample GitLab CI/CD configuration file that should run without any modifications.
-# It demonstrates a basic 3 stage CI/CD pipeline. Instead of real tests or scripts,
-# it uses echo commands to simulate the pipeline execution.
+image: customregistry/docker-builder:latest
 
-# services:
-#   - postgres:latest
+variables:
+  dockerTag: '$CI_BUILD_REF'
+  DOCKER_REPO: customregistry
+  IMAGE_BASE_NAME: redis-faas
+  IMAGE: $EVISTA_DOCKER_REPO/$IMAGE_BASE_NAME:$CI_BUILD_REF
+  CONTAINER_NAME: 'fotok-redis-pipeline'
+  TARGET_DIR_STAGE: /srv/docker/staging/redis-faas
+  TARGET_DIR_PROD: /srv/docker/prod/redis-faas
 
-cache:
-  paths:
-    - node_modules/
 
-stages: # List of stages for jobs, and their order of execution
-- build
-- test
-- deploy
-build-server-job:
-  stage: build
+before_script:
+- echo $dockerTag
+- echo $DOCKER_CERT > cert.ca
+- eval $(ssh-agent -s)
+- ssh-add <(echo "$ID_RSA")
+- mkdir -p ~/.ssh
+- '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+build:
+  type: build
+  tags:
+  - docker-in-docker-pure-builder
   script:
-    - echo "Compiling the server code..."
-    - cd server
-#    - npm --version
-    - echo "Done"
-build-client-job: # This job runs in the build stage, which runs first.
-  stage: build
+  # build test images
+  - docker build -t $IMAGE .
+  only:
+  - master
+  - production
+
+test:
+  type: test
+  variables:
+    ERROR_PATH: /tmp/example_pipeline_testresults
+  tags:
+  - docker-in-docker-builder  
   script:
-    - echo "Compiling the client code..."
-    - cd client
-    - npm --version
-    - npm install
-    - npm run build
-    - echo "Compile complete."
-unit-test-job: # This job runs in the test stage.
-  stage: test # It only starts when the job in the build stage completes successfully.
+  # created directory for errored pages
+  - mkdir -p ${ERROR_PATH} || true
+   # start the previously built container
+  - docker run -d --add-host 'localhost localhost.localdomain localtest:127.0.0.1' -v ${ERROR_PATH}:/app/tests/_output --name ${CONTAINER_NAME} ${IMAGE}
+  # actually run tests
+  - docker exec ${CONTAINER_NAME} /app/runtests.sh
+  only:
+  - master
+  - production
+
+
+deploy_stage:
+  type: deploy
+  variables:
+    RELEASE_IMAGE: $DOCKER_REPO/$IMAGE_BASE_NAME:latest
+    DOCKER_COMPOSE_CMD: cd $TARGET_DIR_STAGE && docker-compose 
+  tags:
+    - docker-in-docker-builder
   script:
-  - echo "Unit tests would go here..."
-lint-test-job: # This job also runs in the test stage.
-  stage: test # It can run at the same time as unit-test-job (in parallel).
+  # tag the final image (the previous test image is built upon the test image file)
+  - docker tag $IMAGE $IMAGE
+  - docker --tlscacert cert.ca push $IMAGE
+  # tag the full image as lastest and push it
+  - docker tag $IMAGE $RELEASE_IMAGE
+  - docker --tlscacert cert.ca push $RELEASE_IMAGE
+  # deploy the images
+  - ssh user@someserver.com -p2224 "docker pull $RELEASE_IMAGE"
+  - ssh user@someserver.com -p2224 "${DOCKER_COMPOSE_CMD} stop"
+  - ssh user@someserver.com -p2224 "${DOCKER_COMPOSE_CMD} up -d"
+  only:
+  - master
+
+deploy_production:
+  type: deploy
+  variables:
+    RELEASE_IMAGE: $DOCKER_REPO/$IMAGE_BASE_NAME:stable
+    DOCKER_COMPOSE_CMD: cd $TARGET_DIR_PROD && docker-compose 
+  tags:
+    - docker-in-docker-builder
   script:
-  - echo "Linting code... This will take about 10 seconds."
-  - sleep 10
-  - echo "No lint issues found."
-deploy-job: # This job runs in the deploy stage.
-  stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
-  script:
-  - echo "Deploying application..."
-  - cd client
-  - npm install
-  - serve -s build
-  - echo "Application successfully deployed."
+  # tag the final image (the previous test image is built upon the test image file)
+  - docker tag $IMAGE $IMAGE
+  - docker --tlscacert cert.ca push $IMAGE
+  # tag the full image as lastest and push it
+  - docker tag $IMAGE $RELEASE_IMAGE
+  - docker --tlscacert cert.ca push $RELEASE_IMAGE
+  # deploy the images
+  - ssh user@someserver.com -p2224 "docker pull $RELEASE_IMAGE"
+  - ssh user@someserver.com -p2224 "${DOCKER_COMPOSE_CMD} stop"
+  - ssh user@someserver.com -p2224 "${DOCKER_COMPOSE_CMD} up -d"
+  only:
+  - production
