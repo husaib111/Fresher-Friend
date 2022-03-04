@@ -15,6 +15,7 @@ build-server-job:
   script:
     - echo "Compiling the server code..."
     - cd server
+    - npm --version
     - npm install
     - echo "Done"
 build-client-job: # This job runs in the build stage, which runs first.
@@ -36,13 +37,13 @@ lint-test-job: # This job also runs in the test stage.
     - echo "Linting code... This will take about 10 seconds."
     - sleep 10
     - echo "No lint issues found."
+
 deploy-job: # This job runs in the deploy stage.
   stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
   environment:
     name: production
     url: https://46.101.81.7/
   script:
-    - echo "Deploying application..."
-    - cd client
-    - npx pm2 serve build 8082 --spa
-    - echo "Application successfully deployed."
+    - cd server
+    - npm install
+    - nodemon index
