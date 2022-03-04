@@ -65,5 +65,5 @@ deploy_production:
     - cd build/
     - ls
     - sshpass -V
-    - #export SSHPASS=$USER_PASS
+    #- export SSHPASS=$USER_PASS
     - ssh -e rsync -r --omit-dir-times -e "ssh -o StrictHostKeyChecking=no" . $SSH_USERNAME@$SSH_IP:/var/www/team10-21
