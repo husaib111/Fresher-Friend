@@ -35,7 +35,7 @@ lint-test-job: # This job also runs in the test stage.
   stage: test # It can run at the same time as unit-test-job (in parallel).
   script:
     - echo "Linting code... This will take about 10 seconds."
-    - sleep 10
+    - sleep 1
     - echo "No lint issues found."
 
 deploy-job: # This job runs in the deploy stage.
@@ -48,6 +48,6 @@ deploy-job: # This job runs in the deploy stage.
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - ssh-add 
-    - ssh -i $SSH_PRIVATE_KEY $SSH_USERNAME@$SSH_IP
+    - ssh -o StrictHostKeyChecking=no root@$SERVER_IP
     - ls -la
-    - nodemon index
+
