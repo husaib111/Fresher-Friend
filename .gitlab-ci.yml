@@ -42,5 +42,5 @@ deploy-job: # This job runs in the deploy stage.
   - echo "Deploying application..."
   - cd client
   - npm install
-  - serve -s build
+  - npx pm2 serve build 8082 --spa 
   - echo "Application successfully deployed."
