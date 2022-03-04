@@ -9,6 +9,11 @@ variables:
   TARGET_DIR_STAGE: /srv/docker/staging/redis-faas
   TARGET_DIR_PROD: /srv/docker/prod/redis-faas
 
+stages:
+  - build
+  - test
+  - deploy
+
 
 before_script:
 - echo $dockerTag
@@ -19,18 +24,15 @@ before_script:
 - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
 build:
-  type: build
+  stage: build
   tags:
   - docker-in-docker-pure-builder
   script:
   # build test images
   - docker build -t $IMAGE .
-  only:
-  - master
-  - production
 
 test:
-  type: test
+  stage: test
   variables:
     ERROR_PATH: /tmp/example_pipeline_testresults
   tags:
@@ -42,13 +44,9 @@ test:
   - docker run -d --add-host 'localhost localhost.localdomain localtest:127.0.0.1' -v ${ERROR_PATH}:/app/tests/_output --name ${CONTAINER_NAME} ${IMAGE}
   # actually run tests
   - docker exec ${CONTAINER_NAME} /app/runtests.sh
-  only:
-  - master
-  - production
-
 
 deploy_stage:
-  type: deploy
+  stage: deploy
   variables:
     RELEASE_IMAGE: $DOCKER_REPO/$IMAGE_BASE_NAME:latest
     DOCKER_COMPOSE_CMD: cd $TARGET_DIR_STAGE && docker-compose 
@@ -65,11 +63,10 @@ deploy_stage:
   - ssh user@someserver.com -p2224 "docker pull $RELEASE_IMAGE"
   - ssh user@someserver.com -p2224 "${DOCKER_COMPOSE_CMD} stop"
   - ssh user@someserver.com -p2224 "${DOCKER_COMPOSE_CMD} up -d"
-  only:
-  - master
+
 
 deploy_production:
-  type: deploy
+  stage: deploy
   variables:
     RELEASE_IMAGE: $DOCKER_REPO/$IMAGE_BASE_NAME:stable
     DOCKER_COMPOSE_CMD: cd $TARGET_DIR_PROD && docker-compose 
@@ -86,5 +83,3 @@ deploy_production:
   - ssh user@someserver.com -p2224 "docker pull $RELEASE_IMAGE"
   - ssh user@someserver.com -p2224 "${DOCKER_COMPOSE_CMD} stop"
   - ssh user@someserver.com -p2224 "${DOCKER_COMPOSE_CMD} up -d"
-  only:
-  - production
