@@ -16,13 +16,15 @@ stages: # List of stages for jobs, and their order of execution
 - deploy
 build-server-job:
   stage: build
+  image: node:17.5.0
   script:
     - echo "Compiling the server code..."
     - cd server
-#    - npm --version
+    - npm --version
     - echo "Done"
 build-client-job: # This job runs in the build stage, which runs first.
   stage: build
+  image: node:17.5.0
   script:
     - echo "Compiling the client code..."
     - cd client
@@ -32,17 +34,20 @@ build-client-job: # This job runs in the build stage, which runs first.
     - echo "Compile complete."
 unit-test-job: # This job runs in the test stage.
   stage: test # It only starts when the job in the build stage completes successfully.
+  image: node:17.5.0
   script:
   - echo "Unit tests would go here..."
+  - npm --version
 lint-test-job: # This job also runs in the test stage.
   stage: test # It can run at the same time as unit-test-job (in parallel).
+  image: node:17.5.0
   script:
   - echo "Linting code... This will take about 10 seconds."
-  - sleep 10
+  - npm --version
   - echo "No lint issues found."
 deploy-job: # This job runs in the deploy stage.
   stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
-  image: node:latest
+  image: node:17.5.0
   script:
   - npm --version
   - echo "Deploying application..."
