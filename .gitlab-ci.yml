@@ -11,6 +11,7 @@ stages:
   - deploy
 
 build-server-job:
+  stage: build
   script:
     - echo "Compiling the server code..."
     - cd server
