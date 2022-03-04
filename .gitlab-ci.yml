@@ -1,4 +1,8 @@
 image: node:latest
+
+variables:
+  SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
+
 stages:
   - build
   - deploy
