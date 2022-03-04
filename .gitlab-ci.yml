@@ -44,7 +44,7 @@ before_script:
   - eval $(ssh-agent -s)
   - ssh-add <(echo "$SSH_PRIVATE_KEY")
   - mkdir -p ~/.ssh
-  - apt-get install nodejs
+  - apt-get install nodejs -y
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
 deploy-job: # This job runs in the deploy stage.
