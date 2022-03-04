@@ -38,15 +38,9 @@ lint-test-job: # This job also runs in the test stage.
     - echo "No lint issues found."
 deploy-job: # This job runs in the deploy stage.
   stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
-  before_script:
-    - eval $(ssh -agent -s)
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" | tr -d ’\r’ > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - ssh-add
-    - ssh -o StrictHostKeyChecking=no root@$SERVER_IPADDRESS apt install -y tomcat9
-    - ssh -o StrictHostKeyChecking=no root@$SERVER_IPADDRESS ufw allow 8080
+  environment:
+    name: production
+    url: https://46.101.81.7/
   script:
     - echo "Deploying application..."
     - cd client
