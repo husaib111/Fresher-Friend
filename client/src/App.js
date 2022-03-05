@@ -6,7 +6,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Link,
+  //Link,
 } from "react-router-dom";
 
 class App extends React.Component {
