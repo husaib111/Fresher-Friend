@@ -1,24 +1,19 @@
 import "./App.css";
 import React from 'react';
-import Login from "./components/Login"
-import HomePage from "./components/HomePage"
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Link,
-} from "react-router-dom";
+import { GiThreeFriends } from "react-icons/gi";
 
 class App extends React.Component {
   render(){
     return (
-      <Router>
-        <Routes>
-          <Route path="/" element={<HomePage/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/404" element={<Login/>} />
-        </Routes>
-      </Router>
+      <div className="App">
+        <h1 className="title">
+          <GiThreeFriends className="icon" />
+          Welcome to Fresher Friend.
+        </h1>
+        <h2>
+          This is Reuben's test
+        </h2>
+      </div>
     );
   } 
 }
