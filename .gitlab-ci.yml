@@ -1,7 +1,6 @@
 # This is a sample GitLab CI/CD configuration file that should run without any modifications.
 # It demonstrates a basic 3 stage CI/CD pipeline. Instead of real tests or scripts,
 # it uses echo commands to simulate the pipeline execution.
-image: node:alpine
 # services:
 #   - postgres:latest
 
@@ -10,12 +9,19 @@ stages:
   - test
   - deploy
 
+before-script:
+  stage: deploy
+  script:
+    - cd /var/www/team10-21
+    - git pull "https://team10-21:glpat--d6rb-Nhhb_srB2sMkDH@git-teaching.cs.bham.ac.uk/mod-team-project-2021/team10-21.git"
+
 build-server-job:
   stage: build
   script:
     - echo "Compiling the server code..."
     - cd server
     - npm --version
+    - npm install
     - echo "Done"
 build-client-job: # This job runs in the build stage, which runs first.
   stage: build
@@ -33,14 +39,16 @@ unit-test-job: # This job runs in the test stage.
 lint-test-job: # This job also runs in the test stage.
   stage: test # It can run at the same time as unit-test-job (in parallel).
   script:
-    - echo "Linting code... This will take about 10 seconds."
-    - sleep 10
+    - echo "Linting code... This will take about 1 second."
+    - sleep 1
     - echo "No lint issues found."
-
 
 deploy-job: # This job runs in the deploy stage.
   stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
   script:
-    - cd server
+    - cd /var/www/team10-21
+    - cd client
     - npm install
-    - node index.js
+    - npm run build
+    - serve -s build
+ 

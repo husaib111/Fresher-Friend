@@ -1,7 +1,15 @@
-#!/usr/bin/env nodejs
-var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(8080, 'localhost');
-console.log('Server running at http://localhost:8080/');
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const db = require("./queries");
+
+const port = 5001;
+
+app.use(cors());
+app.use(express.json()); //req.body
+
+app.listen(port, () => {
+  console.log("Server started on port %d", port);
+});
+
+app.get("/users", db.getUsers);
