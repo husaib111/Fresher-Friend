@@ -29,7 +29,7 @@ class Login extends React.Component {
             />
           </div>
           <button type="submit" class="loginButton btn btn-primary">Log In</button>
-          <p><a href="#">Forgot password</a></p>
+          <p><a href="/login">Forgot password</a></p>
         </form>
         <hr/>
         <div className="createAccount">
