@@ -10,11 +10,6 @@ stages:
   - pre-deploy
   - deploy
 
-before-script:
-  stage: pre-deploy
-  script:
-    - cd /var/www/team10-21
-    - git pull "https://team10-21:glpat--d6rb-Nhhb_srB2sMkDH@git-teaching.cs.bham.ac.uk/mod-team-project-2021/team10-21.git"
 
 build-server-job:
   stage: build
@@ -43,6 +38,13 @@ lint-test-job: # This job also runs in the test stage.
     - echo "Linting code... This will take about 1 second."
     - sleep 1
     - echo "No lint issues found."
+
+pre-deploy-job:
+  stage: pre-deploy
+  script:
+    - cd /var/www/team10-21
+    - git stash
+    - git pull "https://team10-21:glpat--d6rb-Nhhb_srB2sMkDH@git-teaching.cs.bham.ac.uk/mod-team-project-2021/team10-21.git"
 
 deploy-job: # This job runs in the deploy stage.
   stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
