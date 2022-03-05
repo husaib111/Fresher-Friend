@@ -10,6 +10,7 @@ stages:
   - deploy
 
 before-script:
+  stage: build
   script:
     - cd /var/www/team10-21
     - git pull "https://team10-21:glpat--d6rb-Nhhb_srB2sMkDH@git-teaching.cs.bham.ac.uk/mod-team-project-2021/team10-21.git"
