@@ -1,7 +1,6 @@
 # This is a sample GitLab CI/CD configuration file that should run without any modifications.
 # It demonstrates a basic 3 stage CI/CD pipeline. Instead of real tests or scripts,
 # it uses echo commands to simulate the pipeline execution.
-image: node:alpine
 # services:
 #   - postgres:latest
 
@@ -10,8 +9,6 @@ stages:
   - test
   - deploy
 
-before_script:
-  - apt-get update -qq && apt-get install -y -qq sshpass rsync
 
 build-server-job:
   stage: build
@@ -37,19 +34,15 @@ unit-test-job: # This job runs in the test stage.
 lint-test-job: # This job also runs in the test stage.
   stage: test # It can run at the same time as unit-test-job (in parallel).
   script:
-    - echo "Linting code... This will take about 10 seconds."
+    - echo "Linting code... This will take about 1 second."
     - sleep 1
     - echo "No lint issues found."
 
 deploy-job: # This job runs in the deploy stage.
   stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
   script:
-    - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
-    - eval $(ssh-agent -s)
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - ssh-add 
-    - ssh -o StrictHostKeyChecking=no root@$SSH_IP "cd /var/www"
+    - cd /var/www/team10-21
+    - cd client
+    - sudo npm run build
+    - serve -s build
  
