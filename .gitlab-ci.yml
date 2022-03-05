@@ -46,12 +46,13 @@ pre-deploy-job:
     - git stash
     - git pull "https://team10-21:glpat--d6rb-Nhhb_srB2sMkDH@git-teaching.cs.bham.ac.uk/mod-team-project-2021/team10-21.git"
 
-deploy-job: # This job runs in the deploy stage.
+deploy-client-job: # This job runs in the deploy stage.
   stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
   script:
     - cd /var/www/team10-21
     - cd client
     - npm install
     - npm run build
-    - serve -s build
+    - pm2 delete all
+    - pm2 serve -s build 3000 --spa
  
