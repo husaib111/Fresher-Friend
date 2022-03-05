@@ -1,16 +1,24 @@
 import "./App.css";
 import React from 'react';
-import { GiThreeFriends } from "react-icons/gi";
+import Login from "./components/Login"
+import HomePage from "./components/HomePage"
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link,
+} from "react-router-dom";
 
 class App extends React.Component {
   render(){
     return (
-      <div className="App">
-        <h1 className="title">
-          <GiThreeFriends className="icon" />
-          Welcome to Fresher Friend.
-        </h1>
-      </div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/404" element={<Login/>} />
+        </Routes>
+      </Router>
     );
   } 
 }
