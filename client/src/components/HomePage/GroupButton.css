@@ -1,0 +1,12 @@
+.GroupButton{
+    font-size: 30px;
+    display: block;
+    border-radius: 15px;
+    background-color: darkgrey;
+    outline-width: thick;
+    outline-color: black;
+    width: 200px;
+    height: 200px;
+    margin: 10px 10px 10px 10px;
+    padding: 5px 5px 5px 5px;
+}
