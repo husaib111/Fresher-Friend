@@ -10,6 +10,9 @@ class App extends React.Component {
           <GiThreeFriends className="icon" />
           Welcome to Fresher Friend.
         </h1>
+        <h2>
+          This is Reuben's test
+        </h2>
       </div>
     );
   } 
