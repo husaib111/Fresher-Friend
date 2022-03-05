@@ -48,6 +48,7 @@ deploy-job: # This job runs in the deploy stage.
   script:
     - cd /var/www/team10-21
     - cd client
+    - npm install
     - npm run build
     - serve -s build
  
