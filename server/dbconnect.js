@@ -3,7 +3,7 @@ const Pool = require("pg").Pool;
 const config = {
   user: "api",
   host: "localhost",
-  database: "fresher_friend",
+  database: "api",
   password: "password",
   port: 5432,
 };
