@@ -34,7 +34,9 @@ class Login extends React.Component {
         <hr/>
         <div className="createAccount">
           <p>New here?</p>
-          <button className="btn btn-primary">Create an Account</button>
+          <form action="/register">
+            <button className="btn btn-primary">Create an Account</button>
+          </form>
         </div>
       </div>
     );

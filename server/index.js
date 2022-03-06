@@ -5,8 +5,12 @@ const db = require("./queries");
 
 const port = 5001;
 
-app.use(cors());
+//middleware
+
 app.use(express.json()); //req.body
+app.use(cors());
+
+//routes
 
 app.listen(port, () => {
   console.log("Server started on port %d", port);

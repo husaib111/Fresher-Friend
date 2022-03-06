@@ -1,24 +1,14 @@
 const { response } = require("express");
-const pg = require("pg");
+const pool = require("./dbconnect");
 
-const config = {
-  user: "api",
-  host: "localhost",
-  database: "api",
-  password: "password",
-  port: 5432,
-};
 
-const pool = new pg.Pool(config);
-
-const getUsers = (request, response) => {
-  pool.query("SELECT * FROM users", (err, results) => {
-    if (err) {
-      console.log(pool);
-      throw err;
-    }
-    response.status(200).json(results.rows);
-  });
+const getUsers = async (request, response) => {
+  try {
+    const allUsers = await pool.query("SELECT * FROM users;");
+    response.json(allUsers.rows);
+  } catch (e) {
+    console.log(e.message);
+  }
 };
 
 module.exports = {
