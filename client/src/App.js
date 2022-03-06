@@ -2,6 +2,7 @@ import "./App.css";
 import React from 'react';
 import Login from "./components/Login/Login"
 import HomePage from "./components/HomePage/HomePage"
+import Account from "./components/Account/Account"
 import {
   BrowserRouter as Router,
   Route,
@@ -15,6 +16,7 @@ class App extends React.Component {
       <Router>
         <Routes>
           <Route path="/" element={<HomePage/>} />
+          <Route path="/myAccount" element={<Account/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<HomePage/>} />
           <Route path="/404" element={<Login/>} />
