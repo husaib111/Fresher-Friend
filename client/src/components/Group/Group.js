@@ -1,5 +1,6 @@
 import { GiThreeFriends } from "react-icons/gi";
 import React, {Component} from 'react';
+import ProfileList from "./ProfileList";
 
 class Group extends Component{
     render(){
@@ -9,6 +10,7 @@ class Group extends Component{
                     <GiThreeFriends className="icon" />
                     Group Page
                 </h1>
+                <ProfileList/>
             </div>
         )
     }

@@ -1,0 +1,15 @@
+.ProfileList{
+    display: flex;
+
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 25px;
+    background-color: lightgray;
+    overflow: auto;
+    border-radius: 10px;
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    padding: 10px;
+
+}
