@@ -41,6 +41,7 @@ class Account extends Component{
               icon={faCertificate}
               onClick={()=>this.handleClick(0)}
             />
+            <p className="statusLabel">I'm isolating</p>
           </div>
           <div className="statusButton">
             <FontAwesomeIcon 
@@ -48,6 +49,7 @@ class Account extends Component{
               icon={faPlane}
               onClick={(e)=>this.handleClick(1)}
             />
+            <p className="statusLabel">I'm away</p>
           </div>
           <div className="statusButton">
             <FontAwesomeIcon
@@ -55,6 +57,7 @@ class Account extends Component{
               icon={faUser}
               onClick={(e)=>this.handleClick(2)}
             />
+            <p className="statusLabel">I have a guest</p>
           </div>
         </div>
       </div>
