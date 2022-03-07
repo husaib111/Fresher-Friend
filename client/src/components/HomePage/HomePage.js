@@ -1,20 +1,20 @@
 import { GiThreeFriends } from "react-icons/gi";
-import React, {Component} from 'react';
 import GroupsList from './GroupsList';
+import React from 'react';
 
-class HomePage extends Component{
+class HomePage extends React.Component{
     render(){
         return(
             <div className="HomePage">
                 <h1 className="title">
                     <GiThreeFriends className="icon" />
                     Welcome to Fresher Friend.
-                    <GroupsList/>
+
                 </h1>
+                <GroupsList/>
 
             </div>
         )
     }
 }
-
 export default HomePage;

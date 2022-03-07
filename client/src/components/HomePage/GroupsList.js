@@ -6,10 +6,14 @@ import GroupButton from './GroupButton';
 class GroupsList extends Component{
     render(){
         return(
-            <div className="GroupsList">
+            <div className="groupsList">
             <GroupButton />
             <GroupButton />
-            <GroupButton />
+                <GroupButton />
+                <GroupButton />
+                <GroupButton />
+                <GroupButton />
+                <GroupButton />
             </div>
         )
     }

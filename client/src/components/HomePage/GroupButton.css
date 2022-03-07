@@ -1,12 +1,23 @@
-.GroupButton{
-    font-size: 30px;
+.GroupButtonCircle{
     display: block;
-    border-radius: 15px;
+    border-radius: 50%;
     background-color: darkgrey;
-    outline-width: thick;
-    outline-color: black;
-    width: 200px;
-    height: 200px;
-    margin: 10px 10px 10px 10px;
-    padding: 5px 5px 5px 5px;
+    width: 100px;
+    height: 100px;
+    margin: 10px 0 10px 10px;
+    align-content: center;
+    /*padding: 5px 5px 5px 5px;*/
+}
+.Icon{
+    width: 70px;
+    height: 70px;
+    margin: 15px;
+    align-items: center;
+}
+
+.GroupButtonTitle{
+    font-size: 20px;
+    text-align: center;
+    text-wrap: normal;
+    width: 130px;
 }

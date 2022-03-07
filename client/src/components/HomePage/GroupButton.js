@@ -6,8 +6,12 @@ class GroupButton extends Component{
     render(){
         return(
             <div className="GroupButton">
-                <IoHome className={"Icon"} />
-                <p> Example Group </p>
+                <div className="GroupButtonCircle">
+                    <IoHome className={"Icon"} />
+                </div>
+                <div className="GroupButtonTitle">
+                Example Group
+                </div>
             </div>
         )
     }
