@@ -1,23 +1,19 @@
 .GroupButtonCircle{
-    display: block;
+
     border-radius: 50%;
     background-color: darkgrey;
     width: 100px;
     height: 100px;
-    margin: 10px 0 10px 10px;
-    align-content: center;
-    /*padding: 5px 5px 5px 5px;*/
 }
-.Icon{
-    width: 70px;
-    height: 70px;
-    margin: 15px;
-    align-items: center;
+.GroupButtonIcon{
+    width: 70%;
+    height: 70%;
+    margin: 15%;
 }
 
 .GroupButtonTitle{
     font-size: 20px;
-    text-align: center;
     text-wrap: normal;
-    width: 130px;
+    text-align: center;
+    width: 100px;
 }

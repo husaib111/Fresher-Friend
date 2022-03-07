@@ -7,7 +7,7 @@ class GroupButton extends Component{
         return(
             <div className="GroupButton">
                 <div className="GroupButtonCircle">
-                    <IoHome className={"Icon"} />
+                    <IoHome className={"GroupButtonIcon"} />
                 </div>
                 <div className="GroupButtonTitle">
                 Example Group
