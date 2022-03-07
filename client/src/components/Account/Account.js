@@ -8,10 +8,14 @@ class Account extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      isolating: false,
-      away: false,
-      guest: false
+      status: [false,false,false]
     }
+  }
+  handleClick = (e) => {
+    const oldStatus=this.state.status;
+    console.log(e);
+    oldStatus[e]=!oldStatus[e];
+    this.setState({status:oldStatus}); 
   }
 
   render(){
@@ -32,13 +36,25 @@ class Account extends Component{
         </div>
         <div className="statusButtons">
           <div className="statusButton">
-             <FontAwesomeIcon icon={faCertificate} />
+            <FontAwesomeIcon 
+              className={`statusIcon ${this.state.status[0] ? "isolating" : "" }`}
+              icon={faCertificate}
+              onClick={()=>this.handleClick(0)}
+            />
           </div>
           <div className="statusButton">
-             <FontAwesomeIcon icon={faPlane} />
+            <FontAwesomeIcon 
+              className={`statusIcon ${this.state.status[1] ? "away" : "" }`}
+              icon={faPlane}
+              onClick={(e)=>this.handleClick(1)}
+            />
           </div>
           <div className="statusButton">
-             <FontAwesomeIcon icon={faUser} />
+            <FontAwesomeIcon
+              className={`statusIcon ${this.state.status[2] ? "guest" : "" }`}
+              icon={faUser}
+              onClick={(e)=>this.handleClick(2)}
+            />
           </div>
         </div>
       </div>

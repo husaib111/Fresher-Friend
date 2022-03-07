@@ -19,8 +19,25 @@ hr {
   width: 95%;
   margin: 3% auto;
 }
+
+.statusButtons{
+  text-align:center;
+}
 .statusButton{
-  color:red;
+  display: inline;
+}
+.statusIcon{
+  padding: 3% 5%;
+  font-size: 4em;
+}
+.statusIcon.isolating{
+  color:#cf2a27;
+}
+.statusIcon.away{
+  color:#2b78e4;
+}
+.statusIcon.guest{
+  color:#27cf4f;
 }
 
 
