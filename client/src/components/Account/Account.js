@@ -1,8 +1,19 @@
 import React, {Component} from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCertificate, faPlane, faUser } from '@fortawesome/free-solid-svg-icons'
 import pfp from '../../resources/default_pfp.png';
 import './Account.css';
 
 class Account extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      isolating: false,
+      away: false,
+      guest: false
+    }
+  }
+
   render(){
     return(
       <div className="Account">
@@ -18,6 +29,17 @@ class Account extends Component{
           <p className="About">MBChB Medicine and Surgery</p>
           <p className="About">First Year</p>
           <p className="About">Flat 7, Block 41 Mason</p>
+        </div>
+        <div className="statusButtons">
+          <div className="statusButton">
+             <FontAwesomeIcon icon={faCertificate} />
+          </div>
+          <div className="statusButton">
+             <FontAwesomeIcon icon={faPlane} />
+          </div>
+          <div className="statusButton">
+             <FontAwesomeIcon icon={faUser} />
+          </div>
         </div>
       </div>
     )
