@@ -21,6 +21,7 @@ class App extends React.Component {
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<HomePage/>} />
           <Route path="/404" element={<Login/>} />
+		  <Route path="/Group" element={<Group/>} />
         </Routes>
       </Router>
     );
