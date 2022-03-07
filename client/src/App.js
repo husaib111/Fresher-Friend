@@ -3,7 +3,7 @@ import React from 'react';
 import Login from "./components/Login/Login"
 import HomePage from "./components/HomePage/HomePage"
 import Account from "./components/Account/Account"
-import Group from "./components/Account/Group"
+import Group from "./components/Group/Group"
 import {
   BrowserRouter as Router,
   Route,
