@@ -1,6 +1,7 @@
 import { GiThreeFriends } from "react-icons/gi";
 import React, {Component} from 'react';
 import ProfileList from "./ProfileList";
+import { useEffect, useState } from "react";
 
 
 /*
