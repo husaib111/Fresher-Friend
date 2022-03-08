@@ -4,7 +4,7 @@ const cors = require("cors");
 const db = require("./queries");
 const auth = require("./auth");
 
-const port = 5001;
+const port = 5500;
 
 //middleware
 
