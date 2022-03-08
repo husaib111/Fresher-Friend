@@ -6,12 +6,14 @@ class ProfileButton extends Component{
     render(){
         return(
             <div className="ProfileButton">
+                <a href={"/myAccount"}>
                 <div className="ProfileButtonCircle">
                     <IoPersonCircle className={"ProfileButtonIcon"} />
                 </div>
                 <div className="ProfileButtonTitle">
                     Example Person
                 </div>
+                </a>
             </div>
         )
     }

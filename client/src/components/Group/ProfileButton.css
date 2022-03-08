@@ -1,3 +1,15 @@
+a{
+    color: black;
+    text-decoration: none;
+}
+
+a:hover{
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
 .ProfileButtonCircle{
     display: block;
     border-radius: 50%;
@@ -12,6 +24,12 @@
     height: 90%;
     margin: 5%;
     align-items: center;
+}
+
+.ProfileButtonIcon:hover{
+    width: 110%;
+    height: 110%;
+    margin: -5%;
 }
 
 .ProfileButtonTitle{
