@@ -18,3 +18,4 @@ app.listen(port, () => {
 
 app.get("/users", db.getUsers);
 app.get("/usersByCourse", db.getUsersByCourse);
+app.get("/usersByAccomodation", db.getUsersByAccomodation);

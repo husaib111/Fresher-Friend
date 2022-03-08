@@ -10,7 +10,7 @@ const getUsers = async (request, response) => {
   }
 };
 
-const getUsersByCourse = (request, response) => {
+const getUsersByCourse = async (request, response) => {
   try {
     const { courseId } = request.body;
     const users = await pool.query("SELECT * FROM users WHERE course_id = $1", [
@@ -23,7 +23,20 @@ const getUsersByCourse = (request, response) => {
   }
 };
 
+const getUsersByAccomodation = async (request, response) => {
+  try {
+    const { accId } = request.body;
+    const users = await pool.query("SELECT * FROM users WHERE acc_id = $1", [
+      accId,
+    ]);
+
+    response.json(users);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
 module.exports = {
   getUsers,
   getUsersByCourse,
+  getUsersByAccomodation
 };
