@@ -26,18 +26,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     const [socketConnected, setSocketConnected] = useState(false);
     const [typing, setTyping] = useState(false);
     const [istyping, setIsTyping] = useState(false);
-    const toast = useToast();
-  
-    const defaultOptions = {
-      loop: true,
-      autoplay: true,
-      animationData: animationData,
-      rendererSettings: {
-        preserveAspectRatio: "xMidYMid slice",
-      },
     };
-    const { selectedChat, setSelectedChat, user, notification, setNotification } =
-      ChatState();
-};
 
 export default Group;
