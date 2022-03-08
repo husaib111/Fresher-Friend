@@ -18,6 +18,8 @@ app.listen(port, () => {
 });
 
 app.post('/', async (req, res) => {
+  const { email, password } = request.body;
+  const user = await db.query("SELECT * FROM users WHERE email = $1", [email]);
   res.send('Got a POST request')
 })
 app.get("/users", db.getUsers);
