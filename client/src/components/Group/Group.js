@@ -2,6 +2,8 @@ import { GiThreeFriends } from "react-icons/gi";
 import React, {Component} from 'react';
 import ProfileList from "./ProfileList";
 
+
+/*
 class Group extends Component{
     render(){
         return(
@@ -15,5 +17,27 @@ class Group extends Component{
         )
     }
 }
+*/
+
+const SingleChat = ({ fetchAgain, setFetchAgain }) => {
+    const [messages, setMessages] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [newMessage, setNewMessage] = useState("");
+    const [socketConnected, setSocketConnected] = useState(false);
+    const [typing, setTyping] = useState(false);
+    const [istyping, setIsTyping] = useState(false);
+    const toast = useToast();
+  
+    const defaultOptions = {
+      loop: true,
+      autoplay: true,
+      animationData: animationData,
+      rendererSettings: {
+        preserveAspectRatio: "xMidYMid slice",
+      },
+    };
+    const { selectedChat, setSelectedChat, user, notification, setNotification } =
+      ChatState();
+};
 
 export default Group;
