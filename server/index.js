@@ -17,3 +17,4 @@ app.listen(port, () => {
 });
 
 app.get("/users", db.getUsers);
+app.get("/usersByCourse", db.getUsersByCourse);
