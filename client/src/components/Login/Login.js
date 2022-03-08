@@ -17,7 +17,11 @@ const Login = () => {
       }),
     });
 
+    alert("hi1");
+
     const data = await response.json();
+
+    alert("hi2");
 
     if (data.user) {
       localStorage.setItem("token", data.user);
@@ -59,11 +63,11 @@ const Login = () => {
             placeholder="Password"
           />
         </div>
-        <button
+        <input
           type="submit"
           value="Login"
           class="loginButton btn btn-primary"
-        ></button>
+        ></input>
         <p>
           <a href="/login">Forgot password</a>
         </p>

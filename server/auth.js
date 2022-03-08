@@ -24,7 +24,7 @@ module.exports = {
 };
 
 const loginCheck = async (request, response) => {
-  const { email, password } = request.params;
+  const { email, password } = request.body;
   const user = await db.query("SELECT * FROM users WHERE email = $1", [email]);
 
   if (!user) {
