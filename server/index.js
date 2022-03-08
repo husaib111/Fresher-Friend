@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const db = require("./queries");
+const auth = require("./auth");
 
 const port = 5001;
 
@@ -17,5 +18,6 @@ app.listen(port, () => {
 });
 
 app.get("/users", db.getUsers);
-app.get("/usersByCourse", db.getUsersByCourse);
-app.get("/usersByAccomodation", db.getUsersByAccomodation);
+app.get("/users/courseId/:courseId", db.getUsersByCourse);
+app.get("/users/accId/:addId", db.getUsersByAccomodation);
+app.post("/login", auth.loginCheck);

@@ -12,12 +12,12 @@ const getUsers = async (request, response) => {
 
 const getUsersByCourse = async (request, response) => {
   try {
-    const { courseId } = request.body;
+    const { courseId } = request.params;
     const users = await pool.query("SELECT * FROM users WHERE course_id = $1", [
       courseId,
     ]);
 
-    response.json(users);
+    response.json(users.rows);
   } catch (e) {
     console.log(e.message);
   }
@@ -25,18 +25,19 @@ const getUsersByCourse = async (request, response) => {
 
 const getUsersByAccomodation = async (request, response) => {
   try {
-    const { accId } = request.body;
+    const { accId } = request.params;
     const users = await pool.query("SELECT * FROM users WHERE acc_id = $1", [
       accId,
     ]);
 
-    response.json(users);
+    response.json(users.rows);
   } catch (e) {
     console.log(e.message);
   }
 };
+
 module.exports = {
   getUsers,
   getUsersByCourse,
-  getUsersByAccomodation
+  getUsersByAccomodation,
 };
