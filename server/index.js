@@ -17,10 +17,10 @@ app.listen(port, () => {
   console.log("Server started on port %d", port);
 });
 
-app.post('/', (req, res) => {
+app.post('/', async (req, res) => {
   res.send('Got a POST request')
 })
 app.get("/users", db.getUsers);
 app.get("/users/courseId/:courseId", db.getUsersByCourse);
 app.get("/users/accId/:addId", db.getUsersByAccomodation);
-app.put("/login", auth.loginCheck);
+app.post("/login", auth.loginCheck);
