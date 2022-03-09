@@ -51,7 +51,7 @@ build: # This job runs in the build stage, which runs first.
     - install-server
 
 
-unit-test-client-job: # This job runs in the test stage.
+unit-test-client: # This job runs in the test stage.
   stage: test # It only starts when the job in the build stage completes successfully.
   script:
     - cd client
@@ -62,7 +62,7 @@ unit-test-client-job: # This job runs in the test stage.
     - install-server
 
 
-lint-test-job: # This job also runs in the test stage.
+lint-test: # This job also runs in the test stage.
   stage: test # It can run at the same time as unit-test-job (in parallel).
   script:
     - echo "Linting code... This will take about 1 second."
@@ -76,8 +76,9 @@ pre-deploy:
     - git stash
     - git pull "https://team10-21:glpat--d6rb-Nhhb_srB2sMkDH@git-teaching.cs.bham.ac.uk/mod-team-project-2021/team10-21.git"
     - pm2 delete all
+  needs: ["unit-test-client", "lint-test"]
 
-deploy-client-job: # This job runs in the deploy stage.
+deploy-client: # This job runs in the deploy stage.
   stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
   script:
     - cd /var/www/team10-21
@@ -88,7 +89,7 @@ deploy-client-job: # This job runs in the deploy stage.
     - install-client
     - build
   
-deploy-server-job: # This job runs in the deploy stage.
+deploy-server: # This job runs in the deploy stage.
   stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
   script:
     - cd /var/www/team10-21
