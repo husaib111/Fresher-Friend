@@ -21,6 +21,7 @@ install-client:
       untracked: true
       expire_in: 30 mins
       paths:
+        - client/.npm
         - client/node_modules/
 
 install-server:
@@ -59,6 +60,7 @@ unit-test-client-job: # This job runs in the test stage.
   dependencies:
     - install-client
     - install-server
+    - build
 
 
 lint-test-job: # This job also runs in the test stage.
