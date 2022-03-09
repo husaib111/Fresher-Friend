@@ -50,17 +50,14 @@ unit-test-client:
     - cd client
     - echo "Executing unit tests..."
     - CI=true npm test -- --coverage
+    - cp /coverage/coverage-final.json .
   needs: ["install-client"]
   dependencies:
     - install-client
   artifacts:
     name: "test-report"
-    untracked: true
     paths: 
-      - /client/coverage/coverage-final.json
-    exclude:
-      - /client/node_modules
-      - /client/Icov-report
+      - coverage-final.json
     when: always
     expire_in: "1 day"
 
