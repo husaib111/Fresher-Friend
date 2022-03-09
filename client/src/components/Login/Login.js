@@ -20,6 +20,7 @@ const Login = () => {
       }),
     });
 
+    alert("hi");
     alert("hi1");
 
     const data = await response.json();
