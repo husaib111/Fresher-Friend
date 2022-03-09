@@ -61,7 +61,6 @@ unit-test-client-job: # This job runs in the test stage.
   dependencies:
     - install-client
     - install-server
-    - build
 
 
 lint-test-job: # This job also runs in the test stage.
@@ -84,15 +83,17 @@ deploy-client-job: # This job runs in the deploy stage.
   script:
     - cd /var/www/team10-21
     - cd client
-    - npm install
-    - npm run build
     - pm2 serve -s build 3000 --spa
+  dependencies:
+    - install-client
+    - build
   
 deploy-server-job: # This job runs in the deploy stage.
   stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
   script:
     - cd /var/www/team10-21
     - cd server
-    - npm install
     - pm2 start index.js
+  dependencies:
+    - install-server
  
