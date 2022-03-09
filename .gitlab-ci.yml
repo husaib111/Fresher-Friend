@@ -61,8 +61,7 @@ unit-test-client:
       - "*/node_modules"
       - client/coverage
       - client/node_modules
-    paths: 
-      - coverage/coverage-final.json
+    paths:
       - client/coverage/coverage-final.json
     when: always
     expire_in: "1 day"
