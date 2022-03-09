@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const loginCheck = async (request, response) => {
   console.log("logging in");
   const { email, password } = request.body;
-  response.json({ status: "ok" });
+  response.json({ email, password });
   const user = await db.query("SELECT * FROM users WHERE email = $1", [email]);
 
   if (!user) {
