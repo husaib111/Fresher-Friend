@@ -9,28 +9,28 @@ const loginCheck = async (request, response) => {
 
   if (user.rows == 0) {
     response.json({ status: "error", error: "Invalid login" });
-  }
+  } else {
+    const userId = user.rows[0].user_id;
 
-  const userId = user.rows[0].user_id;
-
-  const dbPassword = await db.query(
-    "SELECT * FROM passwords WHERE user_id = $1",
-    [userId]
-  );
-
-  const isPasswordValid = password == dbPassword.rows[0].pass;
-
-  if (isPasswordValid) {
-    const token = jwt.sign(
-      {
-        email: user.rows[0].email,
-      },
-      "fresherFriend"
+    const dbPassword = await db.query(
+      "SELECT * FROM passwords WHERE user_id = $1",
+      [userId]
     );
 
-    response.json({ status: "ok", user: token });
-  } else {
-    response.json({ status: "error", user: false });
+    const isPasswordValid = password == dbPassword.rows[0].pass;
+
+    if (isPasswordValid) {
+      const token = jwt.sign(
+        {
+          email: user.rows[0].email,
+        },
+        "fresherFriend"
+      );
+
+      response.json({ status: "ok", user: token });
+    } else {
+      response.json({ status: "error", user: false });
+    }
   }
 };
 
