@@ -28,9 +28,9 @@ const loginCheck = async (request, response) => {
       "fresherFriend"
     );
 
-    return response.json({ status: "ok", user: token });
+    response.json({ status: "ok", user: token });
   } else {
-    return response.json({ status: "error", user: false });
+    response.json({ status: "error", user: false });
   }
 };
 
