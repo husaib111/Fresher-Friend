@@ -50,7 +50,6 @@ unit-test-client:
     - cd client
     - echo "Executing unit tests..."
     - CI=true npm test -- --coverage
-    - cp /coverage/coverage-final.json .
   needs: ["install-client"]
   dependencies:
     - install-client
