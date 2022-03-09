@@ -113,22 +113,22 @@ pre-deploy:
 
 deploy-client:
   stage: deploy
+  dependencies:
+    - install-client
+    - build
   script:
     - cd /var/www/team10-21
     - cd client
     - npm run build
     - pm2 serve -s build 3000 --spa
   needs: ["pre-deploy", "install-client", "build"]
-  dependencies:
-    - install-client
-    - build
 
 deploy-server:
   stage: deploy
+  dependencies:
+    - install-server
   script:
     - cd /var/www/team10-21
     - cd server
     - pm2 start index.js
   needs: ["pre-deploy", "install-server"]
-  dependencies:
-    - install-server

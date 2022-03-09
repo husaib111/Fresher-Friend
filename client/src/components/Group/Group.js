@@ -1,15 +1,13 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import "./Group.css";
 
 function Group({ socket, username, room }) {
-
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList] = useState([]);
   const [sendMessage] = useState("");
 
-
-/*
+  /*
   const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
@@ -77,7 +75,6 @@ function Group({ socket, username, room }) {
       </div>
     </div>
   );
-};
+}
 
 export default Group;
-

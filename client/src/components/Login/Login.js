@@ -20,12 +20,7 @@ const Login = () => {
       }),
     });
 
-    alert("hi");
-    alert("hi1");
-
     const data = await response.json();
-
-    alert("hi2");
 
     if (data.user) {
       localStorage.setItem("token", data.user);
