@@ -5,33 +5,62 @@
 #   - postgres:latest
 
 stages:
+  - install
   - build
   - test
   - pre-deploy
   - deploy
 
+install-client:
+   stage: install
+   script:
+      - cd client
+      - npm install
+   artifacts:
+      name: "artifacts"
+      untracked: true
+      expire_in: 30 mins
+      paths:
+        - client/node_modules/
 
-build-server-job:
-  stage: build
-  script:
-    - echo "Compiling the server code..."
-    - cd server
-    - npm --version
-    - npm install
-    - echo "Done"
-build-client-job: # This job runs in the build stage, which runs first.
+install-server:
+   stage: install
+   script:
+      - cd server
+      - npm install
+   artifacts:
+      name: "artifacts"
+      untracked: true
+      expire_in: 30 mins
+      paths:
+        - server/node_modules/        
+
+build: # This job runs in the build stage, which runs first.
   stage: build
   script:
     - echo "Compiling the client code..."
     - cd client
-    - npm --version
-    - npm install
     - npm run build
     - echo "Compile complete."
-unit-test-job: # This job runs in the test stage.
+  artifacts:
+      paths:
+         - build
+      expire_in: 30 mins
+  dependencies:
+    - install-client
+    - install-server
+
+
+unit-test-client-job: # This job runs in the test stage.
   stage: test # It only starts when the job in the build stage completes successfully.
   script:
-    - echo "Unit tests would go here..."
+    - echo "Executing unit tests..."
+    - CI=true npm test
+  dependencies:
+    - install-client
+    - install-server
+
+
 lint-test-job: # This job also runs in the test stage.
   stage: test # It can run at the same time as unit-test-job (in parallel).
   script:
