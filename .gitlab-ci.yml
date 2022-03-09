@@ -119,7 +119,6 @@ deploy-client:
   script:
     - cd /var/www/team10-21
     - cd client
-    - npm run build
     - pm2 serve -s build 3000 --spa
   needs: ["pre-deploy", "install-client", "build"]
 
