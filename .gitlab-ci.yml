@@ -1,9 +1,3 @@
-# This is a sample GitLab CI/CD configuration file that should run without any modifications.
-# It demonstrates a basic 3 stage CI/CD pipeline. Instead of real tests or scripts,
-# it uses echo commands to simulate the pipeline execution.
-# services:
-#   - postgres:latest
-
 stages:
   - install
   - build
@@ -35,13 +29,11 @@ install-server:
       paths:
         - server/node_modules/        
 
-build: # This job runs in the build stage, which runs first.
+build:
   stage: build
   script:
-    - echo "Compiling the client code..."
     - cd client
     - npm run build
-    - echo "Compile complete."
   artifacts:
       paths:
          - build
@@ -51,23 +43,48 @@ build: # This job runs in the build stage, which runs first.
     - install-server
 
 
-unit-test-client: # This job runs in the test stage.
-  stage: test # It only starts when the job in the build stage completes successfully.
+unit-test-client:
+  stage: test
   script:
     - cd client
     - echo "Executing unit tests..."
     - CI=true npm test
+  needs: ["install-client"]
+  dependencies:
+    - install-client
+
+unit-test-server: 
+  stage: test
+  script:
+    - echo "Testing..."
+    - sleep 1
+    - echo "Done"
+  needs: ["install-server"]
+  dependencies:
+    - install-server
+
+integration-test:
+  stage: test
+  script:
+    - echo "Testing..."
+    - sleep 1
+    - echo "Done"
+  needs: ["install-server", "install-client", "unit-test-client", "unit-test-server"]
   dependencies:
     - install-client
     - install-server
 
-
-lint-test: # This job also runs in the test stage.
-  stage: test # It can run at the same time as unit-test-job (in parallel).
+system-test:
+  stage: test
   script:
-    - echo "Linting code... This will take about 1 second."
+    - echo "Testing..."
     - sleep 1
-    - echo "No lint issues found."
+    - echo "Done"
+  needs: ["install-server", "install-client", "unit-test-client", "unit-test-server", "build"]
+  dependencies:
+    - install-server
+    - install-client
+    - build
 
 pre-deploy:
   stage: deploy
@@ -76,7 +93,7 @@ pre-deploy:
     - git stash
     - git pull "https://team10-21:glpat--d6rb-Nhhb_srB2sMkDH@git-teaching.cs.bham.ac.uk/mod-team-project-2021/team10-21.git"
     - pm2 delete all
-  needs: ["unit-test-client", "lint-test"]
+  needs: ["unit-test-client", "unit-test-server", "integration-test", "system-test"]
 
 deploy-client: # This job runs in the deploy stage.
   stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
