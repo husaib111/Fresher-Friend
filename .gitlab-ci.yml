@@ -49,10 +49,15 @@ unit-test-client:
   script:
     - cd client
     - echo "Executing unit tests..."
-    - CI=true npm test
+    - CI=true npm test -- --coverage
   needs: ["install-client"]
   dependencies:
     - install-client
+  artifacts:
+    name: "test-report"
+    paths: 
+      - /coverage
+    expire_in: "1 day"
 
 unit-test-server: 
   stage: test
