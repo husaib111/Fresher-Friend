@@ -8,7 +8,6 @@ stages:
   - install
   - build
   - test
-  - pre-deploy
   - deploy
 
 install-client:
@@ -70,8 +69,8 @@ lint-test-job: # This job also runs in the test stage.
     - sleep 1
     - echo "No lint issues found."
 
-pre-deploy-job:
-  stage: pre-deploy
+pre-deploy:
+  stage: deploy
   script:
     - cd /var/www/team10-21
     - git stash
@@ -84,6 +83,7 @@ deploy-client-job: # This job runs in the deploy stage.
     - cd /var/www/team10-21
     - cd client
     - pm2 serve -s build 3000 --spa
+  needs: ["pre-deploy","install-client","build"]
   dependencies:
     - install-client
     - build
@@ -94,6 +94,7 @@ deploy-server-job: # This job runs in the deploy stage.
     - cd /var/www/team10-21
     - cd server
     - pm2 start index.js
+  needs: ["pre-deploy","install-server"]
   dependencies:
     - install-server
  
