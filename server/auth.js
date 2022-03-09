@@ -7,7 +7,7 @@ const loginCheck = async (request, response) => {
   const { email, password } = request.body;
   const user = await db.query("SELECT * FROM users WHERE email = $1", [email]);
 
-  if (!user) {
+  if (user.rows == 0) {
     response.json({ status: "error", error: "Invalid login" });
   }
 
