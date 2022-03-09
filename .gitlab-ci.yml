@@ -38,6 +38,7 @@ build:
       paths:
          - build
       expire_in: 30 mins
+  needs: ["install-client", "install-server"]
   dependencies:
     - install-client
     - install-server
