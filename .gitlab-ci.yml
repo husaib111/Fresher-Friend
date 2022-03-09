@@ -96,8 +96,8 @@ pre-deploy:
     - pm2 delete all
   needs: ["unit-test-client", "unit-test-server", "integration-test", "system-test"]
 
-deploy-client: # This job runs in the deploy stage.
-  stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
+deploy-client:
+  stage: deploy
   script:
     - cd /var/www/team10-21
     - cd client
@@ -107,8 +107,8 @@ deploy-client: # This job runs in the deploy stage.
     - install-client
     - build
   
-deploy-server: # This job runs in the deploy stage.
-  stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
+deploy-server:
+  stage: deploy
   script:
     - cd /var/www/team10-21
     - cd server
