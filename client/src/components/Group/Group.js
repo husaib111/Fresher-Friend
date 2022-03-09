@@ -1,6 +1,6 @@
 import React, {useState } from "react";
-//import ScrollToBottom from "react-scroll-to-bottom";
-import SwipeableViews from "react-swipeable-views";
+import ScrollToBottom from "react-scroll-to-bottom";
+//import SwipeableViews from "react-swipeable-views";
 import "./Group.css";
 
 function Group({ socket, username, room }) {
@@ -38,10 +38,10 @@ function Group({ socket, username, room }) {
   return (
     <div className="chat-window">
       <div className="chat-header">
-        <p>Live Chat</p>
+        <p>Group Name</p>
       </div>
       <div className="chat-body">
-        <SwipeableViews className="message-container">
+        <ScrollToBottom  className="message-container">
           {messageList.map((messageContent) => {
             return (
               <div
@@ -60,7 +60,7 @@ function Group({ socket, username, room }) {
               </div>
             );
           })}
-        </SwipeableViews>
+        </ScrollToBottom >
       </div>
       <div className="chat-footer">
         <input
