@@ -1,0 +1,126 @@
+stages:
+  - install
+  - build
+  - test
+  - deploy
+
+install-client:
+   stage: install
+   script:
+      - cd client
+      - npm install
+   artifacts:
+      name: "artifacts"
+      untracked: true
+      expire_in: 30 mins
+      paths:
+        - client/.npm
+        - client/node_modules/
+
+install-server:
+   stage: install
+   script:
+      - cd server
+      - npm install
+   artifacts:
+      name: "artifacts"
+      untracked: true
+      expire_in: 30 mins
+      paths:
+        - server/node_modules/        
+
+build:
+  stage: build
+  script:
+    - cd client
+    - npm run build
+  artifacts:
+      paths:
+         - build
+      expire_in: 30 mins
+  needs: ["install-client", "install-server"]
+  dependencies:
+    - install-client
+    - install-server
+
+
+unit-test-client:
+  stage: test
+  script:
+    - cd client
+    - echo "Executing unit tests..."
+    - CI=true npm test -- --coverage
+  needs: ["install-client"]
+  dependencies:
+    - install-client
+  artifacts:
+    name: "test-report"
+    untracked: true
+    exclude:
+      - client/node_modules/**/*
+    when: always
+    expire_in: "1 day"
+
+unit-test-server: 
+  stage: test
+  script:
+    - echo "Testing..."
+    - sleep 1
+    - echo "Done"
+  needs: ["install-server"]
+  dependencies:
+    - install-server
+
+integration-test:
+  stage: test
+  script:
+    - echo "Testing..."
+    - sleep 1
+    - echo "Done"
+  needs: ["install-server", "install-client", "unit-test-client", "unit-test-server"]
+  dependencies:
+    - install-client
+    - install-server
+
+system-test:
+  stage: test
+  script:
+    - echo "Testing..."
+    - sleep 1
+    - echo "Done"
+  needs: ["install-server", "install-client", "unit-test-client", "unit-test-server", "build"]
+  dependencies:
+    - install-server
+    - install-client
+    - build
+
+pre-deploy:
+  stage: deploy
+  script:
+    - cd /var/www/team10-21
+    - git stash
+    - git pull "https://team10-21:glpat--d6rb-Nhhb_srB2sMkDH@git-teaching.cs.bham.ac.uk/mod-team-project-2021/team10-21.git"
+    - pm2 delete all
+  needs: ["unit-test-client", "unit-test-server", "integration-test", "system-test"]
+
+deploy-client:
+  stage: deploy
+  script:
+    - cd /var/www/team10-21
+    - cd client
+    - pm2 serve -s build 3000 --spa
+  needs: ["pre-deploy","install-client","build"]
+  dependencies:
+    - install-client
+    - build
+  
+deploy-server:
+  stage: deploy
+  script:
+    - cd /var/www/team10-21
+    - cd server
+    - pm2 start index.js
+  needs: ["pre-deploy","install-server"]
+  dependencies:
+    - install-server
+ 

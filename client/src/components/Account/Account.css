@@ -1,0 +1,85 @@
+.title{
+  padding-top: 1%;
+}
+.basicInfo{
+  text-align:center;
+}
+.pfp{
+  width:15%;
+  border: 1px solid black;
+  border-radius:50%;
+  padding:0.5%;
+}
+.basicInfo{
+  background: #dddddd;
+  border-radius:50px;
+  margin: 0 auto;
+  padding: 3% 3% 1% 3%;
+  width: 90%;
+  max-width: 750px;
+}
+
+hr {
+  width: 95%;
+  margin: 3% auto;
+}
+
+.statusButtons{
+  text-align:center;
+  display:flex;
+  flex-flow:row nowrap;
+  justify-content: space-around;
+  padding: 3% 5%;
+}
+
+/* for desktop: */
+@media only screen and (min-width: 768px) {
+  .statusButtons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    width: 700px;
+    gap: 150px;
+    margin: 0 auto;
+    }
+  }
+
+.statusIcon{
+  padding: 4% 5%;
+  font-size: 4em;
+  color: #cccccc;
+}
+.statusIcon.isolating{
+  color:#cf2a27;
+}
+.statusIcon.away{
+  color:#2b78e4;
+}
+.statusIcon.guest{
+  color:#27cf4f;
+}
+.statusLabel{
+  display:flex;
+}
+
+.statusLabels{
+  text-align:center;
+}
+.statusLabel{
+  padding:3% 5%;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .loginForm {
+    margin: 0 auto;
+    padding: 2% 3%;
+    width: 50%;
+    background-color: #dddddd;
+    border-radius: 10%;
+  }
+  hr {
+    width: 70%;
+    margin: 2% auto;
+  }
+}
