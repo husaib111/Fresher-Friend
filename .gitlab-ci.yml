@@ -55,8 +55,9 @@ unit-test-client:
     - install-client
   artifacts:
     name: "test-report"
+    untracked: true
     paths: 
-      - /coverage
+      - /client/coverage
     expire_in: "1 day"
 
 unit-test-server: 
