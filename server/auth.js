@@ -3,6 +3,8 @@ const passport = require("passport");
 const pool = require("./dbconnect");
 const jwt = require("jsonwebtoken");
 
+require("./passport-auth")(passport);
+
 const loginCheck = async (request, response) => {
   try {
     console.log("logging in");
