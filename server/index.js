@@ -5,7 +5,6 @@ const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const db = require("./queries");
 const auth = require("./auth");
-//const { userAuth } = require("./auth-middleware");
 
 require("./passport");
 

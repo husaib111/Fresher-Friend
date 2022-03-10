@@ -55,9 +55,10 @@ const logOut = async (request, response) => {
   }
 };
 
-exports.userAuth = passport.authenticate("jwt", { session: false });
+const userAuth = passport.authenticate("jwt", { session: false });
 
 module.exports = {
   loginCheck,
   logOut,
+  userAuth,
 };
