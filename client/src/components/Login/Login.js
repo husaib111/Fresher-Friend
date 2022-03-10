@@ -8,7 +8,6 @@ const Login = () => {
 
   async function loginUser(event) {
     event.preventDefault();
-    const testVar = 0;
     const response = await fetch("http://46.101.81.7:5001/login", {
       method: "POST",
       headers: {
@@ -27,7 +26,6 @@ const Login = () => {
       alert("Login Successful!");
       window.location.href = "/homePage";
     } else {
-      testVar = -1;
       alert(
         "Your email or password is incorrect, please check your login information!"
       );
