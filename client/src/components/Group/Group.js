@@ -1,16 +1,20 @@
+<<<<<<< HEAD
 import React, {useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 //import SwipeableViews from "react-swipeable-views";
+=======
+import React, { useState } from "react";
+//import ScrollToBottom from "react-scroll-to-bottom";
+import SwipeableViews from "react-swipeable-views";
+>>>>>>> cbe04b869579a9e0eb91e4cf32e2281ceef21f11
 import "./Group.css";
 
 function Group({ socket, username, room }) {
-
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList] = useState([]);
   const [sendMessage] = useState("");
 
-
-/*
+  /*
   const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
@@ -78,7 +82,6 @@ function Group({ socket, username, room }) {
       </div>
     </div>
   );
-};
+}
 
 export default Group;
-
