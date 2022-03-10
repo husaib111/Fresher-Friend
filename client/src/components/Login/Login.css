@@ -11,10 +11,10 @@
 }
 .loginForm {
   margin: 0 auto;
-  padding: 4% 3% 1% 3%;
+  padding: 15px 3% 15px 3%;
   width: 90%;
   background-color: #dddddd;
-  border-radius: 10%;
+  border-radius: 15px;
 }
 
 .loginButton {
@@ -30,10 +30,10 @@ hr {
 @media only screen and (min-width: 768px) {
   .loginForm {
     margin: 0 auto;
-    padding: 2% 3%;
-    width: 50%;
+    padding: 15px 25px 15px 25px;
+    width: 690px;
     background-color: #dddddd;
-    border-radius: 10%;
+    border-radius: 15px;
   }
   hr {
     width: 70%;
