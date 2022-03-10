@@ -1,9 +1,6 @@
 const { response } = require("express");
-const passport = require("passport");
 const pool = require("./dbconnect");
 const jwt = require("jsonwebtoken");
-
-require("./passport-auth")(passport);
 
 const loginCheck = async (request, response) => {
   try {
@@ -29,7 +26,6 @@ const loginCheck = async (request, response) => {
         const token = jwt.sign(
           {
             email: user.rows[0].email,
-            userId: user.rows[0].user_id,
           },
           "fresherFriend"
         );
@@ -58,13 +54,7 @@ const logOut = async (request, response) => {
   }
 };
 
-const userAuth = () => {
-  passport.authenticate("jwt", { session: false });
-  console.log("test0");
-};
-
 module.exports = {
   loginCheck,
   logOut,
-  userAuth,
 };
