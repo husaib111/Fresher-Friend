@@ -24,7 +24,7 @@ app.listen(port, () => {
   console.log("Server started on port %d", port);
 });
 
-app.get("/users", auth.userAuth, db.getUsers);
+app.get("/users", userAuth, db.getUsers);
 app.get("/users/courseId/:courseId", db.getUsersByCourse);
 app.get("/users/accId/:addId", db.getUsersByAccommodation);
 app.post("/login", auth.loginCheck);
