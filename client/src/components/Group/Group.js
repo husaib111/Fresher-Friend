@@ -2,6 +2,9 @@ import React, {useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 //import SwipeableViews from "react-swipeable-views";
 import "./Group.css";
+import "./GroupsList.css"
+import "./GroupButton.css";
+import GroupsList from "./GroupsList";
 
 function Group({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -34,7 +37,11 @@ function Group({ socket, username, room }) {
   }, [socket]);
 */
   return (
+  
     <div className="chat-window">
+      <div className="title">
+        <h1>Welcome to Group Chat with : </h1>
+        </div>  
       <div className="chat-header">
         <p>Group Name</p>
       </div>
@@ -74,7 +81,9 @@ function Group({ socket, username, room }) {
         />
         <button onClick={sendMessage}>&#9658;</button>
       </div>
+      <GroupsList />
     </div>
+
   );
 }
 
