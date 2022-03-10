@@ -7,7 +7,7 @@ const db = require("./queries");
 const auth = require("./auth");
 //const { userAuth } = require("./auth-middleware");
 
-require("./passport-auth");
+require("./passport");
 
 const port = 5001;
 
