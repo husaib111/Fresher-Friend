@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 import React, {useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 //import SwipeableViews from "react-swipeable-views";
-=======
-import React, { useState } from "react";
-//import ScrollToBottom from "react-scroll-to-bottom";
-import SwipeableViews from "react-swipeable-views";
->>>>>>> cbe04b869579a9e0eb91e4cf32e2281ceef21f11
 import "./Group.css";
 
 function Group({ socket, username, room }) {
