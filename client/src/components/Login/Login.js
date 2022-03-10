@@ -21,8 +21,7 @@ const Login = () => {
 
     const data = await response.json();
 
-    if (data.user) {
-      localStorage.setItem("token", data.user);
+    if (data.success) {
       alert("Login Successful!");
       window.location.href = "/homePage";
     } else {
