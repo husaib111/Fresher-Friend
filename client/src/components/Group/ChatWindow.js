@@ -37,11 +37,8 @@ function ChatWindow({ socket, username, room }) {
 
     return (
         <div className="chat-window">
-            <div className="title">
-                <h1>Welcome to Group Chat with : </h1>
-            </div>
             <div className="chat-header">
-                <p>Group Name</p>
+                <p>Group Chat</p>
             </div>
             <div className="chat-body">
                 <ScrollToBottom className="message-container">
