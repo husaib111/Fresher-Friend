@@ -6,6 +6,7 @@ module.exports = function (passport) {
   const cookieExtractor = function (request) {
     let token = null;
     if (request && request.cookies) token = request.cookies["token"];
+    console.log("test1");
     return token;
   };
 
@@ -21,13 +22,13 @@ module.exports = function (passport) {
           "SELECT user_id, email FROM users WHERE email = $1",
           [email]
         );
-
+        console.log("test2");
         if (!rows.length) {
           throw new Error("401 not authorized");
         }
 
         let user = { id: rows[0].user_id, email: rows[0].email };
-
+        console.log("test3");
         return await done(null, user);
       } catch (e) {
         console.log(e.message);
