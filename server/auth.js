@@ -1,4 +1,5 @@
 const { response } = require("express");
+const passport = require("passport");
 const pool = require("./dbconnect");
 const jwt = require("jsonwebtoken");
 
@@ -53,6 +54,8 @@ const logOut = async (request, response) => {
     console.log(e.message);
   }
 };
+
+exports.userAuth = passport.authenticate("jwt", { session: false });
 
 module.exports = {
   loginCheck,

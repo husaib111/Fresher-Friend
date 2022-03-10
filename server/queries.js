@@ -4,7 +4,6 @@ const pool = require("./dbconnect");
 const getUsers = async (request, response) => {
   try {
     const allUsers = await pool.query("SELECT * FROM users;");
-    console.log(allUsers);
     response.json(allUsers.rows);
   } catch (e) {
     console.log(e.message);

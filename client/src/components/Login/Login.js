@@ -8,7 +8,7 @@ const Login = () => {
 
   async function loginUser(event) {
     event.preventDefault();
-    const response = await fetch("http://fresher-friend.bham.team:5001/login", {
+    const response = await fetch("http://46.101.81.7:5001/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
