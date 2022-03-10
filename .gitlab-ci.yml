@@ -16,6 +16,12 @@ install-client:
     paths:
       - client/.npm
       - client/node_modules/
+  cache:
+    key:
+      file:
+        - client/package-lock.json
+    paths:
+      - client/node_modules
 
 install-server:
   stage: install
@@ -28,6 +34,12 @@ install-server:
     expire_in: 30 mins
     paths:
       - server/node_modules/
+  cache:
+    key:
+      files:
+        - system/package-lock.json
+    paths:
+      - system/node_modules
 
 build:
   stage: build
@@ -42,6 +54,19 @@ build:
   dependencies:
     - install-client
     - install-server
+  cache:
+    - key:
+      file:
+        - client/package-lock.json
+      paths:
+        - client/node_modules
+      policy: pull
+    - key:
+      file:
+        - server/package-lock.json
+      paths:
+        - server/node_modules
+      policy: pull
 
 unit-test-client:
   stage: test
@@ -59,6 +84,13 @@ unit-test-client:
       - client/node_modules/**/*
     when: always
     expire_in: "1 day"
+  cache:
+    key:
+      file:
+        - client/package-lock.json
+    paths:
+      - client/node_modules
+    policy: pull
 
 unit-test-server:
   stage: test
@@ -69,6 +101,13 @@ unit-test-server:
   needs: ["install-server"]
   dependencies:
     - install-server
+  cache:
+    key:
+      file:
+        - server/package-lock.json
+    paths:
+      - server/node_modules
+    policy: pull
 
 integration-test:
   stage: test
@@ -110,6 +149,19 @@ pre-deploy:
     - pm2 delete all
   needs:
     ["unit-test-client", "unit-test-server", "integration-test", "system-test"]
+  cache:
+    - key:
+      file:
+        - client/package-lock.json
+      paths:
+        - client/node_modules
+      policy: pull
+    - key:
+      file:
+        - server/package-lock.json
+      paths:
+        - server/node_modules
+      policy: pull
 
 deploy-client:
   stage: deploy
@@ -121,6 +173,19 @@ deploy-client:
     - cd client
     - pm2 serve -s build 3000 --spa
   needs: ["pre-deploy", "install-client", "build"]
+  cache:
+    - key:
+      file:
+        - client/package-lock.json
+      paths:
+        - client/node_modules
+      policy: pull
+    - key:
+      file:
+        - server/package-lock.json
+      paths:
+        - server/node_modules
+      policy: pull
 
 deploy-server:
   stage: deploy
@@ -131,3 +196,16 @@ deploy-server:
     - cd server
     - pm2 start index.js
   needs: ["pre-deploy", "install-server"]
+  cache:
+    - key:
+      file:
+        - client/package-lock.json
+      paths:
+        - client/node_modules
+      policy: pull
+    - key:
+      file:
+        - server/package-lock.json
+      paths:
+        - server/node_modules
+      policy: pull
