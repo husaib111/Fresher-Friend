@@ -15,7 +15,7 @@ const port = 5001;
 app.use(express.json()); //req.body
 app.use(cookieParser());
 app.use(passport.initialize());
-app.use(cors({ origin: "46.101.81.7:3000", credentials: true }));
+app.use(cors({ origin: "fresher-friend.bham.team", credentials: true }));
 
 //routes
 
