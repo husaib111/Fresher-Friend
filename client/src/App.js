@@ -16,11 +16,11 @@ class App extends React.Component {
     return (
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/homePage" element={<HomePage />} />
           <Route path="/myAccount" element={<Account />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/register" element={<HomePage />} />
-          <Route path="/404" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/Group" element={<Group />} />
         </Routes>
       </Router>
