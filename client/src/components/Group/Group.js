@@ -1,4 +1,4 @@
-import React, from "react";
+import React from "react";
 import "./Group.css";
 import ChatWindow from "./ChatWindow";
 import ProfileList from "./ProfileList";
