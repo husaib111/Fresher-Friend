@@ -1,6 +1,7 @@
 import ScrollToBottom from "react-scroll-to-bottom";
 //import SwipeableViews from "react-swipeable-views";
 //import GroupsList from "./GroupsList";
+import "./ChatWindow.css"
 import React, {useState} from "react";
 
 

@@ -4,9 +4,11 @@
     height: 80px;
 }
 .chat-window {
-    width: 800px;
+    width: 90%;
+    max-width: 700px;
     height: 600px;
 }
+
 
 .chat-window p {
     margin: 0;
