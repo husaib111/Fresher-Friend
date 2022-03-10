@@ -9,7 +9,7 @@ const Login = () => {
   async function loginUser(event) {
     event.preventDefault();
 
-    const response = await fetch("http://localhost:5001/login", {
+    const response = await fetch("http://46.101.81.7:5001/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ const Login = () => {
       <h1>Fresher Friend</h1>
       <h2>Connecting UoB students</h2>
       <form className="loginForm" onSubmit={loginUser}>
-        <div class="mb-3">
+        <div className="mb-3">
           <input
             className="form-control loginInput"
             type="email"
@@ -50,7 +50,7 @@ const Login = () => {
             placeholder="example@student.bham.ac.uk"
           />
         </div>
-        <div class="mb-3">
+        <div className="mb-3">
           <input
             className="form-control loginInput"
             type="password"
@@ -62,7 +62,7 @@ const Login = () => {
         <input
           type="submit"
           value="Login"
-          class="loginButton btn btn-primary"
+          className="loginButton btn btn-primary"
         ></input>
         <p>
           <a href="/login">Forgot password</a>
