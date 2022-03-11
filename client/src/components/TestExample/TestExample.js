@@ -1,5 +1,5 @@
 import "./TestExample.css";
-import React, { useState } from "react";
+import React from "react";
 
 const TestExample = () => {
   return <div />;
