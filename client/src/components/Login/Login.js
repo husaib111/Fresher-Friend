@@ -1,6 +1,7 @@
 import "./Login.css";
 import React, { useState } from "react";
 import { GiThreeFriends } from "react-icons/gi";
+import Axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -8,21 +9,24 @@ const Login = () => {
 
   async function loginUser(event) {
     event.preventDefault();
-    const response = await fetch("http://46.101.81.7:5001/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+
+    const response = await Axios.post(
+      "http://www.fresher-friend.bham.team:5001/login",
+      {
+        email: email,
+        password: password,
       },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-    const data = await response.json();
+    const data = response.data;
 
-    if (data.user) {
-      localStorage.setItem("token", data.user);
+    if (data.success) {
       alert("Login Successful!");
       window.location.href = "/homePage";
     } else {

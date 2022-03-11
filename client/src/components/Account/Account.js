@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCertificate, faPlane, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faFutbol,faCertificate, faGamepad, faTrain, faBicycle, faPlane, faUser } from '@fortawesome/free-solid-svg-icons'
 import pfp from '../../resources/default_pfp.png';
 import './Account.css';
+import Interest from './Interest'
 
 class Account extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      status: [false,false,false]
+      status: [false,false,false],
+      private: true
     }
   }
   handleClick = (e) => {
@@ -16,6 +18,9 @@ class Account extends Component{
     console.log(e);
     oldStatus[e]=!oldStatus[e];
     this.setState({status:oldStatus}); 
+  }
+  togglePrivate = ()=>{
+    this.setState({private:!this.state.private});
   }
 
   render(){
@@ -59,6 +64,25 @@ class Account extends Component{
             />
             <p className="statusLabel">I have a guest</p>
           </div>
+        </div>
+        <div className="interestBox">
+          <h2>Interests</h2>
+          <div className="interests">
+            <Interest icon={faFutbol} interestName="Football"/>
+            <Interest icon={faGamepad} interestName="Games"/>
+            <Interest icon={faTrain} interestName="Travel"/>
+            <Interest icon={faBicycle} interestName="Cycling"/>
+          </div>
+        </div>
+        <div className="settings">
+          <input 
+            type="checkbox"
+            defaultChecked={this.state.private}
+            onChange={()=>this.togglePrivate()}
+          />
+          <label>Private profile</label>
+          <br/>
+          <button className="logout btn btn-primary" type="button">Log out</button>
         </div>
       </div>
     )
