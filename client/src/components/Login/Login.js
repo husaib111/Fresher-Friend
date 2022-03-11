@@ -13,15 +13,14 @@ const Login = () => {
     const response = Axios.post(
       "http://www.fresher-friend.bham.team:5001/login",
       {
-        method: "POST",
-        credentials: "include",
+        withCredentials: true,
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+        data: {
+          email: email,
+          password: password,
+        },
       }
     );
 
