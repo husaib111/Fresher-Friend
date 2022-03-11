@@ -36,5 +36,4 @@ app.get("/logout", auth.logOut);
 app.get("/userInfo/:userId", db.getUserBasicInfo);
 
 app.get("/test", db.testFunction);
-app.get("/test2", db.testFunction2);
 app.get("/testAuth", auth.userAuth);

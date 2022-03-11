@@ -1,7 +1,6 @@
 const { response } = require("express");
 const pool = require("./dbconnect");
 const jwt = require("jsonwebtoken");
-const passport = require("passport");
 
 const getUsers = async (request, response) => {
   try {
@@ -84,23 +83,17 @@ const getUsersInCourseGroup = async (request, response) => {
 
 const testFunction = async (request, response) => {
   try {
-    const token = request.cookies["token"];
-    const decoded = jwt.verify(token, "fresherFriend");
-    const userEmail = decoded.email;
+    const userEmail = jwt.verify(
+      request.cookies["token"],
+      "fresherFriend"
+    ).email;
     console.log(userEmail);
-    console.log(token);
-    response.json(token);
-  } catch (e) {
-    console.log(e.message);
-  }
-};
 
-const testFunction2 = async (request, response) => {
-  try {
-    const decoded = passport.authenticate("jwt", { session: false });
-    const userEmail = decoded.email;
-    console.log(decoded);
-    console.log(userEmail);
+    const user = await pool.query("SELECT * FROM Users WHERE email = $1", [
+      userEmail,
+    ]);
+
+    response.json(user);
   } catch (e) {
     console.log(e.message);
   }
@@ -112,5 +105,4 @@ module.exports = {
   getUsersByAccommodation,
   getUserBasicInfo,
   testFunction,
-  testFunction2,
 };
