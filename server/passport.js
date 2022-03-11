@@ -16,7 +16,6 @@ const opts = {
 passport.use(
   new Strategy(opts, async ({ email }, done) => {
     try {
-      console.log(email);
       const { rows } = await pool.query(
         "SELECT user_id, email FROM users WHERE email = $1",
         [email]

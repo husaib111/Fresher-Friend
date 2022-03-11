@@ -82,6 +82,8 @@ const getUsersInCourseGroup = async (request, response) => {
 
 const testFunction = async (request, response) => {
   try {
+    console.log(request);
+    console.log(request.params);
   } catch (e) {
     console.log(e.message);
   }
