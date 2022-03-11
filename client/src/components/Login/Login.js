@@ -10,11 +10,10 @@ const Login = () => {
     event.preventDefault();
     const response = await fetch("http://46.101.81.7:5001/login", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials: true,
-      credentials: "include",
       body: JSON.stringify({
         email,
         password,
@@ -22,6 +21,7 @@ const Login = () => {
     });
 
     const data = await response.json();
+    console.log(data);
 
     if (data.success) {
       alert("Login Successful!");
