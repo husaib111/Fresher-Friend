@@ -20,6 +20,9 @@ const Login = () => {
       }),
     });
     console.log(response);
+    response.headers.forEach((val, key) => {
+      console.log(key, val);
+    });
     const data = await response.json();
 
     if (data.success) {

@@ -31,9 +31,20 @@ const loginCheck = async (request, response) => {
           "fresherFriend"
         );
 
+        //CORS requires access-control-allow-origin... for fetch this needs an exact host match
+        // CORS also needs access-control-allow-credentials if it is a fetch call with credentials: 'include'
+        response.set("Access-Control-Allow-Origin", request.headers.origin); //req.headers.origin
+        response.set("Access-Control-Allow-Credentials", "true");
+        // access-control-expose-headers allows JS in the browser to see headers other than the default 7
+        response.set(
+          "Access-Control-Expose-Headers",
+          "date, etag, access-control-allow-origin, access-control-allow-credentials"
+        );
+
         response
           .status(200)
           .cookie("token", token, {
+            maxAge: 1000 * 60 * 60 * 24,
             httpOnly: true,
             sameSite: "Lax",
           })
