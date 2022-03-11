@@ -107,7 +107,9 @@ function Account(){
         />
         <label>Private profile</label>
         <br/>
-        <button onClick={()=>getInfo(1)} className="logout btn btn-primary" type="button">Log out</button>
+        <form action="http://www.fresher-friend.bham.team/logout">
+          <button className="logout btn btn-primary" type="submit">Log out</button>
+        </form>
       </div>
     </div>
   )
