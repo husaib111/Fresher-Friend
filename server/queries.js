@@ -39,15 +39,47 @@ const getUserBasicInfo = async (request, response) => {
   try {
     const { userId } = request.params;
     console.log(userId);
-    const users = await pool.query("select first_name,middle_name,last_name,course_name,flat_num,block_num,acc_location from users natural join accommodation natural join courses where user_id=$1",[
-      userId,
-    ]);
+    const users = await pool.query(
+      "select first_name,middle_name,last_name,course_name,flat_num,block_num,acc_location from users natural join accommodation natural join courses where user_id=$1",
+      [userId]
+    );
 
     response.json(users.rows);
   } catch (e) {
     console.log(e.message);
   }
 };
+
+  const getUsersInBlockGroup = async (request, response) => {
+    try {
+      const { userId } = request.params;
+      console.log(userId);
+      const users = await pool.query(
+        "select first_name from users  where block_num = $1",
+        [block_num]
+      );
+  
+      response.json(users.rows);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+
+    const getUsersInCourseGroup = async (request, response) => {
+      try {
+        const { userId } = request.params;
+        console.log(userId);
+        const users = await pool.query(
+          "select first_name from users  where courseId = $1",
+          [courseId]
+        );
+    
+        response.json(users.rows);
+      } catch (e) {
+        console.log(e.message);
+      }    
+    };
 
 module.exports = {
   getUsers,
