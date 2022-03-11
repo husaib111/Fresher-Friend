@@ -33,7 +33,10 @@ const loginCheck = async (request, response) => {
 
         response
           .status(200)
-          .cookie("token", token, { httpOnly: true, path: "/" })
+          .cookie("token", token, {
+            httpOnly: true,
+            sameSite: "lax",
+          })
           .json({
             success: true,
             message: "Logged in successfully",
