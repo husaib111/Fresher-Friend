@@ -4,6 +4,7 @@ import Login from "./components/Login/Login";
 import HomePage from "./components/HomePage/HomePage";
 import Account from "./components/Account/Account";
 import Group from "./components/Group/Group";
+import TestExample from "./components/TestExample/TestExample";
 import {
   BrowserRouter as Router,
   Route,
@@ -22,6 +23,7 @@ class App extends React.Component {
           <Route path="/register" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/Group" element={<Group />} />
+          <Route path="/test" element={<TestExample />} />
         </Routes>
       </Router>
     );
