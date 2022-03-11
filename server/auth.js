@@ -31,10 +31,13 @@ const loginCheck = async (request, response) => {
           "fresherFriend"
         );
 
-        response.status(200).cookie("token", token, { httpOnly: true }).json({
-          success: true,
-          message: "Logged in successfully",
-        });
+        response
+          .status(200)
+          .cookie("token", token, { httpOnly: true, path: "/" })
+          .json({
+            success: true,
+            message: "Logged in successfully",
+          });
       } else {
         response.json({ status: "error", success: false });
       }

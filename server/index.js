@@ -17,8 +17,9 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://www.fresher-friend.bham.team",
     credentials: true,
+    allowedHeaders: "*",
   })
 );
 
