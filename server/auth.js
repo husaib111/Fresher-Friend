@@ -35,7 +35,7 @@ const loginCheck = async (request, response) => {
           .status(200)
           .cookie("token", token, {
             httpOnly: true,
-            sameSite: "lax",
+            sameSite: "Lax",
           })
           .json({
             success: true,

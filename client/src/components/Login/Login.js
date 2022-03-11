@@ -19,9 +19,8 @@ const Login = () => {
         password,
       }),
     });
-
+    console.log(response);
     const data = await response.json();
-    console.log(data);
 
     if (data.success) {
       alert("Login Successful!");
