@@ -10,7 +10,7 @@ const Login = () => {
   async function loginUser(event) {
     event.preventDefault();
 
-    const data = await Axios.post(
+    const response = await Axios.post(
       "http://www.fresher-friend.bham.team:5001/login",
       {
         email: email,
@@ -22,31 +22,11 @@ const Login = () => {
           "Content-Type": "application/json",
         },
       }
-    )
-      .then((response) => {
-        response.json();
-        console.log(response);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    );
 
+    console.log(response);
+    const data = response.json();
     console.log(data);
-    // const response = await fetch(
-    //   "http://www.fresher-friend.bham.team:5001/login",
-    //   {
-    //     method: "POST",
-    //     credentials: "include",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       email,
-    //       password,
-    //     }),
-    //   }
-    // );
-    // const data = response.json();
 
     if (data.success) {
       alert("Login Successful!");
