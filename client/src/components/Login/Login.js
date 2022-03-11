@@ -24,9 +24,7 @@ const Login = () => {
       }
     );
 
-    console.log(response);
-    const data = response.json();
-    console.log(data);
+    const data = response.data;
 
     if (data.success) {
       alert("Login Successful!");
