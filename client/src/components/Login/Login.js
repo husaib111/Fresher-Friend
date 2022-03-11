@@ -8,21 +8,21 @@ const Login = () => {
 
   async function loginUser(event) {
     event.preventDefault();
-    const response = await fetch("http://46.101.81.7:5001/login", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
-    console.log(response);
-    response.headers.forEach((val, key) => {
-      console.log(key, val);
-    });
+    const response = await fetch(
+      "http://www.fresher-friend.bham.team:5001/login",
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      }
+    );
+
     const data = await response.json();
 
     if (data.success) {
