@@ -25,11 +25,13 @@ const Login = () => {
     )
       .then((response) => {
         response.json();
+        console.log(response);
       })
       .catch((e) => {
         console.log(e);
       });
 
+    console.log(data);
     // const response = await fetch(
     //   "http://www.fresher-friend.bham.team:5001/login",
     //   {
@@ -44,6 +46,7 @@ const Login = () => {
     //     }),
     //   }
     // );
+    // const data = response.json();
 
     if (data.success) {
       alert("Login Successful!");

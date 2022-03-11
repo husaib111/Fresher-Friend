@@ -12,7 +12,11 @@ const loginCheck = async (request, response) => {
     ]);
 
     if (user.rows == 0) {
-      response.json({ status: "error", error: "Invalid login" });
+      response.json({
+        success: false,
+        status: "error",
+        error: "Invalid login",
+      });
     } else {
       const userId = user.rows[0].user_id;
 
@@ -43,7 +47,11 @@ const loginCheck = async (request, response) => {
             message: "Logged in successfully",
           });
       } else {
-        response.json({ status: "error", success: false });
+        response.json({
+          success: false,
+          status: "error",
+          error: "Invalid login",
+        });
       }
     }
   } catch (e) {
