@@ -15,9 +15,22 @@ const port = 5001;
 app.use(express.json()); //req.body
 app.use(cookieParser());
 app.use(passport.initialize());
+app.use(function (request, response, next) {
+  response.header(
+    "Access-Control-Allow-Origin",
+    "http://www.fresher-friend.bham.team"
+  );
+  response.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  response.header("Access-Control-Allow-Credentials", true);
+  next();
+});
 app.use(
   cors({
     origin: "http://www.fresher-friend.bham.team",
+    preflightContinue: true,
     credentials: true,
     allowedHeaders: "*",
   })
