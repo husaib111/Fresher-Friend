@@ -24,8 +24,8 @@ function Account(){
     )
       .then((response) => {
         const {data} = response; 
-        const {first_name,middle_name,last_name}=data[0];
-        setInfo([first_name,middle_name,last_name]);
+        const {first_name,middle_name,last_name,course_name,flat_num,block_num,acc_location}=data[0];
+        setInfo([first_name,middle_name,last_name,course_name,flat_num,block_num,acc_location]);
         // console.log(first_name);
       })
       .catch((e) => {
@@ -33,10 +33,10 @@ function Account(){
       });
   }
 
-  const [info,setInfo] = useState(()=>getInfo(1));
+  const [info,setInfo] = useState(()=>getInfo(3));
 
   useEffect(() => {
-    getInfo(1);
+    getInfo(3);
   },[]);
 
   const handleClick = (e) => {
@@ -60,9 +60,9 @@ function Account(){
           <img className="pfp" src={pfp} alt="Profile"/>
         </div>
         <h1>{info[0]} {info[1]} {info[2]}</h1>
-        <p className="About">MBChB Medicine and Surgery</p>
-        <p className="About">First Year</p>
-        <p className="About">Flat 7, Block 41 Mason</p>
+        <p className="About">{info[3]}</p>
+        {/* <p className="About">First Year</p> */}
+        <p className="About">Flat {info[4]}, Block {info[5]}, {info[6]}</p>
       </div>
       <div className="statusButtons">
         <div className="statusButton">
