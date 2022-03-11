@@ -10,19 +10,16 @@ const Login = () => {
   async function loginUser(event) {
     event.preventDefault();
 
-    const response = Axios.post(
-      "http://www.fresher-friend.bham.team:5001/login",
-      {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: {
-          email: email,
-          password: password,
-        },
-      }
-    );
+    const data = Axios.post("http://www.fresher-friend.bham.team:5001/login", {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: {
+        email: email,
+        password: password,
+      },
+    }).then((response) => response.json());
 
     // const response = await fetch(
     //   "http://www.fresher-friend.bham.team:5001/login",
@@ -38,8 +35,6 @@ const Login = () => {
     //     }),
     //   }
     // );
-
-    const data = await response.json();
 
     if (data.success) {
       alert("Login Successful!");
