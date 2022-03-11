@@ -15,9 +15,9 @@ const TestExample = () => {
     );
 
     console.log(response);
-    //const data = response.data;
-    //const label = document.getElementsByClassName("fetchData");
-    //label.innerHTML = data;
+    const data = response.data.rows[0];
+    const label = document.getElementsByClassName("fetchData");
+    label.innerHTML = data;
   }
 
   return (

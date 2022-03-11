@@ -35,5 +35,4 @@ app.post("/login", auth.loginCheck);
 app.get("/logout", auth.logOut);
 app.get("/userInfo/:userId", db.getUserBasicInfo);
 
-app.get("/test", db.testFunction);
-app.get("/testAuth", auth.userAuth);
+app.get("/test", auth.userAuth, db.testFunction);
