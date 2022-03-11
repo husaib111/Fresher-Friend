@@ -1,92 +1,116 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFutbol,faCertificate, faGamepad, faTrain, faBicycle, faPlane, faUser } from '@fortawesome/free-solid-svg-icons'
 import pfp from '../../resources/default_pfp.png';
 import './Account.css';
 import Interest from './Interest'
+import Axios from "axios";
 
-class Account extends Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      status: [false,false,false],
-      private: true
-    }
+function Account(){
+  const [status, setStatus] = useState([false,false,false]);
+  const [priv,setPriv] = useState(true);
+
+  const getInfo = async (i) => {
+    await Axios.get(
+      "http://localhost:5001/userInfo/"+i,
+      {
+      },
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        const {data} = response; 
+        const {first_name,middle_name,last_name}=data[0];
+        setInfo([first_name,middle_name,last_name]);
+        // console.log(first_name);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
-  handleClick = (e) => {
-    const oldStatus=this.state.status;
-    console.log(e);
+
+  const [info,setInfo] = useState(()=>getInfo(1));
+
+  useEffect(() => {
+    getInfo(1);
+  },[]);
+
+  const handleClick = (e) => {
+    console.log(info);
+    const oldStatus=status;
     oldStatus[e]=!oldStatus[e];
-    this.setState({status:oldStatus}); 
+    setStatus([...oldStatus]);
   }
-  togglePrivate = ()=>{
-    this.setState({private:!this.state.private});
+  const togglePrivate = ()=>{
+    setPriv(!priv);
   }
 
-  render(){
-    return(
-      <div className="Account">
-        <h1 className="title">
-          Your Profile
-        </h1>
-        <hr/>
-        <div className="basicInfo">
-          <div className="pfpContainer">
-            <img className="pfp" src={pfp} alt="Profile"/>
-          </div>
-          <h1>Jane Doe</h1>
-          <p className="About">MBChB Medicine and Surgery</p>
-          <p className="About">First Year</p>
-          <p className="About">Flat 7, Block 41 Mason</p>
+  return(
+    <div className="Account">
+      <h1 className="title">
+        Your Profile
+      </h1>
+      <hr/>
+      <div className="basicInfo">
+        <div className="pfpContainer">
+          <img className="pfp" src={pfp} alt="Profile"/>
         </div>
-        <div className="statusButtons">
-          <div className="statusButton">
-            <FontAwesomeIcon 
-              className={`statusIcon ${this.state.status[0] ? "isolating" : "" }`}
-              icon={faCertificate}
-              onClick={()=>this.handleClick(0)}
-            />
-            <p className="statusLabel">I'm isolating</p>
-          </div>
-          <div className="statusButton">
-            <FontAwesomeIcon 
-              className={`statusIcon ${this.state.status[1] ? "away" : "" }`}
-              icon={faPlane}
-              onClick={(e)=>this.handleClick(1)}
-            />
-            <p className="statusLabel">I'm away</p>
-          </div>
-          <div className="statusButton">
-            <FontAwesomeIcon
-              className={`statusIcon ${this.state.status[2] ? "guest" : "" }`}
-              icon={faUser}
-              onClick={(e)=>this.handleClick(2)}
-            />
-            <p className="statusLabel">I have a guest</p>
-          </div>
-        </div>
-        <div className="interestBox">
-          <h2>Interests</h2>
-          <div className="interests">
-            <Interest icon={faFutbol} interestName="Football"/>
-            <Interest icon={faGamepad} interestName="Games"/>
-            <Interest icon={faTrain} interestName="Travel"/>
-            <Interest icon={faBicycle} interestName="Cycling"/>
-          </div>
-        </div>
-        <div className="settings">
-          <input 
-            type="checkbox"
-            defaultChecked={this.state.private}
-            onChange={()=>this.togglePrivate()}
+        <h1>{info[0]} {info[1]} {info[2]}</h1>
+        <p className="About">MBChB Medicine and Surgery</p>
+        <p className="About">First Year</p>
+        <p className="About">Flat 7, Block 41 Mason</p>
+      </div>
+      <div className="statusButtons">
+        <div className="statusButton">
+          <FontAwesomeIcon 
+            className={`statusIcon ${status[0] ? "isolating" : "" }`}
+            icon={faCertificate}
+            onClick={(e)=>handleClick(0)}
           />
-          <label>Private profile</label>
-          <br/>
-          <button className="logout btn btn-primary" type="button">Log out</button>
+          <p className="statusLabel">I'm isolating</p>
+        </div>
+        <div className="statusButton">
+          <FontAwesomeIcon 
+            className={`statusIcon ${status[1] ? "away" : "" }`}
+            icon={faPlane}
+            onClick={(e)=>handleClick(1)}
+          />
+          <p className="statusLabel">I'm away</p>
+        </div>
+        <div className="statusButton">
+          <FontAwesomeIcon
+            className={`statusIcon ${status[2] ? "guest" : "" }`}
+            icon={faUser}
+            onClick={(e)=>handleClick(2)}
+          />
+          <p className="statusLabel">I have a guest</p>
         </div>
       </div>
-    )
-  }
+      <div className="interestBox">
+        <h2>Interests</h2>
+        <div className="interests">
+          <Interest icon={faFutbol} interestName="Football"/>
+          <Interest icon={faGamepad} interestName="Games"/>
+          <Interest icon={faTrain} interestName="Travel"/>
+          <Interest icon={faBicycle} interestName="Cycling"/>
+        </div>
+      </div>
+      <div className="settings">
+        <input 
+          type="checkbox"
+          defaultChecked={priv}
+          onChange={()=>togglePrivate()}
+        />
+        <label>Private profile</label>
+        <br/>
+        <button onClick={()=>getInfo(1)} className="logout btn btn-primary" type="button">Log out</button>
+      </div>
+    </div>
+  )
 }
 
 export default Account;
