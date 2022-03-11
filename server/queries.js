@@ -50,40 +50,47 @@ const getUserBasicInfo = async (request, response) => {
   }
 };
 
-  const getUsersInBlockGroup = async (request, response) => {
-    try {
-      const { userId } = request.params;
-      console.log(userId);
-      const users = await pool.query(
-        "select first_name from users  where block_num = $1",
-        [block_num]
-      );
-  
-      response.json(users.rows);
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
+const getUsersInBlockGroup = async (request, response) => {
+  try {
+    const { userId } = request.params;
+    console.log(userId);
+    const users = await pool.query(
+      "select first_name from users  where block_num = $1",
+      [block_num]
+    );
 
+    response.json(users.rows);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
 
-    const getUsersInCourseGroup = async (request, response) => {
-      try {
-        const { userId } = request.params;
-        console.log(userId);
-        const users = await pool.query(
-          "select first_name from users  where courseId = $1",
-          [courseId]
-        );
-    
-        response.json(users.rows);
-      } catch (e) {
-        console.log(e.message);
-      }    
-    };
+const getUsersInCourseGroup = async (request, response) => {
+  try {
+    const { userId } = request.params;
+    console.log(userId);
+    const users = await pool.query(
+      "select first_name from users  where courseId = $1",
+      [courseId]
+    );
+
+    response.json(users.rows);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+const testFunction = async (request, response) => {
+  try {
+  } catch (e) {
+    console.log(e.message);
+  }
+};
 
 module.exports = {
   getUsers,
   getUsersByCourse,
   getUsersByAccommodation,
   getUserBasicInfo,
+  testFunction,
 };

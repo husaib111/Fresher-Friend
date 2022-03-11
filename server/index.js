@@ -34,3 +34,5 @@ app.get("/users/accId/:accId", db.getUsersByAccommodation);
 app.post("/login", auth.loginCheck);
 app.get("/logout", auth.logOut);
 app.get("/userInfo/:userId", db.getUserBasicInfo);
+
+app.get("/test", db.testFunction);
