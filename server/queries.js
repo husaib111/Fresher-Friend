@@ -82,7 +82,9 @@ const getUsersInCourseGroup = async (request, response) => {
 
 const testFunction = async (request, response) => {
   try {
-    console.log(request.headers.cookie.token);
+    const token = request.cookies["token"];
+    console.log(token);
+    response.json(token);
   } catch (e) {
     console.log(e.message);
   }
