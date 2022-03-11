@@ -30,6 +30,7 @@ app.listen(port, () => {
 
 app.get("/users", auth.userAuth, db.getUsers);
 app.get("/users/courseId/:courseId", db.getUsersByCourse);
-app.get("/users/accId/:addId", db.getUsersByAccommodation);
+app.get("/users/accId/:accId", db.getUsersByAccommodation);
 app.post("/login", auth.loginCheck);
 app.get("/logout", auth.logOut);
+app.get("/userInfo/:userId", db.getUserBasicInfo);
