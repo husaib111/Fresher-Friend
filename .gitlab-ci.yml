@@ -16,7 +16,6 @@ install-client:
     untracked: true
     expire_in: 30 mins
     paths:
-      - client/.npm
       - client/node_modules/
 
 install-server:
