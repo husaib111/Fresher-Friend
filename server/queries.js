@@ -40,7 +40,7 @@ const getUsersByAccommodation = async (request, response) => {
   }
 };
 
-const getLoggedInUserBasicInfo = async (request,response) => {
+const getLoggedInUserBasicInfo = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);
     console.log(userEmail);
@@ -53,11 +53,11 @@ const getLoggedInUserBasicInfo = async (request,response) => {
     response.json(users.rows);
   } catch (e) {
     response.status(400).send({
-      message: 'Not logged in!'
+      message: "Not logged in!",
     });
     console.log(e.message);
   }
-}
+};
 const getUserBasicInfo = async (request, response) => {
   try {
     const { userId } = request.params;
@@ -103,6 +103,26 @@ const getUsersInCourseGroup = async (request, response) => {
   }
 };
 
+const getCourseUsers = async (request, response) => {
+  try {
+    const userEmail = getLoggedUserEmail(request);
+
+    const courseId = await pool.query(
+      "SELECT course_id FROM Users WHERE email = $1",
+      [userEmail]
+    );
+
+    const courseUsers = await pool.query(
+      "SELECT * FROM Users WHERE course_id = $1",
+      [courseId]
+    );
+
+    response.json(courseUsers.rows);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 const testFunction = async (request, response) => {
   try {
     //COPY THE LINE BELOW TO RETRIEVE THE EMAIL OF SIGNED USER
@@ -124,5 +144,6 @@ module.exports = {
   getUsersByAccommodation,
   getUserBasicInfo,
   testFunction,
-  getLoggedInUserBasicInfo
+  getLoggedInUserBasicInfo,
+  getCourseUsers,
 };
