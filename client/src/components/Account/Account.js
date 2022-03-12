@@ -10,6 +10,18 @@ function Account(){
   const [status, setStatus] = useState([false,false,false]);
   const [priv,setPriv] = useState(true);
 
+  const doLogout = async () =>{
+    await Axios.get(
+      "http://www.fresher-friend.bham.team:5001/logout/",
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    window.location.href='/';
+  }
+
   const getInfo = async () => {
     await Axios.get(
       "http://www.fresher-friend.bham.team:5001/loggedInUserInfo/",
@@ -106,7 +118,7 @@ function Account(){
         />
         <label>Private profile</label>
         <br/>
-        <form action="http://www.fresher-friend.bham.team/logout">
+        <form onSubmit={doLogout} >
           <button className="logout btn btn-primary" type="submit">Log out</button>
         </form>
       </div>
