@@ -15,10 +15,26 @@ const TestExample = () => {
     );
 
     console.log(response);
-    const data = response.data.rows[0];
-    console.log(data);
-    const label = document.getElementsByClassName("fetchData");
-    label[0].innerText = data;
+    const {
+      user_id,
+      email,
+      first_name,
+      middle_name,
+      last_name,
+      acc_id,
+      course_id,
+    } = response.data.rows[0];
+
+    const userContainer = document.getElementsByClassName("userInfo");
+    userContainer[0].innerHTML = `
+    <label>${user_id}</label>
+    <label>${email}</label>
+    <label>${first_name}</label>
+    <label>${middle_name}</label>
+    <label>${last_name}</label>
+    <label>${acc_id}</label>
+    <label>${course_id}</label>
+    `;
   }
 
   return (
@@ -27,6 +43,7 @@ const TestExample = () => {
         Get data
       </button>
       <label className="fetchData"></label>
+      <div className="userInfo"></div>
     </section>
   );
 };
