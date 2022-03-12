@@ -38,10 +38,6 @@ build:
     paths:
       - client/build/
     expire_in: 30 mins
-  needs: ["install-client", "install-server"]
-  dependencies:
-    - install-client
-    - install-server
 
 unit-test-client:
   stage: test
@@ -108,8 +104,6 @@ pre-deploy:
     - git stash
     - git pull "https://team10-21:glpat--d6rb-Nhhb_srB2sMkDH@git-teaching.cs.bham.ac.uk/mod-team-project-2021/team10-21.git"
     - pm2 delete all
-  needs:
-    ["unit-test-client", "unit-test-server", "integration-test", "system-test"]
 
 deploy-client:
   stage: deploy
