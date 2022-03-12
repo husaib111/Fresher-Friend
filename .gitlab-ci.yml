@@ -16,7 +16,6 @@ install-client:
     untracked: true
     expire_in: 30 mins
     paths:
-      - client/.npm
       - client/node_modules/
 
 install-server:
@@ -96,8 +95,8 @@ pre-deploy:
   stage: deploy
   script:
     - ls -la
-    - cp -R ./client /var/www/team10-21/client
-    - cp -R ./server /var/www/team10-21/server
+    - cp -R ./client /var/www/team10-21-1/
+    - cp -R ./server /var/www/team10-21-1/
     - cd /var/www/team10-21
     - git stash
     - git pull "https://team10-21:glpat--d6rb-Nhhb_srB2sMkDH@git-teaching.cs.bham.ac.uk/mod-team-project-2021/team10-21.git"
