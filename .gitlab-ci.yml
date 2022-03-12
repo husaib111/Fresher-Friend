@@ -1,3 +1,5 @@
+image: node:alpine
+
 stages:
   - install
   - build
@@ -8,7 +10,7 @@ install-client:
   stage: install
   script:
     - cd client
-    - npm install
+    - npm ci
   artifacts:
     name: "artifacts"
     untracked: true
@@ -21,7 +23,7 @@ install-server:
   stage: install
   script:
     - cd server
-    - npm install
+    - npm ci
   artifacts:
     name: "artifacts"
     untracked: true
@@ -38,10 +40,6 @@ build:
     paths:
       - client/build/
     expire_in: 30 mins
-  needs: ["install-client", "install-server"]
-  dependencies:
-    - install-client
-    - install-server
 
 unit-test-client:
   stage: test
@@ -77,7 +75,7 @@ integration-test:
     - sleep 1
     - echo "Done"
   needs:
-    ["install-server", "install-client", "unit-test-client", "unit-test-server"]
+    ["install-server", "install-client"]
   dependencies:
     - install-client
     - install-server
@@ -89,47 +87,35 @@ system-test:
     - sleep 1
     - echo "Done"
   needs:
-    [
-      "install-server",
-      "install-client",
-      "unit-test-client",
-      "unit-test-server",
-      "build",
-    ]
+    ["install-server", "install-client"]
   dependencies:
     - install-server
     - install-client
-    - build
 
 pre-deploy:
   stage: deploy
   script:
+    - ls -la
+    - cp -R ./client /var/www/team10-21/client
+    - cp -R ./server /var/www/team10-21/server
     - cd /var/www/team10-21
     - git stash
     - git pull "https://team10-21:glpat--d6rb-Nhhb_srB2sMkDH@git-teaching.cs.bham.ac.uk/mod-team-project-2021/team10-21.git"
     - pm2 delete all
-  needs:
-    ["unit-test-client", "unit-test-server", "integration-test", "system-test"]
 
 deploy-client:
   stage: deploy
-  dependencies:
-    - install-client
-    - build
   script:
-    - cd /var/www/team10-21
-    - cd client
+    - cd /var/www/team10-21/client
     - npm ci
     - npm run build
     - pm2 serve -s build 3000 --spa
-  needs: ["pre-deploy", "install-client", "build"]
+  needs: ["pre-deploy"]
 
 deploy-server:
   stage: deploy
-  dependencies:
-    - install-server
   script:
-    - cd /var/www/team10-21
-    - cd server
+    - cd /var/www/team10-21/server
+    - npm ci
     - pm2 start index.js
-  needs: ["pre-deploy", "install-server"]
+  needs: ["pre-deploy"]

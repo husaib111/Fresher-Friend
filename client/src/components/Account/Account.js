@@ -10,11 +10,21 @@ function Account(){
   const [status, setStatus] = useState([false,false,false]);
   const [priv,setPriv] = useState(true);
 
-  const getInfo = async (i) => {
+  const doLogout = async () =>{
     await Axios.get(
-      "http://localhost:5001/userInfo/"+i,
+      "http://www.fresher-friend.bham.team:5001/logout/",
       {
-      },
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    window.location.href='/';
+  }
+
+  const getInfo = async () => {
+    await Axios.get(
+      "http://www.fresher-friend.bham.team:5001/loggedInUserInfo/",
       {
         withCredentials: true,
         headers: {
@@ -30,13 +40,14 @@ function Account(){
       })
       .catch((e) => {
         console.log(e);
+        window.location.href='/';
       });
   }
 
-  const [info,setInfo] = useState(()=>getInfo(3));
+  const [info,setInfo] = useState(()=>getInfo());
 
   useEffect(() => {
-    getInfo(3);
+    getInfo();
   },[]);
 
   const handleClick = (e) => {
@@ -107,7 +118,7 @@ function Account(){
         />
         <label>Private profile</label>
         <br/>
-        <form action="http://www.fresher-friend.bham.team/logout">
+        <form onSubmit={doLogout} >
           <button className="logout btn btn-primary" type="submit">Log out</button>
         </form>
       </div>

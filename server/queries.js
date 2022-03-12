@@ -40,6 +40,24 @@ const getUsersByAccommodation = async (request, response) => {
   }
 };
 
+const getLoggedInUserBasicInfo = async (request,response) => {
+  try {
+    const userEmail = getLoggedUserEmail(request);
+    console.log(userEmail);
+
+    const users = await pool.query(
+      "select first_name,middle_name,last_name,course_name,flat_num,block_num,acc_location from users natural join accommodation natural join courses where email=$1",
+      [userEmail]
+    );
+
+    response.json(users.rows);
+  } catch (e) {
+    response.status(400).send({
+      message: 'Not logged in!'
+    });
+    console.log(e.message);
+  }
+}
 const getUserBasicInfo = async (request, response) => {
   try {
     const { userId } = request.params;
@@ -106,4 +124,5 @@ module.exports = {
   getUsersByAccommodation,
   getUserBasicInfo,
   testFunction,
+  getLoggedInUserBasicInfo
 };
