@@ -25,6 +25,10 @@
   text-align: center;
 }
 
+.userInfo h3 {
+  margin-top: 3rem;
+}
+
 .userInfo label {
   display: block;
   margin: 0 auto;

@@ -87,7 +87,6 @@ const testFunction = async (request, response) => {
       request.cookies["token"],
       "fresherFriend"
     ).email;
-    console.log(userEmail);
 
     const user = await pool.query("SELECT * FROM Users WHERE email = $1", [
       userEmail,
