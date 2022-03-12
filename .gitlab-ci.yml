@@ -4,42 +4,33 @@ stages:
   - test
   - deploy
 
-install:
+install-client:
   stage: install
   script:
     - cd client
-    - npm install
-    - cd ../server
-    - npm install
-  cache:
-    key:
-      files:
-        - server/package-lock.json
-        - client/package-lock.json
-    paths:
-      - server/node_modules
-      - client/node_modules
-    policy: pull-push
+    - npm ci
   artifacts:
     name: "artifacts"
     untracked: true
     expire_in: 30 mins
     paths:
       - client/.npm
-      - client/node_modules
-      - server/node_modules
+      - client/node_modules/
+
+install-server:
+  stage: install
+  script:
+    - cd server
+    - npm ci
+  artifacts:
+    name: "artifacts"
+    untracked: true
+    expire_in: 30 mins
+    paths:
+      - server/node_modules/
 
 build:
   stage: build
-  cache:
-    key:
-      files:
-        - server/package-lock.json
-        - client/package-lock.json
-    paths:
-      - server/node_modules
-      - client/node_modules
-    policy: pull
   script:
     - cd client
     - npm run build
@@ -50,22 +41,13 @@ build:
 
 unit-test-client:
   stage: test
-  cache:
-    key:
-      files:
-        - server/package-lock.json
-        - client/package-lock.json
-    paths:
-      - server/node_modules
-      - client/node_modules
-    policy: pull
   script:
     - cd client
     - echo "Executing unit tests..."
     - CI=true npm test -- --coverage
-  needs: ["install"]
+  needs: ["install-client"]
   dependencies:
-    - install
+    - install-client
   artifacts:
     name: "test-report"
     untracked: true
@@ -76,62 +58,37 @@ unit-test-client:
 
 unit-test-server:
   stage: test
-  cache:
-    key:
-      files:
-        - server/package-lock.json
-        - client/package-lock.json
-    paths:
-      - server/node_modules
-      - client/node_modules
-    policy: pull
   script:
     - echo "Testing..."
     - sleep 1
     - echo "Done"
-  needs: ["install"]
+  needs: ["install-server"]
   dependencies:
-    - install
+    - install-server
 
 integration-test:
   stage: test
-  cache:
-    key:
-      files:
-        - server/package-lock.json
-        - client/package-lock.json
-    paths:
-      - server/node_modules
-      - client/node_modules
-    policy: pull
   script:
     - echo "Testing..."
     - sleep 1
     - echo "Done"
   needs:
-    ["install"]
+    ["install-server", "install-client"]
   dependencies:
-    - install
+    - install-client
+    - install-server
 
 system-test:
   stage: test
-  cache:
-    key:
-      files:
-        - server/package-lock.json
-        - client/package-lock.json
-    paths:
-      - server/node_modules
-      - client/node_modules
-    policy: pull
   script:
     - echo "Testing..."
     - sleep 1
     - echo "Done"
   needs:
-    ["install"]
+    ["install-server", "install-client"]
   dependencies:
-    - install
+    - install-server
+    - install-client
 
 pre-deploy:
   stage: deploy
@@ -143,17 +100,8 @@ pre-deploy:
 
 deploy-client:
   stage: deploy
-  cache:
-    key:
-      files:
-        - server/package-lock.json
-        - client/package-lock.json
-    paths:
-      - server/node_modules
-      - client/node_modules
-    policy: pull
   dependencies:
-    - install
+    - install-client
     - build
   script:
     - cd /var/www/team10-21
@@ -161,23 +109,14 @@ deploy-client:
     - npm ci
     - npm run build
     - pm2 serve -s build 3000 --spa
-  needs: ["pre-deploy", "install", "build"]
+  needs: ["pre-deploy", "install-client", "build"]
 
 deploy-server:
   stage: deploy
-  cache:
-    key:
-      files:
-        - server/package-lock.json
-        - client/package-lock.json
-    paths:
-      - server/node_modules
-      - client/node_modules
-    policy: pull
   dependencies:
-    - install
+    - install-server
   script:
     - cd /var/www/team10-21
     - cd server
     - pm2 start index.js
-  needs: ["pre-deploy", "install"]
+  needs: ["pre-deploy", "install-server"]
