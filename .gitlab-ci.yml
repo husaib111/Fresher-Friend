@@ -96,7 +96,8 @@ pre-deploy:
   stage: deploy
   script:
     - ls -la
-    - cp -R . /var/www/team10-21/
+    - cp -R ./client /var/www/team10-21/client
+    - cp -R ./server /var/www/team10-21/server
     - cd /var/www/team10-21
     - git stash
     - git pull "https://team10-21:glpat--d6rb-Nhhb_srB2sMkDH@git-teaching.cs.bham.ac.uk/mod-team-project-2021/team10-21.git"

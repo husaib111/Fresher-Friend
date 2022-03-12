@@ -105,6 +105,7 @@ const getUsersInCourseGroup = async (request, response) => {
 
 const testFunction = async (request, response) => {
   try {
+    //COPY THE LINE BELOW TO RETRIEVE THE EMAIL OF SIGNED USER
     const userEmail = getLoggedUserEmail(request);
 
     const user = await pool.query("SELECT * FROM Users WHERE email = $1", [

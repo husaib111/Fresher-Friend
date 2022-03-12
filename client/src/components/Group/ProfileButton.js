@@ -1,12 +1,11 @@
 import "./ProfileButton.css";
 import "./Group.css";
-import React, {useState, useEffect, Component} from 'react';
-import {IoPersonCircle} from "react-icons/io5";
+import React, { useState, useEffect } from "react";
+import { IoPersonCircle } from "react-icons/io5";
 import Axios from "axios";
 
 function ProfileButton(props){
   
-
     return(
       <div className="ProfileButton">
           <a href={"/myAccount"}>
@@ -21,12 +20,7 @@ function ProfileButton(props){
   )
 }
 
-
 //class ProfileButton extends Component{
 //    render(){
-        
-
-
-
 
 export default ProfileButton;
