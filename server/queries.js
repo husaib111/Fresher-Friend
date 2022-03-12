@@ -81,12 +81,13 @@ const getUsersInCourseGroup = async (request, response) => {
   }
 };
 
+const getLoggedUserEmail = (request) => {
+  return jwt.verify(request.cookies["token"], "fresherFriend").email;
+};
+
 const testFunction = async (request, response) => {
   try {
-    const userEmail = jwt.verify(
-      request.cookies["token"],
-      "fresherFriend"
-    ).email;
+    const userEmail = getLoggedUserEmail(request);
 
     const user = await pool.query("SELECT * FROM Users WHERE email = $1", [
       userEmail,

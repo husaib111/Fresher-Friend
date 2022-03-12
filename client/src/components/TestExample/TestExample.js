@@ -26,7 +26,7 @@ const TestExample = () => {
 
     const userContainer = document.getElementsByClassName("userInfo");
     userContainer[0].innerHTML = `
-    <h3>You are logged in as</h3>
+    <h3>You are logged in as User${user_id}</h3>
     <label>User ID: ${user_id}</label>
     <label>Email: ${email}</label>
     <label>First Name: ${first_name}</label>
