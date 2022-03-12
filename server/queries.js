@@ -2,6 +2,10 @@ const { response } = require("express");
 const pool = require("./dbconnect");
 const jwt = require("jsonwebtoken");
 
+const getLoggedUserEmail = (request) => {
+  return jwt.verify(request.cookies["token"], "fresherFriend").email;
+};
+
 const getUsers = async (request, response) => {
   try {
     const allUsers = await pool.query("SELECT * FROM users;");
@@ -79,10 +83,6 @@ const getUsersInCourseGroup = async (request, response) => {
   } catch (e) {
     console.log(e.message);
   }
-};
-
-const getLoggedUserEmail = (request) => {
-  return jwt.verify(request.cookies["token"], "fresherFriend").email;
 };
 
 const testFunction = async (request, response) => {
