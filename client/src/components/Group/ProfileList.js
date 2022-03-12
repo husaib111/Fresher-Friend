@@ -1,8 +1,24 @@
 import "./ProfileList.css";
+import "./ProfileButton.css";
+import "./Group.css";
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
 
-import ProfileButton from "./ProfileButton";
+function ProfileButton(props) {
+  return (
+    <div className="ProfileButton">
+      <a href={"/myAccount"}>
+        <div className="ProfileButtonCircle">
+          <IoPersonCircle className={"ProfileButtonIcon"} />
+        </div>
+        <div className="ProfileButtonTitle">
+          <h1>{props.name}</h1>
+        </div>
+      </a>
+    </div>
+  );
+}
+
 
 function makeProfileButton(name) {
   const { first_name } = name;
