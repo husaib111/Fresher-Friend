@@ -9,7 +9,6 @@ install-client:
   script:
     - cd client
     - npm install
-    - cp -R client/node_modules /var/www/team10-21/client/
   artifacts:
     name: "artifacts"
     untracked: true
@@ -23,7 +22,6 @@ install-server:
   script:
     - cd server
     - npm install
-    - cp -R server/node_modules /var/www/team10-21/server/
   artifacts:
     name: "artifacts"
     untracked: true
@@ -36,7 +34,6 @@ build:
   script:
     - cd client
     - npm run build
-    - cp -R client/build /var/www/team10-21/client/
   artifacts:
     paths:
       - client/build/
@@ -76,7 +73,7 @@ integration-test:
     - sleep 1
     - echo "Done"
   needs:
-    ["install-server", "install-client", "unit-test-client", "unit-test-server"]
+    ["install-server", "install-client"]
   dependencies:
     - install-client
     - install-server
@@ -88,17 +85,10 @@ system-test:
     - sleep 1
     - echo "Done"
   needs:
-    [
-      "install-server",
-      "install-client",
-      "unit-test-client",
-      "unit-test-server",
-      "build",
-    ]
+    ["install-server", "install-client"]
   dependencies:
     - install-server
     - install-client
-    - build
 
 pre-deploy:
   stage: deploy
