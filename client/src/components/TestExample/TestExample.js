@@ -14,7 +14,6 @@ const TestExample = () => {
       }
     );
 
-    console.log(response);
     const {
       user_id,
       email,
@@ -27,21 +26,21 @@ const TestExample = () => {
 
     const userContainer = document.getElementsByClassName("userInfo");
     userContainer[0].innerHTML = `
-    <title>You are logged in as</title>
-    <label className="userLabel">User ID: ${user_id}</label>
-    <label className="userLabel">Email: ${email}</label>
-    <label className="userLabel">First Name: ${first_name}</label>
-    <label className="userLabel">Middle Name: ${middle_name}</label>
-    <label className="userLabel">Last Name:${last_name}</label>
-    <label className="userLabel">Accommodation ID: ${acc_id}</label>
-    <label className="userLabel">Course ID: ${course_id}</label>
+    <h3>You are logged in as</h3>
+    <label>User ID: ${user_id}</label>
+    <label>Email: ${email}</label>
+    <label>First Name: ${first_name}</label>
+    <label>Middle Name: ${middle_name}</label>
+    <label>Last Name:${last_name}</label>
+    <label>Accommodation ID: ${acc_id}</label>
+    <label>Course ID: ${course_id}</label>
     `;
   }
 
   return (
     <section className="container">
       <button className="getDataBtn" onClick={getData}>
-        Get data
+        Get user info
       </button>
       <div className="userInfo"></div>
     </section>
