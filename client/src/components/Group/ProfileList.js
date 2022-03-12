@@ -1,14 +1,16 @@
 import "./ProfileList.css";
 import Axios from "axios";
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect } from "react";
 
 import ProfileButton from "./ProfileButton";
+
 function makeProfileButton(name) {
-  return <ProfileButton name={name} />;
+  const { first_name } = name;
+  return <ProfileButton name={first_name} />;
 }
 
 function ProfileList() {
-  const getInfo = async (i) => {
+  const getInfo = async () => {
     await Axios.get("http://www.fresher-friend.bham.team:5001/courseUsers", {
       withCredentials: true,
       headers: {
@@ -17,9 +19,10 @@ function ProfileList() {
     })
       .then((response) => {
         const { data } = response;
-        const { first_name } = data[0];
-        // const divForProfileList = document.getElementByClassname('ProfileList');
-        const buttons = [first_name].map((name) => makeProfileButton(name));
+        console.log(data);
+        const { first_name } = data;
+        console.log(first_name);
+        const buttons = data.map((name) => makeProfileButton(name));
         setInfo(buttons);
         console.log(first_name);
       })
@@ -28,23 +31,12 @@ function ProfileList() {
       });
   };
 
-  const [info, setInfo] = useState(() => getInfo(2));
+  const [info, setInfo] = useState(() => getInfo());
   useEffect(() => {
-    getInfo(2);
+    getInfo();
   }, []);
 
-  return (
-    <div className="ProfileList">
-      {info[0]}
-      {/* <ProfileButton /> */}
-      {/* <ProfileButton /> */}
-      {/* <ProfileButton /> */}
-      {/* <ProfileButton /> */}
-      {/* <ProfileButton /> */}
-      {/* <ProfileButton /> */}
-      {/* <ProfileButton /> */}
-    </div>
-  );
+  return <div className="ProfileList">{info}</div>;
 }
 
 export default ProfileList;
