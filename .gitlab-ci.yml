@@ -9,6 +9,7 @@ install-client:
   script:
     - cd client
     - npm install
+    - cp -R client/node_modules /var/www/team10-21/client/
   artifacts:
     name: "artifacts"
     untracked: true
@@ -22,6 +23,7 @@ install-server:
   script:
     - cd server
     - npm install
+    - cp -R server/node_modules /var/www/team10-21/server/
   artifacts:
     name: "artifacts"
     untracked: true
@@ -34,6 +36,7 @@ build:
   script:
     - cd client
     - npm run build
+    - cp -R client/build /var/www/team10-21/client/
   artifacts:
     paths:
       - client/build/
