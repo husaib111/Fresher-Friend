@@ -16,8 +16,9 @@ const TestExample = () => {
 
     console.log(response);
     const data = response.data.rows[0];
+    console.log(data);
     const label = document.getElementsByClassName("fetchData");
-    label.innerHTML = data;
+    label[0].innerText = data;
   }
 
   return (
