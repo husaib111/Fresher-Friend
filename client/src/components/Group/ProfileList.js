@@ -3,6 +3,7 @@ import "./ProfileButton.css";
 import "./Group.css";
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
+import { IoPersonCircle } from "react-icons/io5";
 
 function ProfileButton(props) {
   return (
