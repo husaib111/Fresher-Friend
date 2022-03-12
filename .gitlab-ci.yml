@@ -95,6 +95,7 @@ system-test:
 pre-deploy:
   stage: deploy
   script:
+    - ls -la
     - cp -R . /var/www/team10-21/
     - cd /var/www/team10-21
     - git stash
