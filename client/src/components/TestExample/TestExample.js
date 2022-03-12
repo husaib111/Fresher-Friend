@@ -27,13 +27,14 @@ const TestExample = () => {
 
     const userContainer = document.getElementsByClassName("userInfo");
     userContainer[0].innerHTML = `
-    <label>${user_id}</label>
-    <label>${email}</label>
-    <label>${first_name}</label>
-    <label>${middle_name}</label>
-    <label>${last_name}</label>
-    <label>${acc_id}</label>
-    <label>${course_id}</label>
+    <title>You are logged in as</title>
+    <label className="userLabel">User ID: ${user_id}</label>
+    <label className="userLabel">Email: ${email}</label>
+    <label className="userLabel">First Name: ${first_name}</label>
+    <label className="userLabel">Middle Name: ${middle_name}</label>
+    <label className="userLabel">Last Name:${last_name}</label>
+    <label className="userLabel">Accommodation ID: ${acc_id}</label>
+    <label className="userLabel">Course ID: ${course_id}</label>
     `;
   }
 
@@ -42,7 +43,6 @@ const TestExample = () => {
       <button className="getDataBtn" onClick={getData}>
         Get data
       </button>
-      <label className="fetchData"></label>
       <div className="userInfo"></div>
     </section>
   );

@@ -18,3 +18,15 @@
 .fetchData {
   margin-top: 5rem;
 }
+
+.userInfo {
+  display: flexbox;
+  align-items: center;
+  text-align: center;
+}
+
+.userLabel {
+  margin: 0 auto;
+  text-align: center;
+  display: block;
+}
