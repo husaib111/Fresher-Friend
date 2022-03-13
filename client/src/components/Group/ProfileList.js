@@ -26,7 +26,7 @@ function makeProfileButton(name) {
   return <ProfileButton name={first_name} />;
 }
 
-function ProfileList() {
+function ProfileList(props) {
   const getInfo = async () => {
     await Axios.get("http://www.fresher-friend.bham.team:5001/courseUsers", {
       withCredentials: true,
@@ -36,19 +36,17 @@ function ProfileList() {
     })
       .then((response) => {
         const { data } = response;
-        console.log(data);
-        const { first_name } = data;
-        console.log(first_name);
+        // console.log(data);
         const buttons = data.map((name) => makeProfileButton(name));
+        console.log(buttons);
         setInfo(buttons);
-        console.log(first_name);
       })
       .catch((e) => {
         console.log(e);
       });
   };
 
-  const [info, setInfo] = useState(() => getInfo());
+  const [info, setInfo] = useState([]);
   useEffect(() => {
     getInfo();
   }, []);

@@ -107,14 +107,16 @@ const getCourseUsers = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);
 
-    const courseId = await pool.query(
+    const course_ids = await pool.query(
       "SELECT course_id FROM Users WHERE email = $1",
       [userEmail]
     );
+    const {course_id} =course_ids.rows[0];
+
 
     const courseUsers = await pool.query(
       "SELECT * FROM Users WHERE course_id = $1",
-      [courseId]
+      [course_id]
     );
 
     response.json(courseUsers.rows);
