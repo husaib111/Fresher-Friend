@@ -2,37 +2,57 @@ import "./Login.css";
 import React, { useState } from "react";
 import { GiThreeFriends } from "react-icons/gi";
 import Axios from "axios";
+import { Document, Page } from "react-pdf";
+import PrivacyPolicy from "./PrivacyPolicy";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [checked, setChecked] = useState(false);
+  const [shownDocument, setShownDocument] = useState(false);
+
+  const handleChange = () => {
+    setChecked(!checked);
+  };
+
+  const showDocument = () => {
+    setShownDocument(!shownDocument);
+    if (shownDocument) {
+      //show the document
+    }
+  };
+
   async function loginUser(event) {
     event.preventDefault();
 
-    const response = await Axios.post(
-      "http://www.fresher-friend.bham.team:5001/login",
-      {
-        email: email,
-        password: password,
-      },
-      {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const data = response.data;
-
-    if (data.success) {
-      alert("Login Successful!");
-      window.location.href = "/homePage";
+    if (!checked) {
+      alert("Before you can proceed, you need to agree to the Privacy Policy.");
     } else {
-      alert(
-        "Your email or password is incorrect, please check your login information!"
+      const response = await Axios.post(
+        "http://www.fresher-friend.bham.team:5001/login",
+        {
+          email: email,
+          password: password,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
+
+      const data = response.data;
+
+      if (data.success) {
+        alert("Login Successful!");
+        window.location.href = "/homePage";
+      } else {
+        alert(
+          "Your email or password is incorrect, please check your login information!"
+        );
+      }
     }
   }
 
@@ -64,6 +84,20 @@ const Login = () => {
             placeholder="Password"
           />
         </div>
+        <label className="check-container">
+          <input
+            className="checkbox"
+            type="checkbox"
+            checked={checked}
+            onChange={handleChange}
+          />
+          By continuing, I acknowledge FresherFriend’s
+          <button type="button" onChange={showDocument}>
+            {" "}
+            Privacy Policy
+          </button>
+          .
+        </label>
         <input
           aria-label="loginButton"
           type="submit"
@@ -73,6 +107,7 @@ const Login = () => {
         <p>
           <a href="/login">Forgot password</a>
         </p>
+        <PrivacyPolicy />
       </form>
       <hr />
       <div className="createAccount">

@@ -21,6 +21,23 @@
   margin: 2%;
 }
 
+.check-container {
+  display: block;
+}
+
+.check-container button {
+  background: transparent;
+  border: none !important;
+  color: blue;
+}
+
+.checkbox {
+  margin-right: 1rem;
+  border: 1px solid blue;
+  border-radius: 2px;
+  accent-color: blue;
+}
+
 hr {
   width: 95%;
   margin: 3% auto;
