@@ -58,6 +58,28 @@ const getLoggedInUserBasicInfo = async (request, response) => {
     console.log(e.message);
   }
 };
+
+const getLoggedInUserInterests = async (request, response) => {
+  try {
+    const userEmail = getLoggedUserEmail(request);
+
+    const user_ids = await pool.query(
+      "SELECT course_id FROM Users WHERE email = $1",
+      [userEmail]
+    );
+    const {user_id} = users_ids.rows[0];
+
+    const interests = await pool.query(
+      "select interest_name,interest_icon from users natural join user_interests natural join interests where user_id=$1;",
+      [user_id]
+    );
+
+    response.json(interests.rows);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 const getUserBasicInfo = async (request, response) => {
   try {
     const { userId } = request.params;
