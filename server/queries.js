@@ -64,10 +64,11 @@ const getLoggedInUserInterests = async (request, response) => {
     const userEmail = getLoggedUserEmail(request);
 
     const user_ids = await pool.query(
-      "SELECT course_id FROM Users WHERE email = $1",
+      "SELECT user_id FROM Users WHERE email = $1",
       [userEmail]
     );
-    const {user_id} = users_ids.rows[0];
+    console.log(user_ids);
+    const {user_id} = user_ids.rows[0];
 
     const interests = await pool.query(
       "select interest_name,interest_icon from users natural join user_interests natural join interests where user_id=$1;",
@@ -169,5 +170,6 @@ module.exports = {
   getUserBasicInfo,
   testFunction,
   getLoggedInUserBasicInfo,
+  getLoggedInUserInterests,
   getCourseUsers,
 };
