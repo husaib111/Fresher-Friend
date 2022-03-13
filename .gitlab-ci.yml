@@ -30,6 +30,7 @@ install-server:
 
 build:
   stage: build
+  dependencies: ["install-client"]
   script:
     - cd client
     - npm cache clear --force
