@@ -2,7 +2,6 @@ import "./Login.css";
 import React, { useState } from "react";
 import { GiThreeFriends } from "react-icons/gi";
 import Axios from "axios";
-import { Document, Page } from "react-pdf";
 import PrivacyPolicy from "./PrivacyPolicy";
 
 const Login = () => {
