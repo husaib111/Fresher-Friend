@@ -82,7 +82,7 @@ const Login = () => {
             onChange={handleChange}
           />
           By continuing, I acknowledge FresherFriend’s
-          <a href="/">Privacy Policy</a>.
+          <a href="/privacy"> Privacy Policy</a>.
         </label>
         <input
           aria-label="loginButton"
