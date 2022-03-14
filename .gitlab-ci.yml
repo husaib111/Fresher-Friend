@@ -93,7 +93,7 @@ system-test:
 pre-deploy:
   stage: deploy
   script:
-    - rsync -a --delete-after . $BUILD_LOCATION
+    - rsync -a --delete-after . /var/www/team10-21/
     - cd /var/www/team10-21
     - pm2 delete all
 
@@ -101,7 +101,7 @@ deploy-client:
   stage: deploy
   dependencies: []
   script:
-    - cd $BUILD_LOCATION
+    - cd /var/www/team10-21/
     - cd client
     - pm2 serve -s build 3000 --spa
   needs: ["pre-deploy"]
@@ -110,7 +110,7 @@ deploy-server:
   stage: deploy
   dependencies: []
   script:
-    - cd $BUILD_LOCATION
+    - cd /var/www/team10-21/
     - cd server
     - pm2 start index.js
   needs: ["pre-deploy"]
