@@ -25,12 +25,6 @@
   display: block;
 }
 
-.check-container button {
-  background: transparent;
-  border: none !important;
-  color: blue;
-}
-
 .checkbox {
   margin-right: 1rem;
   border: 1px solid blue;

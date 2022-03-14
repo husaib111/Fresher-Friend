@@ -2,24 +2,15 @@ import "./Login.css";
 import React, { useState } from "react";
 import { GiThreeFriends } from "react-icons/gi";
 import Axios from "axios";
-import PrivacyPolicy from "./PrivacyPolicy";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [checked, setChecked] = useState(false);
-  const [shownDocument, setShownDocument] = useState(false);
 
   const handleChange = () => {
     setChecked(!checked);
-  };
-
-  const showDocument = () => {
-    setShownDocument(!shownDocument);
-    if (shownDocument) {
-      //show the document
-    }
   };
 
   async function loginUser(event) {
@@ -91,11 +82,7 @@ const Login = () => {
             onChange={handleChange}
           />
           By continuing, I acknowledge FresherFriend’s
-          <button type="button" onChange={showDocument}>
-            {" "}
-            Privacy Policy
-          </button>
-          .
+          <a href="/">Privacy Policy</a>.
         </label>
         <input
           aria-label="loginButton"
