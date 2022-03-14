@@ -60,7 +60,10 @@ unit-test-server:
   stage: test
   script:
     - echo "Testing..."
-    - sleep 1
+    - cd server
+    - pm2 list
+    - pm2 delete index
+    - npm test
     - echo "Done"
   needs: ["install-server"]
   dependencies:
@@ -72,8 +75,7 @@ integration-test:
     - echo "Testing..."
     - sleep 1
     - echo "Done"
-  needs:
-    ["install-server", "install-client"]
+  needs: ["install-server", "install-client"]
   dependencies:
     - install-client
     - install-server
@@ -84,8 +86,7 @@ system-test:
     - echo "Testing..."
     - sleep 1
     - echo "Done"
-  needs:
-    ["install-server", "install-client"]
+  needs: ["install-server", "install-client"]
   dependencies:
     - install-server
     - install-client
