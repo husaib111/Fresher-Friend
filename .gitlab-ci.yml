@@ -66,6 +66,13 @@ server-test:
   needs: ["install-server"]
   dependencies:
     - install-server
+  artifacts:
+    name: "test-report"
+    untracked: true
+    exclude:
+      - server/node_modules/**/*
+    when: always
+    expire_in: "1 day"
 
 system-test:
   stage: test
