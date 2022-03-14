@@ -15,6 +15,5 @@ describe("Our server", () => {
     const response = await request(server).get("/users");
 
     expect(response.statusCode).toBe(200);
-    console.log(response);
   });
 });
