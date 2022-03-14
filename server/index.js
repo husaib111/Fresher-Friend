@@ -24,7 +24,7 @@ app.use(
 
 //routes
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log("Server started on port %d", port);
 });
 
@@ -40,3 +40,5 @@ app.get("/users/courseId/:courseId", db.getUsersByCourse);
 app.get("/users/accId/:accId", db.getUsersByAccommodation);
 app.get("/userInfo/:userId", db.getUserBasicInfo);
 app.get("/test", auth.userAuth, db.testFunction);
+
+module.exports = server;
