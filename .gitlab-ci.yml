@@ -95,19 +95,19 @@ system-test:
 pre-deploy:
   stage: deploy
   script:
-    - ls -la
-    - rsync -a -v --delete-after . /var/www/team10-21-1/
+    # - ls -la
+    - rsync -a --delete-after . /var/www/team10-21/
     - cd /var/www/team10-21
-    - git stash
-    - git pull "https://team10-21:glpat--d6rb-Nhhb_srB2sMkDH@git-teaching.cs.bham.ac.uk/mod-team-project-2021/team10-21.git"
-    # - pm2 delete all
+    # - git stash
+    # - git pull "https://team10-21:glpat--d6rb-Nhhb_srB2sMkDH@git-teaching.cs.bham.ac.uk/mod-team-project-2021/team10-21.git"
+    - pm2 delete all
 
 deploy-client:
   stage: deploy
   script:
     - cd /var/www/team10-21/client
-    - npm ci
-    - npm run build
+    # - npm ci
+    # - npm run build
     - pm2 serve -s build 3000 --spa
   needs: ["pre-deploy"]
 
@@ -115,6 +115,6 @@ deploy-server:
   stage: deploy
   script:
     - cd /var/www/team10-21/server
-    - npm ci
+    # - npm ci
     - pm2 start index.js
   needs: ["pre-deploy"]
