@@ -1,7 +1,7 @@
 const request = require("supertest");
 const server = require("./index");
 
-describe("Our server", () => {
+describe("Server tests", () => {
   beforeAll((done) => {
     done();
   });

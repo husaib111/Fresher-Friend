@@ -99,6 +99,8 @@ Thumbs.db
 *.key
 *.pem
 
+output.txt
+
 # --------------------------------------------------------
 # BEGIN Explictly Allowed Files (i.e. do NOT ignore these)
 # --------------------------------------------------------
