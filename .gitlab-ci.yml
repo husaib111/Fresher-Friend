@@ -59,12 +59,10 @@ unit-test-client:
 unit-test-server:
   stage: test
   script:
-    - echo "Testing..."
     - cd server
     - pm2 list
     - pm2 delete index
     - npm test
-    - echo "Done"
   needs: ["install-server"]
   dependencies:
     - install-server
