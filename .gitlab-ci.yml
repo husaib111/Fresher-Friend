@@ -33,7 +33,7 @@ build:
   dependencies: ["install-client"]
   script:
     - cd client
-    - node --expose-gc --max-old-space-size=3072 node_modules/react-scripts/scripts/bundle.js
+    - npm run build
   artifacts:
     paths:
       - client/build/
