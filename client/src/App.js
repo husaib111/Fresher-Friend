@@ -20,8 +20,6 @@ class App extends React.Component {
           <Route path="/homePage" element={<HomePage />} />
           <Route path="/myAccount" element={<Account />} />
           <Route path="/" element={<Login />} />
-          <Route path="/register" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/Group" element={<Group />} />
           <Route path="/test" element={<TestExample />} />
         </Routes>
