@@ -1,5 +1,3 @@
-image: node:alpine
-
 stages:
   - install
   - build
@@ -35,7 +33,7 @@ build:
   dependencies: ["install-client"]
   script:
     - cd client
-    - node --expose-gc --max-old-space-size=4096 node_modules/react-scripts/scripts/bundle.js
+    - node --expose-gc --max-old-space-size=3072 node_modules/react-scripts/scripts/bundle.js
   artifacts:
     paths:
       - client/build/
