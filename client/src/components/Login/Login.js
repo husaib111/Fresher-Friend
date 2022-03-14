@@ -93,7 +93,6 @@ const Login = () => {
         <p>
           <a href="/login">Forgot password</a>
         </p>
-        <PrivacyPolicy />
       </form>
       <hr />
       <div className="createAccount">
