@@ -95,6 +95,7 @@ pre-deploy:
   script:
     - rsync -a --delete-after . /var/www/team10-21/
     - cd /var/www/team10-21
+    - pm2 list
     - pm2 delete all
 
 deploy-client:
