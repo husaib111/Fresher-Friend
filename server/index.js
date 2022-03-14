@@ -28,9 +28,15 @@ app.listen(port, () => {
   console.log("Server started on port %d", port);
 });
 
-app.get("/users", auth.userAuth, db.getUsers);
-app.get("/users/courseId/:courseId", db.getUsersByCourse);
-app.get("/users/accId/:accId", db.getUsersByAccommodation);
 app.post("/login", auth.loginCheck);
 app.get("/logout", auth.logOut);
+app.get("/courseUsers", auth.userAuth, db.getCourseUsers);
+app.get("/loggedInUserInfo", auth.userAuth, db.getLoggedInUserBasicInfo);
+app.get("/loggedInUserInterests", auth.userAuth, db.getLoggedInUserInterests);
+
+//USED FOR TESTING, DO NOT USE FOR PRODUCTION
+app.get("/users", db.getUsers);
+app.get("/users/courseId/:courseId", db.getUsersByCourse);
+app.get("/users/accId/:accId", db.getUsersByAccommodation);
 app.get("/userInfo/:userId", db.getUserBasicInfo);
+app.get("/test", auth.userAuth, db.testFunction);

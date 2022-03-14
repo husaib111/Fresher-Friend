@@ -1,0 +1,36 @@
+* {
+  font-size: large;
+}
+
+.container {
+  display: flexbox;
+  align-items: center;
+  margin-top: 5rem;
+  text-align: center;
+}
+
+.getDataBtn {
+  display: block;
+  size: 1rem;
+  margin: 0 auto;
+}
+
+.fetchData {
+  margin-top: 5rem;
+}
+
+.userInfo {
+  display: flexbox;
+  align-items: center;
+  text-align: center;
+}
+
+.userInfo h3 {
+  margin-top: 3rem;
+}
+
+.userInfo label {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
