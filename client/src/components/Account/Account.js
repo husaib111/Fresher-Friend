@@ -7,6 +7,7 @@ import pfp from '../../resources/default_pfp.png';
 import './Account.css';
 import Interest from './Interest'
 import Axios from "axios";
+import Navbar from "../Navbar/Navbar";
 
 function Account(){
   library.add(fas);
@@ -100,69 +101,72 @@ function Account(){
   }
 
   return(
-    <div className="Account">
-      <h1 className="title">
-        Your Profile
-      </h1>
-      <hr/>
-      <div className="basicInfo">
-        <div className="pfpContainer">
-          <img className="pfp" src={pfp} alt="Profile"/>
-        </div>
-        <h1>{info[0]} {info[1]} {info[2]}</h1>
-        <p className="About">{info[3]}</p>
-        {/* <p className="About">First Year</p> */}
-        <p className="About">Flat {info[4]}, Block {info[5]}, {info[6]}</p>
+      <div>
+          <Navbar />
+        <div className="Account">
+          <h1 className="title">
+            Your Profile
+          </h1>
+          <hr/>
+          <div className="basicInfo">
+            <div className="pfpContainer">
+              <img className="pfp" src={pfp} alt="Profile"/>
+            </div>
+            <h1>{info[0]} {info[1]} {info[2]}</h1>
+            <p className="About">{info[3]}</p>
+            {/* <p className="About">First Year</p> */}
+            <p className="About">Flat {info[4]}, Block {info[5]}, {info[6]}</p>
+          </div>
+          <div className="statusButtons">
+            <div className="statusButton">
+              <FontAwesomeIcon
+                className={`statusIcon ${status[0] ? "isolating" : "" }`}
+                icon={faCertificate}
+                onClick={(e)=>handleClick(0)}
+              />
+              <p className="statusLabel">I'm isolating</p>
+            </div>
+            <div className="statusButton">
+              <FontAwesomeIcon
+                className={`statusIcon ${status[1] ? "away" : "" }`}
+                icon={faPlane}
+                onClick={(e)=>handleClick(1)}
+              />
+              <p className="statusLabel">I'm away</p>
+            </div>
+            <div className="statusButton">
+              <FontAwesomeIcon
+                className={`statusIcon ${status[2] ? "guest" : "" }`}
+                icon={faUser}
+                onClick={(e)=>handleClick(2)}
+              />
+              <p className="statusLabel">I have a guest</p>
+            </div>
+          </div>
+          <div className="interestBox">
+            <h2>Interests</h2>
+            <div className="interests">
+              {interests}
+              {/* <Interest icon={faFutbol} interestName="Football"/> */}
+              {/* <Interest icon={faGamepad} interestName="Games"/> */}
+              {/* <Interest icon={faTrain} interestName="Travel"/> */}
+              {/* <Interest icon={faBicycle} interestName="Cycling"/> */}
+            </div>
+          </div>
+          <div className="settings">
+            <input
+              type="checkbox"
+              defaultChecked={priv}
+              onChange={()=>togglePrivate()}
+            />
+            <label>Private profile</label>
+            <br/>
+            <form onSubmit={doLogout} >
+              <button className="logout btn btn-primary" type="submit">Log out</button>
+            </form>
+          </div>
+        </div>``
       </div>
-      <div className="statusButtons">
-        <div className="statusButton">
-          <FontAwesomeIcon 
-            className={`statusIcon ${status[0] ? "isolating" : "" }`}
-            icon={faCertificate}
-            onClick={(e)=>handleClick(0)}
-          />
-          <p className="statusLabel">I'm isolating</p>
-        </div>
-        <div className="statusButton">
-          <FontAwesomeIcon 
-            className={`statusIcon ${status[1] ? "away" : "" }`}
-            icon={faPlane}
-            onClick={(e)=>handleClick(1)}
-          />
-          <p className="statusLabel">I'm away</p>
-        </div>
-        <div className="statusButton">
-          <FontAwesomeIcon
-            className={`statusIcon ${status[2] ? "guest" : "" }`}
-            icon={faUser}
-            onClick={(e)=>handleClick(2)}
-          />
-          <p className="statusLabel">I have a guest</p>
-        </div>
-      </div>
-      <div className="interestBox">
-        <h2>Interests</h2>
-        <div className="interests">
-          {interests}
-          {/* <Interest icon={faFutbol} interestName="Football"/> */}
-          {/* <Interest icon={faGamepad} interestName="Games"/> */}
-          {/* <Interest icon={faTrain} interestName="Travel"/> */}
-          {/* <Interest icon={faBicycle} interestName="Cycling"/> */}
-        </div>
-      </div>
-      <div className="settings">
-        <input 
-          type="checkbox"
-          defaultChecked={priv}
-          onChange={()=>togglePrivate()}
-        />
-        <label>Private profile</label>
-        <br/>
-        <form onSubmit={doLogout} >
-          <button className="logout btn btn-primary" type="submit">Log out</button>
-        </form>
-      </div>
-    </div>
   )
 }
 
