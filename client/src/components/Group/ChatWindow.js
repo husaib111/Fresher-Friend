@@ -2,14 +2,15 @@ import ScrollToBottom from "react-scroll-to-bottom";
 //import SwipeableViews from "react-swipeable-views";
 //import GroupsList from "./GroupsList";
 import "./ChatWindow.css"
+//import React, {useEffect, useState} from "react";
 import React, {useState} from "react";
 
 
 function ChatWindow({ socket, username, room }) {
     const [currentMessage, setCurrentMessage] = useState("");
-    const [messageList] = useState([]);
-    const [sendMessage] = useState("");
-    /*
+    const [messageList, setMessageList] = useState([]);
+    //const [sendMessage] = useState("");
+
     const sendMessage = async () => {
       if (currentMessage !== "") {
         const messageData = {
@@ -22,18 +23,12 @@ function ChatWindow({ socket, username, room }) {
             new Date(Date.now()).getMinutes(),
         };
 
-        await socket.emit("send_message", messageData);
         setMessageList((list) => [...list, messageData]);
         setCurrentMessage("");
       }
     };
 
-    useEffect(() => {
-      socket.on("receive_message", (data) => {
-        setMessageList((list) => [...list, data]);
-      });
-    }, [socket]);
-  */
+
 
     return (
         <div className="chat-window">
