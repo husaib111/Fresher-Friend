@@ -39,7 +39,7 @@ build:
       - client/build/
     expire_in: 30 mins
 
-unit-test-client:
+client-test:
   stage: test
   script:
     - cd client
@@ -56,27 +56,23 @@ unit-test-client:
     when: always
     expire_in: "1 day"
 
-unit-test-server:
+server-test:
   stage: test
   script:
-    - echo "Testing..."
-    - sleep 1
-    - echo "Done"
+    - cd server
+    - pm2 list
+    - pm2 delete index
+    - npm test
   needs: ["install-server"]
   dependencies:
     - install-server
-
-integration-test:
-  stage: test
-  script:
-    - echo "Testing..."
-    - sleep 1
-    - echo "Done"
-  needs:
-    ["install-server", "install-client"]
-  dependencies:
-    - install-client
-    - install-server
+  artifacts:
+    name: "test-report"
+    untracked: true
+    exclude:
+      - server/node_modules/**/*
+    when: always
+    expire_in: "1 day"
 
 system-test:
   stage: test
@@ -84,8 +80,7 @@ system-test:
     - echo "Testing..."
     - sleep 1
     - echo "Done"
-  needs:
-    ["install-server", "install-client"]
+  needs: ["install-server", "install-client", "client-test", "server-test"]
   dependencies:
     - install-server
     - install-client
@@ -95,6 +90,7 @@ pre-deploy:
   script:
     - rsync -a --delete-after . /var/www/team10-21/
     - cd /var/www/team10-21
+    - pm2 list
     - pm2 delete all
 
 deploy-client:
