@@ -3,13 +3,18 @@
     background-color: darkgray;
     height: 80px;
     margin-bottom: 10px;
+    justify-items: center;
 }
 
 .NavbarFlex{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     height: 80px;
     max-width: 700px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .h1{
@@ -19,6 +24,7 @@
 .NavbarIcon{
     height: 50px;
     width: 50px;
+    margin: auto;
 }
 
 .NavbarIcon.menuOpen{
@@ -36,18 +42,47 @@
 
 
 .NavigationMenu.menuOpen{
-    display: block;
+    display: flow;
+
     position:absolute;
-    padding:0;
+
     margin:0;
 
     top: 0;
     right: 10%;
     bottom: 0;
     left: 0;
-
-
-    width: 90%;
+    padding-left: 5%;
+    padding-top: 15px;
+    max-width: 400px;
+    width: 85%;
     height: 100%;
     background: rgba(131, 131, 131, 1);
+
+}
+
+.NavigationMenu li{
+    font-size:30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    list-style-type: none;
+
+}
+.NavigationMenu li + li{
+    border-top: 2px solid darkgray;
+}
+
+.TopNavbarMenuItems {
+    position: absolute;
+}
+
+.BottomNavbarMenuItems{
+    bottom: 30px;
+    position: absolute;
+}
+
+.NavbarMenuIcon{
+    width: 35px;
+    height: 35px;
+    margin-right: 15px;
 }

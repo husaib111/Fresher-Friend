@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {FaUniversalAccess} from "react-icons/fa";
 import {GiHamburgerMenu} from "react-icons/gi";
 import "./Navbar.css"
+import {MdHome, MdInfo, MdLogout, MdPerson, MdPrivacyTip} from "react-icons/md";
 
 function Navbar() {
     return (
@@ -47,32 +48,28 @@ function MenuBarButton(){
         <div className="MenuBarButton">
                 <GiHamburgerMenu
                     className= {`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
-                    onClick={(e)=>toggleNavbarMenu(0)}
+                    onClick={()=>toggleNavbarMenu(0)}
                 />
         </div>
             <div className= {`NavigationMenu ${MenuStatus[0] ? "menuOpen" : "menuClosed" }`}>
-
-                <div className="NavbarMenu">
                     <GiHamburgerMenu
                         className= {`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
-                        onClick={(e)=>toggleNavbarMenu(0)}
+                        onClick={()=>toggleNavbarMenu(0)}
                     />
 
 
-                    <div className="TopNavbarMenuItems">
-                        <li>Home</li>
-                        <li>My Profile</li>
-                    </div>
-                    <div className="BottomNavbarMenuItems">
-                        <li>About Us</li>
-                        <li>Privacy Policy</li>
-                        <li>Log Out</li>
-                    </div>
+                    <ul className="TopNavbarMenuItems">
+                        <li><MdHome className = "NavbarMenuIcon" />Home</li>
+                        <li><MdPerson className = "NavbarMenuIcon" />My Profile</li>
+                    </ul>
+                    <ul className="BottomNavbarMenuItems">
+                        <li><MdInfo className = "NavbarMenuIcon" />About Us</li>
+                        <li><MdPrivacyTip className = "NavbarMenuIcon" />Privacy Policy</li>
+                        <li><MdLogout className = "NavbarMenuIcon" />Log Out</li>
+                    </ul>
                 </div>
 
 
-
-            </div>
         </div>
     )
 }
