@@ -42,7 +42,7 @@
         right: 0;
         bottom: 0;
         left: -400px;
-        animation: slideOut 1s 1;
+        animation: slideOut 0.6s 1;
     }
 }
 
@@ -53,7 +53,7 @@
     left: 0;
 
 
-    animation: slideIn 1s 1;
+    animation: slideIn 0.6s 1;
 }
 .NavigationMenu{
 
@@ -61,40 +61,52 @@
     position: absolute;
 
     margin: 0;
-    padding-left: 5%;
+    align-items: center;
     padding-top: 15px;
+    padding-left: 15px;
     max-width: 400px;
     width: 85%;
     height: 100%;
     background: rgba(131, 131, 131, 1);
+    z-index: 2;
 
 }
 
 @keyframes slideIn {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(0%);
-    }
+    0% {transform: translateX(-100%)}
+    10%{transform: translateX(-98%)}
+    20%{transform: translateX(-95%)}
+    80%{transform: translateX(-5%)}
+    90%{transform: translateX(-2%)}
+    100% {transform: translateX(0%)}
 }
 
 @keyframes slideOut {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(0%);
-    }
+    0% {transform: translateX(100%)}
+    10%{transform: translateX(98%)}
+    20%{transform: translateX(95%)}
+    80%{transform: translateX(5%)}
+    90%{transform: translateX(2%)}
+    100% {transform: translateX(0%)}
 }
 
 .NavigationMenu li{
-    font-size:30px;
+
     padding-top: 5px;
     padding-bottom: 5px;
     list-style-type: none;
+    width: 100%;
+    align-self: center;
 
 }
+
+.NavigationMenu a{
+    font-size:30px;
+    text-align: left;
+    text-decoration: none;
+    color: black;
+}
+
 .NavigationMenu li + li{
     border-top: 2px solid darkgray;
 }
