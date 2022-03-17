@@ -1,9 +1,9 @@
-a{
+.ProfileButton a{
     color: black;
     text-decoration: none;
 }
 
-a:hover{
+.ProfileButton a:hover{
     color: black;
     text-decoration: none;
     font-weight: bold;
