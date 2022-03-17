@@ -62,14 +62,13 @@ function MenuBarButton(){
                         onClick={()=>toggleNavbarMenu(0)}
                     />
 
-
                     <ul className="TopNavbarMenuItems">
                         <li> <a href={"/homePage"}> <MdHome className = "NavbarMenuIcon" />Home</a></li>
                         <li> <a href={"/myAccount"}> <MdPerson className = "NavbarMenuIcon" />My Profile</a></li>
                     </ul>
                     <ul className="BottomNavbarMenuItems">
-                        <li> <a> <MdInfo className = "NavbarMenuIcon" />About Us </a></li>
-                        <li> <a> <MdPrivacyTip className = "NavbarMenuIcon" />Privacy Policy</a></li>
+                        <li> <a href={"/about"}> <MdInfo className = "NavbarMenuIcon" />About Us </a></li>
+                        <li> <a href={"/privacy"}> <MdPrivacyTip className = "NavbarMenuIcon" />Privacy Policy</a></li>
                         <li> <a href={"/"}> <MdLogout className = "NavbarMenuIcon" />Log Out</a></li>
                     </ul>
                 </div>
