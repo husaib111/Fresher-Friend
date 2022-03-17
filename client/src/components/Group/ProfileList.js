@@ -20,7 +20,6 @@ function ProfileButton(props) {
   );
 }
 
-
 function makeProfileButton(name) {
   const { first_name } = name;
   return <ProfileButton name={first_name} />;
@@ -28,7 +27,7 @@ function makeProfileButton(name) {
 
 function ProfileList(props) {
   const getInfo = async () => {
-    await Axios.get("http://www.fresher-friend.bham.team:5001/courseUsers", {
+    await Axios.get("https://www.fresher-friend.bham.team:5001/courseUsers", {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
