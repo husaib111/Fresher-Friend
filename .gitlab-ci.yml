@@ -62,7 +62,7 @@ server-test:
     - cd server
     - pm2 list
     - pm2 delete index
-    # - npm test
+    - npm test
   needs: ["install-server"]
   dependencies:
     - install-server
