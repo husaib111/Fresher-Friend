@@ -11,6 +11,7 @@ const https = require("https");
 require("./passport");
 
 const port = 5001;
+const portTesting = 5002;
 
 const options = {
   cert: fs.readFileSync(
@@ -37,6 +38,9 @@ app.use(
 
 const server = https.createServer(options, app).listen(port, () => {
   console.log("Server started on port %d", port);
+});
+const serverTest = app.listen(portTesting, () => {
+  console.log("Server for testing started on port %d", portTesting);
 });
 
 app.post("/login", auth.loginCheck);
