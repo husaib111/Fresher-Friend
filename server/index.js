@@ -56,4 +56,4 @@ app.get("/users/accId/:accId", db.getUsersByAccommodation);
 app.get("/userInfo/:userId", db.getUserBasicInfo);
 app.get("/test", auth.userAuth, db.testFunction);
 
-module.exports = server;
+module.exports = [server, serverTest];
