@@ -1,5 +1,5 @@
 const request = require("supertest");
-const serverTest = require("./index");
+const { serverTest } = require("./index");
 
 describe("Server tests", () => {
   beforeAll((done) => {
