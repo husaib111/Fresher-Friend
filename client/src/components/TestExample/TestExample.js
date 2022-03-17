@@ -5,7 +5,7 @@ import Axios from "axios";
 const TestExample = () => {
   async function getData() {
     const response = await Axios.get(
-      "http://www.fresher-friend.bham.team:5001/test",
+      "https://www.fresher-friend.bham.team:5001/test",
       {
         withCredentials: true,
         headers: {
