@@ -1,6 +1,5 @@
 const request = require("supertest");
-// const server = require("./index");
-const Axios = require("axios");
+const { server, serverTest } = require("./index");
 
 describe("Server tests", () => {
   beforeAll((done) => {
@@ -8,24 +7,31 @@ describe("Server tests", () => {
   });
 
   afterAll((done) => {
-    // server.close();
+    server.close();
+    serverTest.close();
     done();
   });
 
-  test("Login test 1", async () => {
-    const response = await Axios.post(
-      "https://www.fresher-friend.bham.team:5001/login",
-      {
+  test("Initial test", async () => {
+    const response = await request(serverTest).get("/users");
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("Login test", async () => {
+    const json = {
+      body: {
         email: "txg071@student.bham.ac.uk",
         password: "MySecurePassword",
       },
-      {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await request(serverTest).post("/login").send(json);
+
+    console.log(response.body);
     expect(response.statusCode).toBe(200);
   });
 });
