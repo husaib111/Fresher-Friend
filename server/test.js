@@ -1,5 +1,5 @@
 const request = require("supertest");
-const server = require("./index");
+// const server = require("./index");
 const Axios = require("axios");
 
 describe("Server tests", () => {
@@ -8,7 +8,7 @@ describe("Server tests", () => {
   });
 
   afterAll((done) => {
-    server.close();
+    // server.close();
     done();
   });
 
