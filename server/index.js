@@ -5,10 +5,21 @@ const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const db = require("./queries");
 const auth = require("./auth");
+const fs = require("fs");
+const https = require("https");
 
 require("./passport");
 
 const port = 5001;
+
+const options = {
+  cert: fs.readFileSync(
+    "/etc/letsencrypt/live/fresher-friend.bham.team/fullchain.pem"
+  ),
+  key: fs.readFileSync(
+    "/etc/letsencrypt/live/fresher-friend.bham.team/privkey.pem"
+  ),
+};
 
 //middleware
 
@@ -17,14 +28,14 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(
   cors({
-    origin: "http://www.fresher-friend.bham.team",
+    origin: "https://www.fresher-friend.bham.team",
     credentials: true,
   })
 );
 
 //routes
 
-const server = app.listen(port, () => {
+const server = https.createServer(options, app).listen(port, () => {
   console.log("Server started on port %d", port);
 });
 

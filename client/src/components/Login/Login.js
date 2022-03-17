@@ -20,7 +20,7 @@ const Login = () => {
       alert("Before you can proceed, you need to agree to the Privacy Policy.");
     } else {
       const response = await Axios.post(
-        "http://www.fresher-friend.bham.team:5001/login",
+        "https://www.fresher-friend.bham.team:5001/login",
         {
           email: email,
           password: password,
