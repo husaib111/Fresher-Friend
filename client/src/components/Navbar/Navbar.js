@@ -35,6 +35,9 @@ function AccessibilitySwitch(){
 
 function MenuBarButton(){
     const [MenuStatus, setMenuStatus] = useState([false])
+    // -1 = Close without animation (for when you first open the site
+    // 0 = Close with animation
+    // 1 = Open with animation
 
     const toggleNavbarMenu = (e) => {
         const oldMenuStatus = MenuStatus;
@@ -43,6 +46,8 @@ function MenuBarButton(){
         console.log(MenuStatus);
     }
 
+    let homePageRef =  React.createRef();
+    homePageRef.current = "/homePage";
     return(
         <div>
         <div className="MenuBarButton">
@@ -59,13 +64,13 @@ function MenuBarButton(){
 
 
                     <ul className="TopNavbarMenuItems">
-                        <li><MdHome className = "NavbarMenuIcon" />Home</li>
-                        <li><MdPerson className = "NavbarMenuIcon" />My Profile</li>
+                        <li> <a href={"/homePage"}> <MdHome className = "NavbarMenuIcon" />Home</a></li>
+                        <li> <a href={"/myAccount"}> <MdPerson className = "NavbarMenuIcon" />My Profile</a></li>
                     </ul>
                     <ul className="BottomNavbarMenuItems">
-                        <li><MdInfo className = "NavbarMenuIcon" />About Us</li>
-                        <li><MdPrivacyTip className = "NavbarMenuIcon" />Privacy Policy</li>
-                        <li><MdLogout className = "NavbarMenuIcon" />Log Out</li>
+                        <li> <a> <MdInfo className = "NavbarMenuIcon" />About Us </a></li>
+                        <li> <a> <MdPrivacyTip className = "NavbarMenuIcon" />Privacy Policy</a></li>
+                        <li> <a href={"/"}> <MdLogout className = "NavbarMenuIcon" />Log Out</a></li>
                     </ul>
                 </div>
 
