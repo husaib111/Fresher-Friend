@@ -1,5 +1,5 @@
 const request = require("supertest");
-const { server, serverTest } = require("./index");
+const server = require("./index");
 
 describe("Server tests", () => {
   beforeAll((done) => {
@@ -8,12 +8,11 @@ describe("Server tests", () => {
 
   afterAll((done) => {
     server.close();
-    serverTest.close();
     done();
   });
 
   test("Initial test", async () => {
-    const response = await request(serverTest).get("/users");
+    const response = await request(server).get("/users");
 
     expect(response.statusCode).toBe(200);
   });
@@ -29,7 +28,7 @@ describe("Server tests", () => {
         "Content-Type": "application/json",
       },
     };
-    const response = await request(serverTest).post("/login").send(json);
+    const response = await request(server).post("/login").send(json);
 
     console.log(response.body);
     expect(response.statusCode).toBe(200);
