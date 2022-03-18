@@ -12,7 +12,7 @@ const config = {
   "Content-Type": "application/json",
 };
 
-let session = NULL;
+let session = null;
 
 describe("Server tests", () => {
   beforeAll((done) => {
