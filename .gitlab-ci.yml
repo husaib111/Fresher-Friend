@@ -50,7 +50,7 @@ client-test:
   stage: test
   script:
     - cd client
-    - echo "Executing unit tests for client..."
+    - echo "Executing unit and integration tests for client..."
     - CI=true npm test -- --coverage
     - echo "Client tests executed successfully."
   needs: ["install-client"]
@@ -68,7 +68,7 @@ server-test:
   stage: test
   script:
     - cd server
-    - echo "Executing unit tests for server..."
+    - echo "Executing unit and integration tests for server..."
     - npm test
     - echo "Server tests executed successfully."
   needs: ["install-server"]
