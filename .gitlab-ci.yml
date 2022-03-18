@@ -96,13 +96,15 @@ system-test:
 deploy-client:
   stage: deploy
   script:
+    - echo "Deploying client..."
     - rsync -a --delete-after ./client/build/* /var/www/fresher-friend.bham.team/html/
-    - cd /var/www/team10-21/
-    - cd client
+    - echo "Client deployed successfully."
 
 deploy-server:
   stage: deploy
   script:
+    - echo "Deploying server..."
     - rsync -a --delete-after . /var/www/team10-21/
     - cd /var/www/team10-21/server
     - pm2 restart server.js
+    - echo "Server deployed successfully."
