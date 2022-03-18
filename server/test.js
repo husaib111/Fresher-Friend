@@ -1,12 +1,5 @@
 const request = require("supertest");
-const app = require("./index");
-const http = require("http");
-
-const testingPort = 5002;
-
-const server = http.createServer(app).listen(testingPort, () => {
-  console.log("Server started on port %d", testingPort);
-});
+const db = require("./queries");
 
 describe("Server tests", () => {
   beforeAll((done) => {
@@ -14,13 +7,14 @@ describe("Server tests", () => {
   });
 
   afterAll((done) => {
-    server.close();
+    // server.close();
     done();
   });
 
   test("Initial test", async () => {
-    const response = await request(server).get("/users");
-    expect(response.statusCode).toBe(200);
+    const users = await db.getUsers();
+    console.log(users);
+    expect(users);
     // expect();
   });
 

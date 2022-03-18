@@ -62,7 +62,7 @@ server-test:
     - cd server
     - pm2 list
     - pm2 delete index
-    # - npm test
+    - npm test
   needs: ["install-server"]
   dependencies:
     - install-server
@@ -109,5 +109,5 @@ deploy-server:
   script:
     - cd /var/www/team10-21/
     - cd server
-    - pm2 start server.js
+    - pm2 start index.js
   needs: ["pre-deploy"]

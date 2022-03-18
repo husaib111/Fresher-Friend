@@ -5,6 +5,8 @@ const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const db = require("./queries");
 const auth = require("./auth");
+const fs = require("fs");
+const https = require("https");
 
 require("./passport");
 
@@ -20,6 +22,21 @@ app.use(
   })
 );
 
+const port = 5001;
+
+const options = {
+  cert: fs.readFileSync(
+    "/etc/letsencrypt/live/fresher-friend.bham.team/fullchain.pem"
+  ),
+  key: fs.readFileSync(
+    "/etc/letsencrypt/live/fresher-friend.bham.team/privkey.pem"
+  ),
+};
+
+const server = https.createServer(options, app).listen(port, () => {
+  console.log("Server started on port %d", port);
+});
+
 //routes
 app.post("/login", auth.loginCheck);
 app.get("/logout", auth.logOut);
@@ -34,4 +51,4 @@ app.get("/users/accId/:accId", db.getUsersByAccommodation);
 app.get("/userInfo/:userId", db.getUserBasicInfo);
 app.get("/test", auth.userAuth, db.testFunction);
 
-module.exports = [app];
+module.exports = [server];
