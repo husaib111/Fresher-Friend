@@ -132,15 +132,20 @@ describe("Query tests", () => {
       .set(config)
       .send(json);
 
-    const tokenValue = await response.headers["set-cookie"][0]
+    session = await response.headers["set-cookie"][0]
       .split(",")
       .map((item) => item.split(";")[0])[0]
       .split("=")[1];
 
-    session = {
-      token: tokenValue,
-    };
-    console.log(session);
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("Authorized /courseUsers", async () => {
+    const response = await request(server)
+      .get("/courseUsers")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
     expect(response.statusCode).toBe(200);
   });
 });
