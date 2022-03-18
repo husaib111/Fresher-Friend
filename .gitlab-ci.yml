@@ -61,8 +61,8 @@ server-test:
   script:
     - cd server
     - pm2 list
-    - pm2 delete index
-    # - npm test
+    - pm2 delete server
+    - npm test
   needs: ["install-server"]
   dependencies:
     - install-server
