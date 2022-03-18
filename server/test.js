@@ -12,6 +12,8 @@ const config = {
   "Content-Type": "application/json",
 };
 
+let session = NULL;
+
 describe("Server tests", () => {
   beforeAll((done) => {
     done();
@@ -38,7 +40,15 @@ describe("Server tests", () => {
       .set(config)
       .send(json);
 
-    console.log(response);
+    const tokenValue = response.headers["set-cookie"][0]
+      .split(",")
+      .map((item) => item.split(";")[0])[0]
+      .split("=")[1];
+
+    session = {
+      token: tokenValue,
+    };
+    console.log(session);
     expect(response.statusCode).toBe(200);
   });
 });
