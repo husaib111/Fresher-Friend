@@ -6,7 +6,7 @@ const passport = require("passport");
 const db = require("./db/queries");
 const auth = require("./db/auth");
 
-require("./passport");
+require("./db/passport");
 
 //middleware
 
