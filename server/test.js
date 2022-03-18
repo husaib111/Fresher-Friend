@@ -113,7 +113,7 @@ describe("Unauthorized request tests", () => {
 
 let session = null;
 
-describe("Query tests", () => {
+describe("Session 1 query tests", () => {
   beforeAll((done) => {
     done();
   });
@@ -147,5 +147,98 @@ describe("Query tests", () => {
       .set("Cookie", `token=${session}`);
 
     expect(response.statusCode).toBe(200);
+  });
+
+  test("Authorized /loggedInUserInfo", async () => {
+    const response = await request(server)
+      .get("/loggedInUserInfo")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("Authorized /loggedInUserInterests", async () => {
+    const response = await request(server)
+      .get("/loggedInUserInterests")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("User logout", async () => {
+    const response = await request(server)
+      .get("/logout")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
+    session = null;
+    expect(response.body.success).toBe(true);
+  });
+});
+
+describe("Session 2 query tests", () => {
+  beforeAll((done) => {
+    done();
+  });
+
+  afterAll((done) => {
+    done();
+  });
+
+  test("Setup session token", async () => {
+    const json = {
+      email: "dxs111@student.bham.ac.uk",
+      password: "Password123",
+    };
+    const response = await request(server)
+      .post("/login")
+      .set(config)
+      .send(json);
+
+    session = await response.headers["set-cookie"][0]
+      .split(",")
+      .map((item) => item.split(";")[0])[0]
+      .split("=")[1];
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("Authorized /courseUsers", async () => {
+    const response = await request(server)
+      .get("/courseUsers")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("Authorized /loggedInUserInfo", async () => {
+    const response = await request(server)
+      .get("/loggedInUserInfo")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("Authorized /loggedInUserInterests", async () => {
+    const response = await request(server)
+      .get("/loggedInUserInterests")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("User logout", async () => {
+    const response = await request(server)
+      .get("/logout")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
+    session = null;
+    expect(response.body.success).toBe(true);
   });
 });
