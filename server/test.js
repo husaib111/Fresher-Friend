@@ -20,8 +20,13 @@ describe("Server tests", () => {
   });
 
   afterAll((done) => {
-    server.close();
-    done();
+    try {
+      server.close();
+      done();
+    } catch (e) {
+      console.log(e.message);
+      done();
+    }
   });
 
   test("Initial test", async () => {
@@ -40,7 +45,7 @@ describe("Server tests", () => {
       .set(config)
       .send(json);
 
-    const tokenValue = response.headers["set-cookie"][0]
+    const tokenValue = await response.headers["set-cookie"][0]
       .split(",")
       .map((item) => item.split(";")[0])[0]
       .split("=")[1];
