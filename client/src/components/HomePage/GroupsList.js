@@ -2,17 +2,18 @@ import "./GroupsList.css"
 import React, {Component} from 'react';
 
 import GroupButton from './GroupButton';
+import GroupButtonn from './GroupButtonn';
 
 class GroupsList extends Component{
     render(){
         return(
             <div className="groupsList">
             <GroupButton />
-            <GroupButton />
+            <GroupButtonn />
                 <GroupButton />
+                <GroupButtonn />
                 <GroupButton />
-                <GroupButton />
-                <GroupButton />
+                <GroupButtonn />
                 <GroupButton />
             </div>
         )
