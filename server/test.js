@@ -1,18 +1,10 @@
 const request = require("supertest");
-const app = require("./index");
-
-const PORT = 5002;
-
-const server = app.listen(PORT, () => {
-  console.log("Server started on port %d", PORT);
-});
+const server = require("./index");
 
 const config = {
   "Access-Control-Allow-Credentials": true,
   "Content-Type": "application/json",
 };
-
-let session = null;
 
 describe("Login authentication tests", () => {
   beforeAll((done) => {
@@ -20,13 +12,7 @@ describe("Login authentication tests", () => {
   });
 
   afterAll((done) => {
-    try {
-      // server.close();
-      done();
-    } catch (e) {
-      console.log(e.message);
-      done();
-    }
+    done();
   });
 
   test("Login test for valid user information 1", async () => {
@@ -95,19 +81,15 @@ describe("Login authentication tests", () => {
   });
 });
 
+let session = null;
+
 describe("Query tests", () => {
   beforeAll((done) => {
     done();
   });
 
   afterAll((done) => {
-    try {
-      // server.close();
-      done();
-    } catch (e) {
-      console.log(e.message);
-      done();
-    }
+    done();
   });
 
   test("Setup session token", async () => {

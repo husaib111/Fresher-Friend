@@ -34,8 +34,4 @@ app.get("/users/accId/:accId", db.getUsersByAccommodation);
 app.get("/userInfo/:userId", db.getUserBasicInfo);
 app.get("/test", auth.userAuth, db.testFunction);
 
-app.get("/test1", (request, response) => {
-  response.json({ success: true });
-});
-
 module.exports = app;
