@@ -81,6 +81,36 @@ describe("Login authentication tests", () => {
   });
 });
 
+describe("Unauthorized request tests", () => {
+  beforeAll((done) => {
+    done();
+  });
+
+  afterAll((done) => {
+    done();
+  });
+
+  test("Unauthorized /courseUsers", async () => {
+    const response = await request(server).get("/courseUsers").set(config);
+
+    expect(response.statusCode).toBe(401);
+  });
+
+  test("Unauthorized /loggedInUserInfo", async () => {
+    const response = await request(server).get("/loggedInUserInfo").set(config);
+
+    expect(response.statusCode).toBe(401);
+  });
+
+  test("Unauthorized /loggedInUserInterests", async () => {
+    const response = await request(server)
+      .get("/loggedInUserInterests")
+      .set(config);
+
+    expect(response.statusCode).toBe(401);
+  });
+});
+
 let session = null;
 
 describe("Query tests", () => {
