@@ -109,5 +109,5 @@ deploy-server:
   script:
     - cd /var/www/team10-21/
     - cd server
-    - pm2 start index.js
+    - pm2 restart server.js
   needs: ["pre-deploy"]
