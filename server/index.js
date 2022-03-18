@@ -22,20 +22,11 @@ app.use(
   })
 );
 
-const port = 5001;
+// const server = http.createServer(app).listen(port);
 
-const options = {
-  cert: fs.readFileSync(
-    "/etc/letsencrypt/live/fresher-friend.bham.team/fullchain.pem"
-  ),
-  key: fs.readFileSync(
-    "/etc/letsencrypt/live/fresher-friend.bham.team/privkey.pem"
-  ),
-};
-
-const server = https.createServer(options, app).listen(port, () => {
-  console.log("Server started on port %d", port);
-});
+// const serverTest = app.listen(5002, () => {
+//   console.log("Server started on port 5002");
+// });
 
 //routes
 app.post("/login", auth.loginCheck);
@@ -51,4 +42,8 @@ app.get("/users/accId/:accId", db.getUsersByAccommodation);
 app.get("/userInfo/:userId", db.getUserBasicInfo);
 app.get("/test", auth.userAuth, db.testFunction);
 
-module.exports = [server];
+app.get("/test1", (request, response) => {
+  response.json({ success: true });
+});
+
+module.exports = app;
