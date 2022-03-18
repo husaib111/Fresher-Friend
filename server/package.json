@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon",
-    "test": "npx jest --no-color 2>output.txt"
+    "test": "npx jest --forceExit --no-color 2>output.txt"
   },
   "author": "",
   "license": "ISC",
