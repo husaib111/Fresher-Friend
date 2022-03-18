@@ -23,7 +23,7 @@ class App extends React.Component {
           <Route path="/" element={<Login />} />
           <Route path="/group" element={<Group />} />
           <Route path="/test" element={<TestExample />} />
-          <Route path="/gdpr" element={<PrivacyPolicy />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
         </Routes>
       </Router>
     );

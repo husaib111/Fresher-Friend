@@ -95,7 +95,7 @@ function MenuBarButton() {
           </li>
           <li>
             {" "}
-            <a href={"/gdpr"}>
+            <a href={"/privacy"}>
               {" "}
               <MdPrivacyTip className="NavbarMenuIcon" />
               Privacy Policy
