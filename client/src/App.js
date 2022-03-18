@@ -18,12 +18,12 @@ class App extends React.Component {
     return (
       <Router>
         <Routes>
-          <Route path="/homePage" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/myAccount" element={<Account />} />
           <Route path="/" element={<Login />} />
-          <Route path="/Group" element={<Group />} />
+          <Route path="/group" element={<Group />} />
           <Route path="/test" element={<TestExample />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/gdpr" element={<PrivacyPolicy />} />
         </Routes>
       </Router>
     );
