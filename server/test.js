@@ -7,6 +7,11 @@ const server = app.listen(PORT, () => {
   console.log("Server started on port %d", PORT);
 });
 
+const config = {
+  "Access-Control-Allow-Credentials": true,
+  "Content-Type": "application/json",
+};
+
 describe("Server tests", () => {
   beforeAll((done) => {
     done();
@@ -25,18 +30,15 @@ describe("Server tests", () => {
 
   test("Login test", async () => {
     const json = {
-      body: {
-        email: "txg071@student.bham.ac.uk",
-        password: "MySecurePassword",
-      },
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      email: "txg071@student.bham.ac.uk",
+      password: "MySecurePassword",
     };
-    const response = await request(server).post("/login").send(json);
+    const response = await request(server)
+      .post("/login")
+      .set(config)
+      .send(json);
 
-    console.log(response.body);
+    console.log(response);
     expect(response.statusCode).toBe(200);
   });
 });
