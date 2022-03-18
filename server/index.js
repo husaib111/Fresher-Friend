@@ -3,10 +3,8 @@ const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
-const db = require("./queries");
-const auth = require("./auth");
-const fs = require("fs");
-const https = require("https");
+const db = require("./db/queries");
+const auth = require("./db/auth");
 
 require("./passport");
 
@@ -21,12 +19,6 @@ app.use(
     credentials: true,
   })
 );
-
-// const server = http.createServer(app).listen(port);
-
-// const serverTest = app.listen(5002, () => {
-//   console.log("Server started on port 5002");
-// });
 
 //routes
 app.post("/login", auth.loginCheck);
