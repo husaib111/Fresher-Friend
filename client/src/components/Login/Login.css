@@ -1,75 +1,24 @@
 * {
   font-family: "Fredoka", sans-serif;
-  font-weight: 400;
-  color: #dfdfdf;
+  font-weight: 300;
 }
-
-body {
-  background-color: #1f1f1f;
-}
-
-h1 {
-  font-size: 3rem;
-}
-
-h1,
-h2,
-h3 {
-  color: #7267ab;
-}
-
-a {
-  color: #7267ab;
-}
-
-a:hover {
-  color: #bf4342;
-}
-
 .login {
   text-align: center;
 }
 
 .logo {
   font-size: 4em;
-  color: #7267ab;
 }
-
 .loginForm {
   margin: 0 auto;
   padding: 15px 3% 15px 3%;
   width: 90%;
-  background-color: #3d3d3d;
+  background-color: #dddddd;
   border-radius: 15px;
-  box-shadow: 2px 2px 2px inset #141414;
 }
 
-.inputDiv {
-  background-color: #dfdfdf;
-  border-radius: 8px;
-  box-shadow: 2px 2px 2px inset #141414;
-}
-
-.btn {
+.loginButton {
   margin: 2%;
-  background-color: #7267ab;
-  border: none;
-  -webkit-transition: background-color 0.6s ease-out;
-  -moz-transition: background-color 0.6s ease-out;
-  -o-transition: background-color 0.6s ease-out;
-  transition: background-color 0.6s ease-out;
-  box-shadow: 1px 1px 4px black;
-}
-
-.btn:hover,
-.btn:active,
-.btn:focus {
-  background-color: #d8313f;
-}
-
-.loginInput {
-  background: transparent;
-  border: none;
 }
 
 .check-container {
@@ -78,11 +27,9 @@ a:hover {
 
 .checkbox {
   margin-right: 1rem;
-  border: 1px solid #7267ab;
+  border: 1px solid blue;
   border-radius: 2px;
-  accent-color: #7267ab;
-  width: 0.8rem;
-  height: 0.8rem;
+  accent-color: blue;
 }
 
 hr {
@@ -96,7 +43,7 @@ hr {
     margin: 0 auto;
     padding: 15px 25px 15px 25px;
     width: 690px;
-    /* background-color: #dddddd; */
+    background-color: #dddddd;
     border-radius: 15px;
   }
   hr {
