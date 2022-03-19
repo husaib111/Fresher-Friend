@@ -54,7 +54,7 @@ const Login = () => {
       <h1>Fresher Friend</h1>
       <h2>Connecting UoB students</h2>
       <form className="loginForm" onSubmit={loginUser}>
-        <div className="mb-3">
+        <div className="mb-3 inputDiv">
           <input
             aria-label="emailInput"
             className="form-control loginInput"
@@ -64,7 +64,7 @@ const Login = () => {
             placeholder="example@student.bham.ac.uk"
           />
         </div>
-        <div className="mb-3">
+        <div className="mb-3 inputDiv">
           <input
             aria-label="passwordInput"
             className="form-control loginInput"
@@ -81,8 +81,8 @@ const Login = () => {
             checked={checked}
             onChange={handleChange}
           />
-          By continuing, I acknowledge FresherFriend’s
-          <a href="/privacy"> Privacy Policy</a>.
+          By continuing, I acknowledge FresherFriend’s&nbsp;
+          <a href="/privacy">Privacy Policy</a>.
         </label>
         <input
           aria-label="loginButton"
