@@ -1,42 +1,244 @@
 const request = require("supertest");
-const app = require("./index");
+const server = require("./index");
 
-const PORT = 5002;
+const config = {
+  "Access-Control-Allow-Credentials": true,
+  "Content-Type": "application/json",
+};
 
-const server = app.listen(PORT, () => {
-  console.log("Server started on port %d", PORT);
-});
-
-describe("Server tests", () => {
+describe("Login authentication tests", () => {
   beforeAll((done) => {
     done();
   });
 
   afterAll((done) => {
-    server.close();
     done();
   });
 
-  test("Initial test", async () => {
-    const users = await request(server).get("/test1");
-    console.log(users.body);
-    expect(users.body.success);
+  test("Login test for valid user information 1", async () => {
+    const json = {
+      email: "txg071@student.bham.ac.uk",
+      password: "MySecurePassword",
+    };
+    const response = await request(server)
+      .post("/login")
+      .set(config)
+      .send(json);
+
+    expect(response.body.success).toBe(true);
   });
 
-  test("Login test", async () => {
+  test("Login test for valid user information 2", async () => {
     const json = {
-      body: {
-        email: "txg071@student.bham.ac.uk",
-        password: "MySecurePassword",
-      },
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      email: "dxs111@student.bham.ac.uk",
+      password: "Password123",
     };
-    const response = await request(server).post("/login").send(json);
+    const response = await request(server)
+      .post("/login")
+      .set(config)
+      .send(json);
 
-    console.log(response.body);
+    expect(response.body.success).toBe(true);
+  });
+
+  test("Login test for invalid user password", async () => {
+    const json = {
+      email: "txg071@student.bham.ac.uk",
+      password: "IncorrectPassword",
+    };
+    const response = await request(server)
+      .post("/login")
+      .set(config)
+      .send(json);
+
+    expect(response.body.success).toBe(false);
+  });
+
+  test("Login test for invalid user email", async () => {
+    const json = {
+      email: "XXXXXX@student.bham.ac.uk",
+      password: "MySecurePassword",
+    };
+    const response = await request(server)
+      .post("/login")
+      .set(config)
+      .send(json);
+
+    expect(response.body.success).toBe(false);
+  });
+
+  test("Login test for invalid user information", async () => {
+    const json = {
+      email: "incorrect@gmail.com",
+      password: "incorrect",
+    };
+    const response = await request(server)
+      .post("/login")
+      .set(config)
+      .send(json);
+
+    expect(response.body.success).toBe(false);
+  });
+});
+
+describe("Unauthorized request tests", () => {
+  beforeAll((done) => {
+    done();
+  });
+
+  afterAll((done) => {
+    done();
+  });
+
+  test("Unauthorized /courseUsers", async () => {
+    const response = await request(server).get("/courseUsers").set(config);
+
+    expect(response.statusCode).toBe(401);
+  });
+
+  test("Unauthorized /loggedInUserInfo", async () => {
+    const response = await request(server).get("/loggedInUserInfo").set(config);
+
+    expect(response.statusCode).toBe(401);
+  });
+
+  test("Unauthorized /loggedInUserInterests", async () => {
+    const response = await request(server)
+      .get("/loggedInUserInterests")
+      .set(config);
+
+    expect(response.statusCode).toBe(401);
+  });
+});
+
+let session = null;
+
+describe("Session 1 query tests", () => {
+  beforeAll((done) => {
+    done();
+  });
+
+  afterAll((done) => {
+    done();
+  });
+
+  test("Setup session token", async () => {
+    const json = {
+      email: "txg071@student.bham.ac.uk",
+      password: "MySecurePassword",
+    };
+    const response = await request(server)
+      .post("/login")
+      .set(config)
+      .send(json);
+
+    session = await response.headers["set-cookie"][0]
+      .split(",")
+      .map((item) => item.split(";")[0])[0]
+      .split("=")[1];
+
     expect(response.statusCode).toBe(200);
+  });
+
+  test("Authorized /courseUsers", async () => {
+    const response = await request(server)
+      .get("/courseUsers")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("Authorized /loggedInUserInfo", async () => {
+    const response = await request(server)
+      .get("/loggedInUserInfo")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("Authorized /loggedInUserInterests", async () => {
+    const response = await request(server)
+      .get("/loggedInUserInterests")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("User logout", async () => {
+    const response = await request(server)
+      .get("/logout")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
+    session = null;
+    expect(response.body.success).toBe(true);
+  });
+});
+
+describe("Session 2 query tests", () => {
+  beforeAll((done) => {
+    done();
+  });
+
+  afterAll((done) => {
+    done();
+  });
+
+  test("Setup session token", async () => {
+    const json = {
+      email: "dxs111@student.bham.ac.uk",
+      password: "Password123",
+    };
+    const response = await request(server)
+      .post("/login")
+      .set(config)
+      .send(json);
+
+    session = await response.headers["set-cookie"][0]
+      .split(",")
+      .map((item) => item.split(";")[0])[0]
+      .split("=")[1];
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("Authorized /courseUsers", async () => {
+    const response = await request(server)
+      .get("/courseUsers")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("Authorized /loggedInUserInfo", async () => {
+    const response = await request(server)
+      .get("/loggedInUserInfo")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("Authorized /loggedInUserInterests", async () => {
+    const response = await request(server)
+      .get("/loggedInUserInterests")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test("User logout", async () => {
+    const response = await request(server)
+      .get("/logout")
+      .set(config)
+      .set("Cookie", `token=${session}`);
+
+    session = null;
+    expect(response.body.success).toBe(true);
   });
 });

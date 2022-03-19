@@ -37,7 +37,7 @@ const Login = () => {
 
       if (data.success) {
         alert("Login Successful!");
-        window.location.href = "/homePage";
+        window.location.href = "/home";
       } else {
         alert(
           "Your email or password is incorrect, please check your login information!"

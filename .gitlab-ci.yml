@@ -8,7 +8,9 @@ install-client:
   stage: install
   script:
     - cd client
+    - echo "Installing client dependencies..."
     - npm ci
+    - echo "Client dependencies installed successfully."
   artifacts:
     name: "artifacts"
     untracked: true
@@ -20,7 +22,9 @@ install-server:
   stage: install
   script:
     - cd server
+    - echo "Installing server dependencies..."
     - npm ci
+    - echo "Server dependencies installed successfully."
   artifacts:
     name: "artifacts"
     untracked: true
@@ -31,9 +35,12 @@ install-server:
 build:
   stage: build
   dependencies: ["install-client"]
+  needs: ["install-client"]
   script:
     - cd client
+    - echo "Building client for production..."
     - npm run build
+    - echo "Client build created successfully."
   artifacts:
     paths:
       - client/build/
@@ -43,8 +50,9 @@ client-test:
   stage: test
   script:
     - cd client
-    - echo "Executing unit tests..."
+    - echo "Executing unit and integration tests for client..."
     - CI=true npm test -- --coverage
+    - echo "Client tests executed successfully."
   needs: ["install-client"]
   dependencies:
     - install-client
@@ -54,15 +62,15 @@ client-test:
     exclude:
       - client/node_modules/**/*
     when: always
-    expire_in: "1 day"
+    expire_in: 3 days
 
 server-test:
   stage: test
   script:
     - cd server
-    - pm2 list
-    # - pm2 delete index
+    - echo "Executing unit and integration tests for server..."
     - npm test
+    - echo "Server tests executed successfully."
   needs: ["install-server"]
   dependencies:
     - install-server
@@ -72,42 +80,31 @@ server-test:
     exclude:
       - server/node_modules/**/*
     when: always
-    expire_in: "1 day"
+    expire_in: 3 days
 
 system-test:
   stage: test
   script:
-    - echo "Testing..."
+    - echo "Executing system tests..."
     - sleep 1
-    - echo "Done"
+    - echo "System tests executed successfully."
   needs: ["install-server", "install-client", "client-test", "server-test"]
   dependencies:
     - install-server
     - install-client
 
-pre-deploy:
-  stage: deploy
-  script:
-    - rsync -a --delete-after . /var/www/team10-21/
-    - rsync -a --delete-after ./client/build/* /var/www/fresher-friend.bham.team/html/
-    - cd /var/www/team10-21
-    - pm2 list
-    # - pm2 delete all
-
 deploy-client:
   stage: deploy
-  dependencies: []
   script:
-    - cd /var/www/team10-21/
-    - cd client
-    # - pm2 serve -s build 3000 --spa
-  needs: ["pre-deploy"]
+    - echo "Deploying client..."
+    - rsync -a --delete-after ./client/build/* /var/www/fresher-friend.bham.team/html/ #TODO switch to git variables
+    - echo "Client deployed successfully."
 
 deploy-server:
   stage: deploy
-  dependencies: []
   script:
-    - cd /var/www/team10-21/
-    - cd server
+    - echo "Deploying server..."
+    - rsync -a --delete-after . /var/www/team10-21/ #TODO switch to git variables
+    - cd /var/www/team10-21/server #TODO switch to git variables
     - pm2 restart server.js
-  needs: ["pre-deploy"]
+    - echo "Server deployed successfully."
