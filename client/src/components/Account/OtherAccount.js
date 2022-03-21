@@ -101,7 +101,7 @@ function Account() {
         });
     };
     getInterests();
-  }, []);
+  });
 
   const handleClick = (e) => {
     const oldStatus = status;
