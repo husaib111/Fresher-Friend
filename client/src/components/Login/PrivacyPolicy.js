@@ -1,25 +1,23 @@
 import React from 'react';
+import './PrivacyPolicy.css' ;
 
 
 function PrivacyPolicy(props) {
     return (
-      <div>
+      <div className="main">
         <meta httpEquiv="content-type" content="text/html; charset=utf-8" />
         <title />
         <meta name="generator" content="LibreOffice 7.2.5.2.0 (Linux)" />
         <meta name="created" content="00:00:00" />
         <meta name="changed" content="00:00:00" />
-        <style type="text/css" dangerouslySetInnerHTML={{__html: "\n\t\t@page { size: 21cm 29.7cm; margin-left: 2.54cm; margin-right: 2.54cm; margin-bottom: 1.25cm }\n\t\tp { line-height: 115%; text-align: left; page-break-inside: auto; orphans: 2; widows: 2; margin-bottom: 0.25cm; border: none; padding: 0cm; direction: ltr; background: transparent; page-break-before: auto; page-break-after: auto }\n\t\tp.western { font-size: 12pt; so-language: en-US }\n\t\tp.cjk { font-size: 12pt; so-language: en-US }\n\t\tp.ctl { font-size: 12pt; so-language: ar-SA }\n\t\ta:link { text-decoration: underline }\n\t\ta.0:link { color: #0563c1; text-decoration: underline }\n\t" }} />
-        <div title="header"><p style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '100%', marginBottom: '1.8cm', textDecoration: 'none'}}>
-            <br />
-          </p>
-        </div><p lang="en-US" align="center" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '100%', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+        <style type="text/css"  />
+        <h1 lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '100%', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
           <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={4} style={{fontSize: '14pt'}}><span lang="en-US"><b>Fresher
                           Friend Privacy Policy
-                        </b></span></font></font></span></font></font></font></p>
+                        </b></span></font></font></span></font></font></font></h1>
         <p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '100%', marginTop: '0.07cm', marginBottom: '0.35cm', background: '#ffffff', textDecoration: 'none'}}>
           <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">Fresher
-                        Friend</span></font></font><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><b>
+                        Friend </span></font></font><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><b>
                       </b></font></font><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">is
                         a web-based application, developed by students at the University of
                         Birmingham. This privacy policy explains what personal data </span></font></font><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="fr-FR">our
@@ -30,31 +28,31 @@ function PrivacyPolicy(props) {
         <p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '100%', marginTop: '0.18cm', marginBottom: '0.35cm', background: '#ffffff', textDecoration: 'none'}}>
           <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US"><b>Document outline</b></span></font></font><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><b>:</b></font></font></span></font></font></font></p>
         <div id="TextSection" dir="ltr" gutter={30} style={{columnCount: 2}}>
-          <ul><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+          <ul><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">What
                               data do we collect?</span></font></font></span></font></font></font></p>
-            </li><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+            </li><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">How
                               do we collect your data?</span></font></font></span></font></font></font></p>
-            </li><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+            </li><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">How
                               will we use your data?</span></font></font></span></font></font></font></p>
-            </li><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+            </li><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">How
                               do we store your data?</span></font></font></span></font></font></font></p>
-            </li><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+            </li><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">What
                               are your data protection rights?</span></font></font></span></font></font></font></p>
-            </li><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+            </li><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">Our
                               cookie policy</span></font></font></span></font></font></font></p>
-            </li><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+            </li><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">Privacy
                               policies of external websites</span></font></font></span></font></font></font></p>
-            </li><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+            </li><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">How
                               to contact us</span></font></font></span></font></font></font></p>
-            </li><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+            </li><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">How
                               to contact the appropriate authorities</span></font></font></span></font></font></font></p>
             </li></ul>
@@ -67,45 +65,45 @@ function PrivacyPolicy(props) {
                           Organisation collects the following data:</span></font></font></span></font></font></font></p>
         </div>
         <div id="Section2" dir="ltr">
-          <ol><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+          <ol><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">Personal
                               identification information:</span></font></font></span></font></font></font></p>
             </li></ol>
           <ul>
             <ul>
               <ul>
-                <li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.42cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+                <li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.42cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                     <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US"><i>First
                                     Name, Middle Name(s), Surname</i></span></font></font></span></font></font></font></p>
-                </li><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.42cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+                </li><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.42cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                     <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US"><i>University
                                     Email Address (@student.bham.ac.uk)</i></span></font></font></span></font></font></font></p>
-                </li><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+                </li><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                     <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US"><i>Passwords</i></span></font></font></span></font></font></font></p>
                 </li></ul>
             </ul>
           </ul>
           <ol start={2}>
-            <li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+            <li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">Educational
                               information:</span></font></font></span></font></font></font></p>
             </li></ol>
           <ul>
             <ul>
               <ul>
-                <li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.42cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+                <li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.42cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                     <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US"><i>Course</i></span></font></font></span></font></font></font></p>
-                </li><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.42cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+                </li><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.42cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                     <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US"><i>Year
                                     of Study</i></span></font></font></span></font></font></font></p>
-                </li><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.39cm', background: '#ffffff', textDecoration: 'none'}}>
+                </li><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.39cm', background: '#ffffff', textDecoration: 'none'}}>
                     <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US"><i>Accommodation
                                     (Type, Block, Flat)</i></span></font></font></span></font></font></font></p>
                 </li></ul>
             </ul>
           </ul>
         </div>
-        <div id="Section3" dir="ltr"><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.35cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+        <div id="Section3" dir="ltr"><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.35cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
             <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US"><b>How
                             do we collect your data?</b></span></font></font></span></font></font></font></p>
           <p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '100%', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
@@ -117,16 +115,16 @@ function PrivacyPolicy(props) {
                       </font></font><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">and
                           process your information when you</span></font></font><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}>:</font></font></span></font></font></font></p>
           <ul>
-            <li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+            <li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">Register
                               an account.</span></font></font></span></font></font></font></p>
-            </li><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+            </li><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">Complete
                               or review your profile.</span></font></font></span></font></font></font></p>
-            </li><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+            </li><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">Update
                               your password.</span></font></font></span></font></font></font></p>
-            </li><li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
+            </li><li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.18cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">Use
                               or view our website via your browser’s cookies.</span></font></font></span></font></font></font></p>
             </li></ul>
@@ -135,7 +133,7 @@ function PrivacyPolicy(props) {
                           Friend may also receive communication data indirectly from the
                           following sources:</span></font></font></span></font></font></font></p>
           <ul>
-            <li><p lang="en-US" align="left" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.42cm', background: '#ffffff', textDecoration: 'none'}}>
+            <li><p lang="en-US" style={{fontVariant: 'normal', letterSpacing: 'normal', fontStyle: 'normal', fontWeight: 'normal', lineHeight: '0.64cm', marginTop: '0.18cm', marginBottom: '0.42cm', background: '#ffffff', textDecoration: 'none'}}>
                 <font color="#000000"><font face="Calibri, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{background: 'transparent'}}><font face="Arial, serif"><font size={3} style={{fontSize: '12pt'}}><span lang="en-US">The
                               messaging service on Fresher Friend.</span></font></font></span></font></font></font></p>
             </li></ul>
@@ -147,31 +145,31 @@ function PrivacyPolicy(props) {
               <col width={299} />
             </colgroup><thead>
               <tr>
-                <td width={299} height={18} bgcolor="#dddddd" style={{background: '#dddddd', borderTop: '1px solid #000000', borderBottom: '1px solid #000000', borderLeft: '1px solid #000000', borderRight: '1px solid #000000', padding: '0cm'}}><p lang="en-US" className="western" align="center" style={{pageBreakInside: 'auto', orphans: 0, widows: 0, background: 'transparent', pageBreakAfter: 'auto'}}>
+                <td width={299} height={18} bgcolor="#dddddd" style={{background: '#dddddd', borderTop: '1px solid #000000', borderBottom: '1px solid #000000', borderLeft: '1px solid #000000', borderRight: '1px solid #000000', padding: '0cm'}}><p lang="en-US" className="western" style={{pageBreakInside: 'auto', orphans: 0, widows: 0, background: 'transparent', pageBreakAfter: 'auto'}}>
                     <span style={{fontVariant: 'normal'}}><font color="#000000"><span style={{textDecoration: 'none'}}><font face="Arial, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{letterSpacing: 'normal'}}><span style={{fontStyle: 'normal'}}><span style={{fontWeight: 'normal'}}><span style={{background: 'transparent'}}>Data</span></span></span></span></font></font></span></font></span></p>
                 </td>
-                <td width={299} bgcolor="#dddddd" style={{background: '#dddddd', borderTop: '1px solid #000000', borderBottom: '1px solid #000000', borderLeft: '1px solid #000000', borderRight: '1px solid #000000', padding: '0cm'}}><p lang="en-US" className="western" align="center" style={{pageBreakInside: 'auto', orphans: 0, widows: 0, background: 'transparent', pageBreakAfter: 'auto'}}>
+                <td width={299} bgcolor="#dddddd" style={{background: '#dddddd', borderTop: '1px solid #000000', borderBottom: '1px solid #000000', borderLeft: '1px solid #000000', borderRight: '1px solid #000000', padding: '0cm'}}><p lang="en-US" className="western" style={{pageBreakInside: 'auto', orphans: 0, widows: 0, background: 'transparent', pageBreakAfter: 'auto'}}>
                     <span style={{fontVariant: 'normal'}}><font color="#000000"><span style={{textDecoration: 'none'}}><font face="Arial, serif"><font size={2} style={{fontSize: '11pt'}}><span style={{letterSpacing: 'normal'}}><span style={{fontStyle: 'normal'}}><span style={{fontWeight: 'normal'}}><span style={{background: 'transparent'}}>Purpose</span></span></span></span></font></font></span></font></span></p>
                 </td>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td width={299} height={39} style={{background: 'transparent', borderTop: '1px solid #000000', borderBottom: '1px solid #000000', borderLeft: '1px solid #000000', borderRight: '1px solid #000000', padding: '0cm'}}><p lang="en-US" className="western" align="left" style={{pageBreakInside: 'auto', orphans: 0, widows: 0, background: 'transparent', pageBreakAfter: 'auto'}}>
+                <td width={299} height={39} style={{background: 'transparent', borderTop: '1px solid #000000', borderBottom: '1px solid #000000', borderLeft: '1px solid #000000', borderRight: '1px solid #000000', padding: '0cm'}}><p lang="en-US" className="western" style={{pageBreakInside: 'auto', orphans: 0, widows: 0, background: 'transparent', pageBreakAfter: 'auto'}}>
                     <span style={{fontVariant: 'normal'}}><font color="#000000"><span style={{textDecoration: 'none'}}><font face="Arial, serif"><font size={2} style={{fontSize: '10pt'}}><span style={{letterSpacing: 'normal'}}><span style={{fontStyle: 'normal'}}><span style={{fontWeight: 'normal'}}><span style={{background: 'transparent'}}>Personal
                                       identification information</span></span></span></span></font></font></span></font></span></p>
                 </td>
-                <td width={299} style={{background: 'transparent', borderTop: '1px solid #000000', borderBottom: '1px solid #000000', borderLeft: '1px solid #000000', borderRight: '1px solid #000000', padding: '0cm'}}><p lang="en-US" className="western" align="left" style={{pageBreakInside: 'auto', orphans: 0, widows: 0, background: 'transparent', pageBreakAfter: 'auto'}}>
+                <td width={299} style={{background: 'transparent', borderTop: '1px solid #000000', borderBottom: '1px solid #000000', borderLeft: '1px solid #000000', borderRight: '1px solid #000000', padding: '0cm'}}><p lang="en-US" className="western" style={{pageBreakInside: 'auto', orphans: 0, widows: 0, background: 'transparent', pageBreakAfter: 'auto'}}>
                     <span style={{fontVariant: 'normal'}}><font color="#000000"><span style={{textDecoration: 'none'}}><font face="Arial, serif"><font size={2} style={{fontSize: '10pt'}}><span style={{letterSpacing: 'normal'}}><span style={{fontStyle: 'normal'}}><span style={{fontWeight: 'normal'}}><span style={{background: 'transparent'}}>To
                                       identify the user</span></span></span></span></font></font></span></font></span></p>
                 </td>
               </tr>
               <tr>
-                <td width={299} height={38} style={{background: 'transparent', borderTop: '1px solid #000000', borderBottom: '1px solid #000000', borderLeft: '1px solid #000000', borderRight: '1px solid #000000', padding: '0cm'}}><p lang="en-US" className="western" align="left" style={{pageBreakInside: 'auto', orphans: 0, widows: 0, background: 'transparent', pageBreakAfter: 'auto'}}>
+                <td width={299} height={38} style={{background: 'transparent', borderTop: '1px solid #000000', borderBottom: '1px solid #000000', borderLeft: '1px solid #000000', borderRight: '1px solid #000000', padding: '0cm'}}><p lang="en-US" className="western" style={{pageBreakInside: 'auto', orphans: 0, widows: 0, background: 'transparent', pageBreakAfter: 'auto'}}>
                     <span style={{fontVariant: 'normal'}}><font color="#000000"><span style={{textDecoration: 'none'}}><font face="Arial, serif"><font size={2} style={{fontSize: '10pt'}}><span style={{letterSpacing: 'normal'}}><span style={{fontStyle: 'normal'}}><span style={{fontWeight: 'normal'}}><span style={{background: 'transparent'}}>Educational
                                       information</span></span></span></span></font></font></span></font></span></p>
                 </td>
-                <td width={299} style={{background: 'transparent', borderTop: '1px solid #000000', borderBottom: '1px solid #000000', borderLeft: '1px solid #000000', borderRight: '1px solid #000000', padding: '0cm'}}><p lang="en-US" className="western" align="left" style={{pageBreakInside: 'auto', orphans: 0, widows: 0, background: 'transparent', pageBreakAfter: 'auto'}}>
+                <td width={299} style={{background: 'transparent', borderTop: '1px solid #000000', borderBottom: '1px solid #000000', borderLeft: '1px solid #000000', borderRight: '1px solid #000000', padding: '0cm'}}><p lang="en-US" className="western" style={{pageBreakInside: 'auto', orphans: 0, widows: 0, background: 'transparent', pageBreakAfter: 'auto'}}>
                     <span style={{fontVariant: 'normal'}}><font color="#000000"><span style={{textDecoration: 'none'}}><font face="Arial, serif"><font size={2} style={{fontSize: '10pt'}}><span style={{letterSpacing: 'normal'}}><span style={{fontStyle: 'normal'}}><span style={{fontWeight: 'normal'}}><span style={{background: 'transparent'}}>To
                                       allocate you with other users, based on shared attributes</span></span></span></span></font></font></span></font></span></p>
                 </td>
