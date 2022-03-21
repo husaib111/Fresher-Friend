@@ -3,6 +3,7 @@ import React from "react";
 import Login from "./components/Login/Login";
 import HomePage from "./components/HomePage/HomePage";
 import Account from "./components/Account/Account";
+import OtherAccount from "./components/Account/OtherAccount";
 import Group from "./components/Group/Group";
 import TestExample from "./components/TestExample/TestExample";
 import PrivacyPolicy from "./components/Login/PrivacyPolicy";
@@ -21,6 +22,7 @@ class App extends React.Component {
           <Route path="/home" element={<HomePage />} />
           <Route path="/myAccount" element={<Account />} />
           <Route path="/" element={<Login />} />
+          <Route path="account/:userName" element={<OtherAccount />} />
           <Route path="/group" element={<Group />} />
           <Route path="/test" element={<TestExample />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
