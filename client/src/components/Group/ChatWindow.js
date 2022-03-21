@@ -59,6 +59,7 @@ function ChatWindow({ socket, username, room }) {
             </div>
             <div className="chat-footer">
                 <input
+                    aria-label="chatInput"
                     type="text"
                     value={currentMessage}
                     placeholder="Hey..."
@@ -69,7 +70,7 @@ function ChatWindow({ socket, username, room }) {
                         event.key === "Enter" && sendMessage();
                     }}
                 />
-                <button onClick={sendMessage}>&#9658;</button>
+                <button aria-label="chatButton" onClick={sendMessage}>&#9658;</button>
             </div>
         </div>
     );
