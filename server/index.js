@@ -33,5 +33,6 @@ app.get("/users/courseId/:courseId", db.getUsersByCourse);
 app.get("/users/accId/:accId", db.getUsersByAccommodation);
 app.get("/userInfo/:userId", db.getUserBasicInfo);
 app.get("/test", auth.userAuth, db.testFunction);
+app.get("/userInterests/:userId",db.getUserInterests);
 
 module.exports = app;

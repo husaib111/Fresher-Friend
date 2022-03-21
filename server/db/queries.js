@@ -81,13 +81,34 @@ const getLoggedInUserInterests = async (request, response) => {
   }
 };
 
+const getUserInterests = async (request, response) => {
+  try {
+    const { userId } = request.params;
+    const userIds = await pool.query(
+      "select user_id from users where email=$1",
+      [userId+"@student.bham.ac.uk"]
+    );
+    console.log(userIds);
+
+    const {user_id} = userIds.rows[0];
+    // console.log(userId);
+    const interests = await pool.query(
+      "select interest_name,interest_icon from users natural join user_interests natural join interests where user_id=$1;",
+      [user_id]
+    );
+
+    response.json(interests.rows);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
 const getUserBasicInfo = async (request, response) => {
   try {
     const { userId } = request.params;
     console.log(userId);
     const users = await pool.query(
-      "select first_name,middle_name,last_name,course_name,flat_num,block_num,acc_location from users natural join accommodation natural join courses where user_id=$1",
-      [userId]
+      "select first_name,middle_name,last_name,course_name,flat_num,block_num,acc_location from users natural join accommodation natural join courses where email=$1",
+      [userId+"@student.bham.ac.uk"]
     );
 
     response.json(users.rows);
@@ -172,4 +193,5 @@ module.exports = {
   getLoggedInUserBasicInfo,
   getLoggedInUserInterests,
   getCourseUsers,
+  getUserInterests
 };
