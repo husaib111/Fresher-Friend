@@ -4,7 +4,7 @@ import App from "./Group";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
-it("shows correct time for message input", () => {
+ it("shows correct time for message input", () => {
   try{
     jest.useFakeTimers();
     jest.setSystemTime(new Date('20 Aug 2020 02:12:00 GMT').getTime());
@@ -22,7 +22,7 @@ it("shows correct time for message input", () => {
   	jest.useRealTimers();
   	}
 });
-
+/*
 it("shows the message on screen that a user has input", () => {
   render(<App />);
   async (dispatch) => {
@@ -43,6 +43,6 @@ it("doesn't show the message Chat Window Test as no user has inputted it", () =>
     await userEvent.click(buttonE1);
     expect(screen.getByText("Chat Window Test")).not.toBeInTheDocument();
   };
-});
+}); */
 
 
