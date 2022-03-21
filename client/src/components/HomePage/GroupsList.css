@@ -1,4 +1,6 @@
 .groupsList {
+
+  justify-content: space-around;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;

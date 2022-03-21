@@ -10,11 +10,6 @@ class GroupsList extends Component{
             <div className="groupsList">
             <GroupButton />
             <GroupButtonn />
-                <GroupButton />
-                <GroupButtonn />
-                <GroupButton />
-                <GroupButtonn />
-                <GroupButton />
             </div>
         )
     }
