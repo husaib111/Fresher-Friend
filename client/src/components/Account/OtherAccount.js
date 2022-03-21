@@ -41,7 +41,7 @@ function Account() {
 
   const getInfo = async () => {
     await Axios.get(
-      "http://localhost:5001/userInfo/"+userName,
+      "https://www.fresher-friend.bham.team:5001/userInfo/"+userName,
       {
         withCredentials: true,
         headers: {
@@ -82,7 +82,7 @@ function Account() {
     getInfo();
     const getInterests = async () => {
       await Axios.get(
-        "http://localhost:5001/userInterests/"+userName,
+        "https://www.fresher-friend.bham.team:5001/userInterests/"+userName,
         {
           withCredentials: true,
           headers: {
@@ -116,8 +116,6 @@ function Account() {
     <div>
       <Navbar />
       <div className="Account">
-        <h1 className="title">Your Profile</h1>
-        <hr />
         <div className="basicInfo">
           <div className="pfpContainer">
             <img className="pfp" src={pfp} alt="Profile" />
