@@ -104,7 +104,8 @@ deploy-server:
   stage: deploy
   script:
     - echo "Deploying server..."
-    - rsync -a --delete-after . /var/www/team10-21/ #TODO switch to git variables
-    - cd /var/www/team10-21/server #TODO switch to git variables
+    - rsync -a --delete-after . $BUILD_LOCATION #TODO switch to git variables
+    - cd $BUILD_LOCATION #TODO switch to git variables
+    - cd server
     - pm2 restart server.js
     - echo "Server deployed successfully."
