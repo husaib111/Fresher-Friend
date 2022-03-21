@@ -97,15 +97,15 @@ deploy-client:
   stage: deploy
   script:
     - echo "Deploying client..."
-    - rsync -a --delete-after ./client/build/* /var/www/fresher-friend.bham.team/html/ #TODO switch to git variables
+    - rsync -a --delete-after ./client/build/* $CLIENT_DEPLOY_LOCATION
     - echo "Client deployed successfully."
 
 deploy-server:
   stage: deploy
   script:
     - echo "Deploying server..."
-    - rsync -a --delete-after . $BUILD_LOCATION #TODO switch to git variables
-    - cd $BUILD_LOCATION #TODO switch to git variables
+    - rsync -a --delete-after . $SERVER_DEPLOY_LOCATION
+    - cd $SERVER_DEPLOY_LOCATION
     - cd server
     - pm2 restart server.js
     - echo "Server deployed successfully."
