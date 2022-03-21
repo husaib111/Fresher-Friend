@@ -52,6 +52,7 @@ function MenuBarButton() {
     <div>
       <div className="MenuBarButton">
         <GiHamburgerMenu
+          aria-label="menuBarButton"
           className={`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
           onClick={() => toggleNavbarMenu(0)}
         />
@@ -77,7 +78,7 @@ function MenuBarButton() {
           </li>
           <li>
             {" "}
-            <a href={"/myAccount"}>
+            <a href={"/myAccount"} aria-label="myAccountLink">
               {" "}
               <MdPerson className="NavbarMenuIcon" />
               My Profile
