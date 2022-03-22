@@ -52,7 +52,7 @@ function GroupsList(props) {
   // }, []);
 
   return <div className="groupsList">
-    <GroupButton name="Accommodation" type="accommodation"/>
+    <GroupButton name="Flat" type="accommodation"/>
     <GroupButton name="Course" type="course"/>
   </div>;
   }
