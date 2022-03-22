@@ -5,12 +5,12 @@ import Navbar from "../Navbar/Navbar";
 class HomePage extends React.Component {
   render() {
     return (
-        <div>
-            <Navbar />
-      <div className="HomePage">
-        <GroupsList />
-      </div>
+      <div>
+        <Navbar />
+        <div className="HomePage">
+          <GroupsList />
         </div>
+      </div>
     );
   }
 }
