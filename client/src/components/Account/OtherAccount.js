@@ -134,7 +134,6 @@ function Account() {
             <FontAwesomeIcon
               className={`statusIcon ${status[0] ? "isolating" : ""}`}
               icon={faCertificate}
-              onClick={(e) => handleClick(0)}
             />
             <p className="statusLabel">I'm isolating</p>
           </div>
@@ -142,7 +141,6 @@ function Account() {
             <FontAwesomeIcon
               className={`statusIcon ${status[1] ? "away" : ""}`}
               icon={faPlane}
-              onClick={(e) => handleClick(1)}
             />
             <p className="statusLabel">I'm away</p>
           </div>
@@ -150,7 +148,6 @@ function Account() {
             <FontAwesomeIcon
               className={`statusIcon ${status[2] ? "guest" : ""}`}
               icon={faUser}
-              onClick={(e) => handleClick(2)}
             />
             <p className="statusLabel">I have a guest</p>
           </div>
@@ -165,22 +162,7 @@ function Account() {
             {/* <Interest icon={faBicycle} interestName="Cycling"/> */}
           </div>
         </div>
-        <div className="settings">
-          <input
-            type="checkbox"
-            defaultChecked={priv}
-            onChange={() => togglePrivate()}
-          />
-          <label>Private profile</label>
-          <br />
-          <form onSubmit={doLogout}>
-            <button className="logout btn btn-primary" type="submit">
-              Log out
-            </button>
-          </form>
-        </div>
       </div>
-      ``
     </div>
   );
 }
