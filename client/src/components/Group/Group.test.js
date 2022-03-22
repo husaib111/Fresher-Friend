@@ -21,7 +21,7 @@ const getSession = async () => {
         },
       }
     );
-
+    console.log(response);
     const session = await response.headers["set-cookie"][0]
       .split(",")
       .map((item) => item.split(";")[0])[0]
@@ -31,6 +31,8 @@ const getSession = async () => {
       writable: true,
       value: `token=${session}`,
     });
+    console.log(session);
+    console.log(document.cookie);
   } catch (e) {
     console.log(e.message);
   }
