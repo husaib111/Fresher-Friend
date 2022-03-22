@@ -61,6 +61,7 @@ it("Render login", () => {
 });
 
 it("Setup cookie session", () => {
+  render(<App />);
   async () => {
     const response = await Axios.post(
       "https://www.fresher-friend.bham.team:5001/login",
