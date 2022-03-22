@@ -103,14 +103,6 @@ function Account() {
     getInterests();
   });
 
-  const handleClick = (e) => {
-    const oldStatus = status;
-    oldStatus[e] = !oldStatus[e];
-    setStatus([...oldStatus]);
-  };
-  const togglePrivate = () => {
-    setPriv(!priv);
-  };
 
   return (
     <div>
