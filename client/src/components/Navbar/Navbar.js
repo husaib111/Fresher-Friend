@@ -34,20 +34,19 @@ function AccessibilitySwitch() {
 }
 
 function MenuBarButton() {
-  const [MenuStatus, setMenuStatus] = useState([false]);
-  // -1 = Close without animation (for when you first open the site
-  // 0 = Close with animation
-  // 1 = Open with animation
+  const [MenuStatus, setMenuStatus] = useState(['i']);
 
   const toggleNavbarMenu = (e) => {
-    const oldMenuStatus = MenuStatus;
-    oldMenuStatus[e] = !oldMenuStatus[e];
+    let oldMenuStatus = MenuStatus;
+    switch (oldMenuStatus[e]){
+      case  'i': {oldMenuStatus[e] = 'o'; break;}
+      case  'c': {oldMenuStatus[e] = 'o'; break;}
+      case  'o': {oldMenuStatus[e] = 'c'; break;}
+    }
     setMenuStatus([...oldMenuStatus]);
     console.log(MenuStatus);
   };
 
-  let homePageRef = React.createRef();
-  homePageRef.current = "/home";
   return (
     <div>
       <div className="MenuBarButton">
@@ -59,7 +58,7 @@ function MenuBarButton() {
       </div>
       <div
         className={`NavigationMenu ${
-          MenuStatus[0] ? "menuOpen" : "menuClosed"
+          MenuStatus[0]
         }`}
       >
         <GiHamburgerMenu
