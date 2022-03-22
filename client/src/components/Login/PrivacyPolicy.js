@@ -3,7 +3,7 @@ import "./PrivacyPolicy.css";
 
 function PrivacyPolicy(props) {
   return (
-    <div className="main">
+    <div className="PrivacyPolicy">
       <h2>Fresher Friend Privacy Policy</h2>
       <p>
         Fresher Friend is a web-based application, developed by students at the
