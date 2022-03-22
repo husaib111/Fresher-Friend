@@ -14,7 +14,7 @@ class GroupButton extends Component{
                     <IoHome className={"GroupButtonIcon"} />
                 </div>
                 <div className="GroupButtonTitle">
-                Accomodation Group
+                Accommodation Group
                 </div>
                 </a>
             </div>
