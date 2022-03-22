@@ -1,6 +1,6 @@
 // import React from "react";
 // import { render, screen } from "@testing-library/react";
-// import App from "./Group";
+import App from "./Group";
 // import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
@@ -57,6 +57,7 @@ it("Render login", () => {
     console.log(document.cookie);
     expect(screen.getByText("Login Successful!")).toBeInTheDocument();
   };
+  render(<App />);
 });
 
 it("Setup cookie session", () => {
