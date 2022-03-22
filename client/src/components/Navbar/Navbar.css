@@ -1,9 +1,11 @@
 .Navbar{
     width: 100%;
-    background-color: darkgray;
+    /*background-color: darkgray;*/
+    background-color: #9F7AC4;
     height: 80px;
     margin-bottom: 10px;
     justify-items: center;
+
 }
 
 .NavbarFlex{
@@ -28,7 +30,7 @@
 }
 
 
-.NavigationMenu.menuClosed{
+.NavigationMenu.c{
     top: 0;
     right: -90%;
     bottom: 0;
@@ -36,8 +38,16 @@
     animation: slideOut 1s 1;
 
 }
+
+.NavigationMenu.i{
+    top: 0;
+    right: -90%;
+    bottom: 0;
+    left: -100%;
+}
+
 @media only screen and (min-width: 444px) {
-    .NavigationMenu.menuClosed{
+    .NavigationMenu.c{
         top: 0;
         right: 0;
         bottom: 0;
@@ -46,7 +56,7 @@
     }
 }
 
-.NavigationMenu.menuOpen {
+.NavigationMenu.o {
     top: 0;
     right: 10%;
     bottom: 0;
@@ -67,7 +77,8 @@
     max-width: 400px;
     width: 85%;
     height: 100%;
-    background: rgba(131, 131, 131, 1);
+    background-color: #270549;
+    color: white;
     z-index: 2;
 
 }
@@ -104,7 +115,7 @@
     font-size:30px;
     text-align: left;
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 .NavigationMenu li + li{
