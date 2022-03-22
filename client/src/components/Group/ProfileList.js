@@ -8,7 +8,7 @@ import { IoPersonCircle } from "react-icons/io5";
 function ProfileButton(props) {
   return (
     <div className="ProfileButton">
-      <a href={"/myAccount"}>
+      <a href={"/account/"+props.username}>
         <div className="ProfileButtonCircle">
           <IoPersonCircle className={"ProfileButtonIcon"} />
         </div>
@@ -21,8 +21,10 @@ function ProfileButton(props) {
 }
 
 function makeProfileButton(name) {
-  const { first_name } = name;
-  return <ProfileButton name={first_name} />;
+  console.log(name);
+  const { first_name,email } = name;
+  const username = email.substring(0, email.lastIndexOf("@"));
+  return <ProfileButton name={first_name} username={username}/>;
 }
 
 function ProfileList(props) {
