@@ -5,7 +5,6 @@ import App from "./Group";
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 // import { render } from "@testing-library/react";
-import Axios from "axios";
 import Login from "../Login/Login";
 
 // const getSession = async () => {

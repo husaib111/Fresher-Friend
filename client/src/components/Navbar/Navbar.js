@@ -34,14 +34,26 @@ function AccessibilitySwitch() {
 }
 
 function MenuBarButton() {
-  const [MenuStatus, setMenuStatus] = useState(['i']);
+  const [MenuStatus, setMenuStatus] = useState(["i"]);
 
   const toggleNavbarMenu = (e) => {
     let oldMenuStatus = MenuStatus;
-    switch (oldMenuStatus[e]){
-      case  'i': {oldMenuStatus[e] = 'o'; break;}
-      case  'c': {oldMenuStatus[e] = 'o'; break;}
-      case  'o': {oldMenuStatus[e] = 'c'; break;}
+    switch (oldMenuStatus[e]) {
+      case "i": {
+        oldMenuStatus[e] = "o";
+        break;
+      }
+      case "c": {
+        oldMenuStatus[e] = "o";
+        break;
+      }
+      case "o": {
+        oldMenuStatus[e] = "c";
+        break;
+      }
+      //THIS FIXES THE BUILD ERROR
+      default:
+        console.log("Error in navbar, contact the developer!");
     }
     setMenuStatus([...oldMenuStatus]);
     console.log(MenuStatus);
@@ -56,11 +68,7 @@ function MenuBarButton() {
           onClick={() => toggleNavbarMenu(0)}
         />
       </div>
-      <div
-        className={`NavigationMenu ${
-          MenuStatus[0]
-        }`}
-      >
+      <div className={`NavigationMenu ${MenuStatus[0]}`}>
         <GiHamburgerMenu
           className={`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
           onClick={() => toggleNavbarMenu(0)}
