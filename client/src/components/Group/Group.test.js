@@ -3,8 +3,10 @@
 // import App from "./Group";
 // import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
+import { render } from "@testing-library/react";
 // import { render } from "@testing-library/react";
 import Axios from "axios";
+import Login from "../Login/Login";
 
 // const getSession = async () => {
 //   try {
@@ -39,8 +41,26 @@ import Axios from "axios";
 // };
 // getSession();
 
-it("Setup cookie session", async () => {
-  try {
+it("Render login", () => {
+  render(<Login />);
+  async (dispatch) => {
+    await userEvent.type(
+      screen.getByLabelText("emailInput"),
+      "txg071@student.bham.ac.uk"
+    );
+    await userEvent.type(
+      screen.getByLabelText("passwordInput"),
+      "MySecurePassword"
+    );
+    const buttonE1 = screen.getByLabelText("loginButton");
+    await userEvent.click(buttonE1);
+    console.log(document.cookie);
+    expect(screen.getByText("Login Successful!")).toBeInTheDocument();
+  };
+});
+
+it("Setup cookie session", () => {
+  async () => {
     const response = await Axios.post(
       "https://www.fresher-friend.bham.team:5001/login",
       {
@@ -66,9 +86,8 @@ it("Setup cookie session", async () => {
     });
     console.log(session);
     console.log(document.cookie);
-  } catch (e) {
-    console.log(e.message);
-  }
+  };
+
   // render(<App />);
   // try {
   //   jest.useFakeTimers();

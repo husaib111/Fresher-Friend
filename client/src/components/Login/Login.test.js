@@ -31,7 +31,6 @@ it("succeeds when correct data is inputted", () => {
     );
     const buttonE1 = screen.getByLabelText("loginButton");
     await userEvent.click(buttonE1);
-    console.log(document.cookie);
     expect(screen.getByText("Login Successful!")).toBeInTheDocument();
   };
 });
