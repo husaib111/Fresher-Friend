@@ -88,7 +88,7 @@ it("Setup cookie session", () => {
   //   });
   //   console.log(session);
   //   console.log(document.cookie);
-  };
+  // };
 
   // render(<App />);
   // try {
