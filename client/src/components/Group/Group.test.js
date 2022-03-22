@@ -1,12 +1,12 @@
 // import React from "react";
 // import { render, screen } from "@testing-library/react";
-import App from "./Group";
+// import App from "./Group";
 // import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
-import { render } from "@testing-library/react";
+// import { render } from "@testing-library/react";
 
 it("shows correct time for message input", () => {
-  render(<App />);
+  // render(<App />);
   // try {
   //   jest.useFakeTimers();
   //   jest.setSystemTime(new Date("20 Aug 2020 02:12:00 GMT").getTime());
