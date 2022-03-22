@@ -8,7 +8,7 @@ import React from 'react';
 
 function GroupButton(props) {
   return (
-    <div className="profileButton">
+    <div className="GroupButton">
       <a href={"/group/"+props.type}>
         <div className="GroupButtonCircle">
           <IoHome className={"GroupButtonIcon"} />

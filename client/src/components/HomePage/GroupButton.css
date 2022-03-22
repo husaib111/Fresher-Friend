@@ -1,3 +1,4 @@
+
 .GroupButton a{
     color: black;
     text-decoration: none;
@@ -12,7 +13,7 @@
 
 .GroupButtonCircle{
     border-radius: 50%;
-    background-color: darkgrey;
+    background-color: #CAD0F0;
     width: 100px;
     height: 100px;
 
@@ -30,7 +31,7 @@
 }
 
 .GroupButtonTitle{
-    font-size: 20px;
+    font-size: 18px;
     text-wrap: normal;
     text-align: center;
     width: 100px;
