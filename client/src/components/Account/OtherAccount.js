@@ -17,18 +17,8 @@ import Navbar from "../Navbar/Navbar";
 function Account() {
   library.add(fas);
   let {userName} = useParams();
-  const [status, setStatus] = useState([false, false, false]);
-  const [priv, setPriv] = useState(true);
+  const [status] = useState([false, false, false])[0];
 
-  const doLogout = async () => {
-    await Axios.get("https://www.fresher-friend.bham.team:5001/logout/", {
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    window.location.href = "/";
-  };
 
   const generateInterests = (row) => {
     const { interest_name, interest_icon } = row;
