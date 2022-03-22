@@ -4,8 +4,38 @@
 // import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 // import { render } from "@testing-library/react";
+import Axios from "axios";
+
+const response = await Axios.post(
+  "https://www.fresher-friend.bham.team:5001/login",
+  {
+    email: "txg071@student.bham.ac.uk",
+    password: "MySecurePassword",
+  },
+  {
+    withCredentials: true,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }
+);
+
+const session = await response.headers["set-cookie"][0]
+  .split(",")
+  .map((item) => item.split(";")[0])[0]
+  .split("=")[1];
+
+Object.defineProperty(window.document, "cookie", {
+  writable: true,
+  value: `token=${session}`,
+});
 
 it("shows correct time for message input", () => {
+  Object.defineProperty(window.document, "cookie", {
+    writable: true,
+    value: `token=${session}`,
+  });
+  console.log(document.cookie);
   // render(<App />);
   // try {
   //   jest.useFakeTimers();
