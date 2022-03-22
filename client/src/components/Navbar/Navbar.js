@@ -20,41 +20,42 @@ function Navbar() {
           <AccessibilitySwitch />
         </div>
       </div>
-      <div className="Menu"></div>
+      <div className="Menu"/>
     </div>
   );
 }
 
 function AccessibilitySwitch() {
   return (
-    <div className="AccesibilitySwitch">
+    <div className="AccessibilitySwitch">
       <FaUniversalAccess className={"NavbarIcon"} />
     </div>
   );
 }
 
 function MenuBarButton() {
-  const [MenuStatus, setMenuStatus] = useState(["i"]);
+  const [MenuStatus, setMenuStatus] = useState(['i']);
 
   const toggleNavbarMenu = (e) => {
     let oldMenuStatus = MenuStatus;
     switch (oldMenuStatus[e]) {
-      case "i": {
-        oldMenuStatus[e] = "o";
+      case 'i': {
+        oldMenuStatus[e] = 'o';
         break;
       }
-      case "c": {
-        oldMenuStatus[e] = "o";
+      case 'c': {
+        oldMenuStatus[e] = 'o';
         break;
       }
-      case "o": {
-        oldMenuStatus[e] = "c";
+      case 'o': {
+        oldMenuStatus[e] = 'c';
         break;
       }
-      //THIS FIXES THE BUILD ERROR
+        //THIS FIXES THE BUILD ERROR
       default:
         console.log("Error in navbar, contact the developer!");
     }
+
     setMenuStatus([...oldMenuStatus]);
     console.log(MenuStatus);
   };
@@ -119,6 +120,7 @@ function MenuBarButton() {
           </li>
         </ul>
       </div>
+      <div className={`PageDimmer ${MenuStatus[0]}`} />
     </div>
   );
 }
