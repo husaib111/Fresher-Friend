@@ -1,8 +1,10 @@
 import React from "react";
 import "./PrivacyPolicy.css";
+import Navbar from "../Navbar/Navbar";
 
 function PrivacyPolicy(props) {
   return (
+      <div> <Navbar />
     <div className="PrivacyPolicy">
       <h2>Fresher Friend Privacy Policy</h2>
       <p>
@@ -234,6 +236,7 @@ function PrivacyPolicy(props) {
           on 8th March 2022.
         </p>
       </div>
+    </div>
     </div>
   );
 }
