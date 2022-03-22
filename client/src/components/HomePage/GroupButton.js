@@ -1,28 +1,21 @@
 import "./GroupButton.css";
-import React, {Component} from 'react';
 import {IoHome} from "react-icons/io5";
+import "./HomePage.css";
+import React from "react";
 
 
-class GroupButton extends Component{
-    render(){
-
-
-        return(
-            <div className="GroupButton" onClick={event => this.openGroup(event)}>
-                <a href = {"/Group"}>
-                <div className="GroupButtonCircle">
-                    <IoHome className={"GroupButtonIcon"} />
-                </div>
-                <div className="GroupButtonTitle">
-                Course Group
-                </div>
-                </a>
-            </div>
-        )
-    }
-
-    openGroup(event) {
-        console.log("Opening Group" + event)
-    }
-}
+function GroupButton(props) {
+    return (
+      <div className="GroupButton">
+        <a href={"/Group"}>
+          <div className="GroupButtonCircle">
+            <IoHome className={"GroupButtonIcon"} />
+          </div>
+          <div className="GroupButtonTitle">
+            <h1>{props.name}</h1>
+          </div>
+        </a>
+      </div>
+    );
+  }
     export default GroupButton;
