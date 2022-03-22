@@ -61,7 +61,7 @@ it("Render login", () => {
 });
 
 it("Setup cookie session", () => {
-  render(<App />);
+  // render(<App />);
   // async () => {
   //   const response = await Axios.post(
   //     "https://www.fresher-friend.bham.team:5001/login",
@@ -81,7 +81,6 @@ it("Setup cookie session", () => {
   //     .split(",")
   //     .map((item) => item.split(";")[0])[0]
   //     .split("=")[1];
-
   //   Object.defineProperty(window.document, "cookie", {
   //     writable: true,
   //     value: `token=${session}`,
@@ -89,7 +88,6 @@ it("Setup cookie session", () => {
   //   console.log(session);
   //   console.log(document.cookie);
   // };
-
   // render(<App />);
   // try {
   //   jest.useFakeTimers();
