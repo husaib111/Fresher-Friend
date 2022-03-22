@@ -1,7 +1,11 @@
+.GroupButton{
+    align-items: center;
+}
 
 .GroupButton a{
     color: black;
     text-decoration: none;
+    min-width: 100px;
 }
 
 .GroupButton a:hover{
@@ -14,6 +18,8 @@
 .GroupButtonCircle{
     border-radius: 50%;
     background-color: #CAD0F0;
+    margin-left: auto;
+    margin-right: auto;
     width: 100px;
     height: 100px;
 
@@ -30,9 +36,7 @@
     margin: 10%;
 }
 
-.GroupButtonTitle{
-    font-size: 18px;
-    text-wrap: normal;
+.GroupButtonTitle h1{
+    font-size: 40px;
     text-align: center;
-    width: 100px;
 }
