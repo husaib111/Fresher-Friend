@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(
   cors({
-    origin: "https://www.fresher-friend.bham.team",
+    origin: "https://www.fresher-friend.bham.team:3000",
     credentials: true,
   })
 );
@@ -27,6 +27,8 @@ app.get("/courseUsers", auth.userAuth, db.getCourseUsers);
 app.get("/accommodationUsers", auth.userAuth, db.getAccomodationUsers);
 app.get("/loggedInUserInfo", auth.userAuth, db.getLoggedInUserBasicInfo);
 app.get("/loggedInUserInterests", auth.userAuth, db.getLoggedInUserInterests);
+app.get("/courseInfo", auth.userAuth, db.getCourseInfo);
+app.get("/accomInfo", auth.userAuth, db.getAccomInfo);
 
 //USED FOR TESTING, DO NOT USE FOR PRODUCTION
 app.get("/users", db.getUsers);

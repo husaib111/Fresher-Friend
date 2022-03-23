@@ -2,9 +2,9 @@ import "./GroupsList.css"
 import "./GroupButton.css";
 import "./HomePage.css";
 import {IoHome} from "react-icons/io5";
-// import Axios from "axios";
-// import React, { useState, useEffect } from "react";
-import React from 'react';
+import Axios from "axios";
+import React, { useState, useEffect } from "react";
+// import React from 'react';
 
 function GroupButton(props) {
   return (
@@ -51,9 +51,62 @@ function GroupsList(props) {
   //   getInfo();
   // }, []);
 
+  const getAccom = async () => {
+    console.log("here");
+    await Axios.get(
+      "https://www.fresher-friend.bham.team:5001/accomInfo",
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        const { data } = response;
+        console.log(data);
+        const {flat_num} = data[0];
+        console.log(flat_num);
+        setAccom(flat_num);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const [accom, setAccom] = useState([]);
+  useEffect(() => {
+    getAccom();
+  });
+  const getCourse = async () => {
+    console.log("here");
+    await Axios.get(
+      "https://www.fresher-friend.bham.team:5001/courseInfo",
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        const { data } = response;
+        const {course_name} = data[0];
+        console.log(course_name);
+        setCourse(course_name);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const [course, setCourse] = useState([]);
+  useEffect(() => {
+    getCourse();
+  });
   return <div className="groupsList">
-    <GroupButton name="Flat" type="accommodation"/>
-    <GroupButton name="Course" type="course"/>
+    <GroupButton name={"Flat "+accom} type="accommodation"/>
+    <GroupButton name={course} type="course"/>
   </div>;
   }
 

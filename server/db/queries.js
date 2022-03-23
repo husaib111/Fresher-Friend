@@ -209,7 +209,46 @@ const testFunction = async (request, response) => {
   }
 };
 
+const getAccomInfo = async (request, response) => {
+  try {
+    const userEmail = getLoggedUserEmail(request);
+
+    const acc_ids = await pool.query(
+      "SELECT acc_id FROM Users WHERE email = $1",
+      [userEmail]
+    );
+    const {acc_id} =acc_ids.rows[0];
+
+    const acc_info = await pool.query(
+      "select * from accommodation where acc_id = $1",
+      [acc_id]);
+    console.log(acc_info.rows);
+    response.json(acc_info.rows);
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+const getCourseInfo = async (request, response) => {
+  try {
+    const userEmail = getLoggedUserEmail(request);
+
+    const course_ids = await pool.query(
+      "SELECT course_id FROM Users WHERE email = $1",
+      [userEmail]
+    );
+    const {course_id} =course_ids.rows[0];
+
+    const course_info= await pool.query(
+      "select * from courses where course_id = $1",
+      [course_id]);
+    console.log(course_info.rows);
+    response.json(course_info.rows);
+  } catch (e) {
+    console.log(e.message);
+  }
+}
 module.exports = {
+  getCourseInfo,
   getUsers,
   getUsersByCourse,
   getUsersByAccommodation,
@@ -218,6 +257,7 @@ module.exports = {
   getLoggedInUserBasicInfo,
   getLoggedInUserInterests,
   getCourseUsers,
+  getAccomInfo,
   getUserInterests,
   getAccomodationUsers
 };
