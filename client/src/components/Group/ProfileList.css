@@ -1,15 +1,18 @@
-.ProfileList{
-    display: flex;
+.ProfileList {
+  display: flex;
 
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 25px;
-    background-color: lightgray;
-    overflow: auto;
-    border-radius: 10px;
-    width: 95%;
-    max-width: 750px;
-    margin: auto;
-    padding: 10px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 25px;
+  background-color: lightgray;
+  overflow: auto;
+  border-radius: 10px;
+  width: 95%;
+  max-width: 750px;
+  margin: auto;
+  padding: 10px;
+}
 
+.ProfileButton {
+  margin-right: 1rem;
 }

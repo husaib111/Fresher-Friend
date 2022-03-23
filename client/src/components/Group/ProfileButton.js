@@ -10,9 +10,7 @@ function ProfileButton(props) {
         <div className="ProfileButtonCircle">
           <IoPersonCircle className={"ProfileButtonIcon"} />
         </div>
-        <div className="ProfileButtonTitle">
-          <h1>{props.name}</h1>
-        </div>
+        <h1 className="ProfileButtonTitle">{props.name}</h1>
       </a>
     </div>
   );
