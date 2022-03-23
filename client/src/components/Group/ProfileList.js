@@ -52,7 +52,7 @@ function ProfileList(props) {
   const [info, setInfo] = useState([]);
   useEffect(() => {
     getInfo();
-  }, []);
+  });
 
   return <div className="ProfileList">{info}</div>;
 }
