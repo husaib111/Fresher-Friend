@@ -14,13 +14,7 @@
   margin: auto;
   padding: 10px;
 }
-.profileButton{
-  width: 100%;
-  justify-content:space-around;
-  display: flex;
-  text-align: center;
-  text-decoration:none;
-}
+
 a, a:hover{
   text-decoration:none;
   color:black;

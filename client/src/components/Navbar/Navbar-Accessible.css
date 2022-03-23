@@ -2,7 +2,7 @@
     width: 100%;
     /*background-color: darkgray;*/
     background-color: #9F7AC4;
-    height: 80px;
+    height: 100px;
     margin-bottom: 10px;
     justify-items: center;
 
@@ -20,13 +20,18 @@
 }
 
 .h1{
-    font-size: 300px;
+    font-size: 350px;
 }
 
 .NavbarIcon{
-    height: 50px;
-    width: 50px;
+    height: 80px;
+    width: 80px;
     margin: auto;
+    border-radius: 15px;
+    padding: 8px;
+    background-color: white;
+    color:black
+
 }
 
 
@@ -81,9 +86,9 @@
     background-color: #270549;
     color: white;
     z-index: 3;
-
-
 }
+
+
 
 .PageDimmer {
     position: absolute;
@@ -150,31 +155,38 @@
 
 .NavigationMenu li{
 
-    padding-top: 5px;
-    padding-bottom: 5px;
     list-style-type: none;
     width: 100%;
     align-self: center;
 
+    border-radius: 15px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: white;
+
 }
 
 .NavigationMenu a{
-    font-size:30px;
+    font-size:35px;
     text-align: left;
     text-decoration: none;
-    color: white;
-}
-
-.NavigationMenu li + li{
-    border-top: 2px solid darkgray;
+    color: #000000;
+    font-weight: bold;
 }
 
 .TopNavbarMenuItems {
+    margin-top: 15px;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
     position: absolute;
 }
 
 .BottomNavbarMenuItems{
     bottom: 30px;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
     position: absolute;
 }
 
