@@ -147,6 +147,28 @@ const getUsersInCourseGroup = async (request, response) => {
   }
 };
 
+const getAccomodationUsers = async (request, response) => {
+  try {
+    const userEmail = getLoggedUserEmail(request);
+
+    const accommodation_ids = await pool.query(
+      "SELECT accommodation_id FROM Users WHERE email = $1",
+      [userEmail]
+    );
+    const {accommodation_id} =accommodation_ids.rows[0];
+
+
+    const courseUsers = await pool.query(
+      "SELECT * FROM Users WHERE accommodation_id = $1",
+      [accommodation_id]
+    );
+
+    response.json(courseUsers.rows);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 const getCourseUsers = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);

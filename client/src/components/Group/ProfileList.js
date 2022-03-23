@@ -4,6 +4,7 @@ import "./Group.css";
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import { IoPersonCircle } from "react-icons/io5";
+import { useParams } from "react-router-dom"; 
 
 function ProfileButton(props) {
   return (
@@ -28,8 +29,9 @@ function makeProfileButton(name) {
 }
 
 function ProfileList(props) {
+  let params = useParams();
   const getInfo = async () => {
-    await Axios.get("https://www.fresher-friend.bham.team:5001/courseUsers", {
+    await Axios.get("https://www.fresher-friend.bham.team:5001/"+params.type+"Users", {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
