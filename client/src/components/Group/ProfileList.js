@@ -30,7 +30,7 @@ function ProfileList(props) {
   let params = useParams();
   const getInfo = async () => {
     await Axios.get(
-      "https://www.fresher-friend.bham.team:5001/" + params.type + "Users",
+      "http://localhost:5001/" + params.type + "Users",
       {
         withCredentials: true,
         headers: {
