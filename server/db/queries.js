@@ -215,5 +215,6 @@ module.exports = {
   getLoggedInUserBasicInfo,
   getLoggedInUserInterests,
   getCourseUsers,
-  getUserInterests
+  getUserInterests,
+  getAccomodationUsers
 };

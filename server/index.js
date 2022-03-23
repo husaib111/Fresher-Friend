@@ -24,7 +24,7 @@ app.use(
 app.post("/login", auth.loginCheck);
 app.get("/logout", auth.logOut);
 app.get("/courseUsers", auth.userAuth, db.getCourseUsers);
-app.get("/accommodationUsers", auth.userAuth, db.getCourseUsers);
+app.get("/accommodationUsers", auth.userAuth, db.getAccomodationUsers);
 app.get("/loggedInUserInfo", auth.userAuth, db.getLoggedInUserBasicInfo);
 app.get("/loggedInUserInterests", auth.userAuth, db.getLoggedInUserInterests);
 
