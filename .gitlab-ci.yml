@@ -85,6 +85,7 @@ server-test:
 system-test:
   stage: test
   script:
+    - cd client
     - echo "Executing system tests..."
     - CI=true npm run system-test
     - echo "System tests executed successfully."
