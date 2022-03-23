@@ -55,7 +55,7 @@ function ProfileList(props) {
     getInfo();
   });
 
-  return <div className="ProfileList"></div>;
+  return <div className="ProfileList">{info}</div>;
 }
 
 export default ProfileList;
