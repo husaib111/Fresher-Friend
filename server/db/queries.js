@@ -152,16 +152,19 @@ const getAccomodationUsers = async (request, response) => {
     const userEmail = getLoggedUserEmail(request);
 
     const accommodation_ids = await pool.query(
-      "SELECT accommodation_id FROM Users WHERE email = $1",
+      "SELECT acc_id FROM Users WHERE email = $1",
       [userEmail]
     );
-    const {accommodation_id} =accommodation_ids.rows[0];
+    console.log(accommodation_ids);
+    const {acc_id} =accommodation_ids.rows[0];
+    console.log(acc_id);
 
 
     const courseUsers = await pool.query(
-      "SELECT * FROM Users WHERE accommodation_id = $1",
-      [accommodation_id]
+      "SELECT * FROM Users WHERE acc_id = $1",
+      [acc_id]
     );
+    console.log(courseUsers);
 
     response.json(courseUsers.rows);
   } catch (e) {
