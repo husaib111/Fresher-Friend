@@ -86,7 +86,7 @@ system-test:
   stage: test
   script:
     - echo "Executing system tests..."
-    - sleep 1
+    - CI=true npm run system-test
     - echo "System tests executed successfully."
   needs: ["install-server", "install-client", "client-test", "server-test"]
   dependencies:

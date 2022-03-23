@@ -25,7 +25,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts --max_old_space_size=900 build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --testPathIgnorePatterns=spec",
+    "system-test": "react-scripts test App.spec.js > system-test.log",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

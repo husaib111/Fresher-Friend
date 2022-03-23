@@ -76,13 +76,17 @@ const Login = () => {
         </div>
         <label className="check-container">
           <input
+            aria-label="checkPrivacy"
             className="checkbox"
             type="checkbox"
             checked={checked}
             onChange={handleChange}
           />
           By continuing, I acknowledge FresherFriend’s&nbsp;
-          <a href="/privacy">Privacy Policy</a>.
+          <a data-testid="privacyLink" href="/privacy">
+            Privacy Policy
+          </a>
+          .
         </label>
         <input
           aria-label="loginButton"
