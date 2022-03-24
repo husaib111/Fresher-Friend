@@ -8,7 +8,7 @@
 describe("Test", () => {
   it("Test 1", () => {
     //login
-    cy.visit("http://localhost:3000");
+    cy.visit("https://www.fresher-friend.bham.team");
     cy.findByRole("textbox", { name: /emailinput/i }).type(
       "txg071@student.bham.ac.uk"
     );
