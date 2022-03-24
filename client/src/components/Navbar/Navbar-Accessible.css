@@ -131,7 +131,6 @@
 
 @keyframes fade-Out {
     0% {opacity:60%;}
-    50%{background-color: red}
     100% {opacity:0;}
 }
 

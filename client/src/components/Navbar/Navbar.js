@@ -9,6 +9,7 @@ import {
   MdPerson,
   MdPrivacyTip,
 } from "react-icons/md";
+import Axios from "axios";
 
 function Navbar() {
   return (
@@ -35,6 +36,19 @@ function AccessibilitySwitch() {
 
 function MenuBarButton() {
   const [MenuStatus, setMenuStatus] = useState(['i']);
+
+  const doLogout = async () => {
+
+    await Axios.get("https://www.fresher-friend.bham.team:5001/logout/", {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    window.location.href = "/";
+
+
+  };
 
   const toggleNavbarMenu = (e) => {
     let oldMenuStatus = MenuStatus;
@@ -112,7 +126,7 @@ function MenuBarButton() {
           </li>
           <li>
             {" "}
-            <a href={"/"}>
+            <a href={"/#"} onClick={doLogout}>
               {" "}
               <MdLogout className="NavbarMenuIcon" />
               Log Out
