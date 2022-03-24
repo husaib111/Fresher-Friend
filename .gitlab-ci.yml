@@ -88,19 +88,19 @@ system-test:
     - cd server
     - pm2 start server.http.js
     - cd ../client
-    - pm2 serve build 3002 --spa
+    - pm2 serve build 3001 --spa
   script:
-    # - cd client
     - echo "Executing system tests..."
     - CI=true npm run system-test
     - echo "System tests executed successfully."
   after_script:
     - pm2 delete server.http
-    - pm2 delete static-page-server-3002
-  needs: ["install-server", "install-client", "client-test", "server-test"]
+    - pm2 delete static-page-server-3001
+  needs: ["install-server", "install-client", "client-test", "server-test", "build"]
   dependencies:
     - install-server
     - install-client
+    - build
   artifacts:
     name: "test-report"
     untracked: true
