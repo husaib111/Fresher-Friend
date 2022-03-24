@@ -96,7 +96,8 @@ system-test:
   after_script:
     - pm2 delete server.http
     - pm2 delete static-page-server-3001
-  needs: ["install-server", "install-client", "client-test", "server-test", "build"]
+  needs:
+    ["install-server", "install-client", "client-test", "server-test", "build"]
   dependencies:
     - install-server
     - install-client
@@ -107,6 +108,7 @@ system-test:
     exclude:
       - server/node_modules/**/*
       - client/node_modules/**/*
+      - client/build/**/*
     when: always
     expire_in: 3 days
 
