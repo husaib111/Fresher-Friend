@@ -109,7 +109,6 @@ deploy-client:
     - rsync -a --delete-after ./client/build/* $CLIENT_DEPLOY_LOCATION
     - echo "Client deployed successfully."
   dependencies:
-    - install-server
     - install-client
     - build
 
