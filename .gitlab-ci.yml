@@ -57,7 +57,7 @@ client-test:
   dependencies:
     - install-client
   artifacts:
-    name: "test-report"
+    name: "client-test-report"
     untracked: true
     exclude:
       - client/node_modules/**/*
@@ -75,7 +75,7 @@ server-test:
   dependencies:
     - install-server
   artifacts:
-    name: "test-report"
+    name: "server-test-report"
     untracked: true
     exclude:
       - server/node_modules/**/*
@@ -94,7 +94,7 @@ system-test:
     - install-server
     - install-client
   artifacts:
-    name: "test-report"
+    name: "system-test-report"
     untracked: true
     exclude:
       - server/node_modules/**/*
