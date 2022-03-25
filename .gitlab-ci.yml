@@ -108,6 +108,10 @@ deploy-client:
     - echo "Deploying client..."
     - rsync -a --delete-after ./client/build/* $CLIENT_DEPLOY_LOCATION
     - echo "Client deployed successfully."
+  dependencies:
+    - install-server
+    - install-client
+    - build
 
 deploy-server:
   stage: deploy
@@ -118,3 +122,7 @@ deploy-server:
     - cd server
     - pm2 restart server.js
     - echo "Server deployed successfully."
+  dependencies:
+    - install-server
+    - install-client
+    - build
