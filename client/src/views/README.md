@@ -1,1 +1,0 @@
-This folder continas the pages of the app.
