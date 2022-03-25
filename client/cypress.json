@@ -1,7 +1,5 @@
 {   
     "baseUrl": "https://www.fresher-friend.bham.team",
     "defaultCommandTimeout": 5000,
-    "video": true,
-    "viewportHeight": 1000,
-    "viewportWidth": 1280
+    "video": false
 }
