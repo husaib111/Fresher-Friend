@@ -25,7 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts --max_old_space_size=900 build",
-    "test": "react-scripts test --testPathIgnorePatterns=spec",
+    "test": "react-scripts test --testPathIgnorePatterns=spec 2>client-test.log",
     "system-test": "NO_COLOR=1 npx cypress run --record false --spec \"cypress/integration/App.spec.js\" > system-test.log",
     "eject": "react-scripts eject"
   },
