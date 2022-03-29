@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -29,7 +29,8 @@ function Account() {
 
   const [interests, setInterests] = useState([]);
 
-  const getInfo = async () => {
+  const getInfo = useCallback(async () => {
+    console.log("getting info");
     await Axios.get(
       "https://www.fresher-friend.bham.team:5001/userInfo/"+userName,
       {
@@ -64,34 +65,36 @@ function Account() {
         console.log(e);
         // window.location.href = "/";
       });
-  };
+  },[userName]);
 
-  const [info, setInfo] = useState(() => getInfo());
+  const getInterests = useCallback(async () => {
+    console.log("getting interests");
+    await Axios.get(
+      "https://www.fresher-friend.bham.team:5001/userInterests/"+userName,
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        const { data } = response;
+        const myInterests = data.map((row) => generateInterests(row));
+        setInterests(myInterests);
+      })
+      .catch((e) => {
+        console.log(e);
+        // window.location.href = "/";
+      }
+      )},[userName])
+
+  const [info, setInfo] = useState([]);
 
   useEffect(() => {
     getInfo();
-    const getInterests = async () => {
-      await Axios.get(
-        "https://www.fresher-friend.bham.team:5001/userInterests/"+userName,
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => {
-          const { data } = response;
-          const myInterests = data.map((row) => generateInterests(row));
-          setInterests(myInterests);
-        })
-        .catch((e) => {
-          console.log(e);
-          // window.location.href = "/";
-        });
-    };
     getInterests();
-  });
+  },[getInfo,getInterests]);
 
 
   return (
