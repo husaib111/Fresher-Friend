@@ -89,7 +89,7 @@ function Account() {
       }
       )},[userName])
 
-  const getStatus = async () =>{
+  const getStatus = useCallback(async () =>{
       await Axios.get(
         "https://www.fresher-friend.bham.team:5001/userStatus/"+userName,
         {
@@ -111,18 +111,16 @@ function Account() {
           console.log(e);
           // window.location.href = "/";
         });
-  };
+  },[userName]);
 
   const [info, setInfo] = useState([]);
 
   useEffect(() => {
     getInfo();
     getInterests();
-  },[getInfo,getInterests]);
-
-  useEffect(() => {
     getStatus();
-  },[]);
+  },[getStatus,getInfo,getInterests]);
+
 
 
   return (
