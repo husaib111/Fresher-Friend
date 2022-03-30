@@ -247,7 +247,78 @@ const getCourseInfo = async (request, response) => {
     console.log(e.message);
   }
 }
+
+const getUserStatus = async (request, response) => {
+  try {
+    const {userId} = request.params; 
+    const userEmail = userId + "@student.bham.ac.uk";
+    console.log(userEmail);
+
+    const users = await pool.query(
+      "select isolating,away,guest,priv from users where email=$1",
+      [userEmail]
+    );
+
+    response.json(users.rows);
+  } catch (e) {
+    response.status(400).send({
+      message: "Not logged in!",
+    });
+    console.log(e.message);
+  }
+};
+
+const getLoggedInUserStatus = async (request, response) => {
+  try {
+    const userEmail = getLoggedUserEmail(request);
+    console.log(userEmail);
+
+    const users = await pool.query(
+      "select isolating,away,guest,priv from users where email=$1",
+      [userEmail]
+    );
+
+    response.json(users.rows);
+  } catch (e) {
+    response.status(400).send({
+      message: "Not logged in!",
+    });
+    console.log(e.message);
+  }
+};
+
+const postStatus = async (request,response) => {
+  try {
+    const userEmail = getLoggedUserEmail(request);
+    console.log("posting"+userEmail);
+    var { status } = request.body;
+    status=status.map((e)=>{
+      if(e){
+        return 1 
+      } else {
+        return 0
+      }
+    })
+    console.log(status);
+
+    const users = await pool.query(
+      "update users set isolating=$1, away=$2, guest=$3, priv=$4 where email=$5",
+      [status[0],status[1],status[2],status[3],userEmail]
+    );
+   
+    console.log(users.rows);
+
+    // response.json(users.rows);
+  } catch (e) {
+    response.status(400).send({
+      message: "Not logged in!",
+    });
+    console.log(e.message);
+  }
+}
+
 module.exports = {
+  getUserStatus,
   getCourseInfo,
   getUsers,
   getUsersByCourse,
@@ -259,5 +330,7 @@ module.exports = {
   getCourseUsers,
   getAccomInfo,
   getUserInterests,
-  getAccomodationUsers
+  getAccomodationUsers,
+  getLoggedInUserStatus,
+  postStatus
 };

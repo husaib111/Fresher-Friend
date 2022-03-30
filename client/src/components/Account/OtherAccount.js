@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +17,7 @@ import Navbar from "../Navbar/Navbar";
 function Account() {
   library.add(fas);
   let {userName} = useParams();
-  const [status] = useState([false, false, false])[0];
+  const [status,setStatus] = useState([]);
 
 
   const generateInterests = (row) => {
@@ -29,7 +29,8 @@ function Account() {
 
   const [interests, setInterests] = useState([]);
 
-  const getInfo = async () => {
+  const getInfo = useCallback(async () => {
+    // console.log("getting info");
     await Axios.get(
       "https://www.fresher-friend.bham.team:5001/userInfo/"+userName,
       {
@@ -62,17 +63,35 @@ function Account() {
       })
       .catch((e) => {
         console.log(e);
-        // window.location.href = "/";
+        window.location.href = "/";
       });
-  };
+  },[userName]);
 
-  const [info, setInfo] = useState(() => getInfo());
+  const getInterests = useCallback(async () => {
+    // console.log("getting interests");
+    await Axios.get(
+      "https://www.fresher-friend.bham.team:5001/userInterests/"+userName,
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        const { data } = response;
+        const myInterests = data.map((row) => generateInterests(row));
+        setInterests(myInterests);
+      })
+      .catch((e) => {
+        console.log(e);
+        window.location.href = "/";
+      }
+      )},[userName])
 
-  useEffect(() => {
-    getInfo();
-    const getInterests = async () => {
+  const getStatus = useCallback(async () =>{
       await Axios.get(
-        "https://www.fresher-friend.bham.team:5001/userInterests/"+userName,
+        "https://www.fresher-friend.bham.team:5001/userStatus/"+userName,
         {
           withCredentials: true,
           headers: {
@@ -82,16 +101,26 @@ function Account() {
       )
         .then((response) => {
           const { data } = response;
-          const myInterests = data.map((row) => generateInterests(row));
-          setInterests(myInterests);
+          // console.log(data);
+          const { isolating,away,guest,priv } = data[0];
+          // console.log(isolating);
+          console.log("setting status to"+isolating+away+guest+priv);
+          setStatus([parseInt(isolating),parseInt(away),parseInt(guest),parseInt(priv)]);
         })
         .catch((e) => {
           console.log(e);
           // window.location.href = "/";
         });
-    };
+  },[userName]);
+
+  const [info, setInfo] = useState([]);
+
+  useEffect(() => {
+    getInfo();
     getInterests();
-  });
+    getStatus();
+  },[getStatus,getInfo,getInterests]);
+
 
 
   return (
