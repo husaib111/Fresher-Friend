@@ -248,6 +248,26 @@ const getCourseInfo = async (request, response) => {
   }
 }
 
+const getUserStatus = async (request, response) => {
+  try {
+    const {userId} = request.params; 
+    const userEmail = userId + "@student.bham.ac.uk";
+    console.log(userEmail);
+
+    const users = await pool.query(
+      "select isolating,away,guest,priv from users where email=$1",
+      [userEmail]
+    );
+
+    response.json(users.rows);
+  } catch (e) {
+    response.status(400).send({
+      message: "Not logged in!",
+    });
+    console.log(e.message);
+  }
+};
+
 const getLoggedInUserStatus = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);
@@ -295,10 +315,10 @@ const postStatus = async (request,response) => {
     });
     console.log(e.message);
   }
-
 }
 
 module.exports = {
+  getUserStatus,
   getCourseInfo,
   getUsers,
   getUsersByCourse,

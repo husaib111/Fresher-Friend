@@ -17,7 +17,7 @@ import Navbar from "../Navbar/Navbar";
 function Account() {
   library.add(fas);
   let {userName} = useParams();
-  const [status] = useState([false, false, false])[0];
+  const [status,setStatus] = useState([]);
 
 
   const generateInterests = (row) => {
@@ -30,7 +30,7 @@ function Account() {
   const [interests, setInterests] = useState([]);
 
   const getInfo = useCallback(async () => {
-    console.log("getting info");
+    // console.log("getting info");
     await Axios.get(
       "https://www.fresher-friend.bham.team:5001/userInfo/"+userName,
       {
@@ -63,12 +63,12 @@ function Account() {
       })
       .catch((e) => {
         console.log(e);
-        // window.location.href = "/";
+        window.location.href = "/";
       });
   },[userName]);
 
   const getInterests = useCallback(async () => {
-    console.log("getting interests");
+    // console.log("getting interests");
     await Axios.get(
       "https://www.fresher-friend.bham.team:5001/userInterests/"+userName,
       {
@@ -85,9 +85,33 @@ function Account() {
       })
       .catch((e) => {
         console.log(e);
-        // window.location.href = "/";
+        window.location.href = "/";
       }
       )},[userName])
+
+  const getStatus = async () =>{
+      await Axios.get(
+        "https://www.fresher-friend.bham.team:5001/userStatus/"+userName,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((response) => {
+          const { data } = response;
+          // console.log(data);
+          const { isolating,away,guest,priv } = data[0];
+          // console.log(isolating);
+          console.log("setting status to"+isolating+away+guest+priv);
+          setStatus([parseInt(isolating),parseInt(away),parseInt(guest),parseInt(priv)]);
+        })
+        .catch((e) => {
+          console.log(e);
+          // window.location.href = "/";
+        });
+  };
 
   const [info, setInfo] = useState([]);
 
@@ -95,6 +119,10 @@ function Account() {
     getInfo();
     getInterests();
   },[getInfo,getInterests]);
+
+  useEffect(() => {
+    getStatus();
+  },[]);
 
 
   return (

@@ -37,6 +37,7 @@ app.get("/accomInfo", auth.userAuth, db.getAccomInfo);
 app.get("/users", db.getUsers);
 app.get("/users/courseId/:courseId", db.getUsersByCourse);
 app.get("/users/accId/:accId", db.getUsersByAccommodation);
+app.get("/userStatus/:userId",db.getUserStatus);
 app.get("/userInfo/:userId", db.getUserBasicInfo);
 app.get("/test", auth.userAuth, db.testFunction);
 app.get("/userInterests/:userId",db.getUserInterests);
