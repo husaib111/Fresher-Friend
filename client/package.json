@@ -19,6 +19,7 @@
     "react-scripts": "5.0.0",
     "react-scroll-to-bottom": "^4.2.0",
     "react-swipeable-views": "^0.14.0",
+    "react-tabs": "^4.1.0",
     "serve": "^13.0.2",
     "web-vitals": "^2.1.4"
   },
