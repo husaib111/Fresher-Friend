@@ -7,6 +7,9 @@
     --ff-gray: #3d3d3d;
     --ff-white: #dfdfdf;
     --ff-darkPurple: #270549;
+
+    --screenDimOpacity: 80%;
+    --navbarHeight: 80px;
 }
 /* COLOR PALETTE */
 
@@ -14,10 +17,16 @@
     width: 100%;
     /*background-color: darkgray;*/
     background-color: var(--ff-purple);
-    height: 80px;
-    margin-bottom: 10px;
+    height: var(--navbarHeight);
+    top: 0;
     justify-items: center;
+    position: fixed;
 
+}
+
+.NavbarMargin{
+    height:var(--navbarHeight);
+    margin-bottom: 10px;
 }
 
 .NavbarFlex{
@@ -42,59 +51,100 @@
 }
 
 
-.NavigationMenu.c{
-    top: 0;
-    right: -90%;
-    bottom: 0;
-    left: -100%;
-    animation: slideOut 1s 1;
+.NavigationMenu{
+    display: flow;
+    position: fixed;
+    align-items: center;
+    padding-top: 15px;
+    padding-left: 15px;
+    height: 100%;
+    background-color: var(--ff-darkPurple);
+    color: white;
+    z-index: 3;
 
 }
 
-.NavigationMenu.i{
-    top: 0;
-    right: -90%;
-    bottom: 0;
-    left: -100%;
+.NavigationMenu.O{
+    overflow-y:scroll;
 }
+/* Desktop View*/
+@media (min-width: 450px) {
+    .NavigationMenu{
+        width: 400px;
+    }
 
-@media only screen and (min-width: 444px) {
-    .NavigationMenu.c{
+    .NavigationMenu.I{
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .NavigationMenu.O{
+        top:0;
+        left: 0;
+        bottom:0;
+        animation: slideIn 0.6s 1;
+    }
+
+    .NavigationMenu.C{
         top: 0;
         right: 0;
         bottom: 0;
         left: -400px;
         animation: slideOut 0.6s 1;
     }
+
+    @keyframes slideIn {
+        0% {transform: translateX(-100%)}
+        10%{transform: translateX(-98%)}
+        20%{transform: translateX(-95%)}
+        80%{transform: translateX(-5%)}
+        90%{transform: translateX(-2%)}
+        100% {transform: translateX(0%)}
+    }
+
+    @keyframes slideOut {
+        0% {transform: translateX(400px)}
+        100% {transform: translateX(0)}
+    }
 }
 
+/* Mobile View */
+@media (max-width: 449px) {
+    .NavigationMenu{
+        width: 85%;video
+    }
 
-.NavigationMenu.o {
-    top: 0;
-    right: 10%;
-    bottom: 0;
-    left: 0;
+    .NavigationMenu.O {
+        top: 0;
+        right: 10%;
+        bottom: 0;
+        left: 0;
+        animation: slideIn 0.6s 1;
+    }
 
+    .NavigationMenu.C{
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: -85%;
+        animation: slideOut 0.6s 1;
+    }
 
-    animation: slideIn 0.6s 1;
-}
-.NavigationMenu{
+    @keyframes slideIn {
+        0% {transform: translateX(-100%)}
+        10%{transform: translateX(-98%)}
+        20%{transform: translateX(-95%)}
+        80%{transform: translateX(-5%)}
+        90%{transform: translateX(-2%)}
+        100% {transform: translateX(0%)}
+    }
 
-    display: flow;
-    position: absolute;
-
-    margin: 0;
-    align-items: center;
-    padding-top: 15px;
-    padding-left: 15px;
-    max-width: 400px;
-    width: 85%;
-    height: 100%;
-    background-color: var(--ff-darkPurple);
-    color: white;
-    z-index: 3;
-
-
+    @keyframes slideOut {
+        0% {transform: translateX(100%)}
+        100% {transform: translateX(0%)}
+    }
 }
 
 .PageDimmer {
@@ -110,27 +160,24 @@
     pointer-events: none;
 }
 
-.PageDimmer.i{
+.PageDimmer.I{
     opacity: 0;
     pointer-events: none;
 
 }
 
-.pageDimmer.c{
-    opacity: 0;
-    animation: fade-Out 1s 1;
-    pointer-events: none;
-}
-
-.PageDimmer.o{
+.PageDimmer.O{
+    position: fixed;
     opacity: 60%;
     animation: fade-In 1s;
 }
-
+.PageDimmer.C {
+    animation: fade-Out 0.6s 1;
+    pointer-events: none;
+}
 
 @keyframes fade-In {
     0% {opacity:0;}
-
     100% {opacity:60%;}
 }
 
@@ -139,23 +186,6 @@
     100% {opacity:0;}
 }
 
-@keyframes slideIn {
-    0% {transform: translateX(-100%)}
-    10%{transform: translateX(-98%)}
-    20%{transform: translateX(-95%)}
-    80%{transform: translateX(-5%)}
-    90%{transform: translateX(-2%)}
-    100% {transform: translateX(0%)}
-}
-
-@keyframes slideOut {
-    0% {transform: translateX(100%)}
-    10%{transform: translateX(98%)}
-    20%{transform: translateX(95%)}
-    80%{transform: translateX(5%)}
-    90%{transform: translateX(2%)}
-    100% {transform: translateX(0%)}
-}
 
 .NavigationMenu li{
 

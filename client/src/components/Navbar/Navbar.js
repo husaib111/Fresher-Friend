@@ -22,6 +22,7 @@ function Navbar() {
         </div>
       </div>
       <div className="Menu"/>
+      <div className="NavbarMargin" />
     </div>
   );
 }
@@ -35,7 +36,7 @@ function AccessibilitySwitch() {
 }
 
 function MenuBarButton() {
-  const [MenuStatus, setMenuStatus] = useState(['i']);
+  const [MenuStatus, setMenuStatus] = useState(['I']);
 
   const doLogout = async () => {
 
@@ -53,16 +54,16 @@ function MenuBarButton() {
   const toggleNavbarMenu = (e) => {
     let oldMenuStatus = MenuStatus;
     switch (oldMenuStatus[e]) {
-      case 'i': {
-        oldMenuStatus[e] = 'o';
+      case 'I': {
+        oldMenuStatus[e] = 'O';
         break;
       }
-      case 'c': {
-        oldMenuStatus[e] = 'o';
+      case 'C': {
+        oldMenuStatus[e] = 'O';
         break;
       }
-      case 'o': {
-        oldMenuStatus[e] = 'c';
+      case 'O': {
+        oldMenuStatus[e] = 'C';
         break;
       }
         //THIS FIXES THE BUILD ERROR
