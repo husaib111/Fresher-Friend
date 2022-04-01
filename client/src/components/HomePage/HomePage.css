@@ -1,5 +1,15 @@
 .HomePage {
 }
+
+.div-1 {
+    background-color: #929DD8;
+    height: 550px;
+    width: 550px;
+    margin: left;
+    padding: 5px;
+    border-radius: 10px;
+    display: flex;
+  }
 /* Colour Scheme used
 https://paletton.com/#uid=54x0E0kjgus5OV6bYLGoYmjtJgW
  */

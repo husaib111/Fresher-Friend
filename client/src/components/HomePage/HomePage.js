@@ -1,4 +1,5 @@
 import GroupsList from "./GroupsList";
+//import EventButton from "./EventButton";
 import React from "react";
 import Navbar from "../Navbar/Navbar";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -11,6 +12,7 @@ class HomePage extends React.Component {
         <Navbar />
         <div className="HomePage">
           <GroupsList />
+          <div class="div-1">
           <Tabs>
             <TabList>
               <Tab>Upcoming Events</Tab>
@@ -23,6 +25,7 @@ class HomePage extends React.Component {
               <h2>Content</h2>
             </TabPanel>
           </Tabs>
+          </div>
 
         </div>
       </div>
