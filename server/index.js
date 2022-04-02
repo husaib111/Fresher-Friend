@@ -32,7 +32,7 @@ app.get("/loggedInUserInterests", auth.userAuth, db.getLoggedInUserInterests);
 app.get("/loggedInUserStatus", auth.userAuth, db.getLoggedInUserStatus);
 app.get("/courseInfo", auth.userAuth, db.getCourseInfo);
 app.get("/accomInfo", auth.userAuth, db.getAccomInfo);
-app.get("/eventInfo/:event_id", auth.userAuth, db.getCourseInfo);
+app.get("/eventInfo/:event_id", auth.userAuth, db.getEventInfo);
 
 //USED FOR TESTING, DO NOT USE FOR PRODUCTION
 app.get("/users", db.getUsers);

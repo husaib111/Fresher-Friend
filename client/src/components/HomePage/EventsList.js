@@ -24,7 +24,7 @@ function EventsList(props) {
   const getEventsName = async () => {
     console.log("here");
     await Axios.get(
-      "https://www.fresher-friend.bham.team:5001/eventInfo",
+      "https://www.fresher-friend.bham.team:5001/eventInfo/1",
       {
         withCredentials: true,
         headers: {
@@ -35,7 +35,7 @@ function EventsList(props) {
       .then((response) => {
         const { data } = response;
         console.log(data);
-        const {event_name} = data[0];
+        const {event_name} = data;
         console.log(event_name);
         setEventName(event_name);
       })
@@ -51,7 +51,7 @@ function EventsList(props) {
   const getEventsLocation = async () => {
     console.log("here");
     await Axios.get(
-      "https://www.fresher-friend.bham.team:5001/eventInfo",
+      "https://www.fresher-friend.bham.team:5001/eventInfo/1",
       {
         withCredentials: true,
         headers: {
@@ -61,7 +61,7 @@ function EventsList(props) {
     )
       .then((response) => {
         const { data } = response;
-        const {location} = data[0];
+        const {location} = data;
         console.log(location);
         setLocation(location);
       })
