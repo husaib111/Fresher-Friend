@@ -317,7 +317,26 @@ const postStatus = async (request,response) => {
   }
 }
 
+const getEventInfo = async (request, response) => {
+  try {
+    const { event_id } = request.params;
+    console.log("getting "+event_id);
+    const info = await pool.query(
+      "select * from event where event_id=$1",
+      [event_id]);
+    console.log(info.rows);
+    response.json(info.rows[0]);
+  } catch (e) {
+    response.status(400).send({
+      message: "Not logged in!",
+    });
+    console.log(e.message);
+  }
+
+}
+
 module.exports = {
+  getEventInfo,
   getUserStatus,
   getCourseInfo,
   getUsers,
