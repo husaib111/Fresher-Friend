@@ -1,11 +1,12 @@
 import GroupsList from "./GroupsList";
-import { Button } from "./EventButton";
+import EventsList from "./EventsList";
 import React from "react";
 import Navbar from "../Navbar/Navbar";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 //NEED TO BE ABLE TO RETRIEVE THE NAME DYNAMICCALY INSTEAD OF "EVENT"
+//PLACE A EVENTLIST INSIDE THE TABS RATHER THAN BUTTONS
 class HomePage extends React.Component {
   render() {
     return (
@@ -21,7 +22,7 @@ class HomePage extends React.Component {
             </TabList>
             <TabPanel>
               <h2>Content</h2>
-              <Button onClick={() => { alert("FUNCTION CALL TO DISPLAY THE EVENT INFORMATION HERE"); }}> Event Name </Button>
+              <EventsList></EventsList>
             </TabPanel>
             <TabPanel>
               <h2>Content</h2>

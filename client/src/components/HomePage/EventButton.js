@@ -1,18 +1,18 @@
-import React from "react";
 import "./EventButton.css";
+import "./HomePage.css";
+import React from "react";
 
-export const Button = ({
-  children,
-  onClick
-}) => {
 
-  return (
-    <button
-      className={`btn ${"btn--success--solid"} ${"btn--large"}`}
-      onClick={onClick}
-      type={"button"}
-    >
-      {children}
-    </button>
-  );
-};
+function EventButton(props) {
+    return (
+      <div className="EventButton">
+          <div className="EventButtonCircle">
+          </div>
+          <div className="EventButtonTitle">
+            <h1>{props.name}</h1>
+          </div>
+        </a>
+      </div>
+    );
+  }
+    export default EventButton;
