@@ -95,14 +95,14 @@ const Login = () => {
           className="loginButton btn btn-primary"
         ></input>
         <p>
-          <a href="/login">Forgot password</a>
+          <a href="/login" aria-label="forgotPasswordLink">Forgot password</a>
         </p>
       </form>
       <hr />
       <div className="createAccount">
         <p>New here?</p>
         <form action="/register">
-          <button className="btn btn-primary">Create an Account</button>
+          <button aria-label="createAccountButton" className="btn btn-primary">Create an Account</button>
         </form>
       </div>
     </div>

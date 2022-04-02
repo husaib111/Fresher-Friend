@@ -30,7 +30,7 @@ h3 {
   color: var(--ff-purple);
 }
 
-a {
+a, a:link, a:visited {
   color: var(--ff-purple);
 }
 

@@ -32,6 +32,10 @@
   accent-color: blue;
 }
 
+a, a:link, a:hover a:visited {
+	color: #0d6efd;
+}
+
 hr {
   width: 95%;
   margin: 3% auto;
