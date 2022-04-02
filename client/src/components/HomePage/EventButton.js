@@ -1,24 +1,18 @@
-import PropTypes from 'prop-types'
+import React from "react";
+import "./EventButton.css";
 
-function EventButton(color, text, onClick) {
-    return (
-    <button 
-        onClick={onClick}
-        style={{backgroundColor: color}} 
-        className='btn'>
-        {text}
+export const Button = ({
+  children,
+  onClick
+}) => {
+
+  return (
+    <button
+      className={`btn ${"btn--success--solid"} ${"btn--large"}`}
+      onClick={onClick}
+      type={"button"}
+    >
+      {children}
     </button>
-    )
-}
-
-EventButton.defaultrops = {
-    color: 'steelblue'
-}
-
-EventButton.propTypes = {
-    text: PropTypes.string,
-    color:PropTypes.string,
-    onClick: PropTypes.func,
-}
-
-export default EventButton;
+  );
+};

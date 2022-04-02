@@ -1,10 +1,11 @@
 import GroupsList from "./GroupsList";
-//import EventButton from "./EventButton";
+import { Button } from "./EventButton";
 import React from "react";
 import Navbar from "../Navbar/Navbar";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
+//NEED TO BE ABLE TO RETRIEVE THE NAME DYNAMICCALY INSTEAD OF "EVENT"
 class HomePage extends React.Component {
   render() {
     return (
@@ -20,6 +21,7 @@ class HomePage extends React.Component {
             </TabList>
             <TabPanel>
               <h2>Content</h2>
+              <Button onClick={() => { alert("FUNCTION CALL TO DISPLAY THE EVENT INFORMATION HERE"); }}> Event Name </Button>
             </TabPanel>
             <TabPanel>
               <h2>Content</h2>
