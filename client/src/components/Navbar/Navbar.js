@@ -36,7 +36,7 @@ function AccessibilitySwitch() {
 }
 
 function MenuBarButton() {
-  const [MenuStatus, setMenuStatus] = useState(['I']);
+  const [MenuStatus, setMenuStatus] = useState(['O']);
 
   const doLogout = async () => {
 
@@ -87,6 +87,7 @@ function MenuBarButton() {
       </div>
       <div className={`NavigationMenu ${MenuStatus[0]}`}>
         <GiHamburgerMenu
+		  tabindex="0"
           className={`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
           onClick={() => toggleNavbarMenu(0)}
         />
