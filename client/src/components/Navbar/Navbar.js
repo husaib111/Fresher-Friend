@@ -30,7 +30,13 @@ function Navbar() {
 function AccessibilitySwitch() {
   return (
     <div className="AccessibilitySwitch">
-      <FaUniversalAccess className={"NavbarIcon"} />
+	  {" "}
+	  <a href={"/accessibility"}>
+	  {" "}
+      <FaUniversalAccess className={"NavbarIcon"}
+	  />
+	  Accessibility
+	  </a>
     </div>
   );
 }
