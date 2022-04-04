@@ -108,7 +108,7 @@ const Login = () => {
         </form>
         <div className="About">
         <form action="/about">
-          <button aria-label="createAccountButton" className="btn btn-primary">About us</button>
+          <button aria-label="aboutButton" className="btn btn-primary">About us</button>
         </form>
         </div>
 
