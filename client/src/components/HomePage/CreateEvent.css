@@ -1,0 +1,12 @@
+* {
+    font-family: "Fredoka", sans-serif;
+    font-weight: 500;
+  }
+
+  .loginForm {
+    margin: 0 auto;
+    padding: 15px 3% 15px 3%;
+    width: 90%;
+    background-color: #929DD8;
+    border-radius: 15px;
+  }
