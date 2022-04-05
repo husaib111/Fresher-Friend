@@ -1,3 +1,12 @@
+/* COLOR PALETTE */
+:root {
+  --ff-purple: #7267ab;
+  --ff-red: #d8313f;
+  --ff-black: #1f1f1f;
+  --ff-gray: #3d3d3d;
+  --ff-white: #dfdfdf;
+}
+/* COLOR PALETTE */
 .privacyPolicy {
   margin: 1rem;
   max-width: 100ch;
@@ -15,16 +24,24 @@
   display: block;
 }
 
-.privacyPolicy table,
-th,
-td {
-  /* display: grid; */
-  /* grid-template-columns: 1fr 1fr; */
+.privacyPolicy table, th, tr, td {
   align-items: center;
   text-align: center;
   margin-bottom: 1rem;
   gap: 1rem;
-  border: 1px solid black;
+  border: 2px inset var(--ff-white);
+}
+
+.privacyPolicy td {
+  border: 2px inset var(--ff-white);
+}
+
+.privacyPolicy th {
+  border: 2px inset var(--ff-white);
+}
+
+td:hover {
+border: 2px solid var(--ff-red);
 }
 
 .privacyPolicy th {
