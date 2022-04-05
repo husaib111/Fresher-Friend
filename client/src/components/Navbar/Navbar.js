@@ -41,7 +41,7 @@ function AccessibilitySwitch() {
 }
 
 function MenuBarButton() {
-  const [MenuStatus, setMenuStatus] = useState(["O"]);
+  const [MenuStatus, setMenuStatus] = useState(["I"]);
 
   const doLogout = async () => {
     await Axios.get("https://www.fresher-friend.bham.team:5001/logout/", {
