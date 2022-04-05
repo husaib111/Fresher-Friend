@@ -1,17 +1,27 @@
-.title{
+/* COLOR PALETTE */
+:root {
+  --ff-purple: #7267ab;
+  --ff-red: #d8313f;
+  --ff-black: #1f1f1f;
+  --ff-gray: #3d3d3d;
+  --ff-white: #dfdfdf;
+}
+/* COLOR PALETTE */
+.Account > .title{
   padding-top: 1%;
+  color: var(--ff-purple);
 }
 .basicInfo{
   text-align:center;
 }
 .pfp{
   width:15%;
-  border: 1px solid black;
+  border: 1px solid var(--ff-black);
   border-radius:50%;
   padding:0.5%;
 }
 .basicInfo{
-  background: #dddddd;
+  background: var(--ff-gray);
   border-radius:50px;
   margin: 0 auto;
   padding: 3% 3% 1% 3%;
@@ -36,7 +46,7 @@ hr {
 .statusIcon{
   padding: 4% 5%;
   font-size: 4em;
-  color: #cccccc;
+  color: var(--ff-white);
 }
 .statusIcon.isolating{
   color:#cf2a27;
@@ -47,6 +57,19 @@ hr {
 .statusIcon.guest{
   color:#27cf4f;
 }
+
+.statusButton * {
+  -webkit-transition: color 0.3s ease-out;
+  -moz-transition: color 0.3s ease-out;
+  -o-transition: color 0.3s ease-out;
+  transition: color 0.3s ease-out;
+}
+
+.statusButton:hover * {
+  color: var(--ff-red);
+  opacity: 0.8;
+}
+
 .statusLabel{
   display:flex;
 }
@@ -59,7 +82,7 @@ hr {
 }
 
 .interestBox{
-  background:#dddddd;
+  background:var(--ff-gray);
   text-align:center;
 
   border-radius:50px;
@@ -79,9 +102,6 @@ hr {
 .interestIcon{
   font-size:3em;
   margin-bottom:17%;
-  /* background:#aaaaaa; */
-  /* padding:28%; */
-  /* border-radius:50%; */
 }
 .interestTitle{
   display:block;
@@ -90,7 +110,7 @@ hr {
 
 .settings{
   text-align:center;
-  background:#dddddd;
+  background:var(--ff-gray);
   width:90%;
   margin: 3% auto;
   border-radius:50px;
