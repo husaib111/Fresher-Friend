@@ -75,28 +75,33 @@ function Account() {
   };
 
   const [info, setInfo] = useState(() => getInfo());
-  const getStatus = async () =>{
-      await Axios.get(
-        "https://www.fresher-friend.bham.team:5001/loggedInUserStatus/",
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => {
-          const { data } = response;
-          // console.log(data);
-          const { isolating,away,guest,priv } = data[0];
-          // console.log(isolating);
-          console.log("setting status to"+isolating+away+guest+priv);
-          setStatus([parseInt(isolating),parseInt(away),parseInt(guest),parseInt(priv)]);
-        })
-        .catch((e) => {
-          console.log(e);
-          // window.location.href = "/";
-        });
+  const getStatus = async () => {
+    await Axios.get(
+      "https://www.fresher-friend.bham.team:5001/loggedInUserStatus/",
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        const { data } = response;
+        // console.log(data);
+        const { isolating, away, guest, priv } = data[0];
+        // console.log(isolating);
+        console.log("setting status to" + isolating + away + guest + priv);
+        setStatus([
+          parseInt(isolating),
+          parseInt(away),
+          parseInt(guest),
+          parseInt(priv),
+        ]);
+      })
+      .catch((e) => {
+        console.log(e);
+        // window.location.href = "/";
+      });
   };
 
   useEffect(() => {
@@ -123,33 +128,33 @@ function Account() {
     };
     getInterests();
     getStatus();
-  },[]);
+  }, []);
 
   // useEffect(() => {
   // },[getStatus,status]);
 
-  const postStatus = async (status) => { 
-      await Axios.post(
-        "https://www.fresher-friend.bham.team:5001/setStatus",
-        {
-          status: status,
+  const postStatus = async (status) => {
+    await Axios.post(
+      "https://www.fresher-friend.bham.team:5001/setStatus",
+      {
+        status: status,
+      },
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
         },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-  }
+      }
+    );
+  };
 
   const handleClick = (e) => {
     const oldStatus = status;
     // console.log(status);
-    oldStatus[e] = 1-oldStatus[e];
+    oldStatus[e] = 1 - oldStatus[e];
     console.log(oldStatus);
     postStatus(oldStatus);
-    console.log("posted"+oldStatus);
+    console.log("posted" + oldStatus);
     setStatus([...oldStatus]);
     console.log("set status" + status);
     // getStatus();
@@ -183,6 +188,7 @@ function Account() {
           <div className="statusButton">
             <FontAwesomeIcon
               className={`statusIcon ${status[0] ? "isolating" : ""}`}
+              id={`statusIcon ${status[0] ? "isolating" : ""}`}
               icon={faCertificate}
               onClick={(e) => handleClick(0)}
             />
@@ -191,6 +197,7 @@ function Account() {
           <div className="statusButton">
             <FontAwesomeIcon
               className={`statusIcon ${status[1] ? "away" : ""}`}
+              id={`statusIcon ${status[1] ? "away" : ""}`}
               icon={faPlane}
               onClick={(e) => handleClick(1)}
             />
@@ -199,6 +206,7 @@ function Account() {
           <div className="statusButton">
             <FontAwesomeIcon
               className={`statusIcon ${status[2] ? "guest" : ""}`}
+              id={`statusIcon ${status[2] ? "guest" : ""}`}
               icon={faUser}
               onClick={(e) => handleClick(2)}
             />
