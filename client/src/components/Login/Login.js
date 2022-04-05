@@ -1,6 +1,4 @@
 import "./Login.css";
-import "./About.css";
-import "./About";
 import React, { useState } from "react";
 import { GiThreeFriends } from "react-icons/gi";
 import Axios from "axios";
@@ -97,21 +95,19 @@ const Login = () => {
           className="loginButton btn btn-primary"
         ></input>
         <p>
-          <a href="/login" aria-label="forgotPasswordLink">Forgot password</a>
+          <a href="/login" aria-label="forgotPasswordLink">
+            Forgot password
+          </a>
         </p>
       </form>
       <hr />
       <div className="createAccount">
         <p>New here?</p>
         <form action="/register">
-          <button aria-label="createAccountButton" className="btn btn-primary">Create an Account</button>
+          <button aria-label="createAccountButton" className="btn btn-primary">
+            Create an Account
+          </button>
         </form>
-        <div className="About">
-        <form action="/about">
-          <button aria-label="aboutButton" className="btn btn-primary">About us</button>
-        </form>
-        </div>
-
       </div>
     </div>
   );
