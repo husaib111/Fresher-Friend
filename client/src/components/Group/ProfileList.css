@@ -1,10 +1,19 @@
+/* COLOR PALETTE */
+:root {
+  --ff-purple: #7267ab;
+  --ff-red: #d8313f;
+  --ff-black: #1f1f1f;
+  --ff-gray: #3d3d3d;
+  --ff-white: #dfdfdf;
+}
+/* COLOR PALETTE */
 .ProfileList {
   display: flex;
 
   flex-direction: row;
   flex-wrap: nowrap;
   gap: 25px;
-  background-color: lightgray;
+  background-color: var(--ff-gray);
   overflow: auto;
   border-radius: 10px;
   width: 95%;
