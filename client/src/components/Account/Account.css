@@ -126,6 +126,16 @@ hr {
   color:#27cf4f;
 }
 
+.statusButton .isolating{
+  color:#cf2a27;
+}
+.statusButton .away{
+  color:#2b78e4;
+}
+.statusButton .guest{
+  color:#27cf4f;
+}
+
 #isolating{
   color:#cf2a27;
 }
