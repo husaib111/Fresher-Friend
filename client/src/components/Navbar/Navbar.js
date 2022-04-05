@@ -17,11 +17,11 @@ function Navbar() {
       <div className="Navbar">
         <div className="NavbarFlex">
           <MenuBarButton />
-          <h1>Fresher Friend</h1>
+          <h1 className="title">Fresher Friend</h1>
           <AccessibilitySwitch />
         </div>
       </div>
-      <div className="Menu"/>
+      <div className="Menu" />
       <div className="NavbarMargin" />
     </div>
   );
@@ -30,22 +30,20 @@ function Navbar() {
 function AccessibilitySwitch() {
   return (
     <div className="AccessibilitySwitch">
-	  {" "}
-	  <a href={"/accessibility"}>
-	  {" "}
-      <FaUniversalAccess className={"NavbarIcon"}
-	  />
-	  Accessibility
-	  </a>
+      {" "}
+      <a href={"/accessibility"}>
+        {" "}
+        <FaUniversalAccess className={"NavbarIcon"} />
+        Accessibility
+      </a>
     </div>
   );
 }
 
 function MenuBarButton() {
-  const [MenuStatus, setMenuStatus] = useState(['O']);
+  const [MenuStatus, setMenuStatus] = useState(["O"]);
 
   const doLogout = async () => {
-
     await Axios.get("https://www.fresher-friend.bham.team:5001/logout/", {
       withCredentials: true,
       headers: {
@@ -53,26 +51,24 @@ function MenuBarButton() {
       },
     });
     window.location.href = "/";
-
-
   };
 
   const toggleNavbarMenu = (e) => {
     let oldMenuStatus = MenuStatus;
     switch (oldMenuStatus[e]) {
-      case 'I': {
-        oldMenuStatus[e] = 'O';
+      case "I": {
+        oldMenuStatus[e] = "O";
         break;
       }
-      case 'C': {
-        oldMenuStatus[e] = 'O';
+      case "C": {
+        oldMenuStatus[e] = "O";
         break;
       }
-      case 'O': {
-        oldMenuStatus[e] = 'C';
+      case "O": {
+        oldMenuStatus[e] = "C";
         break;
       }
-        //THIS FIXES THE BUILD ERROR
+      //THIS FIXES THE BUILD ERROR
       default:
         console.log("Error in navbar, contact the developer!");
     }
@@ -85,7 +81,7 @@ function MenuBarButton() {
     <div>
       <div className="MenuBarButton">
         <GiHamburgerMenu
-		tabindex="0"
+          tabindex="0"
           aria-label="menuBarButton"
           className={`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
           onClick={() => toggleNavbarMenu(0)}
@@ -93,7 +89,7 @@ function MenuBarButton() {
       </div>
       <div className={`NavigationMenu ${MenuStatus[0]}`}>
         <GiHamburgerMenu
-		  tabindex="0"
+          tabindex="0"
           className={`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
           onClick={() => toggleNavbarMenu(0)}
         />

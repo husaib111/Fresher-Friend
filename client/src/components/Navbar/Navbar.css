@@ -6,7 +6,6 @@
     --ff-black: #1f1f1f;
     --ff-gray: #3d3d3d;
     --ff-white: #dfdfdf;
-    --ff-darkPurple: #270549;
 
     --screenDimOpacity: 80%;
     --navbarHeight: 80px;
@@ -15,7 +14,6 @@
 
 .Navbar{
     width: 100%;
-    /*background-color: darkgray;*/
     background-color: var(--ff-purple);
     height: var(--navbarHeight);
     top: 0;
@@ -40,14 +38,26 @@
     margin-right: auto;
 }
 
-.h1{
-    font-size: 300px;
+.title{
+    color: var(--ff-white);
 }
 
 .NavbarIcon{
     height: 50px;
     width: 50px;
     margin: auto;
+}
+
+.NavbarIcon * {
+    -webkit-transition: color 0.3s ease-out;
+    -moz-transition: color 0.3s ease-out;
+    -o-transition: color 0.3s ease-out;
+    transition: color 0.3s ease-out;
+}
+
+.NavbarIcon:hover * {
+    color: var(--ff-black);
+    opacity: 0.8;
 }
 
 
@@ -58,8 +68,8 @@
     padding-top: 15px;
     padding-left: 15px;
     height: 100%;
-    background-color: var(--ff-darkPurple);
-    color: white;
+    background-color: var(--ff-purple);
+    color: var(--ff-white);
     z-index: 3;
 
 }
@@ -67,6 +77,18 @@
 .NavigationMenu.O{
     overflow-y:hidden;
 }
+
+.NavigationMenu a{
+    -webkit-transition: color 0.3s ease-out;
+    -moz-transition: color 0.3s ease-out;
+    -o-transition: color 0.3s ease-out;
+    transition: color 0.3s ease-out;
+}
+
+.NavigationMenu a:hover {
+    color: var(--ff-gray);
+}
+
 /* Desktop View*/
 @media (min-width: 450px) {
     .NavigationMenu{
