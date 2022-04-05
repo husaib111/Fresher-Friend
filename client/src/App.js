@@ -7,6 +7,7 @@ import OtherAccount from "./components/Account/OtherAccount";
 import Group from "./components/Group/Group";
 import TestExample from "./components/TestExample/TestExample";
 import PrivacyPolicy from "./components/Login/PrivacyPolicy";
+import About from "./components/Login/About";
 import {
   BrowserRouter as Router,
   Route,
@@ -26,6 +27,7 @@ class App extends React.Component {
           <Route path="/group/:type" element={<Group />} />
           <Route path="/test" element={<TestExample />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </Router>
     );
