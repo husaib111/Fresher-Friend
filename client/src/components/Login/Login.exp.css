@@ -1,5 +1,3 @@
-/* START PATTERN PRESET FOR FRESHER FRIEND*/
-
 /* COLOR PALETTE */
 :root {
   --ff-purple: #7267ab;
@@ -10,64 +8,10 @@
 }
 /* COLOR PALETTE */
 
-* {
+.login {
   font-family: "Fredoka", sans-serif;
   font-weight: 400;
   color: var(--ff-white);
-}
-
-body {
-  background-color: var(--ff-black);
-}
-
-h1 {
-  font-size: 3rem;
-}
-
-h1,
-h2,
-h3 {
-  color: var(--ff-purple);
-}
-
-a, a:link, a:visited {
-  color: var(--ff-purple);
-}
-
-a:hover {
-  color: var(--ff-red);
-}
-
-input[type="checkbox"] {
-  margin-right: 1rem;
-  border: 1px solid var(--ff-purple);
-  border-radius: 2px;
-  accent-color: var(--ff-purple);
-  width: 0.8rem;
-  height: 0.8rem;
-}
-
-.btn {
-  margin: 2%;
-  background-color: var(--ff-purple);
-  border: none;
-  -webkit-transition: background-color 0.6s ease-out;
-  -moz-transition: background-color 0.6s ease-out;
-  -o-transition: background-color 0.6s ease-out;
-  transition: background-color 0.6s ease-out;
-  box-shadow: 1px 1px 4px black;
-  color: white;
-}
-
-.btn:hover,
-.btn:active,
-.btn:focus {
-  background-color: var(--ff-red);
-  color: white;
-}
-/* END PATTERN PRESET FOR FRESHER FRIEND*/
-
-.login {
   text-align: center;
 }
 
@@ -76,7 +20,7 @@ input[type="checkbox"] {
   color: var(--ff-purple);
 }
 
-.loginForm {
+.login > .loginForm {
   margin: 0 auto;
   padding: 15px 3% 15px 3%;
   width: 90%;
@@ -98,11 +42,6 @@ input[type="checkbox"] {
 
 .check-container {
   display: block;
-}
-
-hr {
-  width: 95%;
-  margin: 3% auto;
 }
 
 /* for desktop: */
