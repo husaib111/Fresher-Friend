@@ -48,15 +48,6 @@ hr {
   font-size: 4em;
   color: var(--ff-white);
 }
-.statusIcon.isolating{
-  color:#cf2a27;
-}
-.statusIcon.away{
-  color:#2b78e4;
-}
-.statusIcon.guest{
-  color:#27cf4f;
-}
 
 .statusButton * {
   -webkit-transition: color 0.3s ease-out;
@@ -123,6 +114,16 @@ hr {
   min-width:12em;
   min-height:4em;
   /* display:block; */
+}
+
+.statusIcon.isolating{
+  color:#cf2a27;
+}
+.statusIcon.away{
+  color:#2b78e4;
+}
+.statusIcon.guest{
+  color:#27cf4f;
 }
 
 /* for desktop: */
