@@ -2,7 +2,7 @@ import "./ProfileList.css";
 import "./ProfileButton.css";
 import "./Group.css";
 import Axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { IoPersonCircle } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 
@@ -28,7 +28,7 @@ function makeProfileButton(name) {
 
 function ProfileList(props) {
   let params = useParams();
-  const getInfo = async () => {
+  const getInfo = useCallback(async () => {
     await Axios.get(
       "https://www.fresher-friend.bham.team:5001/" + params.type + "Users",
       {
@@ -48,12 +48,12 @@ function ProfileList(props) {
       .catch((e) => {
         console.log(e);
       });
-  };
+  },[params.type]);
 
   const [info, setInfo] = useState([]);
   useEffect(() => {
     getInfo();
-  });
+  },[getInfo]);
 
   return <div className="ProfileList">{info}</div>;
 }
