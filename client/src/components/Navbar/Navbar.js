@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaUniversalAccess } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Navbar.css";
+import "./Navbar-Accessible.css";
 import {
   MdHome,
   MdInfo,
@@ -14,6 +15,7 @@ import Axios from "axios";
 function Navbar() {
   return (
     <div>
+     <link rel="stylesheet" href="./Navbar-Accessible.css"></link> /*
       <div className="Navbar">
         <div className="NavbarFlex">
           <MenuBarButton />
