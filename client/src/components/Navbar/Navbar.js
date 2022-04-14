@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FaUniversalAccess } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Navbar.css";
-import "./Navbar-Accessible.css";
 import {
   MdHome,
   MdInfo,
@@ -14,8 +13,8 @@ import Axios from "axios";
 
 function Navbar() {
   return (
-    <div>
-     <link rel="stylesheet" href="./Navbar-Accessible.css"></link> /*
+   <div>
+     <link rel="stylesheet" href="./Navbar.css"/>
       <div className="Navbar">
         <div className="NavbarFlex">
           <MenuBarButton />
@@ -25,22 +24,26 @@ function Navbar() {
       </div>
       <div className="Menu" />
       <div className="NavbarMargin" />
-    </div>
+   </div>
   );
 }
 
 function AccessibilitySwitch() {
   return (
     <div className="AccessibilitySwitch">
-      {" "}
-      <a href={"/accessibility"}>
-        {" "}
         <FaUniversalAccess className={"NavbarIcon"} />
-        Accessibility
-      </a>
+        Accessibilty
     </div>
   );
 }
+
+/*
+AccessibilitySwitch.onclick = function () { swapStyleSheet("./Navbar-Accessible.css") };
+
+function swapStyleSheet(sheet) {
+  Navbar.getElementById("stylesheet").setAttribute("href", sheet);  
+}
+*/
 
 function MenuBarButton() {
   const [MenuStatus, setMenuStatus] = useState(["I"]);
