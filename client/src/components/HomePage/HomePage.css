@@ -18,7 +18,17 @@
     padding: 5px;
     border-radius: 10px;
     display: flex;
-  }
+  } 
+
+.EventButtonCircle{
+    border-radius: 100%;
+    background-color: #0c2bdd;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+    height: 100px;
+  
+  }  
 /* Colour Scheme used
 https://paletton.com/#uid=54x0E0kjgus5OV6bYLGoYmjtJgW
  */
