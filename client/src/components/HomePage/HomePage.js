@@ -1,109 +1,127 @@
 import "./HomePage.css";
 import GroupsList from "./GroupsList";
 import EventsList from "./EventsList";
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
+const HomePage = () => {
+  const [eventLocation, setLocation] = useState("");
+  const [eventName, setName] = useState("");
+  const [eventStartDate, setStartDate] = useState("");
+  const [eventStartTime, setStartTime] = useState("");
+  const [eventEndDate, setEndDate] = useState("");
+  const [eventEndTime, setEndTime] = useState("");
+  
 
-//NEED TO BE ABLE TO RETRIEVE THE NAME DYNAMICCALY INSTEAD OF "EVENT"
-//PLACE A EVENTLIST INSIDE THE TABS RATHER THAN BUTTONS
-class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      eventName: "Name",
-      eventLocation: 2,
-      eventStartDate: 0,
-      eventStartTime: 0
-    };
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    });
-  }
-//USE THIS FUNCTION TO WORK ON HOW TO SUBMIT THE DATA TO DATABASE
-  handleSubmit(event) {
-    alert('Successfully created event');
-    event.preventDefault();
-  }
-  render() {
-    return (
-      <div>
-        <Navbar />
-        <div className="HomePage">
-          <GroupsList />
-          <div class="div-1">
-          <Tabs>
-            <TabList>
-              <Tab>Upcoming Events</Tab>
-              <Tab>Previous Events</Tab>
-              <Tab>Create Event</Tab>
-            </TabList>
-            <TabPanel>
-              <EventsList></EventsList>
-            </TabPanel>
-            <TabPanel>
-              <h2>Content</h2>
-            </TabPanel>
-            <TabPanel>
-            <form onSubmit={this.handleSubmit}>
-        <label>
-          Event Name: 
-          <input
-            name="eventName"
+  return (
+    <div>
+    <Navbar />
+    <div className="HomePage">
+      <GroupsList />
+      <div class="div-1">
+      <Tabs>
+        <TabList>
+          <Tab>Upcoming Events</Tab>
+          <Tab>Previous Events</Tab>
+          <Tab>Create Event</Tab>
+        </TabList>
+        <TabPanel>
+          <EventsList></EventsList>
+        </TabPanel>
+        <TabPanel>
+          <h2>Content</h2>
+        </TabPanel>
+        <TabPanel>
+        <form onSubmit={alert("Hi")}>
+    <label>
+      Event Name: 
+      <input
+            aria-label="nameInput"
+            className="form-control loginInput"
             type="string"
-            value={this.state.eventName}
-            onChange={this.handleInputChange} />
-        </label>
-        <br /><br />
-        <label>
-          Event Location: 
-          <input
-            name="eventLocation"
-            type="number"
-            value={this.state.eventLocation}
-            onChange={this.handleInputChange} />
-        </label>
-        <br /><br />
-        <label>
-          Event Start Date: 
-          <input
-            name="eventStartDate"
+            value={eventName}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="My Event..."
+          />
+    </label>
+    <br /><br />
+    <label>
+      Event Location: 
+      <input
+            aria-label="locationInput"
+            className="form-control loginInput"
+            type="string"
+            value={eventLocation}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Mason Halls..."
+          />
+    </label>
+    <br /><br />
+    <label>
+      Event Start Date: 
+      <input
+            aria-label="startDateInput"
+            className="form-control loginInput"
             type="date"
-            value={this.state.eventStartDate}
-            onChange={this.handleInputChange} />
-        </label>
-        <br /><br />
-        <label>
-          Event Start Time: 
-          <input
-            name="eventStartTime"
+            value={eventStartDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            placeholder=""
+          />
+    </label>
+    <label>
+      Event Start Time: 
+      <input
+            aria-label="StartTime"
+            className="form-control loginInput"
             type="time"
-            value={this.state.eventStartTime}
-            onChange={this.handleInputChange} />
-        </label>
-        <br /><br />
-        <input className="EventButtonCircle" type="submit" value="Create" />
-      </form>
-              
-            </TabPanel>
-          </Tabs>
-          </div>
-
-        </div>
+            value={eventStartTime}
+            onChange={(e) => setStartTime(e.target.value)}
+            placeholder=""
+          />
+    </label>
+    <br/><br/>
+    <label>
+      Event End Date: 
+      <input
+            aria-label="endDateInput"
+            className="form-control loginInput"
+            type="date"
+            value={eventEndDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            placeholder=""
+          />
+    </label>
+    <label>
+      Event End Time: 
+      <input
+            aria-label="endTime"
+            className="form-control loginInput"
+            type="time"
+            value={eventEndTime}
+            onChange={(e) => setEndTime(e.target.value)}
+            placeholder=""
+          />
+    </label>
+    <br /><br />
+    <input
+          aria-label="loginButton"
+          type="submit"
+          value="Create Event"
+          className="loginButton btn btn-primary"
+        ></input>
+  </form>
+          
+        </TabPanel>
+      </Tabs>
       </div>
-      
-    );
-  }
-}
+
+    </div>
+  </div>
+  );
+};
+
 export default HomePage;
