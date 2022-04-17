@@ -13,7 +13,12 @@ const HomePage = () => {
   const [eventStartTime, setStartTime] = useState("");
   const [eventEndDate, setEndDate] = useState("");
   const [eventEndTime, setEndTime] = useState("");
-  
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    alert("Successfully Created Event: " + eventName);
+    //here insert the values into the database
+  };
 
 
 
@@ -36,7 +41,7 @@ const HomePage = () => {
           <h2>Content</h2>
         </TabPanel>
         <TabPanel>
-        <form onSubmit={alert("Hi")}>
+        <form onSubmit={onSubmit}>
     <label>
       Event Name: 
       <input
