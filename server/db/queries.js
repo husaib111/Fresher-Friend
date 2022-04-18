@@ -338,11 +338,16 @@ const getEventInfo = async (request, response) => {
 const insertEventInfo = async (request, response) => {
   try {
     const { event_name, location, startDate, endDate } = request.params;
+    // const { invitees } = request.params;
     console.log(userId);
     const users = await pool.query(
-      "INSERT INTO event(event_id, event_name, location, organiser, starttime, endtime) VALUES (4, $1, $2, 6, $3, $4)",
+      "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, 6, $3, $4)",
       [event_name, location, startDate, endDate]
     );
+    // TODO: get event id and pass in here:
+    // for(var i=0;i<invitees.length;i++){
+      // await pool.query("INSERT INTO invites(user_id,event_id) values($1,$2))",[invitees[i],event_id]);
+    // }
 
     response.json(users.rows);
   } catch (e) {
