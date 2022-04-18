@@ -335,6 +335,21 @@ const getEventInfo = async (request, response) => {
 
 }
 
+const insertEventInfo = async (request, response) => {
+  try {
+    const { event_name, location, startDate, endDate } = request.params;
+    console.log(userId);
+    const users = await pool.query(
+      "INSERT INTO event(event_name, location, starttime, endtime) VALUES (event_name, location, startDate, endDate)",
+      [event_name, location, startDate, endDate]
+    );
+
+    response.json(users.rows);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 module.exports = {
   getEventInfo,
   getUserStatus,
@@ -351,5 +366,6 @@ module.exports = {
   getUserInterests,
   getAccomodationUsers,
   getLoggedInUserStatus,
-  postStatus
+  postStatus,
+  insertEventInfo
 };

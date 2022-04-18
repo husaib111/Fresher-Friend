@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import Axios from "axios";
 
 const HomePage = () => {
   const [eventLocation, setLocation] = useState("");
@@ -14,11 +15,46 @@ const HomePage = () => {
   const [eventEndDate, setEndDate] = useState("");
   const [eventEndTime, setEndTime] = useState("");
 
+  /*
   const onSubmit = (event) => {
     event.preventDefault();
     alert("Successfully Created Event: " + eventName);
     //here insert the values into the database
   };
+  */
+
+  async function insertEvents(event) {
+    event.preventDefault();
+
+      const response = await Axios.post(
+        "https://www.fresher-friend.bham.team:5001/insertEvent",
+        {
+          eventName: eventName,
+          eventLocation: eventLocation,
+          eventStartDate: eventStartDate,
+          eventEndDate: eventEndDate,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = response.data;
+
+      if (data.success) {
+        alert("Successfully Created Event: " + eventName);
+        window.location.href = "/home";
+      } else {
+        alert(
+          "Unable to create event"
+        );
+      }
+  }
+
+
 
 
 
@@ -41,7 +77,7 @@ const HomePage = () => {
           <h2>Content</h2>
         </TabPanel>
         <TabPanel>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={insertEvents}>
     <label>
       Event Name: 
       <input
