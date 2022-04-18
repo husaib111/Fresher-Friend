@@ -340,7 +340,7 @@ const insertEventInfo = async (request, response) => {
     const { event_name, location, startDate, endDate } = request.params;
     console.log(userId);
     const users = await pool.query(
-      "INSERT INTO event(event_name, location, starttime, endtime) VALUES (event_name, location, startDate, endDate)",
+      "INSERT INTO event(event_id, event_name, location, organiser, starttime, endtime) VALUES (4, $1, $2, 6, $3, $4)",
       [event_name, location, startDate, endDate]
     );
 
