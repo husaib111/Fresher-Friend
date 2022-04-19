@@ -6,10 +6,6 @@ import Axios from "axios";
 import React, { useState, useEffect } from "react";
 // import React from 'react';
 
-function EventDetails(props) {
-  alert("This is event: " + props.name +"\n Happening at: " + props.location);
-
-}
 
 
 function EventButton(props) {
@@ -78,6 +74,10 @@ function EventsList(props) {
   useEffect(() => {
     getEventsLocation();
   });
+  function EventDetails() {
+    alert("This is event: " + name +"\n Happening at: " + location);
+  
+  }
   return <div className="groupsList">
     <EventButton onClick={()=>{EventDetails()}}name={name} type="event"/>
   </div>;
