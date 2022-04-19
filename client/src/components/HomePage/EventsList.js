@@ -6,16 +6,20 @@ import Axios from "axios";
 import React, { useState, useEffect } from "react";
 // import React from 'react';
 
+function EventDetails(props) {
+  alert("This is event: " + props.name +"\n Happening at: " + props.location);
+
+}
+
+
 function EventButton(props) {
   return (
     <div className="EventButton">
-      <a href={"/event/"+props.type}>
         <div className="EventButtonCircle">
         </div>
         <div className="EventButtonTitle">
           <h1>{props.name}</h1>
         </div>
-      </a>
     </div>
   );
 }
@@ -75,7 +79,7 @@ function EventsList(props) {
     getEventsLocation();
   });
   return <div className="groupsList">
-    <EventButton onClick={()=>{alert(location);}}name={"Event "+name} type="event"/>
+    <EventButton onClick={()=>{EventDetails()}}name={name} type="event"/>
   </div>;
   }
 
