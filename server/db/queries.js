@@ -68,7 +68,7 @@ const getLoggedInUserInterests = async (request, response) => {
       [userEmail]
     );
     console.log(user_ids);
-    const {user_id} = user_ids.rows[0];
+    const { user_id } = user_ids.rows[0];
 
     const interests = await pool.query(
       "select interest_name,interest_icon from users natural join user_interests natural join interests where user_id=$1;",
@@ -86,11 +86,11 @@ const getUserInterests = async (request, response) => {
     const { userId } = request.params;
     const userIds = await pool.query(
       "select user_id from users where email=$1",
-      [userId+"@student.bham.ac.uk"]
+      [userId + "@student.bham.ac.uk"]
     );
     console.log(userIds);
 
-    const {user_id} = userIds.rows[0];
+    const { user_id } = userIds.rows[0];
     // console.log(userId);
     const interests = await pool.query(
       "select interest_name,interest_icon from users natural join user_interests natural join interests where user_id=$1;",
@@ -108,7 +108,7 @@ const getUserBasicInfo = async (request, response) => {
     console.log(userId);
     const users = await pool.query(
       "select first_name,middle_name,last_name,course_name,flat_num,block_num,acc_location from users natural join accommodation natural join courses where email=$1",
-      [userId+"@student.bham.ac.uk"]
+      [userId + "@student.bham.ac.uk"]
     );
 
     response.json(users.rows);
@@ -156,9 +156,8 @@ const getAccomodationUsers = async (request, response) => {
       [userEmail]
     );
     console.log(accommodation_ids);
-    const {acc_id} =accommodation_ids.rows[0];
+    const { acc_id } = accommodation_ids.rows[0];
     console.log(acc_id);
-
 
     const courseUsers = await pool.query(
       "SELECT * FROM Users WHERE acc_id = $1",
@@ -180,8 +179,7 @@ const getCourseUsers = async (request, response) => {
       "SELECT course_id FROM Users WHERE email = $1",
       [userEmail]
     );
-    const {course_id} =course_ids.rows[0];
-
+    const { course_id } = course_ids.rows[0];
 
     const courseUsers = await pool.query(
       "SELECT * FROM Users WHERE course_id = $1",
@@ -217,17 +215,18 @@ const getAccomInfo = async (request, response) => {
       "SELECT acc_id FROM Users WHERE email = $1",
       [userEmail]
     );
-    const {acc_id} =acc_ids.rows[0];
+    const { acc_id } = acc_ids.rows[0];
 
     const acc_info = await pool.query(
       "select * from accommodation where acc_id = $1",
-      [acc_id]);
+      [acc_id]
+    );
     console.log(acc_info.rows);
     response.json(acc_info.rows);
   } catch (e) {
     console.log(e.message);
   }
-}
+};
 const getCourseInfo = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);
@@ -236,21 +235,22 @@ const getCourseInfo = async (request, response) => {
       "SELECT course_id FROM Users WHERE email = $1",
       [userEmail]
     );
-    const {course_id} =course_ids.rows[0];
+    const { course_id } = course_ids.rows[0];
 
-    const course_info= await pool.query(
+    const course_info = await pool.query(
       "select * from courses where course_id = $1",
-      [course_id]);
+      [course_id]
+    );
     console.log(course_info.rows);
     response.json(course_info.rows);
   } catch (e) {
     console.log(e.message);
   }
-}
+};
 
 const getUserStatus = async (request, response) => {
   try {
-    const {userId} = request.params; 
+    const { userId } = request.params;
     const userEmail = userId + "@student.bham.ac.uk";
     console.log(userEmail);
 
@@ -287,25 +287,25 @@ const getLoggedInUserStatus = async (request, response) => {
   }
 };
 
-const postStatus = async (request,response) => {
+const postStatus = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);
-    console.log("posting"+userEmail);
+    console.log("posting" + userEmail);
     var { status } = request.body;
-    status=status.map((e)=>{
-      if(e){
-        return 1 
+    status = status.map((e) => {
+      if (e) {
+        return 1;
       } else {
-        return 0
+        return 0;
       }
-    })
+    });
     console.log(status);
 
     const users = await pool.query(
       "update users set isolating=$1, away=$2, guest=$3, priv=$4 where email=$5",
-      [status[0],status[1],status[2],status[3],userEmail]
+      [status[0], status[1], status[2], status[3], userEmail]
     );
-   
+
     console.log(users.rows);
 
     // response.json(users.rows);
@@ -315,15 +315,15 @@ const postStatus = async (request,response) => {
     });
     console.log(e.message);
   }
-}
+};
 
 const getEventInfo = async (request, response) => {
   try {
     const { event_id } = request.params;
-    console.log("getting "+event_id);
-    const info = await pool.query(
-      "select * from event where event_id=$1",
-      [event_id]);
+    console.log("getting " + event_id);
+    const info = await pool.query("select * from event where event_id=$1", [
+      event_id,
+    ]);
     console.log(info.rows);
     response.json(info.rows[0]);
   } catch (e) {
@@ -332,8 +332,7 @@ const getEventInfo = async (request, response) => {
     });
     console.log(e.message);
   }
-
-}
+};
 
 const insertEventInfo = async (request, response) => {
   try {
@@ -346,12 +345,84 @@ const insertEventInfo = async (request, response) => {
     );
     // TODO: get event id and pass in here:
     // for(var i=0;i<invitees.length;i++){
-      // await pool.query("INSERT INTO invites(user_id,event_id) values($1,$2))",[invitees[i],event_id]);
+    // await pool.query("INSERT INTO invites(user_id,event_id) values($1,$2))",[invitees[i],event_id]);
     // }
 
     response.json(users.rows);
   } catch (e) {
     console.log(e.message);
+  }
+};
+
+const getCourseMessages = async (request, response) => {
+  try {
+    const userEmail = getLoggedUserEmail(request);
+
+    const messages = await pool.query(
+      "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM CourseMessages INNER JOIN Users ON CourseMessages.user_id=Users.user_id WHERE course_id = (SELECT course_id FROM Users WHERE email = $1) ORDER BY posted_at DESC",
+      [userEmail]
+    );
+
+    response.json(messages.rows);
+  } catch (e) {
+    response.status(400).send({
+      message: "Not logged in!",
+    });
+  }
+};
+
+const getAccMessages = async (request, response) => {
+  try {
+    const userEmail = getLoggedUserEmail(request);
+
+    const messages = await pool.query(
+      "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM AccommodationMessages INNER JOIN Users ON AccommodationMessages.user_id=Users.user_id WHERE acc_id = (SELECT acc_id FROM Users WHERE email = $1) ORDER BY posted_at DESC",
+      [userEmail]
+    );
+
+    response.json(messages.rows);
+  } catch (e) {
+    response.status(400).send({
+      message: "Not logged in!",
+    });
+  }
+};
+
+const postCourseMessage = async (request, response) => {
+  try {
+    const userEmail = getLoggedUserEmail(request);
+
+    const { message } = request.params;
+
+    const postedMessage = pool.query(
+      "INSERT INTO CourseMessages(msg_text, posted_at, course_id, user_id) VALUES ($1, (SELECT CURRENT_TIMESTAMP), (SELECT course_id FROM Users WHERE email = $2), (SELECT user_id FROM Users WHERE email = $2))",
+      [message, userEmail]
+    );
+
+    response.json(postedMessage.rows);
+  } catch (e) {
+    response.status(400).send({
+      message: "Not logged in!",
+    });
+  }
+};
+
+const postAccMessage = async (request, response) => {
+  try {
+    const userEmail = getLoggedUserEmail(request);
+
+    const { message } = request.params;
+
+    const postedMessage = pool.query(
+      "INSERT INTO AccommodationMessages(msg_text, posted_at, acc_id, user_id) VALUES ($1, (SELECT CURRENT_TIMESTAMP), (SELECT acc_id FROM Users WHERE email = $2), (SELECT user_id FROM Users WHERE email = $2))",
+      [message, userEmail]
+    );
+
+    response.json(postedMessage.rows);
+  } catch (e) {
+    response.status(400).send({
+      message: "Not logged in!",
+    });
   }
 };
 
@@ -372,5 +443,9 @@ module.exports = {
   getAccomodationUsers,
   getLoggedInUserStatus,
   postStatus,
-  insertEventInfo
+  insertEventInfo,
+  getCourseMessages,
+  getAccMessages,
+  postCourseMessage,
+  postAccMessage,
 };
