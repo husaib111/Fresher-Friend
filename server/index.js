@@ -15,7 +15,10 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(
   cors({
-    origin: "https://www.fresher-friend.bham.team",
+    origin: [
+      "https://www.fresher-friend.bham.team",
+      "https://fresher-friend.bham.team",
+    ],
     credentials: true,
   })
 );
