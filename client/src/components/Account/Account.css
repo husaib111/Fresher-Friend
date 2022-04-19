@@ -42,23 +42,10 @@ hr {
   padding: 3% 5%;
 }
 
-
 .statusIcon{
   padding: 4% 5%;
   font-size: 4em;
   color: var(--ff-white);
-}
-
-.statusButton * {
-  -webkit-transition: color 0.3s ease-out;
-  -moz-transition: color 0.3s ease-out;
-  -o-transition: color 0.3s ease-out;
-  transition: color 0.3s ease-out;
-}
-
-.statusButton:hover * {
-  color: var(--ff-red);
-  opacity: 0.8;
 }
 
 .statusLabel{
