@@ -9,11 +9,12 @@ import React, { useState, useEffect } from "react";
 function EventButton(props) {
   return (
     <div className="EventButton">
-      <a href={"/event/"+props.type}>
+      <a href={"/eventInfo/1"}>
         <div className="EventButtonCircle">
         </div>
         <div className="EventButtonTitle">
           <h1>{props.name}</h1>
+          <h1>{props.location}</h1>
         </div>
       </a>
     </div>
@@ -75,7 +76,7 @@ function EventsList(props) {
     getEventsLocation();
   });
   return <div className="groupsList">
-    <EventButton onClick={()=>{alert(location);}}name={"Event "+name} type="event"/>
+    <EventButton onClick={()=>{alert(location);}}name={name} type="event"/>
   </div>;
   }
 
