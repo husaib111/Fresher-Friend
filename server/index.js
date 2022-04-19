@@ -16,7 +16,6 @@ app.use(passport.initialize());
 app.use(
   cors({
     origin: "https://www.fresher-friend.bham.team",
-    // origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -35,13 +34,18 @@ app.get("/accomInfo", auth.userAuth, db.getAccomInfo);
 app.get("/eventInfo/:event_id", auth.userAuth, db.getEventInfo);
 app.post("/insertEvent", auth.userAuth, db.insertEventInfo);
 
+app.get("/getCourseMessages", auth.userAuth, db.getCourseMessages);
+app.get("/getAccMessages", auth.userAuth, db.getAccMessages);
+app.post("/postCourseMessage", auth.userAuth, db.postCourseMessage);
+app.post("/postAccMessage", auth.userAuth, db.postAccMessage);
+
 //USED FOR TESTING, DO NOT USE FOR PRODUCTION
 app.get("/users", db.getUsers);
 app.get("/users/courseId/:courseId", db.getUsersByCourse);
 app.get("/users/accId/:accId", db.getUsersByAccommodation);
-app.get("/userStatus/:userId",db.getUserStatus);
+app.get("/userStatus/:userId", db.getUserStatus);
 app.get("/userInfo/:userId", db.getUserBasicInfo);
 app.get("/test", auth.userAuth, db.testFunction);
-app.get("/userInterests/:userId",db.getUserInterests);
+app.get("/userInterests/:userId", db.getUserInterests);
 
 module.exports = app;
