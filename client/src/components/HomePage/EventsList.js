@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react";
 function EventButton(props) {
   return (
     <div className="EventButton">
-      <a href={"/eventInfo/1"}>
+      <a href={":5001/eventInfo/1"}>
         <div className="EventButtonCircle">
         </div>
         <div className="EventButtonTitle">
@@ -76,7 +76,7 @@ function EventsList(props) {
     getEventsLocation();
   });
   return <div className="groupsList">
-    <EventButton onClick={()=>{alert(location);}}name={name} type="event"/>
+    <EventButton onClick={()=>{alert(location);}}name={name} location={location} type="event"/>
   </div>;
   }
 

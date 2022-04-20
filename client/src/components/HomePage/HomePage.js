@@ -15,18 +15,11 @@ const HomePage = () => {
   const [eventEndDate, setEndDate] = useState("");
   const [eventEndTime, setEndTime] = useState("");
 
-  /*
-  const onSubmit = (event) => {
-    event.preventDefault();
-    alert("Successfully Created Event: " + eventName);
-    //here insert the values into the database
-  };
-  */
 
   async function insertEvents(event) {
     event.preventDefault();
 
-      const response = await Axios.post(
+      await Axios.post(
         "https://www.fresher-friend.bham.team:5001/insertEvent",
         {
           eventName: eventName,
@@ -41,7 +34,8 @@ const HomePage = () => {
           },
         }
       );
-
+    alert("Successfully Created Event: " + eventName);
+/*
       const data = response.data;
 
       if (data.success) {
@@ -52,6 +46,7 @@ const HomePage = () => {
           "Unable to create event"
         );
       }
+      */
   }
 
 
