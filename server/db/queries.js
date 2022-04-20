@@ -429,7 +429,7 @@ const postAccMessage = async (request, response) => {
 const getAllEvents = async (request, response) => {
   try {
     const users = await pool.query(
-      "select * from event",
+      "select * from event;",
     );
 
     response.json(users.rows);
