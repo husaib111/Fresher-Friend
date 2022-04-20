@@ -36,6 +36,7 @@ app.get("/courseInfo", auth.userAuth, db.getCourseInfo);
 app.get("/accomInfo", auth.userAuth, db.getAccomInfo);
 app.get("/eventInfo/:event_id", auth.userAuth, db.getEventInfo);
 app.post("/insertEvent", auth.userAuth, db.insertEventInfo);
+app.post("/getEvents", auth.userAuth, db.getAllEvents);
 
 app.get("/getCourseMessages", auth.userAuth, db.getCourseMessages);
 app.get("/getAccMessages", auth.userAuth, db.getAccMessages);

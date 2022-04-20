@@ -426,6 +426,18 @@ const postAccMessage = async (request, response) => {
   }
 };
 
+const getAllEvents = async (request, response) => {
+  try {
+    const users = await pool.query(
+      "select * from event",
+    );
+
+    response.json(users.rows);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 module.exports = {
   getEventInfo,
   getUserStatus,
@@ -437,6 +449,7 @@ module.exports = {
   testFunction,
   getLoggedInUserBasicInfo,
   getLoggedInUserInterests,
+  getAllEvents,
   getCourseUsers,
   getAccomInfo,
   getUserInterests,
