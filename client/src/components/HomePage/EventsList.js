@@ -1,10 +1,9 @@
 import "./EventsList.css"
 import "./EventButton.css";
 import "./HomePage.css";
-//import {IoHome} from "react-icons/io5";
 import Axios from "axios";
-import React, { useState, useEffect } from "react";
-// import React from 'react';
+import React, { useCallback, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 function EventButton(props) {
   return (
@@ -14,18 +13,24 @@ function EventButton(props) {
         </div>
         <div className="EventButtonTitle">
           <h1>{props.name}</h1>
-          <h1>{props.location}</h1>
         </div>
       </a>
     </div>
   );
 }
 
+
+function makeEventButton(name) {
+  console.log(name);
+  const { first_name } = name;
+  return <EventButton name={first_name}/>;
+}
+
 function EventsList(props) {
-  const getEventsName = async () => {
-    console.log("here");
+  let params = useParams();
+  const getInfo = useCallback(async () => {
     await Axios.get(
-      "https://www.fresher-friend.bham.team:5001/eventInfo/1",
+      "https://www.fresher-friend.bham.team:5001/"+ params.type + "Users",
       {
         withCredentials: true,
         headers: {
@@ -35,49 +40,27 @@ function EventsList(props) {
     )
       .then((response) => {
         const { data } = response;
-        console.log(data);
-        const {event_name} = data;
-        console.log(event_name);
-        setEventName(event_name);
+        // console.log(data);
+        const buttons = data.map((name) => makeEventButton(name));
+        console.log(buttons);
+        setInfo(buttons);
       })
       .catch((e) => {
         console.log(e);
       });
-  };
+  },[params.type]);
 
-  const [name, setEventName] = useState([]);
+  const [info, setInfo] = useState([]);
   useEffect(() => {
-    getEventsName();
-  });
-  const getEventsLocation = async () => {
-    console.log("here");
-    await Axios.get(
-      "https://www.fresher-friend.bham.team:5001/eventInfo/1",
-      {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((response) => {
-        const { data } = response;
-        const {location} = data;
-        console.log(location);
-        setLocation(location);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
+    getInfo();
+  },[getInfo]);
+  return <div className="ProfileList">{info}</div>;
 
-  const [location, setLocation] = useState([]);
-  useEffect(() => {
-    getEventsLocation();
-  });
+/*
   return <div className="groupsList">
-    <EventButton onClick={()=>{alert(location);}}name={name} location={location} type="event"/>
+    <EventButton onClick={()=>{alert(location);}}name={name} type="event"/>
   </div>;
+  */
   }
 
 export default EventsList;
