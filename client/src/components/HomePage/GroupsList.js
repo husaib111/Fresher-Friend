@@ -64,9 +64,9 @@ function GroupsList(props) {
     )
       .then((response) => {
         const { data } = response;
-        console.log(data);
+        // console.log(data);
         const {flat_num} = data[0];
-        console.log(flat_num);
+        // console.log(flat_num);
         setAccom(flat_num);
       })
       .catch((e) => {
@@ -92,7 +92,7 @@ function GroupsList(props) {
       .then((response) => {
         const { data } = response;
         const {course_name} = data[0];
-        console.log(course_name);
+        // console.log(course_name);
         setCourse(course_name);
       })
       .catch((e) => {

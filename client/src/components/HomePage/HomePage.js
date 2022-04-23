@@ -18,14 +18,16 @@ const HomePage = () => {
 
   async function insertEvents(event) {
     event.preventDefault();
+      console.log(eventName);
 
       await Axios.post(
-        "https://www.fresher-friend.bham.team:5001/insertEvent",
+-        "https://www.fresher-friend.bham.team:5001/insertEvent",
         {
           eventName: eventName,
           eventLocation: eventLocation,
           eventStartDate: eventStartDate,
           eventEndDate: eventEndDate,
+	    invitees:[1,4],
         },
         {
           withCredentials: true,
