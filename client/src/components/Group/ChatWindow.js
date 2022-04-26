@@ -9,7 +9,7 @@ import Axios from "axios";
 
 
 
-function ChatWindow(){
+function ChatWindow(params){
     function generateChatMessage(author, time, messageText){
         return ChatMessage({author:author, user:"jane", time:time, messageText:messageText});
     }
@@ -29,7 +29,10 @@ function ChatWindow(){
                 const {data} = response;
                 console.log("Data" + data);
 
-                setInfo([generateChatMessage("Bob", "10:10", "Hello"), generateChatMessage("Bob", "10:10", "Hello")]);
+                setInfo([
+                    generateChatMessage("Bob", "10:10", "Hello"),
+                    generateChatMessage("Bob", "10:10", "Hello")
+                ]);
             })
             .catch((e) => {
                 console.log(e);

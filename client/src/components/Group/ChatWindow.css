@@ -28,8 +28,7 @@
     height: calc(650px - (55px + 70px));
     border: 1px solid #263238;
     background: #fff;
-
-    position: relative;
+    z-index: 600;
 }
 .chat-window .chat-body .message-container {
     width: 100%;

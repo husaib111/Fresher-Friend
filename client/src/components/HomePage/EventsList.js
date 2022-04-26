@@ -25,7 +25,9 @@ function makeEventButton(name) {
 }
 
 function EventsList(props) {
+    let params = useParams();
   const getInfo = useCallback(async () => {
+
     await Axios.get(
       "https://www.fresher-friend.bham.team:5001/"+ params.type + "Users",
       {
