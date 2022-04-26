@@ -1,0 +1,40 @@
+
+.ChatMessage {
+    width: auto;
+    height: auto;
+    display: flex;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.MessageInfo{
+    color: #3d3d3d;
+    font-style: italic;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.MessageBubble{
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+    padding: 5px;
+
+    max-width: 340px;
+    width: auto;
+}
+
+.ChatMessage.other .MessageBubble{
+    background-color: var(--ff-purple);
+    color: var(--ff-white)
+}
+
+.ChatMessage.you .MessageBubble{
+    background-color: var(--ff-red);
+    color: var(--ff-white)
+}
+
+.ChatMessage.you {
+    justify-content: flex-end;
+}

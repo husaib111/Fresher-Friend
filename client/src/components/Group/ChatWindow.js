@@ -3,29 +3,106 @@ import ScrollToBottom from "react-scroll-to-bottom";
 //import GroupsList from "./GroupsList";
 import "./ChatWindow.css"
 //import React, {useEffect, useState} from "react";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import ChatMessage from "./ChatMessage";
+import Axios from "axios";
 
 
+
+function ChatWindow(){
+    function generateChatMessage(author, time, messageText){
+        return ChatMessage({author:author, user:"jane", time:time, messageText:messageText});
+    }
+
+    let getInfo;
+    getInfo = async () => {
+        await Axios.get(
+            "https://www.fresher-friend.bham.team:5001/getCourseMessages",
+            {
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        )
+            .then((response) => {
+                const {data} = response;
+                console.log("Data" + data);
+
+                setInfo([generateChatMessage("Bob", "10:10", "Hello"), generateChatMessage("Bob", "10:10", "Hello")]);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }
+
+    const [info, setInfo] = useState([]);
+    useEffect(() => {
+        getInfo();
+    },[getInfo]);
+
+
+
+    const [currentMessage, setCurrentMessage] = useState("");
+    /*const [messageList, setMessageList] = useState([]);*/
+
+    return (
+        <div className="chat-window">
+            <div className="chat-header">
+                <p>Group Chat</p>
+            </div>
+            <div className="chat-body">
+                <ScrollToBottom className="message-container">
+                    {info}
+                </ScrollToBottom>
+            </div>
+
+
+            <div className="chat-footer">
+                <input
+                    aria-label="chatInput"
+                    type="text"
+                    value={currentMessage}
+                    placeholder="Hey..."
+                    onChange={(event) => {
+                        setCurrentMessage(event.target.value);
+                    }}
+
+                    /*
+                    onKeyPress={(event) => {
+                        event.key === "Enter" && sendMessage();
+                        event.key === "Enter";
+                    }}
+                    */
+                />
+
+
+            </div>
+        </div>
+    )
+}
+
+/*
 function ChatWindow({ socket, username, room }) {
     const [currentMessage, setCurrentMessage] = useState("");
     const [messageList, setMessageList] = useState([]);
     //const [sendMessage] = useState("");
 
     const sendMessage = async () => {
-      if (currentMessage !== "") {
-        const messageData = {
-          room: room,
-          author: username,
-          message: currentMessage,
-          time:
-            new Date(Date.now()).getHours() +
-            ":" +
-            new Date(Date.now()).getMinutes(),
-        };
+        if (currentMessage !== "") {
+            const messageData = {
+                room: room,
+                author: username,
+                message: currentMessage,
+                time:
+                    new Date(Date.now()).getHours() +
+                    ":" +
+                    new Date(Date.now()).getMinutes(),
+            };
 
-        setMessageList((list) => [...list, messageData]);
-        setCurrentMessage("");
-      }
+            setMessageList((list) => [...list, messageData]);
+            setCurrentMessage("");
+        }
     };
 
 
@@ -75,5 +152,5 @@ function ChatWindow({ socket, username, room }) {
         </div>
     );
 }
-
+*/
 export default ChatWindow;
