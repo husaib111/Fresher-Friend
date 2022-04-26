@@ -337,10 +337,6 @@ const getEventInfo = async (request, response) => {
 const insertEventInfo = async (request, response) => {
   try {
       const { eventName, eventLocation, eventStartDate, eventEndDate, invitees } = request.body;
-      console.log(eventName);
-      console.log(eventLocation);
-      console.log(eventEndDate);
-      console.log(eventStartDate);
 
     const userEmail = getLoggedUserEmail(request);
       const userIds = await pool.query("select user_id from users where email=$1", [userEmail]);
@@ -438,11 +434,23 @@ const postAccMessage = async (request, response) => {
 
 const getAllEvents = async (request, response) => {
   try {
-    const users = await pool.query(
-      "select * from event;",
+    const userEmail = getLoggedUserEmail(request);
+
+    const userIds = await pool.query(
+      "select user_id from users where email=$1",
+      [userEmail]
+    );
+    const { user_id } = userIds.rows[0];
+    // console.log(user_id);
+
+    const events = await pool.query(
+      "select * from event natural join invites where user_id=$1;",
+      [user_id]
     );
 
-    response.json(users.rows);
+    console.log(events);
+
+    response.json(events.rows);
   } catch (e) {
     console.log(e.message);
   }
