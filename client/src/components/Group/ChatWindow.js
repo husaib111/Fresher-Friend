@@ -3,7 +3,7 @@ import ScrollToBottom from "react-scroll-to-bottom";
 //import GroupsList from "./GroupsList";
 import "./ChatWindow.css"
 //import React, {useEffect, useState} from "react";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import ChatMessage from "./ChatMessage";
 import Axios from "axios";
 
@@ -15,7 +15,7 @@ function ChatWindow(params){
     }
 
     let getInfo;
-    getInfo = async () => {
+    getInfo = useCallback (async () => {
         await Axios.get(
             "https://www.fresher-friend.bham.team:5001/getCourseMessages",
             {
@@ -37,7 +37,7 @@ function ChatWindow(params){
             .catch((e) => {
                 console.log(e);
             });
-    }
+    }, [params.type]);
 
     const [info, setInfo] = useState([]);
     useEffect(() => {
