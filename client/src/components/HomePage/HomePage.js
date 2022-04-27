@@ -6,6 +6,21 @@ import Navbar from "../Navbar/Navbar";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Axios from "axios";
+import Popup from 'reactjs-popup';
+import { SocialIcon } from 'react-social-icons';
+
+const ShareEvent = () => (
+  <Popup trigger={<button>Share</button>} position="right bottom">
+    <div>Share an Event to your friends!</div>
+    <SocialIcon url="https://twitter.com/" />
+    <SocialIcon url="https://facebook.com/" />
+    <SocialIcon url="https://www.reddit.com/" />
+    <SocialIcon url="https://whatsapp.com" />
+    <SocialIcon url="https://snapchat.com" />
+    <SocialIcon url="https://instagram.com" />
+    <SocialIcon url="https://discord.com" />
+  </Popup>
+);
 
 const HomePage = () => {
   const [eventLocation, setLocation] = useState("");
@@ -69,9 +84,12 @@ const HomePage = () => {
         </TabList>
         <TabPanel>
           <EventsList></EventsList>
+          <div className = "popupp">
+          <ShareEvent></ShareEvent>
+          </div>
         </TabPanel>
         <TabPanel>
-          <h2>Content</h2>
+          <h2>Contentt</h2>
         </TabPanel>
         <TabPanel>
         <form onSubmit={insertEvents}>
