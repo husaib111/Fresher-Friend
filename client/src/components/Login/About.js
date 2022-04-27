@@ -9,40 +9,40 @@ function About(props) {
       <div className="About">
         <h2>Who We Are</h2>
         <p>
-          Fresher Friend is a web-based application, developed by students at
+          Fresher Friend is a web-based application, developed by students at 
           the University of Birmingham. Outlined below is what we have worked together
-          to achieve in this application
+          to achieve, in order to ease the process of meeting new students at university.
         </p>
         <div>
           <h3>Our Goals</h3>
           <ul>
             <li>A secure space for users to communicate with their future and current friends in one central resource.</li>
-            <li>Group together people based on their accomodation and course.</li>
-            <li>Plan upcoming events with your friends.</li>
-            <li>Remove the need to have to search all over social media to find future friends.</li>
+            <li>Group together students, based on their accomodation and course.</li>
+            <li>Plan upcoming events with your friends in and around campus.</li>
+            <li>Remove the difficulty to find other people who will be studying alongside you when you move to the University of Birmingham.</li>
           </ul>
-        </div>
-        <div>
-          <h3>Keeping your data safe and making a positive impact</h3>
-          <p>At Fresher Friend, we are determined to keep any information you give us safe and secure and allow you to have a choice about the way you're data is used.
-            Please see the privacy policy to ensure you are aware of what data we collect.
-          </p>
         </div>
         <div>
           <h3>Our Community</h3>
-          <p>Fresher Friend aims to be as much of an inclusive and safe space for all of its users. Students from all different types of backgrounds and accessibility needs can use
-            Fresher Friend to make the most out of their university experience and find the friends they need before arriving at university. Not only does FresherFriend make it
-            easier for students who are moving out for the first time in their life to meet people, they can do it in a way which suits their needs and preferences.
+          <p>Fresher Friend is an inclusive safe space for all of its users. 
+            Students from all backgrounds can use Fresher Friend to make the most out of their 
+            university experience and make friends before starting their course. Not only does FresherFriend make it
+            easier for students to socialise, they can do it in a way which suits their needs and preferences.
           </p>
-          <p>We support the needs of any students to provide a comfortable experience when using FresherFriend.</p>
+          <p>Our app has been designed with accessibilty in mind. Our website can support and adapt to your needs such as:</p>
           <ul>
-            <li>Entire website can be navigated using only keyboard.</li>
-            <li>Dark mode and Inverted colours.</li>
-            <li>Accessibility button present on all pages to ensure users can use every service we provide.</li>
-            <li>Can view website on both your phone or computer.</li>
+            <li>Entire website can be navigated using only the keyboard.</li>
+            <li>A high contrast design with easy readabilty when using a Contrast Enhancer/Inverted Colours.</li>
+            <li>Both mobile and desktop websites availbile to suit your device.</li>
             <li>Large buttons to ensure ease of access.</li>
           </ul>
           </div>
+          <div>
+          <h3>Your data, your choice</h3>
+          <p>At Fresher Friend, we are determined to keep any information you give us safe and secure, as well as allow you to control the way your data is used.
+            Please see the privacy policy to ensure you are aware of what data we collect and how we use it.
+          </p>
+        </div>
         <div>
           <h3>How to contact us</h3>
           <label>Harrison Hughes</label>

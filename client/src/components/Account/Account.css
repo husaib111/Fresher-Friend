@@ -92,8 +92,9 @@ hr {
   display:block;
 }
 
-.checkboxlabel{
+.PrivateProfileToggle{
   font-size: 30px;
+  vertical-align: -7%;
 }
 
 

@@ -33,7 +33,7 @@ h3 {
 }
 
 a, a:link, a:visited {
-  color: var(--ff-purple);
+  color: var(--ff-lightlilac);
 }
 
 a:hover {
@@ -42,23 +42,23 @@ a:hover {
 
 input[type="checkbox"] {
   margin-right: 1rem;
-  border: 1px solid var(--ff-purple);
+  border: 1px solid var(--ff-black);
   border-radius: 2px;
-  accent-color: var(--ff-purple);
+  accent-color: var(--ff-white);
   width: 1rem;
   height: 1rem;
 }
 
 .btn {
   margin: 2%;
-  background-color: var(--ff-purple);
+  background-color: var(--ff-lightpurple);
   border: none;
   -webkit-transition: background-color 0.6s ease-out;
   -moz-transition: background-color 0.6s ease-out;
   -o-transition: background-color 0.6s ease-out;
   transition: background-color 0.6s ease-out;
-  box-shadow: 1px 1px 4px black;
-  color: white;
+  box-shadow: 1px 1px 5px black;
+  color: rgb(255, 255, 255);
 }
 
 .btn:hover,
