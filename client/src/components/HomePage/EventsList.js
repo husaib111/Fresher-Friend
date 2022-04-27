@@ -3,6 +3,7 @@ import "./EventButton.css";
 import "./HomePage.css";
 import Axios from "axios";
 import React, { useCallback, useState, useEffect } from "react";
+import {useParams} from "react-router-dom";
 
 function EventButton(props) {
   return (
