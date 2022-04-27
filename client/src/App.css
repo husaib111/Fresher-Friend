@@ -1,10 +1,14 @@
 /* COLOR PALETTE */
 :root {
-  --ff-purple: #7267ab;
+  --ff-lightlilac: #c7bbff;
+  --ff-lilac: #6556b1;
+  --ff-lightpurple: #4b3c96;
+  --ff-indigo: #251c52;
+  --ff-purple: #362b6a;
   --ff-red: #d8313f;
-  --ff-black: #1f1f1f;
-  --ff-gray: #3d3d3d;
-  --ff-white: #dfdfdf;
+  --ff-black: #141414;
+  --ff-gray: #3e3e3e;
+  --ff-white: #ffffff;
 }
 /* COLOR PALETTE */
 
@@ -15,7 +19,7 @@
 }
 
 body {
-  background-color: var(--ff-black);
+  background-color: #141414;
 }
 
 h1 {
@@ -25,7 +29,7 @@ h1 {
 h1,
 h2,
 h3 {
-  color: var(--ff-purple);
+  color: var(--ff-lightlilac);
 }
 
 a, a:link, a:visited {
@@ -41,8 +45,8 @@ input[type="checkbox"] {
   border: 1px solid var(--ff-purple);
   border-radius: 2px;
   accent-color: var(--ff-purple);
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 1rem;
+  height: 1rem;
 }
 
 .btn {
@@ -65,7 +69,7 @@ input[type="checkbox"] {
 }
 
 .title {
-  font-size: 40px;
+  font-size: 45px;
   text-align: center;
 }
 

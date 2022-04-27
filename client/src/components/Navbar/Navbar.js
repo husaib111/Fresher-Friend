@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaUniversalAccess } from "react-icons/fa";
+import { GiThreeFriends } from "react-icons/gi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Navbar.css";
 import {
@@ -19,7 +20,7 @@ function Navbar() {
         <div className="NavbarFlex">
           <MenuBarButton />
           <h1 className="title">Fresher Friend</h1>
-          <AccessibilitySwitch />
+          <GiThreeFriends className={"FresherFriendLogo"}/>
         </div>
       </div>
       <div className="Menu" />
@@ -28,6 +29,7 @@ function Navbar() {
   );
 }
 
+/*
 function AccessibilitySwitch() {
   return (
     <div className="AccessibilitySwitch">
@@ -37,7 +39,7 @@ function AccessibilitySwitch() {
   );
 }
 
-/*
+
 AccessibilitySwitch.onclick = function () { swapStyleSheet("./Navbar-Accessible.css") };
 
 function swapStyleSheet(sheet) {
@@ -116,8 +118,6 @@ function MenuBarButton() {
               My Profile
             </a>
           </li>
-        </ul>
-        <ul className="BottomNavbarMenuItems">
           <li>
             {" "}
             <a href={"/about"}>
@@ -141,6 +141,12 @@ function MenuBarButton() {
               <MdLogout className="NavbarMenuIcon" />
               Log Out
             </a>
+          </li>
+        </ul>
+        <ul className="BottomNavbarMenuItems">
+          <li>
+              <FaUniversalAccess className="FresherFriendLogo" />
+              Accessibilty supported
           </li>
         </ul>
       </div>
