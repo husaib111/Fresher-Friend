@@ -466,7 +466,29 @@ const getAllEvents = async (request, response) => {
   }
 };
 
+const uploadProfilePic = async (request, response) => {
+    try{
+	const userEmail = getLoggedUserEmail(request);
+
+	const userIds = await pool.query(
+	    "select user_id from users where email=$1",
+	    [userEmail]
+	);
+	const { user_id } = userIds.rows[0];
+
+	await pool.query(
+	    "insert into profiles(user_id,filename) values ($1,$2)",
+	    [user_id,request.file.filename]
+	)
+	console.log("uploaded photo");
+	console.log(request.file.filename);
+    } catch (e) {
+	console.log(e.message);
+    }
+}
+
 module.exports = {
+  uploadProfilePic,
   getEventInfo,
   getUserStatus,
   getCourseInfo,

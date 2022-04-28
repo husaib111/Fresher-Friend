@@ -8,6 +8,7 @@ import Group from "./components/Group/Group";
 import TestExample from "./components/TestExample/TestExample";
 import PrivacyPolicy from "./components/Login/PrivacyPolicy";
 import About from "./components/Login/About";
+import PFUpload from "./components/Profile/PFUpload";
 import {
   BrowserRouter as Router,
   Route,
@@ -28,6 +29,7 @@ class App extends React.Component {
           <Route path="/test" element={<TestExample />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/about" element={<About />} />
+            <Route path="/profileUpload" element={<PFUpload />} />
         </Routes>
       </Router>
     );

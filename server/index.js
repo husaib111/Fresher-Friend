@@ -6,6 +6,9 @@ const passport = require("passport");
 const db = require("./db/queries");
 const api = require("./db/api");
 const auth = require("./db/auth");
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
+
 
 require("./db/passport");
 
@@ -25,6 +28,7 @@ app.use(
 );
 
 //routes
+app.post("/profile",auth.userAuth, upload.single("selectedFile"), db.uploadProfilePic);
 app.post("/login", auth.loginCheck);
 app.post("/setStatus", auth.userAuth, db.postStatus);
 app.get("/logout", auth.logOut);
