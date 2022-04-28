@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Axios from "axios";
 
 function PFUpload() {
@@ -11,7 +11,7 @@ function PFUpload() {
     try {
 	console.log("hi");
 	console.log(formData);
-	const response = await Axios({
+	await Axios({
 	    method: "post",
 	    url: "https://fresher-friend.bham.team:5001/profile",
 	    data: formData,
