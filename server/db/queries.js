@@ -336,22 +336,32 @@ const getEventInfo = async (request, response) => {
 
 const insertEventInfo = async (request, response) => {
   try {
-      const { eventName, eventLocation, eventStartDate, eventEndDate, invitees } = request.body;
+    const { eventName, eventLocation, eventStartDate, eventEndDate, invitees } =
+      request.body;
 
     const userEmail = getLoggedUserEmail(request);
-      const userIds = await pool.query("select user_id from users where email=$1", [userEmail]);
+    const userIds = await pool.query(
+      "select user_id from users where email=$1",
+      [userEmail]
+    );
     const { user_id } = userIds.rows[0];
-      console.log(user_id);
+    console.log(user_id);
 
     const users = await pool.query(
       "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $5, $3, $4) RETURNING event_id",
-	[eventName, eventLocation, eventStartDate, eventEndDate, user_id]
+      [eventName, eventLocation, eventStartDate, eventEndDate, user_id]
     );
-      const {event_id} =users.rows[0];
-      console.log(event_id);
-	await pool.query("INSERT INTO invites(user_id,event_id) values($1,$2)",[user_id,event_id]);
-    for(var i=0;i<invitees.length;i++){
-	await pool.query("INSERT INTO invites(user_id,event_id) values($1,$2)",[invitees[i],event_id]);
+    const { event_id } = users.rows[0];
+    console.log(event_id);
+    await pool.query("INSERT INTO invites(user_id,event_id) values($1,$2)", [
+      user_id,
+      event_id,
+    ]);
+    for (var i = 0; i < invitees.length; i++) {
+      await pool.query("INSERT INTO invites(user_id,event_id) values($1,$2)", [
+        invitees[i],
+        event_id,
+      ]);
     }
 
     response.json(users.rows);

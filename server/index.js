@@ -4,6 +4,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const db = require("./db/queries");
+const api = require("./db/api");
 const auth = require("./db/auth");
 
 require("./db/passport");
@@ -42,6 +43,51 @@ app.get("/getCourseMessages", auth.userAuth, db.getCourseMessages);
 app.get("/getAccMessages", auth.userAuth, db.getAccMessages);
 app.post("/postCourseMessage", auth.userAuth, db.postCourseMessage);
 app.post("/postAccMessage", auth.userAuth, db.postAccMessage);
+
+// REST API section //
+
+//Events object
+app.all("/api/v1/events", api.events);
+app.all("/api/v1/events/:event_id", api.eventsByID);
+app.all("/api/v1/events/:event_id/name", api.eventsByIDName);
+app.all("/api/v1/events/:event_id/location", api.eventsByIDLocation);
+app.all("/api/v1/events/:event_id/organiser", api.eventsByIDOrganiser);
+app.all("/api/v1/events/:event_id/time", api.eventsByIDTime);
+app.all("/api/v1/events/:event_id/invites", api.eventsByIDInvites);
+app.all("/api/v1/events/:event_id/invites/:user_id", api.eventsByIDInvitesUser);
+
+//Course groups object
+app.all("/api/v1/groups/courses", api.courseGroups);
+app.all("/api/v1/groups/courses/:course_id", api.courseGroupsByID);
+app.all("/api/v1/groups/courses/:course_id/name", api.courseGroupsByIDName);
+app.all(
+  "/api/v1/groups/courses/:course_id/duration",
+  api.courseGroupsByIDDuration
+);
+app.all(
+  "/api/v1/groups/courses/:course_id/members",
+  api.courseGroupsByIDMembers
+);
+app.all(
+  "/api/v1/groups/courses/:course_id/members/:member_id",
+  api.courseGroupsByIDMembersID
+);
+
+//Accommodation groups object
+app.all("/api/v1/groups/accommodation", api.accommodationGroups);
+app.all("/api/v1/groups/accommodation/:acc_id", api.accommodationGroupsByID);
+app.all(
+  "/api/v1/groups/accommodation/:acc_id/location",
+  api.accommodationGroupsByIDLocation
+);
+app.all(
+  "/api/v1/groups/accommodation/:acc_id/members",
+  api.accommodationGroupsByIDMembers
+);
+app.all(
+  "/api/v1/groups/accommodation/:acc_id/members/:member_id",
+  api.accommodationGroupsByIDMembersID
+);
 
 //USED FOR TESTING, DO NOT USE FOR PRODUCTION
 app.get("/users", db.getUsers);
