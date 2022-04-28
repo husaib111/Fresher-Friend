@@ -15,9 +15,8 @@ import Axios from "axios";
 function Navbar() {
   return (
    <div>
-     <link rel="stylesheet" href="./Navbar.css"/>
-      <div className="Navbar">
-        <div className="NavbarFlex">
+      <div className="Navbar"  aria-label="Navigation bar">
+        <div className="NavbarFlex" aria-label="Navigation bar">
           <MenuBarButton />
           <h1 className="title">Fresher Friend</h1>
           <GiThreeFriends className={"FresherFriendLogo"}/>
@@ -86,23 +85,24 @@ function MenuBarButton() {
 
   return (
     <div>
-      <div className="MenuBarButton">
+      <div className="MenuBarButton" >
         <GiHamburgerMenu
           tabindex="0"
-          aria-label="menuBarButton"
+          aria-label="show side-bar menu"
           className={`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
           onClick={() => toggleNavbarMenu(0)}
         />
       </div>
       <div className={`NavigationMenu ${MenuStatus[0]}`}>
         <GiHamburgerMenu
+          aria-label="hide side-bar menu"
           tabindex="0"
           className={`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
           onClick={() => toggleNavbarMenu(0)}
         />
 
         <ul className="TopNavbarMenuItems">
-          <li>
+          <li aria-label="home">
             {" "}
             <a href={"/home"}>
               {" "}
@@ -110,33 +110,33 @@ function MenuBarButton() {
               Home
             </a>
           </li>
-          <li>
+          <li aria-label="My profile">
             {" "}
-            <a href={"/myAccount"} aria-label="myAccountLink">
+            <a href={"/myAccount"} >
               {" "}
               <MdPerson className="NavbarMenuIcon" />
               My Profile
             </a>
           </li>
-          <li>
+          <li aria-label="About us">
             {" "}
-            <a href={"/about"}>
+            <a  aria-label="About us" href={"/about"} >
               {" "}
               <MdInfo className="NavbarMenuIcon" />
               About Us{" "}
             </a>
           </li>
-          <li>
+          <li aria-label="Privacy policy">
             {" "}
-            <a href={"/privacy"}>
+            <a href={"/privacy"} >
               {" "}
               <MdPrivacyTip className="NavbarMenuIcon" />
               Privacy Policy
             </a>
           </li>
-          <li>
+          <li aria-label="log out">
             {" "}
-            <a href={"/#"} onClick={doLogout}>
+            <a href={"/#"}  onClick={doLogout}>
               {" "}
               <MdLogout className="NavbarMenuIcon" />
               Log Out
