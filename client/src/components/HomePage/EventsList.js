@@ -54,7 +54,7 @@ function EventsList(props) {
   useEffect(() => {
     getInfo();
   },[getInfo]);
-  return <table className="">{info}</table>;
+  return <table className="EventList">{info}</table>;
 
 /*
   return <div className="groupsList">
