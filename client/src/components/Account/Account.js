@@ -224,12 +224,11 @@ function Account() {
           </div>
         </div>
         <div className="settings">
-          <input
-            type="checkbox"
-            defaultChecked={priv}
-            onChange={() => togglePrivate()}
-          />
-          <label>Private profile</label>
+            <label><input className="PrivateProfileToggle"
+                 type="checkbox"
+                 defaultChecked={priv}
+                 onChange={() => togglePrivate()}
+                 /> Private profile</label>
           <br />
           <form onSubmit={doLogout}>
             <button className="logout btn btn-primary" type="submit">
@@ -238,7 +237,6 @@ function Account() {
           </form>
         </div>
       </div>
-      ``
     </div>
   );
 }
