@@ -1,10 +1,5 @@
 import "./CreateAccount.css";
-import "./../Navbar/Navbar";
-import React, { useState } from "react";
-import { GiThreeFriends } from "react-icons/gi";
-import Axios from "axios";
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+import React from "react";
 const CreateAccount = () => {
   return (
       <div>
