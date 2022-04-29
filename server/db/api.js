@@ -28,13 +28,18 @@ const events = async (request, response) => {
 
     if (method == "GET") {
       const eventsList = await pool.query("SELECT * FROM event");
+      //200- OK (Events list sent)
       response.status(200).json(eventsList.rows);
     } else if (method == "POST") {
       //???
+      //
+      response.status(200).send(request.body);
+      //
     } else if (method == "PUT") {
       const { username, password } = getAuth(request);
 
       if (!username || !password) {
+        //401- Unauthorized (No credentials provided)
         response.status(401).send({
           error: "You have not provided authorization for POST request.",
         });
@@ -42,10 +47,14 @@ const events = async (request, response) => {
 
       if (username == "admin" && password == "admin") {
         const { name, location, organiser, starttime, endtime } = request.body;
+        //
+        response.status(200).send(request.body);
+        //
         const newEvent = await pool.query(
           "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $3, $3, $5) RETURNING event_id",
           [name, location, organiser, starttime, endtime]
         );
+        //201- Created (Event successfully created)
         response.status(201).json(newEvent);
       } else {
         const user = await pool.query(
@@ -59,8 +68,10 @@ const events = async (request, response) => {
             "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $3, $3, $5) RETURNING event_id",
             [name, location, user.rows[0].user_id, starttime, endtime]
           );
+          //201- Created (Event successfully created)
           response.status(201).json(newEvent);
         } else {
+          //401- Unauthorized (Incorrect authorization credentials)
           response.status(401).send({
             error: "Your authorization is incorrect.",
           });
