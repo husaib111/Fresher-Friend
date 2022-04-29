@@ -1,0 +1,120 @@
+/* START PATTERN PRESET FOR FRESHER FRIEND*/
+
+/* COLOR PALETTE */
+:root {
+  --ff-purple: #7267ab;
+  --ff-red: #d8313f;
+  --ff-black: #1f1f1f;
+  --ff-gray: #3d3d3d;
+  --ff-white: #dfdfdf;
+}
+/* COLOR PALETTE */
+
+* {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 400;
+  color: var(--ff-white);
+}
+
+body {
+  background-color: var(--ff-black);
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--ff-purple);
+}
+
+a, a:link, a:visited {
+  color: var(--ff-purple);
+}
+
+a:hover {
+  color: var(--ff-red);
+}
+
+input[type="checkbox"] {
+  margin-right: 1rem;
+  border: 1px solid var(--ff-purple);
+  border-radius: 2px;
+  accent-color: var(--ff-purple);
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.btn {
+  margin: 2%;
+  background-color: var(--ff-purple);
+  border: none;
+  -webkit-transition: background-color 0.6s ease-out;
+  -moz-transition: background-color 0.6s ease-out;
+  -o-transition: background-color 0.6s ease-out;
+  transition: background-color 0.6s ease-out;
+  box-shadow: 1px 1px 4px black;
+  color: white;
+}
+
+.btn:hover,
+.btn:active,
+.btn:focus {
+  background-color: var(--ff-red);
+  color: white;
+}
+/* END PATTERN PRESET FOR FRESHER FRIEND*/
+
+.login {
+  text-align: center;
+}
+
+.logo {
+  font-size: 4em;
+  color: var(--ff-purple);
+}
+
+.loginForm {
+  margin: 0 auto;
+  padding: 15px 3% 15px 3%;
+  width: 90%;
+  background-color: var(--ff-gray);
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px inset var(--ff-gray);
+}
+
+.inputDiv {
+  background-color: var(--ff-white);
+  border-radius: 8px;
+  box-shadow: 2px 2px 2px inset var(--ff-black);
+}
+
+.loginInput {
+  background: transparent;
+  border: none;
+}
+
+.check-container {
+  display: block;
+}
+
+hr {
+  width: 95%;
+  margin: 3% auto;
+}
+
+/* for desktop: */
+@media only screen and (min-width: 768px) {
+  .loginForm {
+    margin: 0 auto;
+    padding: 15px 25px 15px 25px;
+    width: 690px;
+    border-radius: 15px;
+  }
+  hr {
+    width: 70%;
+    margin: 2% auto;
+  }
+}

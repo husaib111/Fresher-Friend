@@ -48,15 +48,15 @@ const Login = () => {
 
   return (
     <div className="login">
-      <h1 className="logo">
-        <GiThreeFriends className="icon" />
+      <h1 className="logo" aria-label="Fresher Friend Logo">
+        <GiThreeFriends className="FresherFriendLogo" aria-label="Fresher Friend Logo"/>
       </h1>
-      <h1>Fresher Friend</h1>
+      <h1 >Fresher Friend</h1>
       <h2>Connecting UoB students</h2>
-      <form className="loginForm" onSubmit={loginUser}>
+      <form className="loginForm" aria-label="login form" onSubmit={loginUser}>
         <div className="mb-3 inputDiv">
           <input
-            aria-label="emailInput"
+            aria-label="email Input"
             className="form-control loginInput"
             type="email"
             value={email}
@@ -66,7 +66,7 @@ const Login = () => {
         </div>
         <div className="mb-3 inputDiv">
           <input
-            aria-label="passwordInput"
+            aria-label="password Input"
             className="form-control loginInput"
             type="password"
             value={password}
@@ -76,14 +76,14 @@ const Login = () => {
         </div>
         <label className="check-container">
           <input
-            aria-label="checkPrivacy"
+            aria-label="By ticking, I acknowledge and accept FresherFriend's privacy policy"
             className="checkbox"
             type="checkbox"
             checked={checked}
             onChange={handleChange}
           />
-          By continuing, I acknowledge FresherFriend’s&nbsp;
-          <a data-testid="privacyLink" href="/privacy">
+          By continuing, I acknowledge and accept FresherFriend’s&nbsp;
+          <a data-testid="privacy policy Link" href="/privacy">
             Privacy Policy
           </a>
           .
@@ -103,9 +103,9 @@ const Login = () => {
       <hr />
       <div className="createAccount">
         <p>New here?</p>
-        <form action="/register">
-          <button aria-label="createAccountButton" className="btn btn-primary">
-            Create an Account
+        <form action="/createAccount">
+          <button aria-label="Register Button" className="btn btn-primary">
+            Register
           </button>
         </form>
       </div>

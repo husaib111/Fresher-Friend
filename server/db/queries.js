@@ -374,13 +374,23 @@ const getCourseMessages = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);
 
-    const messages = await pool.query(
-      "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM CourseMessages INNER JOIN Users ON CourseMessages.user_id=Users.user_id WHERE course_id = (SELECT course_id FROM Users WHERE email = $1) ORDER BY posted_at DESC",
+    const course_ids = await pool.query(
+      "SELECT course_id FROM Users WHERE email = $1",
       [userEmail]
     );
+    const { course_id } = course_ids.rows[0];
+
+      console.log("ok to here");
+    const messages = await pool.query(
+      "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM CourseMessages NATURAL JOIN Users WHERE course_id = $1 ORDER BY posted_at DESC",
+	[course_id]
+    );
+      console.log(messages);
 
     response.json(messages.rows);
   } catch (e) {
+      console.log("hgetCourseMessagesi");
+      console.log(e.message);
     response.status(400).send({
       message: "Not logged in!",
     });
