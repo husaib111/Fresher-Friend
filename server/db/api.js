@@ -31,20 +31,29 @@ const events = async (request, response) => {
       //200- OK (Events list sent)
       response.status(200).json(eventsList.rows);
     } else if (method == "POST") {
-      //???
-      response.status(200).send(request.body);
+      //405 - Method Not Allowed (No support for POST)
+      response.status(405).send({
+        error:
+          "POST method not supported. Please use POST method for specific event.",
+      });
     } else if (method == "PUT") {
       const { username, password } = getAuth(request);
 
       if (!username || !password) {
         //401- Unauthorized (No credentials provided)
         response.status(401).send({
-          error: "You have not provided authorization for POST request.",
+          error: "You have not provided authorization for PUT request.",
         });
       }
 
       if (username == "admin" && password == "admin") {
         const { name, location, organiser, starttime, endtime } = request.body;
+        if (!name || !location || !organiser || !starttime || !endtime) {
+          //400 - Bad Request (Missing body)
+          response.status().send({
+            error: "You are missing one or more parameters inside your body.",
+          });
+        }
         const newEvent = await pool.query(
           "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $3, $4, $5) RETURNING event_id",
           [name, location, organiser, starttime, endtime]
@@ -59,6 +68,12 @@ const events = async (request, response) => {
 
         if (user.rows[0].pass == password) {
           const { name, location, starttime, endtime } = request.body;
+          if (!name || !location || !organiser || !starttime || !endtime) {
+            //400 - Bad Request (Missing body)
+            response.status().send({
+              error: "You are missing one or more parameters inside your body.",
+            });
+          }
           const newEvent = await pool.query(
             "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $3, $4, $5) RETURNING event_id",
             [name, location, user.rows[0].user_id, starttime, endtime]
@@ -73,9 +88,26 @@ const events = async (request, response) => {
         }
       }
     } else if (method == "DELETE") {
-      //???
+      const { username, password } = getAuth(request);
+
+      if (!username || !password) {
+        //401- Unauthorized (No credentials provided)
+        response.status(401).send({
+          error: "You have not provided authorization for DELETE request.",
+        });
+      }
+
+      if (username == "admin" && password == "admin") {
+        await pool.query("TRUNCATE TABLE event");
+        await pool.query("TRUNCATE TABLE invites");
+        //201- Created (Event successfully created)
+        response.status(201).send("Successfully deleted all events.");
+      } else {
+        //401- Unauthorized (Incorrect authorization credentials)
+        response.status(401).send("Your authorization is incorrect.");
+      }
     } else {
-      //405 - Method Not Allowed
+      //501 - Not Implemented
       response.status(405).send();
     }
   } catch (e) {
