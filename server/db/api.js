@@ -1,6 +1,8 @@
 const { response } = require("express");
 const pool = require("./dbconnect");
 
+const SECRET = "admin";
+
 const getAuth = (request) => {
   const username = Buffer.from(
     request.headers.authorization.split(" ")[1],
@@ -32,27 +34,28 @@ const events = async (request, response) => {
       response.status(200).json(eventsList.rows);
     } else if (method == "POST") {
       //405 - Method Not Allowed (No support for POST)
-      response.status(405).send({
-        error:
-          "POST method not supported. Please use POST method for specific event.",
-      });
+      response
+        .status(405)
+        .send(
+          "POST method not supported. Please use POST method for specific event."
+        );
     } else if (method == "PUT") {
       const { username, password } = getAuth(request);
 
       if (!username || !password) {
         //401- Unauthorized (No credentials provided)
-        response.status(401).send({
-          error: "You have not provided authorization for PUT request.",
-        });
+        response
+          .status(401)
+          .send("You have not provided authorization for PUT request.");
       }
 
-      if (username == "admin" && password == "admin") {
+      if (username == "admin" && password == SECRET) {
         const { name, location, organiser, starttime, endtime } = request.body;
         if (!name || !location || !organiser || !starttime || !endtime) {
           //400 - Bad Request (Missing body)
-          response.status().send({
-            error: "You are missing one or more parameters inside your body.",
-          });
+          response
+            .status(400)
+            .send("You are missing one or more parameters inside your body.");
         }
         const newEvent = await pool.query(
           "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $3, $4, $5) RETURNING event_id",
@@ -68,11 +71,11 @@ const events = async (request, response) => {
 
         if (user.rows[0].pass == password) {
           const { name, location, starttime, endtime } = request.body;
-          if (!name || !location || !organiser || !starttime || !endtime) {
+          if (!name || !location || !starttime || !endtime) {
             //400 - Bad Request (Missing body)
-            response.status().send({
-              error: "You are missing one or more parameters inside your body.",
-            });
+            response
+              .status(400)
+              .send("You are missing one or more parameters inside your body.");
           }
           const newEvent = await pool.query(
             "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $3, $4, $5) RETURNING event_id",
@@ -82,9 +85,7 @@ const events = async (request, response) => {
           response.status(201).json(newEvent.rows);
         } else {
           //401- Unauthorized (Incorrect authorization credentials)
-          response.status(401).send({
-            error: "Your authorization is incorrect.",
-          });
+          response.status(401).send("Your authorization is incorrect.");
         }
       }
     } else if (method == "DELETE") {
@@ -92,23 +93,23 @@ const events = async (request, response) => {
 
       if (!username || !password) {
         //401- Unauthorized (No credentials provided)
-        response.status(401).send({
-          error: "You have not provided authorization for DELETE request.",
-        });
+        response
+          .status(401)
+          .send("You have not provided authorization for DELETE request.");
       }
 
-      if (username == "admin" && password == "admin") {
+      if (username == "admin" && password == SECRET) {
         await pool.query("TRUNCATE TABLE event");
         await pool.query("TRUNCATE TABLE invites");
         //201- Created (Event successfully created)
-        response.status(201).send("Successfully deleted all events.");
+        response.status(200).send("Successfully deleted all events.");
       } else {
         //401- Unauthorized (Incorrect authorization credentials)
         response.status(401).send("Your authorization is incorrect.");
       }
     } else {
       //501 - Not Implemented
-      response.status(405).send();
+      response.status(405).send("Requested method is not yet supported.");
     }
   } catch (e) {
     //500 - Internal Server Error
@@ -118,148 +119,553 @@ const events = async (request, response) => {
 
 const eventsByID = async (request, response) => {
   try {
-    //find out which method was used
     const method = request.method;
+    const { id } = request.params;
 
     if (method == "GET") {
-      //???
+      const event = await pool.query(
+        "SELECT * FROM event WHERE event_id = $1",
+        [id]
+      );
+
+      if (!event.rows[0]) {
+        //404- Not Found (No event found with event_id)
+        response.status(404).send("No event found for ID " + id + ".");
+      }
+      //200- OK (Event sent)
+      response.status(200).json(event.rows[0]);
     } else if (method == "POST") {
-      //???
+      const { username, password } = getAuth(request);
+
+      if (!username || !password) {
+        //401- Unauthorized (No credentials provided)
+        response
+          .status(401)
+          .send("You have not provided authorization for POST request.");
+      }
+
+      if (username == "admin" && password == SECRET) {
+        const { name, location, organiser, starttime, endtime } = request.body;
+        if (!name || !location || !organiser || !starttime || !endtime) {
+          //400 - Bad Request (Missing body)
+          response
+            .status(400)
+            .send("You are missing one or more parameters inside your body.");
+        }
+
+        const eventCheck = await pool.query(
+          "SELECT * FROM event WHERE event_id = $1",
+          [id]
+        );
+
+        if (!eventCheck.rows[0]) {
+          //404 - Not Found (No event found with ID)
+          response.status(404).send("No event with ID " + id + " found.");
+        }
+
+        const updatedEvent = await pool.query(
+          "UPDATE event SET event_name = $1, location = $2, organiser = $3, starttime = $4, endtime = $5 WHERE event_id = $6 RETURNING *",
+          [name, location, organiser, starttime, endtime, id]
+        );
+        //200- OK (Event successfully modified)
+        response.status(200).json(updatedEvent.rows[0]);
+      } else {
+        const user = await pool.query(
+          "SELECT user_id, email, pass FROM users NATURAL JOIN passwords WHERE email = $1",
+          [username + "@student.bham.ac.uk"]
+        );
+
+        if (user.rows[0].pass == password) {
+          const { name, location, starttime, endtime } = request.body;
+          if (!name || !location || !starttime || !endtime) {
+            //400 - Bad Request (Missing body)
+            response
+              .status(400)
+              .send("You are missing one or more parameters inside your body.");
+          }
+
+          const userEvent = await pool.query(
+            "SELECT * FROM event WHERE event_id = $1 AND organiser = $2",
+            [id, user.rows[0].user_id]
+          );
+
+          if (!userEvent.rows[0]) {
+            //404 - Not Found (No event found for user)
+            response
+              .status(404)
+              .send(
+                "No event with ID " + id + " found for user " + username + "."
+              );
+          }
+          const updatedEvent = await pool.query(
+            "UPDATE event SET event_name = $1, location = $2, starttime = $3, endtime = $4 WHERE event_id = $5 RETURNING *",
+            [name, location, starttime, endtime, id]
+          );
+          //200- OK (Event successfully modified)
+          response.status(200).json(updatedEvent.rows[0]);
+        } else {
+          //401- Unauthorized (Incorrect authorization credentials)
+          response.status(401).send("Your authorization is incorrect.");
+        }
+      }
     } else if (method == "PUT") {
-      //???
+      //405 - Method Not Allowed (No support for PUT)
+      response
+        .status(405)
+        .send(
+          "PUT method not allowed. For creating events, use /v1/events endpoint instead."
+        );
     } else if (method == "DELETE") {
-      //???
+      const { username, password } = getAuth(request);
+
+      if (!username || !password) {
+        //401- Unauthorized (No credentials provided)
+        response
+          .status(401)
+          .send("You have not provided authorization for DELETE request.");
+      }
+
+      if (username == "admin" && password == SECRET) {
+        const event = await pool.query(
+          "SELECT * FROM event WHERE event_id = $1",
+          [id]
+        );
+
+        if (!event.rows[0]) {
+          //404 - Not Found (No event found with ID)
+          response.status(404).send("No event with ID " + id + " found.");
+        }
+
+        await pool.query("DELETE FROM event WHERE event_id = $1", [id]);
+        //200- OK (Event successfully deleted)
+        response
+          .status(200)
+          .send("Successfully deleted event with ID $1.", [id]);
+      } else {
+        const user = await pool.query(
+          "SELECT user_id, email, pass FROM users NATURAL JOIN passwords WHERE email = $1",
+          [username + "@student.bham.ac.uk"]
+        );
+        if ((user.rows[0].pass = password)) {
+          const event = await pool.query(
+            "SELECT * FROM event WHERE event_id = $1 AND organiser = $2",
+            [id, user.rows[0].user_id]
+          );
+
+          if (!event.rows[0]) {
+            //404 - Not Found (No event found with ID)
+            response
+              .status(404)
+              .send(
+                "No event for user " + username + " with ID " + id + " found."
+              );
+          }
+          await pool.query("DELETE FROM event WHERE event_id = $1", [id]);
+          //200- OK (Event successfully deleted)
+          response
+            .status(200)
+            .send("Successfully deleted event with ID $1.", [id]);
+        } else {
+          //401- Unauthorized (Incorrect authorization credentials)
+          response.status(401).send("Your authorization is incorrect.");
+        }
+      }
     } else {
-      //handle wrong request method error
+      //501 - Not Implemented
+      response.status(501).send("Requested method is not yet supported.");
     }
   } catch (e) {
-    //if there was an error, a correct status needs to be sent back
+    //500 - Internal Server Error
+    response.status(500).send(e.message);
   }
 };
 
-const eventsByIDName = async (request, response) => {
+const eventsByIDEndpoint = async (request, response) => {
   try {
-    //find out which method was used
     const method = request.method;
+    const { id, endpoint } = request.params;
+    const endpoints = ["name", "location", "organiser", "starttime", "endtime"];
+
+    if (!endpoints.includes(endpoint)) {
+      //400 - Bad Request (wrong endpoint, should not happen)
+      response.status(400).send("Wrong endpoint requested.");
+    }
+    if (endpoint == "name") {
+      endpoint = "event_name";
+    }
 
     if (method == "GET") {
-      //???
+      const event = await pool.query(
+        "SELECT $2 FROM event WHERE event_id = $1",
+        [id, endpoint]
+      );
+
+      if (!event.rows[0]) {
+        //404- Not Found (No event found with event_id)
+        response.status(404).send("No event found for ID " + id + ".");
+      }
+      //200- OK (Event sent)
+      response.status(200).json(event.rows[0]);
     } else if (method == "POST") {
-      //???
+      const { username, password } = getAuth(request);
+
+      if (!username || !password) {
+        //401- Unauthorized (No credentials provided)
+        response
+          .status(401)
+          .send("You have not provided authorization for POST request.");
+      }
+
+      if (username == "admin" && password == SECRET) {
+        const { value } = request.body;
+        if (!value) {
+          //400 - Bad Request (Missing body)
+          response
+            .status(400)
+            .send("You are missing a new value inside your body.");
+        }
+
+        const eventCheck = await pool.query(
+          "SELECT * FROM event WHERE event_id = $1",
+          [id]
+        );
+
+        if (!eventCheck.rows[0]) {
+          //404 - Not Found (No event found with ID)
+          response.status(404).send("No event with ID " + id + " found.");
+        }
+
+        const updatedEvent = await pool.query(
+          "UPDATE event SET $1 = $2 WHERE event_id = $3 RETURNING *",
+          [endpoint, value, id]
+        );
+        //200- OK (Event successfully modified)
+        response.status(200).json(updatedEvent.rows[0]);
+      } else {
+        const user = await pool.query(
+          "SELECT user_id, email, pass FROM users NATURAL JOIN passwords WHERE email = $1",
+          [username + "@student.bham.ac.uk"]
+        );
+
+        if (user.rows[0].pass == password) {
+          const { value } = request.body;
+          if (!value) {
+            //400 - Bad Request (Missing body)
+            response
+              .status(400)
+              .send("You are missing a new value inside your body.");
+          }
+
+          const userEvent = await pool.query(
+            "SELECT * FROM event WHERE event_id = $1 AND organiser = $2",
+            [id, user.rows[0].user_id]
+          );
+
+          if (!userEvent.rows[0]) {
+            //404 - Not Found (No event found for user)
+            response
+              .status(404)
+              .send(
+                "No event with ID " + id + " found for user " + username + "."
+              );
+          }
+          const updatedEvent = await pool.query(
+            "UPDATE event SET $1 = $2 WHERE event_id = $3 RETURNING *",
+            [endpoint, value, id]
+          );
+          //200- OK (Event successfully modified)
+          response.status(200).json(updatedEvent.rows[0]);
+        } else {
+          //401- Unauthorized (Incorrect authorization credentials)
+          response.status(401).send("Your authorization is incorrect.");
+        }
+      }
     } else if (method == "PUT") {
-      //???
+      //405 - Method Not Allowed (No support for PUT)
+      response
+        .status(405)
+        .send(
+          "PUT method not allowed. For creating events, use /v1/events endpoint instead."
+        );
     } else if (method == "DELETE") {
-      //???
+      //405 - Method Not Allowed (No support for PUT)
+      response
+        .status(405)
+        .send(
+          "DELETE method not allowed. For deleting events, use /v1/events/:id endpoint instead."
+        );
     } else {
-      //handle wrong request method error
+      //501 - Not Implemented
+      response.status(501).send("Requested method is not yet supported.");
     }
   } catch (e) {
-    //if there was an error, a correct status needs to be sent back
-  }
-};
-
-const eventsByIDLocation = async (request, response) => {
-  try {
-    //find out which method was used
-    const method = request.method;
-
-    if (method == "GET") {
-      //???
-    } else if (method == "POST") {
-      //???
-    } else if (method == "PUT") {
-      //???
-    } else if (method == "DELETE") {
-      //???
-    } else {
-      //handle wrong request method error
-    }
-  } catch (e) {
-    //if there was an error, a correct status needs to be sent back
-  }
-};
-
-const eventsByIDOrganiser = async (request, response) => {
-  try {
-    //find out which method was used
-    const method = request.method;
-
-    if (method == "GET") {
-      //???
-    } else if (method == "POST") {
-      //???
-    } else if (method == "PUT") {
-      //???
-    } else if (method == "DELETE") {
-      //???
-    } else {
-      //handle wrong request method error
-    }
-  } catch (e) {
-    //if there was an error, a correct status needs to be sent back
-  }
-};
-
-const eventsByIDTime = async (request, response) => {
-  try {
-    //find out which method was used
-    const method = request.method;
-
-    if (method == "GET") {
-      //???
-    } else if (method == "POST") {
-      //???
-    } else if (method == "PUT") {
-      //???
-    } else if (method == "DELETE") {
-      //???
-    } else {
-      //handle wrong request method error
-    }
-  } catch (e) {
-    //if there was an error, a correct status needs to be sent back
+    //500 - Internal Server Error
+    response.status(500).send(e.message);
   }
 };
 
 const eventsByIDInvites = async (request, response) => {
   try {
-    //find out which method was used
     const method = request.method;
+    const { id, invitee } = request.params;
+    const { username, password } = getAuth(request);
+    const account = "PUBLIC";
+    const user = {};
 
-    if (method == "GET") {
-      //???
-    } else if (method == "POST") {
-      //???
-    } else if (method == "PUT") {
-      //???
-    } else if (method == "DELETE") {
-      //???
+    if (username == "admin" && password == SECRET) {
+      account = "ADMIN";
     } else {
-      //handle wrong request method error
+      user = await pool.query(
+        "SELECT user_id, email, pass FROM users NATURAL JOIN passwords WHERE email = $1",
+        [username + "@student.bham.ac.uk"]
+      );
+
+      if (user.rows[0].pass == password) {
+        account = "USER";
+      } else if (username || password) {
+        //401- Unauthorized (Incorrect authorization credentials)
+        response.status(401).send("Your authorization is incorrect.");
+      }
+    }
+    if (method == "GET") {
+      if (account == "PUBLIC") {
+        const invites = await pool.query(
+          "SELECT COUNT(*) FROM invites WHERE event_id = $1",
+          [id]
+        );
+        if (invites.rows[0].count == 0) {
+          //404- Not Found (No event found with event_id)
+          response
+            .status(404)
+            .send("No event invites found for event ID " + id + ".");
+        }
+
+        //200- OK (Event invite count sent)
+        response.status(200).json(invites.rows[0]);
+      } else if (account == "ADMIN") {
+        const invites = await pool.query(
+          "SELECT * FROM invites NATURAL JOIN users WHERE event_id = $1",
+          [id]
+        );
+        if (!invites.rows[0]) {
+          //404- Not Found (No event found with event_id)
+          response
+            .status(404)
+            .send("No event invites found for event ID " + id + ".");
+        }
+
+        //200- OK (Event invite count sent)
+        response.status(200).json(invites.rows);
+      } else if (account == "USER") {
+        const invites = await pool.query(
+          "SELECT invites.user_id, invites.event_id, users.first_name, users.middle_name FROM invites NATURAL JOIN users WHERE event_id = $1",
+          [id]
+        );
+        const event = await pool.query(
+          "SELECT * FROM event WHERE organizer = $1 AND event_id = $2",
+          [user.rows[0].user_id, id]
+        );
+        if (!invites.rows[0] || !event.rows[0]) {
+          //404- Not Found (No event found with event_id)
+          response
+            .status(404)
+            .send("No event invites found with ID " + id + "for user ");
+        }
+
+        //200- OK (Event invite count sent)
+        response.status(200).json(invites.rows);
+      } else {
+        //500 - Internal Server Error
+        response
+          .status(500)
+          .send("Unreachable code. Please contact developer.");
+      }
+    } else if (method == "POST") {
+      //405 - Method Not Allowed (No support for POST)
+      response
+        .status(405)
+        .send(
+          "POST method not allowed. For adding/deleting invites, use PUT/DELETE methods instead."
+        );
+    } else if (method == "PUT") {
+      if (account == "PUBLIC") {
+        //401- Unauthorized (No credentials provided)
+        response
+          .status(401)
+          .send("You have not provided authorization for PUT request.");
+      } else if (account == "ADMIN") {
+        if (!invitee) {
+          //400 - Bad Request (Missing body)
+          response
+            .status(400)
+            .send("You are missing invitee(s) inside your body.");
+        }
+        const event = await pool.query(
+          "SELECT * FROM event WHERE event_id = $1",
+          [id]
+        );
+        if (!event.rows[0]) {
+          //404- Not Found (No event found with event_id)
+          response.status(404).send("No event found for ID " + id + ".");
+        }
+        const inviteCheck = await pool.query(
+          "SELECT * FROM invites WHERE event_id = $1 AND user_id = $2",
+          [id, invitee]
+        );
+        if (inviteCheck.rows[0]) {
+          //409 - Conflict (invite already exists)
+          response.status(409).send("Invite in event for user already exists.");
+        }
+
+        await pool.query(
+          "INSERT INTO invites (user_id, event_id) VALUES ($1, $2)",
+          [invitee, id]
+        );
+        //201 - Created
+        response
+          .status(201)
+          .send(
+            "User " + invitee + " has been successfully invited to the event."
+          );
+      } else if (account == "USER") {
+        if (!invitee) {
+          //400 - Bad Request (Missing body)
+          response
+            .status(400)
+            .send("You are missing invitee(s) inside your body.");
+        }
+        const event = await pool.query(
+          "SELECT * FROM event WHERE event_id = $1 AND organizer = $2",
+          [id, user.rows[0].user_id]
+        );
+        if (!event.rows[0]) {
+          //404- Not Found (No event found with event_id)
+          response
+            .status(404)
+            .send(
+              "No event found with ID " + id + " for user " + username + "."
+            );
+        }
+        const inviteCheck = await pool.query(
+          "SELECT * FROM invites WHERE event_id = $1 AND user_id = $2",
+          [id, invitee]
+        );
+        if (inviteCheck.rows[0]) {
+          //409 - Conflict (invite already exists)
+          response.status(409).send("Invite in event for user already exists.");
+        }
+
+        await pool.query(
+          "INSERT INTO invites (user_id, event_id) VALUES ($1, $2)",
+          [invitee, id]
+        );
+        //201 - Created
+        response
+          .status(201)
+          .send(
+            "User " + invitee + " has been successfully invited to the event."
+          );
+      } else {
+        //500 - Internal Server Error
+        response
+          .status(500)
+          .send("Unreachable code. Please contact developer.");
+      }
+    } else if (method == "DELETE") {
+      if (account == "PUBLIC") {
+        //401- Unauthorized (No credentials provided)
+        response
+          .status(401)
+          .send("You have not provided authorization for DELETE request.");
+      } else if (account == "ADMIN") {
+        if (!invitee) {
+          //400 - Bad Request (Missing body)
+          response
+            .status(400)
+            .send("You are missing invitee(s) inside your body.");
+        }
+        const event = await pool.query(
+          "SELECT * FROM event WHERE event_id = $1",
+          [id]
+        );
+        if (!event.rows[0]) {
+          //404- Not Found (No event found with event_id)
+          response.status(404).send("No event found for ID " + id + ".");
+        }
+        const invite = pool.query(
+          "SELECT * FROM invites WHERE user_id = $1 AND event_id = $2",
+          [invitee, id]
+        );
+        if (!invite.rows[0]) {
+          //409 - Conflict (Invitee is not invited)
+          response
+            .status(409)
+            .send(
+              "Could not be deleted because invitee is not invited to the event."
+            );
+        }
+
+        await pool.query(
+          "DELETE FROM invites WHERE user_id = $1 AND event_id = $2",
+          [invitee, id]
+        );
+        //200 - OK
+        response
+          .status(200)
+          .send("Invitee successfully deleted from the event invites.");
+      } else if (account == "USER") {
+        if (!invitee) {
+          //400 - Bad Request (Missing body)
+          response
+            .status(400)
+            .send("You are missing invitee(s) inside your body.");
+        }
+        const event = await pool.query(
+          "SELECT * FROM event WHERE event_id = $1 AND organizer = $2",
+          [id, user.rows[0].user_id]
+        );
+        if (!event.rows[0]) {
+          //404- Not Found (No event found with event_id)
+          response
+            .status(404)
+            .send(
+              "No event found with ID " + id + " for user " + username + "."
+            );
+        }
+        const invite = pool.query(
+          "SELECT * FROM invites WHERE user_id = $1 AND event_id = $2",
+          [invitee, id]
+        );
+        if (!invite.rows[0]) {
+          //409 - Conflict (Invitee is not invited)
+          response
+            .status(409)
+            .send(
+              "Could not be deleted because invitee is not invited to the event."
+            );
+        }
+
+        await pool.query(
+          "DELETE FROM invites WHERE user_id = $1 AND event_id = $2",
+          [invitee, id]
+        );
+        //200 - OK
+        response
+          .status(200)
+          .send("Invitee successfully deleted from the event invites.");
+      } else {
+        //500 - Internal Server Error
+        response
+          .status(500)
+          .send("Unreachable code. Please contact developer.");
+      }
+    } else {
+      //501 - Not Implemented
+      response.status(501).send("Requested method is not yet supported.");
     }
   } catch (e) {
-    //if there was an error, a correct status needs to be sent back
-  }
-};
-
-const eventsByIDInvitesUser = async (request, response) => {
-  try {
-    //find out which method was used
-    const method = request.method;
-
-    if (method == "GET") {
-      //???
-    } else if (method == "POST") {
-      //???
-    } else if (method == "PUT") {
-      //???
-    } else if (method == "DELETE") {
-      //???
-    } else {
-      //handle wrong request method error
-    }
-  } catch (e) {
-    //if there was an error, a correct status needs to be sent back
+    //500 - Internal Server Error
+    response.status(500).send(e.message);
   }
 };
 
@@ -513,12 +919,8 @@ module.exports = {
   //Events
   events,
   eventsByID,
-  eventsByIDName,
-  eventsByIDLocation,
-  eventsByIDOrganiser,
-  eventsByIDTime,
+  eventsByIDEndpoint,
   eventsByIDInvites,
-  eventsByIDInvitesUser,
   //Course Groups
   courseGroups,
   courseGroupsByID,

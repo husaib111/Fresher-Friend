@@ -56,13 +56,9 @@ app.post("/postAccMessage", auth.userAuth, db.postAccMessage);
 
 //Events object
 app.all("/api/v1/events", api.events);
-app.all("/api/v1/events/:event_id", api.eventsByID);
-app.all("/api/v1/events/:event_id/name", api.eventsByIDName);
-app.all("/api/v1/events/:event_id/location", api.eventsByIDLocation);
-app.all("/api/v1/events/:event_id/organiser", api.eventsByIDOrganiser);
-app.all("/api/v1/events/:event_id/time", api.eventsByIDTime);
-app.all("/api/v1/events/:event_id/invites", api.eventsByIDInvites);
-app.all("/api/v1/events/:event_id/invites/:user_id", api.eventsByIDInvitesUser);
+app.all("/api/v1/events/:id", api.eventsByID);
+app.all("/api/v1/events/:id/:endpoint", api.eventsByIDEndpoint);
+app.all("/api/v1/events/:id/invites", api.eventsByIDInvites);
 
 //Course groups object
 app.all("/api/v1/groups/courses", api.courseGroups);
