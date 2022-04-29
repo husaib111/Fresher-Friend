@@ -32,9 +32,6 @@ const events = async (request, response) => {
       response.status(200).json(eventsList.rows);
     } else if (method == "POST") {
       //???
-      //
-      response.status(200).send(request.body);
-      //
     } else if (method == "PUT") {
       const { username, password } = getAuth(request);
 
@@ -47,9 +44,6 @@ const events = async (request, response) => {
 
       if (username == "admin" && password == "admin") {
         const { name, location, organiser, starttime, endtime } = request.body;
-        //
-        response.status(200).send(request.body);
-        //
         const newEvent = await pool.query(
           "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $3, $3, $5) RETURNING event_id",
           [name, location, organiser, starttime, endtime]
