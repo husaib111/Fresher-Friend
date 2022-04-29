@@ -32,6 +32,7 @@ const events = async (request, response) => {
       response.status(200).json(eventsList.rows);
     } else if (method == "POST") {
       //???
+      response.status(200).send(request.body);
     } else if (method == "PUT") {
       const { username, password } = getAuth(request);
 
@@ -49,7 +50,7 @@ const events = async (request, response) => {
           [name, location, organiser, starttime, endtime]
         );
         //201- Created (Event successfully created)
-        response.status(201).json(newEvent);
+        response.status(201).json(newEvent.rows);
       } else {
         const user = await pool.query(
           "SELECT user_id, email, pass FROM users NATURAL JOIN passwords WHERE email = $1",
@@ -63,7 +64,7 @@ const events = async (request, response) => {
             [name, location, user.rows[0].user_id, starttime, endtime]
           );
           //201- Created (Event successfully created)
-          response.status(201).json(newEvent);
+          response.status(201).json(newEvent.rows);
         } else {
           //401- Unauthorized (Incorrect authorization credentials)
           response.status(401).send({
@@ -79,7 +80,7 @@ const events = async (request, response) => {
     }
   } catch (e) {
     //500 - Internal Server Error
-    response.status(500).send();
+    response.status(500).send(e.message);
   }
 };
 
