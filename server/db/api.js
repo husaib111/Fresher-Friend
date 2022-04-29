@@ -29,9 +29,11 @@ const events = async (request, response) => {
 
     if (method == "GET") {
       const eventsList = await pool.query("SELECT * FROM event");
+      response.status(200).json(eventsList);
     } else if (method == "POST") {
       //check for authentication (student / admin)
       //create a new event
+      response.status(200).json(getAuth(request));
       //return status
     } else if (method == "PUT") {
       //???
