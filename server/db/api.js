@@ -24,28 +24,58 @@ const getAuth = (request) => {
 
 const events = async (request, response) => {
   try {
-    //find out which method was used
     const method = request.method;
 
     if (method == "GET") {
       const eventsList = await pool.query("SELECT * FROM event");
-      response.status(200).json(eventsList);
+      response.status(200).json(eventsList.rows);
     } else if (method == "POST") {
-      //check for authentication (student / admin)
-      //create a new event
+      const { username, password } = getAuth(request);
+
+      if (!username || !password) {
+        response.status(401).send({
+          error: "You have not provided authorization for POST request.",
+        });
+      }
+
+      if (username == "admin" && password == "admin") {
+        const { name, location, organiser, starttime, endtime } = request.body;
+        const newEvent = await pool.query(
+          "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $3, $3, $5) RETURNING event_id",
+          [name, location, organiser, starttime, endtime]
+        );
+        response.status(201).send(newEvent);
+      } else {
+        const user = await pool.query(
+          "SELECT user_id, email, pass FROM users NATURAL JOIN passwords WHERE email = $1",
+          [username + "@student.bham.ac.uk"]
+        );
+
+        if (user.rows[0].pass == password) {
+          const { name, location, starttime, endtime } = request.body;
+          const newEvent = await pool.query(
+            "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $3, $3, $5) RETURNING event_id",
+            [name, location, user.rows[0].user_id, starttime, endtime]
+          );
+          response.status(201).send(newEvent);
+        } else {
+          response.status(401).send({
+            error: "Your authorization is incorrect.",
+          });
+        }
+      }
       response.status(200).json(getAuth(request));
-      //return status
     } else if (method == "PUT") {
       //???
     } else if (method == "DELETE") {
       //???
     } else {
       //405 - Method Not Allowed
-      response.status(405);
+      response.status(405).send();
     }
   } catch (e) {
     //500 - Internal Server Error
-    response.status(500);
+    response.status(500).send();
   }
 };
 
