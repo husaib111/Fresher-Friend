@@ -39,11 +39,13 @@
 .privacyPolicy th {
   border: 2px inset var(--ff-white);
 }
+
 /*
 td:hover {
 border: 2px solid var(--ff-red);
 }
 */
+
 .privacyPolicy th {
   font-weight: bold;
 }
