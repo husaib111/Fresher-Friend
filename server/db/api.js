@@ -435,8 +435,8 @@ const accommodationGroupsByIDMembersID = async (request, response) => {
 
 const testAPI = async (request, response) => {
   response.status(200).json({
-    option: request.option,
-    variable: request.variable,
+    option: request.params.option,
+    variable: request.params.variable,
   });
 };
 
