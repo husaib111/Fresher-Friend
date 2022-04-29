@@ -168,25 +168,26 @@ function Account() {
   return (
     <div>
       <Navbar />
-      <div className="Account">
+      <div className="Account" aria-label="Your Profile">
         <h1 className="title">Your Profile</h1>
         <hr />
-        <div className="basicInfo">
+        <div className="basicInfo" aria-label="Profile information">
           <div className="pfpContainer">
-            <img className="pfp" src={pfp} alt="Profile" />
+            <img className="pfp" src={pfp} alt="Profile" aria-label="Profile picture"/>
           </div>
           <h1>
             {info[0]} {info[1]} {info[2]}
           </h1>
-          <p className="About">{info[3]}</p>
+          <p className="About" aria-label="Course information">{info[3]}</p>
           {/* <p className="About">First Year</p> */}
-          <p className="About">
+          <p className="About" aria-label="accommodation information">
             Flat {info[4]}, Block {info[5]}, {info[6]}
           </p>
         </div>
-        <div className="statusButtons">
-          <div className="statusButton">
-            <FontAwesomeIcon
+        <div className="statusButtons" aria-label="Profile status">
+          <div className="statusButton" aria-label="Isolating status">
+            <FontAwesomeIcon 
+              aria-label="Isolating status"
               className={`statusIcon ${status[0] ? "isolating" : ""}`}
               id={`statusIcon ${status[0] ? "isolating" : ""}`}
               icon={faCertificate}
@@ -194,8 +195,9 @@ function Account() {
             />
             <p className="statusLabel">I'm isolating</p>
           </div>
-          <div className="statusButton">
-            <FontAwesomeIcon
+          <div className="statusButton" aria-label="Absent status">
+            <FontAwesomeIcon 
+              aria-label="Absent status"
               className={`statusIcon ${status[1] ? "away" : ""}`}
               id={`statusIcon ${status[1] ? "away" : ""}`}
               icon={faPlane}
@@ -203,8 +205,9 @@ function Account() {
             />
             <p className="statusLabel">I'm away</p>
           </div>
-          <div className="statusButton">
-            <FontAwesomeIcon
+          <div className="statusButton" aria-label="Visitor status">
+            <FontAwesomeIcon 
+              aria-label="Visitor status"
               className={`statusIcon ${status[2] ? "guest" : ""}`}
               id={`statusIcon ${status[2] ? "guest" : ""}`}
               icon={faUser}

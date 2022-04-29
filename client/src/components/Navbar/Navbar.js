@@ -19,7 +19,7 @@ function Navbar() {
         <div className="NavbarFlex" aria-label="Navigation bar">
           <MenuBarButton />
           <h1 className="title">Fresher Friend</h1>
-          <GiThreeFriends className={"FresherFriendLogo"}/>
+          <GiThreeFriends className={"FresherFriendLogo"} aria-label="Fresher Friend Logo"/>
         </div>
       </div>
       <div className="Menu" />
@@ -104,7 +104,7 @@ function MenuBarButton() {
         <ul className="TopNavbarMenuItems">
           <li aria-label="home">
             {" "}
-            <a href={"/home"}>
+            <a href={"/home"} aria-label="Home button">
               {" "}
               <MdHome className="NavbarMenuIcon" />
               Home
@@ -112,7 +112,7 @@ function MenuBarButton() {
           </li>
           <li aria-label="My profile">
             {" "}
-            <a href={"/myAccount"} >
+            <a href={"/myAccount"} aria-label="My Profile button">
               {" "}
               <MdPerson className="NavbarMenuIcon" />
               My Profile
@@ -120,7 +120,7 @@ function MenuBarButton() {
           </li>
           <li aria-label="About us">
             {" "}
-            <a  aria-label="About us" href={"/about"} >
+            <a href={"/about"} aria-label="About us button">
               {" "}
               <MdInfo className="NavbarMenuIcon" />
               About Us{" "}
@@ -128,7 +128,7 @@ function MenuBarButton() {
           </li>
           <li aria-label="Privacy policy">
             {" "}
-            <a href={"/privacy"} >
+            <a href={"/privacy"} aria-label="Privacy policy button">
               {" "}
               <MdPrivacyTip className="NavbarMenuIcon" />
               Privacy Policy
@@ -136,7 +136,7 @@ function MenuBarButton() {
           </li>
           <li aria-label="log out">
             {" "}
-            <a href={"/#"}  onClick={doLogout}>
+            <a href={"/#"} onClick={doLogout} aria-label="log out button">
               {" "}
               <MdLogout className="NavbarMenuIcon" />
               Log Out
@@ -145,7 +145,7 @@ function MenuBarButton() {
         </ul>
         <ul className="BottomNavbarMenuItems">
           <li>
-              <FaUniversalAccess className="FresherFriendLogo" />
+              <FaUniversalAccess className="FresherFriendLogo"/>
               Accessibilty supported
           </li>
         </ul>

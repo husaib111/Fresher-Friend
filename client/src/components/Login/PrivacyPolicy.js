@@ -6,12 +6,12 @@ function PrivacyPolicy(props) {
   return (
     <div>
       <Navbar />
-      <div className="privacyPolicy">
+      <div className="privacy Policy">
         <h2>Fresher Friend Privacy Policy</h2>
         <p>
           Fresher Friend is a web-based application, developed by students at
           the University of Birmingham. This privacy policy explains what
-          personal data our organization collects, how we store your
+          personal data our organisation collects, how we store your
           information, for how long, and how we utilise your data.
         </p>
         <div>

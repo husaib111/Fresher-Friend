@@ -49,7 +49,11 @@ const Login = () => {
   return (
     <div className="login">
       <h1 className="logo" aria-label="Fresher Friend Logo">
+<<<<<<< HEAD
         <GiThreeFriends className="FresherFriendLogo" aria-label="Fresher Friend Logo"/>
+=======
+        <GiThreeFriends className="FresherFriendLogo" />
+>>>>>>> 2112967 (Screen reader aria label updates)
       </h1>
       <h1 >Fresher Friend</h1>
       <h2>Connecting UoB students</h2>
@@ -76,7 +80,11 @@ const Login = () => {
         </div>
         <label className="check-container">
           <input
+<<<<<<< HEAD
             aria-label="By ticking, I acknowledge and accept FresherFriend's privacy policy"
+=======
+            aria-label="By ticking this box, I acknowledge and accept FresherFriend's Privacy Policy"
+>>>>>>> 2112967 (Screen reader aria label updates)
             className="checkbox"
             type="checkbox"
             checked={checked}
@@ -89,13 +97,13 @@ const Login = () => {
           .
         </label>
         <input
-          aria-label="loginButton"
+          aria-label="login Button"
           type="submit"
           value="Login"
           className="loginButton btn btn-primary"
         ></input>
         <p>
-          <a href="/login" aria-label="forgotPasswordLink">
+          <a href="/login" aria-label="forgot Password Link">
             Forgot password
           </a>
         </p>
@@ -103,9 +111,15 @@ const Login = () => {
       <hr />
       <div className="createAccount">
         <p>New here?</p>
+<<<<<<< HEAD
         <form action="/createAccount">
           <button aria-label="Register Button" className="btn btn-primary">
             Register
+=======
+        <form action="/register">
+          <button aria-label="register Button" className="btn btn-primary">
+            Create an Account
+>>>>>>> 2112967 (Screen reader aria label updates)
           </button>
         </form>
       </div>
