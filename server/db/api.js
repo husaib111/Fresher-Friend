@@ -46,7 +46,7 @@ const events = async (request, response) => {
       if (username == "admin" && password == "admin") {
         const { name, location, organiser, starttime, endtime } = request.body;
         const newEvent = await pool.query(
-          "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $3, $3, $5) RETURNING event_id",
+          "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $3, $4, $5) RETURNING event_id",
           [name, location, organiser, starttime, endtime]
         );
         //201- Created (Event successfully created)
@@ -60,7 +60,7 @@ const events = async (request, response) => {
         if (user.rows[0].pass == password) {
           const { name, location, starttime, endtime } = request.body;
           const newEvent = await pool.query(
-            "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $3, $3, $5) RETURNING event_id",
+            "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $3, $4, $5) RETURNING event_id",
             [name, location, user.rows[0].user_id, starttime, endtime]
           );
           //201- Created (Event successfully created)
