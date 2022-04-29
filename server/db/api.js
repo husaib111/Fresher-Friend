@@ -30,6 +30,8 @@ const events = async (request, response) => {
       const eventsList = await pool.query("SELECT * FROM event");
       response.status(200).json(eventsList.rows);
     } else if (method == "POST") {
+      //???
+    } else if (method == "PUT") {
       const { username, password } = getAuth(request);
 
       if (!username || !password) {
@@ -44,7 +46,7 @@ const events = async (request, response) => {
           "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $3, $3, $5) RETURNING event_id",
           [name, location, organiser, starttime, endtime]
         );
-        response.status(201).send(newEvent);
+        response.status(201).json(newEvent);
       } else {
         const user = await pool.query(
           "SELECT user_id, email, pass FROM users NATURAL JOIN passwords WHERE email = $1",
@@ -57,16 +59,13 @@ const events = async (request, response) => {
             "INSERT INTO event(event_name, location, organiser, starttime, endtime) VALUES ($1, $2, $3, $3, $5) RETURNING event_id",
             [name, location, user.rows[0].user_id, starttime, endtime]
           );
-          response.status(201).send(newEvent);
+          response.status(201).json(newEvent);
         } else {
           response.status(401).send({
             error: "Your authorization is incorrect.",
           });
         }
       }
-      response.status(200).json(getAuth(request));
-    } else if (method == "PUT") {
-      //???
     } else if (method == "DELETE") {
       //???
     } else {
