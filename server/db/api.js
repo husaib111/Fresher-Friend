@@ -1,6 +1,23 @@
 const { response } = require("express");
 const pool = require("./dbconnect");
 
+const getAuth = (request) => {
+  const username = Buffer.from(
+    request.headers.authorization.split(" ")[1],
+    "base64"
+  )
+    .toString()
+    .split(":")[0];
+  const password = Buffer.from(
+    request.headers.authorization.split(" ")[1],
+    "base64"
+  )
+    .toString()
+    .split(":")[1];
+
+  return { username, password };
+};
+
 ////////////////
 //EVENTS//
 ////////////////
@@ -11,7 +28,7 @@ const events = async (request, response) => {
     const method = request.method;
 
     if (method == "GET") {
-      //return a list of events
+      const eventsList = await pool.query("SELECT * FROM event");
     } else if (method == "POST") {
       //check for authentication (student / admin)
       //create a new event
@@ -21,10 +38,12 @@ const events = async (request, response) => {
     } else if (method == "DELETE") {
       //???
     } else {
-      //handle wrong request method error
+      //405 - Method Not Allowed
+      response.status(405);
     }
   } catch (e) {
-    //if there was an error, a correct status needs to be sent back
+    //500 - Internal Server Error
+    response.status(500);
   }
 };
 
@@ -414,6 +433,13 @@ const accommodationGroupsByIDMembersID = async (request, response) => {
   }
 };
 
+const testAPI = async (request, response) => {
+  response.status(200).json({
+    option: request.option,
+    variable: request.variable,
+  });
+};
+
 module.exports = {
   //Events
   events,
@@ -437,4 +463,6 @@ module.exports = {
   accommodationGroupsByIDLocation,
   accommodationGroupsByIDMembers,
   accommodationGroupsByIDMembersID,
+  //Test
+  testAPI,
 };

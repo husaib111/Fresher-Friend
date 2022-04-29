@@ -6,9 +6,8 @@ const passport = require("passport");
 const db = require("./db/queries");
 const api = require("./db/api");
 const auth = require("./db/auth");
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
-
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
 require("./db/passport");
 
@@ -28,7 +27,12 @@ app.use(
 );
 
 //routes
-app.post("/profile",auth.userAuth, upload.single("selectedFile"), db.uploadProfilePic);
+app.post(
+  "/profile",
+  auth.userAuth,
+  upload.single("selectedFile"),
+  db.uploadProfilePic
+);
 app.post("/login", auth.loginCheck);
 app.post("/setStatus", auth.userAuth, db.postStatus);
 app.get("/logout", auth.logOut);
@@ -101,5 +105,6 @@ app.get("/userStatus/:userId", db.getUserStatus);
 app.get("/userInfo/:userId", db.getUserBasicInfo);
 app.get("/test", auth.userAuth, db.testFunction);
 app.get("/userInterests/:userId", db.getUserInterests);
+app.get("/api/v1/test/:variable/:option", api.testAPI);
 
 module.exports = app;
