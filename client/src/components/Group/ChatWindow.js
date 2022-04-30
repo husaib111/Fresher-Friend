@@ -11,8 +11,8 @@ import Axios from "axios";
 function ChatWindow(params){
     function generateChatMessage(message){
         console.log(message);
-        const {msg_txt, posted_at, first_name} = message
-        return ChatMessage({author: first_name, time: posted_at, text: msg_txt});
+        const {msg_text, posted_at, first_name} = message
+        return ChatMessage({author: first_name, time: posted_at, text: msg_text});
     }
 
     let getInfo;
