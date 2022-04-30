@@ -105,7 +105,23 @@ const CreateAccount = () => {
           Demo Interest
         </label>
 		</p>
-        <input
+		<p>
+		In order to register to FresherFriend, you must agree to the &nbsp;
+		<a data-testid="privacy policy Link" href="/privacy">
+            Privacy Policy
+          </a>
+		 </p>
+		<p>
+		<input
+            aria-label="By ticking, I acknowledge and accept FresherFriend's privacy policy"
+            className="checkbox"
+            type="checkbox"
+            //checked={checked}
+            //onChange={handleChange}
+          />
+          By continuing, I acknowledge and accept FresherFriend’s Privacy Policy
+        </p>
+		<input
           aria-label="createAccountButton"
           type="submit"
           value="Create Account"
