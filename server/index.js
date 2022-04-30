@@ -36,6 +36,7 @@ app.post(
 app.post("/login", auth.loginCheck);
 app.post("/setStatus", auth.userAuth, db.postStatus);
 app.get("/logout", auth.logOut);
+app.post("/createAccount", db.createAccount);
 app.get("/courseUsers", auth.userAuth, db.getCourseUsers);
 app.get("/accommodationUsers", auth.userAuth, db.getAccomodationUsers);
 app.get("/loggedInUserInfo", auth.userAuth, db.getLoggedInUserBasicInfo);
