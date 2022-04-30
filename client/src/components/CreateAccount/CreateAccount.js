@@ -24,26 +24,7 @@ const CreateAccount = () => {
   async function loginUser(event) {
     event.preventDefault();
 
-        //} else {
-    //  const response = await Axios.post(
-    //    "https://www.fresher-friend.bham.team:5001/login",
-    //    {
-     //     email: email,
-     //     password: password,
-     //   },
-     //   {
-     //     withCredentials: true,
-    //      headers: {
-    //        "Content-Type": "application/json",
-     //     },
-    //    }
-      //);
-
-     // const data = response.data;
-    
-    //  if (data.success) {
-     //   alert("Login Successful!");
-     //   window.location.href = "/home";
+     
       
 		if(password1 === "" || firstName==="" || surname ==="" || email ==="" || flat === "" || block===""){
 			alert("Empty Fields");
@@ -74,10 +55,32 @@ const CreateAccount = () => {
       alert("Before you can proceed, you need to agree to the Privacy Policy.");
 			}
 		else{
-		  
-        alert(
-          "Your email or password is incorrect, please check your login information!"
-        );
+			const response = await Axios.post(
+				"https://www.fresher-friend.bham.team:5001/createAccount",
+				{
+					email: email,
+					password: password1,
+					firstName: firstName,
+					middleName: middleName,
+					lastName, lastName,
+					courseId: course,
+					accId: accom,
+				},
+				{
+				withCredentials: true,
+				headers: {
+            "Content-Type": "application/json",
+          },
+		  if (response.status === 201){
+			alert("Account successfully created);
+            return <Redirect to "/login/" />
+		  }
+		  else{
+			alert("An error has occurred. Please check that your credentials are correct and that your email is not already in use.");  
+		  }
+        }
+      );
+       
 		}
 		}}}}}}
     }
