@@ -30,9 +30,6 @@ function ChatWindow(params){
                 const {data} = response;
                 console.log("Data" + data);
                 setInfo(data.map((message) => generateChatMessage(message) ));
-                setInfo([
-                    generateChatMessage("Bob", "10:10", "Hello"),
-                ]);
             })
             .catch((e) => {
                 console.log(e);
