@@ -1,16 +1,97 @@
 import "./CreateAccount.css";
-import React from "react";
+import React, { useState } from "react";
+//import Axios from "axios";
+
 const CreateAccount = () => {
+  const [firstName, setFirstName] = useState("");
+  const [middleName, setMiddleName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [flat, setFlat] = useState("");
+  const [block, setBlock] = useState("");
+  const [accom, setAccom] = useState("");
+  const [course, setCourse] = useState("");
+
+  const [checked, setChecked] = useState(false);
+  
+  const handleChange = () => {
+    setChecked(!checked);
+  };
+  
+  
+  async function loginUser(event) {
+    event.preventDefault();
+
+        //} else {
+    //  const response = await Axios.post(
+    //    "https://www.fresher-friend.bham.team:5001/login",
+    //    {
+     //     email: email,
+     //     password: password,
+     //   },
+     //   {
+     //     withCredentials: true,
+    //      headers: {
+    //        "Content-Type": "application/json",
+     //     },
+    //    }
+      //);
+
+     // const data = response.data;
+    
+    //  if (data.success) {
+     //   alert("Login Successful!");
+     //   window.location.href = "/home";
+      
+		if(password1 === "" || firstName==="" || surname ==="" || email ==="" || flat === "" || block===""){
+			alert("Empty Fields");
+		}
+	    else {
+	    if(!/[A-Za-z]+/.test(firstName)||!/[A-Za-z]*/.test(middleName)||!/[A-Za-z]+/.test(surname)||!/[0-9]+/.test(flat)||!/[0-9]+/.test(block)){
+			alert("Some fields contain invalid characters. Names must be comprised only of letters, and flat and block choices must contain only numbers.");
+		}
+		else{
+		if (!/[a-z][a-z][a-z][0-9][0-9][0-9]@student.bham.ac.uk/.test(email)){
+			alert("Invalid email. Email must be composed of three lowercase letters, followed by 3 numbers, ending with \"@student.bham.ac.uk\"");
+		}
+		else{
+		if (accom === "0"){
+			alert("Please choose an accommodation.");
+		}
+		else{
+		if (course === "0"){
+			alert("Please choose a course.");
+		}
+		else{
+			if (password1 !== password2)
+		  {
+			  alert("Passwords don't match");
+		  }
+		else{
+			if (!checked) {
+      alert("Before you can proceed, you need to agree to the Privacy Policy.");
+			}
+		else{
+		  
+        alert(
+          "Your email or password is incorrect, please check your login information!"
+        );
+		}
+		}}}}}}
+    }
+  
   return (
       <div>
           <h1 className="title">Create Your Account</h1>
-		  <form className="loginForm">
+		<form className="loginForm" onSubmit={loginUser}>
         <div className="mb-3 inputDiv">
           <input
             aria-label="firstNameInput"
             className="form-control loginInput"
-            //value={firstName}
-            //onChange={(e) => setEmail(e.target.value)}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
             placeholder="First Name"
           />
         </div>
@@ -18,17 +99,17 @@ const CreateAccount = () => {
           <input
             aria-label="middleNameInput"
             className="form-control loginInput"
-            //value={password}
-            //onChange={(e) => setPassword(e.target.value)}
-            placeholder="Middle Name"
+            value={middleName}
+            onChange={(e) => setMiddleName(e.target.value)}
+            placeholder="Middle Name (optional)"
           />
         </div>
         <div className="mb-3 inputDiv">
           <input
             aria-label="surnameInput"
             className="form-control loginInput"
-            //value={firstName}
-            //onChange={(e) => setEmail(e.target.value)}
+            value={surname}
+            onChange={(e) => setSurname(e.target.value)}
             placeholder="Surname"
           />
         </div>
@@ -36,8 +117,8 @@ const CreateAccount = () => {
           <input
             aria-label="emailInput"
             className="form-control loginInput"
-            //value={firstName}
-            //onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Email Address"
           />
         </div>
@@ -46,17 +127,18 @@ const CreateAccount = () => {
             aria-label="passwordInput1"
             className="form-control loginInput"
             type="password"
-            //value={password}
-            //onChange={(e) => setPassword(e.target.value)}
+            value={password1}
+            onChange={(e) => setPassword1(e.target.value)}
             placeholder="Password"
           />
         </div>
 		<div className="mb-3 inputDiv">
           <input
-            aria-label="passwordInput"
+            aria-label="passwordInput2"
             className="form-control loginInput"
-            //value={password}
-            //onChange={(e) => setPassword(e.target.value)}
+			type="password"
+            value={password2}
+            onChange={(e) => setPassword2(e.target.value)}
             placeholder="Confirm Password"
           />
         </div>
@@ -64,8 +146,8 @@ const CreateAccount = () => {
           <input
             aria-label="flatInput"
             className="form-control loginInput"
-            //value={password}
-            //onChange={(e) => setPassword(e.target.value)}
+            value={flat}
+            onChange={(e) => setFlat(e.target.value)}
             placeholder="Flat Number"
           />
         </div>
@@ -73,23 +155,23 @@ const CreateAccount = () => {
           <input
             aria-label="blockInput"
             className="form-control loginInput"
-            //value={password}
-            //onChange={(e) => setPassword(e.target.value)}
+            value={block}
+            onChange={(e) => setBlock(e.target.value)}
             placeholder="Block"
           />
         </div>
 		Accomodation:&emsp;
-		<select>
-        <option value="Jarratt">Jarratt</option>
-        <option value="">demo</option>
-        <option value="">demo</option>
+		<select class="dropdown" value={accom} onChange={(e) => setAccom(e.target.value)}>
+        <option class="dropdown" value="0">Choose your accommodation</option>
+        <option class="dropdown" value="1">Jarratt</option>
+        <option class="dropdown" value="2">demo</option>
         </select>
 		<p>
 		Course:&emsp;
-		<select>
-        <option value="">Computer Science</option>
-        <option value="">demo</option>
-        <option value="">demo</option>
+		<select class="dropdown" value={course} onChange={(e) => setCourse(e.target.value)}>
+        <option class="dropdown" value="0">Choose your course</option>
+        <option class="dropdown" value="1">Computer Science</option>
+        <option class="dropdown" value="2">demo</option>
         </select>
 		</p>
 		<p>
@@ -116,8 +198,8 @@ const CreateAccount = () => {
             aria-label="By ticking, I acknowledge and accept FresherFriend's privacy policy"
             className="checkbox"
             type="checkbox"
-            //checked={checked}
-            //onChange={handleChange}
+            checked={checked}
+            onChange={handleChange}
           />
           By continuing, I acknowledge and accept FresherFriend’s Privacy Policy
         </p>
