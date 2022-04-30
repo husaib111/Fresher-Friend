@@ -9,8 +9,10 @@ import Axios from "axios";
 
 
 function ChatWindow(params){
-    function generateChatMessage(author, time, messageText){
-        return ChatMessage({author:author, time:time, messageText:messageText});
+    function generateChatMessage(message){
+        console.log(message);
+        const {msg_txt, posted_at, first_name} = message
+        return ChatMessage({author: first_name, time: posted_at, messageText: msg_txt});
     }
 
     let getInfo;
@@ -27,7 +29,7 @@ function ChatWindow(params){
             .then((response) => {
                 const {data} = response;
                 console.log("Data" + data);
-
+                setInfo(data.map((message) => generateChatMessage(message) ));
                 setInfo([
                     generateChatMessage("Bob", "10:10", "Hello"),
                 ]);
