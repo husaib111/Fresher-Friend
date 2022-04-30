@@ -2,7 +2,6 @@ import ScrollToBottom from "react-scroll-to-bottom";
 //import SwipeableViews from "react-swipeable-views";
 //import GroupsList from "./GroupsList";
 import "./ChatWindow.css"
-//import React, {useEffect, useState} from "react";
 import React, {useCallback, useEffect, useState} from "react";
 import ChatMessage from "./ChatMessage";
 import Axios from "axios";
@@ -11,7 +10,7 @@ import Axios from "axios";
 
 function ChatWindow(params){
     function generateChatMessage(author, time, messageText){
-        return ChatMessage({author:author, user:"jane", time:time, messageText:messageText});
+        return ChatMessage({author:author, time:time, messageText:messageText});
     }
 
     let getInfo;
@@ -31,7 +30,6 @@ function ChatWindow(params){
 
                 setInfo([
                     generateChatMessage("Bob", "10:10", "Hello"),
-                    generateChatMessage("Bob", "10:10", "Hello")
                 ]);
             })
             .catch((e) => {
@@ -48,6 +46,26 @@ function ChatWindow(params){
 
     const [currentMessage, setCurrentMessage] = useState("");
     /*const [messageList, setMessageList] = useState([]);*/
+    let sendMessage;
+    sendMessage = async () => {
+        await Axios.post(
+            "https://www.fresher-friend.bham.team:5001/postCourseMessage",
+            {message: "POSTED: " + currentMessage},
+            {
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        )
+    }
+
+
+    function sendMessageInTextbox() {
+        console.log("Posting Message: " + currentMessage)
+        sendMessage();
+        setCurrentMessage("")
+    }
 
     return (
         <div className="chat-window">
@@ -60,7 +78,6 @@ function ChatWindow(params){
                 </ScrollToBottom>
             </div>
 
-
             <div className="chat-footer">
                 <input
                     aria-label="chatInput"
@@ -70,20 +87,16 @@ function ChatWindow(params){
                     onChange={(event) => {
                         setCurrentMessage(event.target.value);
                     }}
-
-                    /*
                     onKeyPress={(event) => {
-                        event.key === "Enter" && sendMessage();
-                        event.key === "Enter";
+                        event.key === "Enter" && sendMessageInTextbox();
                     }}
-                    */
                 />
-
-
+                <button aria-label="chatButton" onClick={sendMessageInTextbox}>&#9658;</button>
             </div>
         </div>
     )
 }
+
 
 /*
 function ChatWindow({ socket, username, room }) {
