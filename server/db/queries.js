@@ -514,6 +514,8 @@ const createAccount = async (request, response) => {
         "INSERT INTO users (email, first_name, middle_name, last_name, course_id, acc_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         [email, firstName, middleName, lastName, courseId, accId]
       );
+      console.log(newUser);
+      console.log(newUser.rows[0]);
       if (!newUser) {
         response
           .status(500)
@@ -523,6 +525,8 @@ const createAccount = async (request, response) => {
         "INSERT INTO passwords (user_id, pass) VALUES ($1, $2) RETURNING user_id",
         [newUser.rows[0].user_id, password]
       );
+      console.log(newPasswordEntry);
+      console.log(newPasswordEntry.rows[0]);
       if (!newPasswordEntry) {
         response
           .status(500)
