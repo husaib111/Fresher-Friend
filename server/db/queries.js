@@ -380,17 +380,17 @@ const getCourseMessages = async (request, response) => {
     );
     const { course_id } = course_ids.rows[0];
 
-      console.log("ok to here");
+    console.log("ok to here");
     const messages = await pool.query(
       "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM CourseMessages NATURAL JOIN Users WHERE course_id = $1 ORDER BY posted_at DESC",
-	[course_id]
+      [course_id]
     );
-      console.log(messages);
+    console.log(messages);
 
     response.json(messages.rows);
   } catch (e) {
-      console.log("hgetCourseMessagesi");
-      console.log(e.message);
+    console.log("hgetCourseMessagesi");
+    console.log(e.message);
     response.status(400).send({
       message: "Not logged in!",
     });
@@ -477,25 +477,84 @@ const getAllEvents = async (request, response) => {
 };
 
 const uploadProfilePic = async (request, response) => {
-    try{
-	const userEmail = getLoggedUserEmail(request);
+  try {
+    const userEmail = getLoggedUserEmail(request);
 
-	const userIds = await pool.query(
-	    "select user_id from users where email=$1",
-	    [userEmail]
-	);
-	const { user_id } = userIds.rows[0];
+    const userIds = await pool.query(
+      "select user_id from users where email=$1",
+      [userEmail]
+    );
+    const { user_id } = userIds.rows[0];
 
-	await pool.query(
-	    "insert into profiles(user_id,filename) values ($1,$2)",
-	    [user_id,request.file.filename]
-	)
-	console.log("uploaded photo");
-	console.log(request.file.filename);
-    } catch (e) {
-	console.log(e.message);
+    await pool.query("insert into profiles(user_id,filename) values ($1,$2)", [
+      user_id,
+      request.file.filename,
+    ]);
+    console.log("uploaded photo");
+    console.log(request.file.filename);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+const createAccount = async (request, response) => {
+  try {
+    const {
+      email,
+      password,
+      firstName,
+      middleName,
+      lastName,
+      courseId,
+      accId,
+    } = request.body;
+
+    if (middleName) {
+      const newUser = pool.query(
+        "INSERT INTO users (email, first_name, middle_name, last_name, course_id, acc_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+        [email, firstName, middleName, lastName, courseId, accId]
+      );
+      if (!newUser) {
+        response
+          .status(500)
+          .send("Unknown error, please contact the developer.");
+      }
+      const newPasswordEntry = pool.query(
+        "INSERT INTO passwords (user_id, pass) VALUES ($1, $2) RETURNING user_id",
+        [newUser.rows[0].user_id, password]
+      );
+      if (!newPasswordEntry) {
+        response
+          .status(500)
+          .send("Unknown error, please contact the developer.");
+      }
+      response.status(201).json(newUser);
+    } else {
+      const newUser = pool.query(
+        "INSERT INTO users (email, first_name, last_name, course_id, acc_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+        [email, firstName, lastName, courseId, accId]
+      );
+      if (!newUser) {
+        response
+          .status(500)
+          .send("Unknown error, please contact the developer.");
+      }
+      const newPasswordEntry = pool.query(
+        "INSERT INTO passwords (user_id, pass) VALUES ($1, $2) RETURNING user_id",
+        [newUser.rows[0].user_id, password]
+      );
+      if (!newPasswordEntry) {
+        response
+          .status(500)
+          .send("Unknown error, please contact the developer.");
+      }
+      response.status(201).json(newUser);
     }
-}
+  } catch (e) {
+    console.log(e.message);
+    response.status(500).send(e);
+  }
+};
 
 module.exports = {
   uploadProfilePic,
@@ -521,4 +580,5 @@ module.exports = {
   getAccMessages,
   postCourseMessage,
   postAccMessage,
+  createAccount,
 };
