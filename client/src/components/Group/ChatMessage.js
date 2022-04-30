@@ -9,7 +9,7 @@ function ChatMessage(props) {
                 <div>
                 <div className="MessageInfo">{props.author} - {props.time}  </div>
                 <div className="MessageBubble">
-                    <div className="messageText">{props.messageText}</div>
+                    <div className="messageText">{props.text}</div>
                 </div>
                 </div>
         </div>
