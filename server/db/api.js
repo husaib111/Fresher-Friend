@@ -4,6 +4,9 @@ const pool = require("./dbconnect");
 const SECRET = "admin";
 
 const getAuth = (request) => {
+  if (!request.headers.authorization) {
+    return "error";
+  }
   const username = Buffer.from(
     request.headers.authorization.split(" ")[1],
     "base64"
@@ -37,7 +40,7 @@ const events = async (request, response) => {
       response
         .status(405)
         .send(
-          "POST method not supported. Please use POST method for specific event."
+          "POST method not supported. Please use POST method for a specific event (api/v1/events/:id)."
         );
     } else if (method == "PUT") {
       const { username, password } = getAuth(request);
@@ -109,7 +112,7 @@ const events = async (request, response) => {
       }
     } else {
       //501 - Not Implemented
-      response.status(405).send("Requested method is not yet supported.");
+      response.status(501).send("Requested method is not yet supported.");
     }
   } catch (e) {
     //500 - Internal Server Error
@@ -675,127 +678,264 @@ const eventsByIDInvites = async (request, response) => {
 
 const courseGroups = async (request, response) => {
   try {
-    //find out which method was used
     const method = request.method;
 
     if (method == "GET") {
-      //???
+      const courses = await pool.query("SELECT * FROM courses");
+      //200- OK (Courses list sent)
+      response.status(200).json(courses.rows);
     } else if (method == "POST") {
-      //???
+      //405 - Method Not Allowed (No support for POST)
+      response
+        .status(405)
+        .send(
+          "POST method not supported. Please use POST method for a specific course (api/v1/groups/courses/:id)."
+        );
     } else if (method == "PUT") {
-      //???
+      const { username, password } = getAuth(request);
+
+      if (!username || !password) {
+        //401- Unauthorized (No credentials provided)
+        response
+          .status(401)
+          .send("You have not provided authorization for PUT request.");
+      }
+
+      if (username == "admin" && password == SECRET) {
+        const { name, duration } = request.body;
+        if (!name || !duration) {
+          //400 - Bad Request (Missing body)
+          response
+            .status(400)
+            .send("You are missing one or more parameters inside your body.");
+        }
+        const newCourse = await pool.query(
+          "INSERT INTO courses(course_name, duration) VALUES ($1, $2) RETURNING *",
+          [name, duration]
+        );
+        //201- Created (Event successfully created)
+        response.status(201).json(newCourse.rows);
+      } else {
+        //401- Unauthorized (Incorrect authorization credentials)
+        response.status(401).send("Your authorization is incorrect.");
+      }
     } else if (method == "DELETE") {
-      //???
+      const { username, password } = getAuth(request);
+
+      if (!username || !password) {
+        //401- Unauthorized (No credentials provided)
+        response
+          .status(401)
+          .send("You have not provided authorization for DELETE request.");
+      }
+
+      if (username == "admin" && password == SECRET) {
+        await pool.query("TRUNCATE TABLE courses");
+        //200- Created (Event successfully created)
+        response.status(200).send("Successfully deleted all courses.");
+      } else {
+        //401- Unauthorized (Incorrect authorization credentials)
+        response.status(401).send("Your authorization is incorrect.");
+      }
     } else {
-      //handle wrong request method error
+      //501 - Not Implemented
+      response.status(501).send("Requested method is not yet supported.");
     }
   } catch (e) {
-    //if there was an error, a correct status needs to be sent back
+    //500 - Internal Server Error
+    response.status(500).send(e.message);
   }
 };
 
 const courseGroupsByID = async (request, response) => {
   try {
-    //find out which method was used
     const method = request.method;
+    const { id } = request.params;
 
     if (method == "GET") {
-      //???
+      const course = await pool.query(
+        "SELECT * FROM courses WHERE course_id = $1",
+        [id]
+      );
+
+      if (!course.rows[0]) {
+        //404- Not Found (No event found with event_id)
+        response.status(404).send("No course found for ID " + id + ".");
+      }
+      //200- OK (Event sent)
+      response.status(200).json(course.rows[0]);
     } else if (method == "POST") {
-      //???
+      const { username, password } = getAuth(request);
+
+      if (!username || !password) {
+        //401- Unauthorized (No credentials provided)
+        response
+          .status(401)
+          .send("You have not provided authorization for POST request.");
+      }
+
+      if (username == "admin" && password == SECRET) {
+        const { name, duration } = request.body;
+        if (!name || !duration) {
+          //400 - Bad Request (Missing body)
+          response
+            .status(400)
+            .send("You are missing one or more parameters inside your body.");
+        }
+
+        const courseCheck = await pool.query(
+          "SELECT * FROM courses WHERE course_id = $1",
+          [id]
+        );
+
+        if (!courseCheck.rows[0]) {
+          //404 - Not Found (No event found with ID)
+          response.status(404).send("No course with ID " + id + " found.");
+        }
+
+        const updatedCourse = await pool.query(
+          "UPDATE courses SET course_name = $1, duration = $2 WHERE course_id = $6 RETURNING *",
+          [name, duration, id]
+        );
+        //200- OK (Event successfully modified)
+        response.status(200).json(updatedCourse.rows[0]);
+      } else {
+        //401- Unauthorized (Incorrect authorization credentials)
+        response.status(401).send("Your authorization is incorrect.");
+      }
     } else if (method == "PUT") {
-      //???
+      //405 - Method Not Allowed (No support for PUT)
+      response
+        .status(405)
+        .send(
+          "PUT method not allowed. For creating events, use /v1/groups/courses endpoint instead."
+        );
     } else if (method == "DELETE") {
-      //???
+      const { username, password } = getAuth(request);
+
+      if (!username || !password) {
+        //401- Unauthorized (No credentials provided)
+        response
+          .status(401)
+          .send("You have not provided authorization for DELETE request.");
+      }
+
+      if (username == "admin" && password == SECRET) {
+        const course = await pool.query(
+          "SELECT * FROM courses WHERE course_id = $1",
+          [id]
+        );
+
+        if (!course.rows[0]) {
+          //404 - Not Found (No event found with ID)
+          response.status(404).send("No course with ID " + id + " found.");
+        }
+
+        await pool.query("DELETE FROM courses WHERE course_id = $1", [id]);
+        //200- OK (Event successfully deleted)
+        response
+          .status(200)
+          .send("Successfully deleted course with ID $1.", [id]);
+      } else {
+        //401- Unauthorized (Incorrect authorization credentials)
+        response.status(401).send("Your authorization is incorrect.");
+      }
     } else {
-      //handle wrong request method error
+      //501 - Not Implemented
+      response.status(501).send("Requested method is not yet supported.");
     }
   } catch (e) {
-    //if there was an error, a correct status needs to be sent back
+    //500 - Internal Server Error
+    response.status(500).send(e.message);
   }
 };
 
-const courseGroupsByIDName = async (request, response) => {
+const courseGroupsByIDEndpoint = async (request, response) => {
   try {
-    //find out which method was used
     const method = request.method;
+    const { id, endpoint } = request.params;
+    const endpoints = ["name", "duration"];
+
+    if (!endpoints.includes(endpoint)) {
+      //400 - Bad Request (wrong endpoint, should not happen)
+      response.status(400).send("Wrong endpoint requested.");
+    }
+    if (endpoint == "name") {
+      endpoint = "course_name";
+    }
 
     if (method == "GET") {
-      //???
+      const course = await pool.query(
+        "SELECT $2 FROM courses WHERE course_id = $1",
+        [id, endpoint]
+      );
+
+      if (!course.rows[0]) {
+        //404- Not Found (No course found with event_id)
+        response.status(404).send("No course found for ID " + id + ".");
+      }
+      //200- OK (Course sent)
+      response.status(200).json(course.rows[0]);
     } else if (method == "POST") {
-      //???
+      const { username, password } = getAuth(request);
+
+      if (!username || !password) {
+        //401- Unauthorized (No credentials provided)
+        response
+          .status(401)
+          .send("You have not provided authorization for POST request.");
+      }
+
+      if (username == "admin" && password == SECRET) {
+        const { value } = request.body;
+        if (!value) {
+          //400 - Bad Request (Missing body)
+          response
+            .status(400)
+            .send("You are missing a new value inside your body.");
+        }
+
+        const courseCheck = await pool.query(
+          "SELECT * FROM courses WHERE course_id = $1",
+          [id]
+        );
+
+        if (!courseCheck.rows[0]) {
+          //404 - Not Found (No event found with ID)
+          response.status(404).send("No course with ID " + id + " found.");
+        }
+
+        const updatedCourse = await pool.query(
+          "UPDATE courses SET $1 = $2 WHERE course_id = $3 RETURNING *",
+          [endpoint, value, id]
+        );
+        //200- OK (Event successfully modified)
+        response.status(200).json(updatedCourse.rows[0]);
+      } else {
+        //401- Unauthorized (Incorrect authorization credentials)
+        response.status(401).send("Your authorization is incorrect.");
+      }
     } else if (method == "PUT") {
-      //???
+      //405 - Method Not Allowed (No support for PUT)
+      response
+        .status(405)
+        .send(
+          "PUT method not allowed. For creating events, use /v1/groups/courses endpoint instead."
+        );
     } else if (method == "DELETE") {
-      //???
+      //405 - Method Not Allowed (No support for PUT)
+      response
+        .status(405)
+        .send(
+          "DELETE method not allowed. For deleting events, use /v1/groups/courses/:id endpoint instead."
+        );
     } else {
-      //handle wrong request method error
+      //501 - Not Implemented
+      response.status(501).send("Requested method is not yet supported.");
     }
   } catch (e) {
-    //if there was an error, a correct status needs to be sent back
-  }
-};
-
-const courseGroupsByIDDuration = async (request, response) => {
-  try {
-    //find out which method was used
-    const method = request.method;
-
-    if (method == "GET") {
-      //???
-    } else if (method == "POST") {
-      //???
-    } else if (method == "PUT") {
-      //???
-    } else if (method == "DELETE") {
-      //???
-    } else {
-      //handle wrong request method error
-    }
-  } catch (e) {
-    //if there was an error, a correct status needs to be sent back
-  }
-};
-
-const courseGroupsByIDMembers = async (request, response) => {
-  try {
-    //find out which method was used
-    const method = request.method;
-
-    if (method == "GET") {
-      //???
-    } else if (method == "POST") {
-      //???
-    } else if (method == "PUT") {
-      //???
-    } else if (method == "DELETE") {
-      //???
-    } else {
-      //handle wrong request method error
-    }
-  } catch (e) {
-    //if there was an error, a correct status needs to be sent back
-  }
-};
-
-const courseGroupsByIDMembersID = async (request, response) => {
-  try {
-    //find out which method was used
-    const method = request.method;
-
-    if (method == "GET") {
-      //???
-    } else if (method == "POST") {
-      //???
-    } else if (method == "PUT") {
-      //???
-    } else if (method == "DELETE") {
-      //???
-    } else {
-      //handle wrong request method error
-    }
-  } catch (e) {
-    //if there was an error, a correct status needs to be sent back
+    //500 - Internal Server Error
+    response.status(500).send(e.message);
   }
 };
 
@@ -805,114 +945,277 @@ const courseGroupsByIDMembersID = async (request, response) => {
 
 const accommodationGroups = async (request, response) => {
   try {
-    //find out which method was used
     const method = request.method;
 
     if (method == "GET") {
-      //???
+      const accommodation = await pool.query("SELECT * FROM accommodation");
+      //200- OK (Courses list sent)
+      response.status(200).json(accommodation.rows);
     } else if (method == "POST") {
-      //???
+      //405 - Method Not Allowed (No support for POST)
+      response
+        .status(405)
+        .send(
+          "POST method not supported. Please use POST method for a specific course (api/v1/groups/accommodation/:id)."
+        );
     } else if (method == "PUT") {
-      //???
+      const { username, password } = getAuth(request);
+
+      if (!username || !password) {
+        //401- Unauthorized (No credentials provided)
+        response
+          .status(401)
+          .send("You have not provided authorization for PUT request.");
+      }
+
+      if (username == "admin" && password == SECRET) {
+        const { flat, block, location } = request.body;
+        if (!flat || !block || !location) {
+          //400 - Bad Request (Missing body)
+          response
+            .status(400)
+            .send("You are missing one or more parameters inside your body.");
+        }
+        const newAccommodation = await pool.query(
+          "INSERT INTO accommodation(flat_num, block_num, acc_location) VALUES ($1, $2, $3) RETURNING *",
+          [flat, block, location]
+        );
+        //201- Created (Event successfully created)
+        response.status(201).json(newAccommodation.rows);
+      } else {
+        //401- Unauthorized (Incorrect authorization credentials)
+        response.status(401).send("Your authorization is incorrect.");
+      }
     } else if (method == "DELETE") {
-      //???
+      const { username, password } = getAuth(request);
+
+      if (!username || !password) {
+        //401- Unauthorized (No credentials provided)
+        response
+          .status(401)
+          .send("You have not provided authorization for DELETE request.");
+      }
+
+      if (username == "admin" && password == SECRET) {
+        await pool.query("TRUNCATE TABLE accommodation");
+        //200- Created (Event successfully created)
+        response.status(200).send("Successfully deleted all accommodation.");
+      } else {
+        //401- Unauthorized (Incorrect authorization credentials)
+        response.status(401).send("Your authorization is incorrect.");
+      }
     } else {
-      //handle wrong request method error
+      //501 - Not Implemented
+      response.status(501).send("Requested method is not yet supported.");
     }
   } catch (e) {
-    //if there was an error, a correct status needs to be sent back
+    //500 - Internal Server Error
+    response.status(500).send(e.message);
   }
 };
 
 const accommodationGroupsByID = async (request, response) => {
   try {
-    //find out which method was used
     const method = request.method;
+    const { id } = request.params;
 
     if (method == "GET") {
-      //???
+      const accommodation = await pool.query(
+        "SELECT * FROM accommodation WHERE acc_id = $1",
+        [id]
+      );
+
+      if (!accommodation.rows[0]) {
+        //404- Not Found (No event found with event_id)
+        response.status(404).send("No accommodation found for ID " + id + ".");
+      }
+      //200- OK (Event sent)
+      response.status(200).json(accommodation.rows[0]);
     } else if (method == "POST") {
-      //???
+      const { username, password } = getAuth(request);
+
+      if (!username || !password) {
+        //401- Unauthorized (No credentials provided)
+        response
+          .status(401)
+          .send("You have not provided authorization for POST request.");
+      }
+
+      if (username == "admin" && password == SECRET) {
+        const { flat, block, location } = request.body;
+        if (!flat || !block || !location) {
+          //400 - Bad Request (Missing body)
+          response
+            .status(400)
+            .send("You are missing one or more parameters inside your body.");
+        }
+
+        const accCheck = await pool.query(
+          "SELECT * FROM accommodation WHERE acc_id = $1",
+          [id]
+        );
+
+        if (!accCheck.rows[0]) {
+          //404 - Not Found (No event found with ID)
+          response
+            .status(404)
+            .send("No accommodation with ID " + id + " found.");
+        }
+
+        const updatedAcc = await pool.query(
+          "UPDATE accommodation SET flat_num = $1, block_num = $2, acc_location = $3 WHERE acc_id = $6 RETURNING *",
+          [flat, block, location, id]
+        );
+        //200- OK (Event successfully modified)
+        response.status(200).json(updatedAcc.rows[0]);
+      } else {
+        //401- Unauthorized (Incorrect authorization credentials)
+        response.status(401).send("Your authorization is incorrect.");
+      }
     } else if (method == "PUT") {
-      //???
+      //405 - Method Not Allowed (No support for PUT)
+      response
+        .status(405)
+        .send(
+          "PUT method not allowed. For creating events, use /v1/groups/accommodation endpoint instead."
+        );
     } else if (method == "DELETE") {
-      //???
+      const { username, password } = getAuth(request);
+
+      if (!username || !password) {
+        //401- Unauthorized (No credentials provided)
+        response
+          .status(401)
+          .send("You have not provided authorization for DELETE request.");
+      }
+
+      if (username == "admin" && password == SECRET) {
+        const accommodation = await pool.query(
+          "SELECT * FROM accommodation WHERE acc_id = $1",
+          [id]
+        );
+
+        if (!accommodation.rows[0]) {
+          //404 - Not Found (No event found with ID)
+          response
+            .status(404)
+            .send("No accommodation with ID " + id + " found.");
+        }
+
+        await pool.query("DELETE FROM accommodation WHERE acc_id = $1", [id]);
+        //200- OK (Event successfully deleted)
+        response
+          .status(200)
+          .send("Successfully deleted accommodation with ID $1.", [id]);
+      } else {
+        //401- Unauthorized (Incorrect authorization credentials)
+        response.status(401).send("Your authorization is incorrect.");
+      }
     } else {
-      //handle wrong request method error
+      //501 - Not Implemented
+      response.status(501).send("Requested method is not yet supported.");
     }
   } catch (e) {
-    //if there was an error, a correct status needs to be sent back
+    //500 - Internal Server Error
+    response.status(500).send(e.message);
   }
 };
 
-const accommodationGroupsByIDLocation = async (request, response) => {
+const accommodationGroupsByIDEndpoint = async (request, response) => {
   try {
-    //find out which method was used
     const method = request.method;
+    const { id, endpoint } = request.params;
+    const endpoints = ["flat", "block", "location"];
+
+    if (!endpoints.includes(endpoint)) {
+      //400 - Bad Request (wrong endpoint, should not happen)
+      response.status(400).send("Wrong endpoint requested.");
+    }
+    if (endpoint == "flat") {
+      endpoint = "flat_num";
+    }
+    if (endpoint == "block") {
+      endpoint = "block_num";
+    }
+    if (endpoint == "location") {
+      endpoint = "acc_location";
+    }
 
     if (method == "GET") {
-      //???
+      const accommodation = await pool.query(
+        "SELECT $2 FROM accommodation WHERE acc_id = $1",
+        [id, endpoint]
+      );
+
+      if (!accommodation.rows[0]) {
+        //404- Not Found (No location found with event_id)
+        response.status(404).send("No accommodation found for ID " + id + ".");
+      }
+      //200- OK (Course sent)
+      response.status(200).json(accommodation.rows[0]);
     } else if (method == "POST") {
-      //???
+      const { username, password } = getAuth(request);
+
+      if (!username || !password) {
+        //401- Unauthorized (No credentials provided)
+        response
+          .status(401)
+          .send("You have not provided authorization for POST request.");
+      }
+
+      if (username == "admin" && password == SECRET) {
+        const { value } = request.body;
+        if (!value) {
+          //400 - Bad Request (Missing body)
+          response
+            .status(400)
+            .send("You are missing a new value inside your body.");
+        }
+
+        const accCheck = await pool.query(
+          "SELECT * FROM accommodation WHERE acc_id = $1",
+          [id]
+        );
+
+        if (!accCheck.rows[0]) {
+          //404 - Not Found (No accommodation found with ID)
+          response
+            .status(404)
+            .send("No accommodation with ID " + id + " found.");
+        }
+
+        const updatedAccommodation = await pool.query(
+          "UPDATE accommodation SET $1 = $2 WHERE acc_id = $3 RETURNING *",
+          [endpoint, value, id]
+        );
+        //200- OK (Event successfully modified)
+        response.status(200).json(updatedAccommodation.rows[0]);
+      } else {
+        //401- Unauthorized (Incorrect authorization credentials)
+        response.status(401).send("Your authorization is incorrect.");
+      }
     } else if (method == "PUT") {
-      //???
+      //405 - Method Not Allowed (No support for PUT)
+      response
+        .status(405)
+        .send(
+          "PUT method not allowed. For creating events, use /v1/groups/accommodation endpoint instead."
+        );
     } else if (method == "DELETE") {
-      //???
+      //405 - Method Not Allowed (No support for PUT)
+      response
+        .status(405)
+        .send(
+          "DELETE method not allowed. For deleting events, use /v1/groups/accommodation/:id endpoint instead."
+        );
     } else {
-      //handle wrong request method error
+      //501 - Not Implemented
+      response.status(501).send("Requested method is not yet supported.");
     }
   } catch (e) {
-    //if there was an error, a correct status needs to be sent back
+    //500 - Internal Server Error
+    response.status(500).send(e.message);
   }
-};
-
-const accommodationGroupsByIDMembers = async (request, response) => {
-  try {
-    //find out which method was used
-    const method = request.method;
-
-    if (method == "GET") {
-      //???
-    } else if (method == "POST") {
-      //???
-    } else if (method == "PUT") {
-      //???
-    } else if (method == "DELETE") {
-      //???
-    } else {
-      //handle wrong request method error
-    }
-  } catch (e) {
-    //if there was an error, a correct status needs to be sent back
-  }
-};
-
-const accommodationGroupsByIDMembersID = async (request, response) => {
-  try {
-    //find out which method was used
-    const method = request.method;
-
-    if (method == "GET") {
-      //???
-    } else if (method == "POST") {
-      //???
-    } else if (method == "PUT") {
-      //???
-    } else if (method == "DELETE") {
-      //???
-    } else {
-      //handle wrong request method error
-    }
-  } catch (e) {
-    //if there was an error, a correct status needs to be sent back
-  }
-};
-
-const testAPI = async (request, response) => {
-  response.status(200).json({
-    option: request.params.option,
-    variable: request.params.variable,
-  });
 };
 
 module.exports = {
@@ -924,16 +1227,9 @@ module.exports = {
   //Course Groups
   courseGroups,
   courseGroupsByID,
-  courseGroupsByIDName,
-  courseGroupsByIDDuration,
-  courseGroupsByIDMembers,
-  courseGroupsByIDMembersID,
+  courseGroupsByIDEndpoint,
   //Accommodation Groups
   accommodationGroups,
   accommodationGroupsByID,
-  accommodationGroupsByIDLocation,
-  accommodationGroupsByIDMembers,
-  accommodationGroupsByIDMembersID,
-  //Test
-  testAPI,
+  accommodationGroupsByIDEndpoint,
 };
