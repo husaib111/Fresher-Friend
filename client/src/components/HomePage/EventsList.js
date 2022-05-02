@@ -48,7 +48,7 @@ function EventsList(props) {
       .catch((e) => {
         console.log(e);
       });
-  },[params.type]);
+  },[]);
 
   const [info, setInfo] = useState([]);
   useEffect(() => {
