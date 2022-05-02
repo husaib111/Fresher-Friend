@@ -63,35 +63,15 @@ app.all("/api/v1/events/:id/invites", api.eventsByIDInvites);
 
 //Course groups object
 app.all("/api/v1/groups/courses", api.courseGroups);
-app.all("/api/v1/groups/courses/:course_id", api.courseGroupsByID);
-app.all("/api/v1/groups/courses/:course_id/name", api.courseGroupsByIDName);
-app.all(
-  "/api/v1/groups/courses/:course_id/duration",
-  api.courseGroupsByIDDuration
-);
-app.all(
-  "/api/v1/groups/courses/:course_id/members",
-  api.courseGroupsByIDMembers
-);
-app.all(
-  "/api/v1/groups/courses/:course_id/members/:member_id",
-  api.courseGroupsByIDMembersID
-);
+app.all("/api/v1/groups/courses/:id", api.courseGroupsByID);
+app.all("/api/v1/groups/courses/:id/:endpoint", api.courseGroupsByIDEndpoint);
 
 //Accommodation groups object
 app.all("/api/v1/groups/accommodation", api.accommodationGroups);
-app.all("/api/v1/groups/accommodation/:acc_id", api.accommodationGroupsByID);
+app.all("/api/v1/groups/accommodation/:id", api.accommodationGroupsByID);
 app.all(
-  "/api/v1/groups/accommodation/:acc_id/location",
-  api.accommodationGroupsByIDLocation
-);
-app.all(
-  "/api/v1/groups/accommodation/:acc_id/members",
-  api.accommodationGroupsByIDMembers
-);
-app.all(
-  "/api/v1/groups/accommodation/:acc_id/members/:member_id",
-  api.accommodationGroupsByIDMembersID
+  "/api/v1/groups/accommodation/:id/:endpoint",
+  api.accommodationGroupsByIDEndpoint
 );
 
 //USED FOR TESTING, DO NOT USE FOR PRODUCTION
@@ -102,6 +82,5 @@ app.get("/userStatus/:userId", db.getUserStatus);
 app.get("/userInfo/:userId", db.getUserBasicInfo);
 app.get("/test", auth.userAuth, db.testFunction);
 app.get("/userInterests/:userId", db.getUserInterests);
-app.get("/api/v1/test/:variable/:option", api.testAPI);
 
 module.exports = app;
