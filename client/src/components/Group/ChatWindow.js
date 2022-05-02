@@ -93,7 +93,7 @@ function ChatWindow(props){
     sendMessageToServer = async () => {
         await Axios.post(
             "https://www.fresher-friend.bham.team:5001/post" + groupType + "Message",
-            {message: "POSTED: " + textBoxText},
+            {message: textBoxText},
             {
                 withCredentials: true,
                 headers: {
