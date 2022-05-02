@@ -1,8 +1,9 @@
 
 .ChatMessage {
-    width: auto;
+    width: 100%;
     height: auto;
     display: flex;
+    flex-direction: column;
     overflow-wrap: break-word;
     word-break: break-word;
     margin-bottom: 10px;
@@ -12,29 +13,45 @@
 .MessageInfo{
     color: #3d3d3d;
     font-style: italic;
+    font-size: large;
     margin-left: 5px;
     margin-right: 5px;
 }
 .MessageBubble{
     margin-left: 5px;
     margin-right: 5px;
-    border-radius: 5px;
-    padding: 5px;
 
+    min-height: 50px;
+    min-width: 50px;
     max-width: 340px;
-    width: auto;
+    width: fit-content;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.ChatMessage.other > .MessageBubble{
+    border-radius: 25px 25px 25px 3px;
+}
+
+.ChatMessage.self > .MessageBubble{
+    border-radius: 25px 25px 3px 25px;
 }
 
 .ChatMessage.other .MessageBubble{
-    background-color: var(--ff-purple);
+    background-color: var(--ff-lilac);
     color: var(--ff-white)
 }
 
-.ChatMessage.you .MessageBubble{
+.ChatMessage.self .MessageBubble{
     background-color: var(--ff-red);
     color: var(--ff-white)
 }
 
-.ChatMessage.you {
-    justify-content: flex-end;
+.ChatMessage.self {
+    align-items: flex-end;
 }
