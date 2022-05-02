@@ -401,9 +401,16 @@ const getAccMessages = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);
 
+    const acc_ids = await pool.query(
+        "SELECT acc_id FROM Users WHERE email = $1",
+        [userEmail]
+    );
+
+    const { acc_id } = acc_ids.rows[0];
+
     const messages = await pool.query(
-      "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM AccommodationMessages INNER JOIN Users ON AccommodationMessages.user_id=Users.user_id WHERE acc_id = (SELECT acc_id FROM Users WHERE email = $1) ORDER BY posted_at ASC",
-      [userEmail]
+        "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM AccommodationMessages NATURAL JOIN Users WHERE acc_id = $1 ORDER BY posted_at ASC",
+        [acc_id]
     );
 
     response.json(messages.rows);
