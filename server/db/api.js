@@ -410,7 +410,8 @@ const eventsByIDEndpoint = async (request, response) => {
 const eventsByIDInvites = async (request, response) => {
   try {
     const method = request.method;
-    const { id, invitee } = request.params;
+    const { id } = request.params;
+    const { invitee } = request.body;
     const { username, password } = getAuth(request);
     const account = "PUBLIC";
     const user = {};
