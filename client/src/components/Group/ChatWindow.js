@@ -5,7 +5,6 @@ import "./ChatWindow.css"
 import React, {useCallback, useEffect, useState} from "react";
 import ChatMessage from "./ChatMessage";
 import Axios from "axios";
-import {useParams} from "react-router-dom";
 
 
 
@@ -79,7 +78,7 @@ function ChatWindow(props){
     const [serverMessages, setServerMessages] = useState([]);
     useEffect(() => {
         getServerMessages();
-        getFakeServerMessages();
+        /*getFakeServerMessages();*/
     },[getServerMessages]);
 
 
