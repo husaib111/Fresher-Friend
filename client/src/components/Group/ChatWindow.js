@@ -25,7 +25,7 @@ function ChatWindow(props){
     }
 
 
-    let getServerMessages, getFakeServerMessages;
+    let getServerMessages;
     getServerMessages = useCallback (async () => {
 
         await Axios.get(
@@ -45,8 +45,11 @@ function ChatWindow(props){
             .catch((e) => {
                 console.log(e);
             });
-    }, []);
+    }, [groupType]);
 
+
+
+    /*let getFakeServerMessages;
     getFakeServerMessages = () => { return (setServerMessages([
         generateChatMessage({
             msg_text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
@@ -74,6 +77,8 @@ function ChatWindow(props){
             posted_at:"2022-04-30T17:18:35.084Z"}),
 
     ]))}
+
+     */
 
     const [serverMessages, setServerMessages] = useState([]);
     useEffect(() => {
