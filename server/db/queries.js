@@ -418,7 +418,7 @@ const postCourseMessage = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);
 
-    const { message } = request.params;
+    const { message } = request.body;
 
     const postedMessage = pool.query(
       "INSERT INTO CourseMessages(msg_text, posted_at, course_id, user_id) VALUES ($1, (SELECT CURRENT_TIMESTAMP), (SELECT course_id FROM Users WHERE email = $2), (SELECT user_id FROM Users WHERE email = $2))",
@@ -437,7 +437,7 @@ const postAccMessage = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);
 
-    const { message } = request.params;
+    const { message } = request.body;
 
     const postedMessage = pool.query(
       "INSERT INTO AccommodationMessages(msg_text, posted_at, acc_id, user_id) VALUES ($1, (SELECT CURRENT_TIMESTAMP), (SELECT acc_id FROM Users WHERE email = $2), (SELECT user_id FROM Users WHERE email = $2))",
