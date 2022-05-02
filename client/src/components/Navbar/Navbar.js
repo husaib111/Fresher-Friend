@@ -82,12 +82,14 @@ function MenuBarButton() {
     console.log(MenuStatus);
   };
 
+  /*
   function activateNavigationMenu(e) {
     //var sidebar = document.getElementById("NavigationMenu");
     //sidebar.classList.toggle("NavigationMenuShown");
     toggleNavbarMenu(e);
   
   }
+  */
 
   return (
     <div>
@@ -96,7 +98,7 @@ function MenuBarButton() {
           tabindex="0"
           aria-label="show side-bar menu"
           className={`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
-          onClick={() => activateNavigationMenu(0)}
+          onClick={() => toggleNavbarMenu(0)}
         />
       </div>
       <div className={`NavigationMenu ${MenuStatus[0]}`}>
@@ -104,7 +106,7 @@ function MenuBarButton() {
           aria-label="hide side-bar menu"
           tabindex="0"
           className={`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
-          onClick={() => activateNavigationMenu(0)}
+          onClick={() => toggleNavbarMenu(0)}
         />
 
         <ul className="TopNavbarMenuItems">
