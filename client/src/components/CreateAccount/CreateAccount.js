@@ -1,5 +1,6 @@
 import "./CreateAccount.css";
 import React, { useState } from "react";
+import { GiThreeFriends } from "react-icons/gi";
 import Axios from "axios";
 
 const CreateAccount = () => {
@@ -100,9 +101,13 @@ const CreateAccount = () => {
 
   return (
     <div>
-      <h1 className="title">Create Your Account</h1>
-      <form className="loginForm" onSubmit={loginUser}>
-        <div className="mb-3 inputDiv">
+      <h1 className="logo" aria-label="Fresher Friend Logo">
+        <GiThreeFriends className="FresherFriendLogo" aria-label="Fresher Friend Logo"/>
+      </h1>
+      <h1 className="maintitle">Fresher Friend</h1>
+      <h2 className="subtitle">Create Your Account</h2>
+      <form className="loginForm" onSubmit={loginUser} aria-label="Account creation form">
+        <div className="mb-3 inputDiv" aria-label="Account creation">
           <input
             aria-label="firstNameInput"
             className="form-control loginInput"
@@ -150,7 +155,7 @@ const CreateAccount = () => {
         </div>
         <div className="mb-3 inputDiv">
           <input
-            aria-label="passwordInput2"
+            aria-label="confirm password input"
             className="form-control loginInput"
             type="password"
             value={password2}
@@ -160,7 +165,7 @@ const CreateAccount = () => {
         </div>
         <div className="mb-3 inputDiv">
           <input
-            aria-label="flatInput"
+            aria-label="Accommodation flat input"
             className="form-control loginInput"
             value={flat}
             onChange={(e) => setFlat(e.target.value)}
@@ -169,19 +174,21 @@ const CreateAccount = () => {
         </div>
         <div className="mb-3 inputDiv">
           <input
-            aria-label="blockInput"
+            aria-label="Accommodation block Input"
             className="form-control loginInput"
             value={block}
             onChange={(e) => setBlock(e.target.value)}
             placeholder="Block"
           />
         </div>
-        Accomodation:&emsp;
-        <select
+        <p>
+         Accommodation:&emsp;
+         <select
+         aria-label="Accommodation drop-down menu"
           class="dropdown"
           value={accom}
           onChange={(e) => setAccom(e.target.value)}
-        >
+         >
           <option class="dropdown" value="0">
             Choose your accommodation
           </option>
@@ -192,9 +199,11 @@ const CreateAccount = () => {
             demo
           </option>
         </select>
+        </p>
         <p>
           Course:&emsp;
           <select
+            aria-label="Course drop-down menu"
             class="dropdown"
             value={course}
             onChange={(e) => setCourse(e.target.value)}
@@ -214,7 +223,7 @@ const CreateAccount = () => {
           Interests
           <label className="check-container">
             <input
-              aria-label="checkPrivacy"
+              aria-label="interest checkbox"
               className="checkbox"
               type="checkbox"
               //checked={checked}
@@ -224,27 +233,32 @@ const CreateAccount = () => {
           </label>
         </p>
         <p>
-          In order to register to FresherFriend, you must agree to the &nbsp;
+          In order to register to Fresher Friend, you must agree to the &nbsp;
           <a data-testid="privacy policy Link" href="/privacy">
-            Privacy Policy
+          Privacy Policy
           </a>
         </p>
         <p>
           <input
-            aria-label="By ticking, I acknowledge and accept FresherFriend's privacy policy"
+            aria-label="By ticking, I acknowledge and accept Fresher Friend's privacy policy"
             className="checkbox"
             type="checkbox"
             checked={checked}
             onChange={handleChange}
           />
-          By continuing, I acknowledge and accept FresherFriend’s Privacy Policy
+          By continuing, I acknowledge and accept Fresher Friend’s Privacy Policy
         </p>
         <input
-          aria-label="createAccountButton"
+          aria-label="create Account Button"
           type="submit"
           value="Create Account"
           className="loginButton btn btn-primary"
         ></input>
+        <form action="/#">
+          <button aria-label="Return to login Button" className="btn btn-primary">
+            Return to Login
+          </button>
+        </form>
       </form>
     </div>
   );

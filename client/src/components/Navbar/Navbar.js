@@ -40,11 +40,8 @@ function AccessibilitySwitch() {
 
 
 AccessibilitySwitch.onclick = function () { swapStyleSheet("./Navbar-Accessible.css") };
-
-function swapStyleSheet(sheet) {
-  Navbar.getElementById("stylesheet").setAttribute("href", sheet);  
-}
 */
+
 
 function MenuBarButton() {
   const [MenuStatus, setMenuStatus] = useState(["I"]);
@@ -61,6 +58,8 @@ function MenuBarButton() {
 
   const toggleNavbarMenu = (e) => {
     let oldMenuStatus = MenuStatus;
+    //var sidebar = document.getElementById("NavigationMenu");
+    //sidebar.classList.toggle("NavigationMenuShown");
     switch (oldMenuStatus[e]) {
       case "I": {
         oldMenuStatus[e] = "O";
@@ -83,6 +82,13 @@ function MenuBarButton() {
     console.log(MenuStatus);
   };
 
+  function activateNavigationMenu(e) {
+    //var sidebar = document.getElementById("NavigationMenu");
+    //sidebar.classList.toggle("NavigationMenuShown");
+    toggleNavbarMenu(e);
+  
+  }
+
   return (
     <div>
       <div className="MenuBarButton" >
@@ -90,7 +96,7 @@ function MenuBarButton() {
           tabindex="0"
           aria-label="show side-bar menu"
           className={`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
-          onClick={() => toggleNavbarMenu(0)}
+          onClick={() => activateNavigationMenu(0)}
         />
       </div>
       <div className={`NavigationMenu ${MenuStatus[0]}`}>
@@ -98,7 +104,7 @@ function MenuBarButton() {
           aria-label="hide side-bar menu"
           tabindex="0"
           className={`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
-          onClick={() => toggleNavbarMenu(0)}
+          onClick={() => activateNavigationMenu(0)}
         />
 
         <ul className="TopNavbarMenuItems">
@@ -143,16 +149,19 @@ function MenuBarButton() {
             </a>
           </li>
         </ul>
-        <ul className="BottomNavbarMenuItems">
-          <li>
-              <FaUniversalAccess className="FresherFriendLogo"/>
-              Accessibilty supported
-          </li>
-        </ul>
       </div>
       <div className={`PageDimmer ${MenuStatus[0]}`} />
     </div>
   );
 }
+/*
+<ul className="BottomNavbarMenuItems">
+          <li>
+              <FaUniversalAccess className="FresherFriendLogo"/>
+              Accessibilty supported
+          </li>
+        </ul>
+
+*/
 
 export default Navbar;

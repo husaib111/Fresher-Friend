@@ -17,7 +17,7 @@ const Login = () => {
     event.preventDefault();
 
     if (!checked) {
-      alert("Before you can proceed, you need to agree to the Privacy Policy.");
+      alert("Before you can proceed, you must agree to our Privacy Policy.");
     } else {
       const response = await Axios.post(
         "https://www.fresher-friend.bham.team:5001/login",
@@ -40,7 +40,7 @@ const Login = () => {
         window.location.href = "/home";
       } else {
         alert(
-          "Your email or password is incorrect, please check your login information!"
+          "Your email/password is incorrect, please check your login information."
         );
       }
     }
