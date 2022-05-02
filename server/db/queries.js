@@ -382,7 +382,7 @@ const getCourseMessages = async (request, response) => {
 
     console.log("ok to here");
     const messages = await pool.query(
-      "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM CourseMessages NATURAL JOIN Users WHERE course_id = $1 ORDER BY posted_at DESC",
+      "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM CourseMessages NATURAL JOIN Users WHERE course_id = $1 ORDER BY posted_at ASC",
       [course_id]
     );
     console.log(messages);
@@ -402,7 +402,7 @@ const getAccMessages = async (request, response) => {
     const userEmail = getLoggedUserEmail(request);
 
     const messages = await pool.query(
-      "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM AccommodationMessages INNER JOIN Users ON AccommodationMessages.user_id=Users.user_id WHERE acc_id = (SELECT acc_id FROM Users WHERE email = $1) ORDER BY posted_at DESC",
+      "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM AccommodationMessages INNER JOIN Users ON AccommodationMessages.user_id=Users.user_id WHERE acc_id = (SELECT acc_id FROM Users WHERE email = $1) ORDER BY posted_at ASC",
       [userEmail]
     );
 
