@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaUniversalAccess } from "react-icons/fa";
+//import { FaUniversalAccess } from "react-icons/fa";
 import { GiThreeFriends } from "react-icons/gi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Navbar.css";
@@ -40,11 +40,8 @@ function AccessibilitySwitch() {
 
 
 AccessibilitySwitch.onclick = function () { swapStyleSheet("./Navbar-Accessible.css") };
-
-function swapStyleSheet(sheet) {
-  Navbar.getElementById("stylesheet").setAttribute("href", sheet);  
-}
 */
+
 
 function MenuBarButton() {
   const [MenuStatus, setMenuStatus] = useState(["I"]);
@@ -61,6 +58,8 @@ function MenuBarButton() {
 
   const toggleNavbarMenu = (e) => {
     let oldMenuStatus = MenuStatus;
+    //var sidebar = document.getElementById("NavigationMenu");
+    //sidebar.classList.toggle("NavigationMenuShown");
     switch (oldMenuStatus[e]) {
       case "I": {
         oldMenuStatus[e] = "O";
@@ -82,6 +81,15 @@ function MenuBarButton() {
     setMenuStatus([...oldMenuStatus]);
     console.log(MenuStatus);
   };
+
+  /*
+  function activateNavigationMenu(e) {
+    //var sidebar = document.getElementById("NavigationMenu");
+    //sidebar.classList.toggle("NavigationMenuShown");
+    toggleNavbarMenu(e);
+  
+  }
+  */
 
   return (
     <div>
@@ -143,16 +151,19 @@ function MenuBarButton() {
             </a>
           </li>
         </ul>
-        <ul className="BottomNavbarMenuItems">
-          <li>
-              <FaUniversalAccess className="FresherFriendLogo"/>
-              Accessibilty supported
-          </li>
-        </ul>
       </div>
       <div className={`PageDimmer ${MenuStatus[0]}`} />
     </div>
   );
 }
+/*
+<ul className="BottomNavbarMenuItems">
+          <li>
+              <FaUniversalAccess className="FresherFriendLogo"/>
+              Accessibilty supported
+          </li>
+        </ul>
+
+*/
 
 export default Navbar;

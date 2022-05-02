@@ -30,7 +30,7 @@ function EventsList(props) {
   const getInfo = useCallback(async () => {
 
     await Axios.get(
-      "https://www.fresher-friend.bham.team:5001/"+ params.type + "Users",
+      "https://www.fresher-friend.bham.team:5001/getEvents",
       {
         withCredentials: true,
         headers: {

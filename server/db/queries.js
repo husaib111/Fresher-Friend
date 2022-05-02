@@ -468,11 +468,11 @@ const getAllEvents = async (request, response) => {
       [userEmail]
     );
     const { user_id } = userIds.rows[0];
-    // console.log(user_id);
+    console.log(user_id);
 
     const events = await pool.query(
-      "select * from event natural join invites where user_id=$1;",
-      [user_id]
+      "select * from event;",
+      //"select * from event natural join invites where user_id=$1;",
     );
 
     console.log(events);
