@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaUniversalAccess } from "react-icons/fa";
+//import { FaUniversalAccess } from "react-icons/fa";
 import { GiThreeFriends } from "react-icons/gi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Navbar.css";
