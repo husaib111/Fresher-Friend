@@ -26,7 +26,7 @@ function makeEventButton(name) {
 }
 
 function EventsList(props) {
-    let params = useParams();
+  /*let params = useParams();*/
   const getInfo = useCallback(async () => {
 
     await Axios.get(
