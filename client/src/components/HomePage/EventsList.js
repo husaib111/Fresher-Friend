@@ -7,17 +7,20 @@ import React, { useCallback, useState, useEffect } from "react";
 import { FaBeer } from 'react-icons/fa';
 
 
-function myfunction(props) {
-  alert("Welcome to Event: " + props.event_name + "\n Located at: " + props.location + "\n Starting at: " + props.starttime + "\n And ending at: " + props.endtime);
+function myfunction(name) {
+    console.log("name"+name);
+    const { event_name, location, starttime, endtime } = name;
+  alert("Welcome to Event: " + event_name + "\n Located at: " + location + "\n Starting at: " + starttime + "\n And ending at: " + endtime);
 }
 
 
 function EventButton(props) {
+    const {event_name} = props.name;
   return (
-    <button onClick={() => myfunction(props)}><FaBeer></FaBeer>
+    <button className="loginButton btn btn-primary" onClick={() => myfunction(props.name)}><FaBeer></FaBeer>
     <div className="event">
         <div className="EventButtonTitle">
-          <h1>{props.event_name}</h1>
+          <h1>{event_name}</h1>
         </div>
     </div>
     </button>
@@ -63,7 +66,18 @@ function EventsList(props) {
   useEffect(() => {
     getInfo();
   },[getInfo]);
-  return <table className="EventList">{info}</table>;
+  return <table className="EventList">{info}
+  {makeEventButton({event_name: "Test1"})}
+  {makeEventButton({event_name: "Test2"})}
+  {makeEventButton({event_name: "Test3"})}
+  {makeEventButton({event_name: "Test4"})}
+  {makeEventButton({event_name: "Test5"})}
+  {makeEventButton({event_name: "Test6"})}
+  {makeEventButton({event_name: "Test7"})}
+  {makeEventButton({event_name: "Test8"})}
+  {makeEventButton({event_name: "Test9"})}
+
+  </table>;
 
 /*
   return <div className="groupsList">

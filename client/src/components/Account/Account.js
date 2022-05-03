@@ -188,7 +188,6 @@ function Account() {
   };
 
   const togglePrivate = () => {
-    handleClick(3)
     if(priv) {
       setPriv(false);
       console.log("private account: " + priv);
@@ -196,6 +195,7 @@ function Account() {
       setPriv(true);
       console.log("private account: " + priv);
     }
+    handleClick(3);
   };
 
   return (
@@ -218,32 +218,35 @@ function Account() {
           </p>
         </div>
         <div className="statusButtons" aria-label="Profile status">
-          <div className="statusButton" aria-label="Isolating status">
+          <div className="statusButton" aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}>
             <FontAwesomeIcon 
               aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}
               className={`statusIcon ${status[0] ? "isolating" : ""}`}
               id={`statusIcon ${status[0] ? "isolating" : ""}`}
               icon={faCertificate}
+              tabIndex="0"
               onClick={(e) => handleClick(0)}
             />
             <p className="statusLabel">I'm isolating</p>
           </div>
-          <div className="statusButton" aria-label="Absent status">
+          <div className="statusButton" aria-label={`statusIcon ${status[1] ? "away" : ""}`}>
             <FontAwesomeIcon 
               aria-label={`statusIcon ${status[1] ? "away" : ""}`}
               className={`statusIcon ${status[1] ? "away" : ""}`}
               id={`statusIcon ${status[1] ? "away" : ""}`}
               icon={faPlane}
+              tabIndex="0"
               onClick={(e) => handleClick(1)}
             />
             <p className="statusLabel">I'm away</p>
           </div>
-          <div className="statusButton" aria-label="Visitor status">
-            <FontAwesomeIcon 
+          <div className="statusButton" aria-label={`statusIcon ${status[2] ? "guest visiting" : ""}`}>
+            <FontAwesomeIcon
               aria-label={`statusIcon ${status[2] ? "guest visiting" : ""}`}
               className={`statusIcon ${status[2] ? "guest" : ""}`}
               id={`statusIcon ${status[2] ? "guest" : ""}`}
               icon={faUser}
+              tabIndex="0"
               onClick={(e) => handleClick(2)}
             />
             <p className="statusLabel">I have a guest</p>

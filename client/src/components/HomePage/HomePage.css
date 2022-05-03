@@ -10,10 +10,22 @@
 .HomePage {
 }
 
+.tabPanel{
+    width: border-box;
+    max-width: 650px;
+}
+.Tabs{
+    width: border-box;
+    max-width: 60px;
+}
+.react-tabs{
+    width: 100%;
+}
 .div-1 {
     background-color: var(--ff-gray);
-    height: 650px;
-    width: 650px;
+    min-height: 650px;
+    width: 95%;
+    max-width: 650px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;

@@ -16,13 +16,18 @@
     background-color: var(--ff-gray);
     overflow: scroll;
     border-radius: 10px;
-    width: 95%;
+    min-width: 100px;
     max-width: 650px;
+    width: border-box;
     margin: auto;
     padding: 10px;
   }
   
   .EventButton {
     margin-right: 1rem;
+  }
+
+  .Button {
+    color: var(--ff-purple);
   }
   
