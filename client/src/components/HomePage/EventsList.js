@@ -14,10 +14,10 @@ function myfunction(props) {
 
 function EventButton(props) {
   return (
-    <button onClick={myfunction(props.name)}><FaBeer></FaBeer>
+    <button onClick={() => myfunction(props.name)}><FaBeer></FaBeer>
     <div className="event">
         <div className="EventButtonTitle">
-          <h1>{props.event_name}</h1>
+          <h1>{props.name}</h1>
         </div>
     </div>
     </button>
