@@ -188,6 +188,7 @@ function Account() {
   };
 
   const togglePrivate = () => {
+    handleClick(3)
     if(priv) {
       setPriv(false);
       console.log("private account: " + priv);
@@ -219,7 +220,7 @@ function Account() {
         <div className="statusButtons" aria-label="Profile status">
           <div className="statusButton" aria-label="Isolating status">
             <FontAwesomeIcon 
-              aria-label="Isolating status"
+              aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}
               className={`statusIcon ${status[0] ? "isolating" : ""}`}
               id={`statusIcon ${status[0] ? "isolating" : ""}`}
               icon={faCertificate}
@@ -229,7 +230,7 @@ function Account() {
           </div>
           <div className="statusButton" aria-label="Absent status">
             <FontAwesomeIcon 
-              aria-label="Absent status"
+              aria-label={`statusIcon ${status[1] ? "away" : ""}`}
               className={`statusIcon ${status[1] ? "away" : ""}`}
               id={`statusIcon ${status[1] ? "away" : ""}`}
               icon={faPlane}
@@ -239,7 +240,7 @@ function Account() {
           </div>
           <div className="statusButton" aria-label="Visitor status">
             <FontAwesomeIcon 
-              aria-label="Visitor status"
+              aria-label={`statusIcon ${status[2] ? "guest visiting" : ""}`}
               className={`statusIcon ${status[2] ? "guest" : ""}`}
               id={`statusIcon ${status[2] ? "guest" : ""}`}
               icon={faUser}
