@@ -15,7 +15,6 @@ function EventButton(props) {
   );
 }
 
-
 function makeEventButton(name) {
     const { event_name, location, starttime, endtime } = name;
     console.log(event_name);
@@ -26,6 +25,7 @@ function makeEventButton(name) {
 }
 
 function EventsList(props) {
+    props;
   /*let params = useParams();*/
   const getInfo = useCallback(async () => {
 

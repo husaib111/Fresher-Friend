@@ -26,7 +26,35 @@ function ChatWindow(props){
 
 
     let getServerMessages;
+    let getUserEmail;
+    const [userEmail, setUserEmail] = useState("");
+    useEffect( () => {
+        getUserEmail()
+    }, [])
+    getUserEmail = useCallback (async () => {
+        await Axios.get(
+            "https://www.fresher-friend.bham.team:5001/getLoggedUserEmail",
+            {
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        )
+        .then((response) => {
+            const {data} = response;
+            console.log("Logged In As " + data);
+            console.log(data);
+            setUserEmail(data);
+            console.log(userEmail);
+        })
+        .catch((e) => {
+            console.log(e);
+        });
+    }, []);
+
     getServerMessages = useCallback (async () => {
+
 
         await Axios.get(
             "https://www.fresher-friend.bham.team:5001/get" + groupType + "Messages",
