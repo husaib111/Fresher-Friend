@@ -854,7 +854,7 @@ const courseGroupsByID = async (request, response) => {
 const courseGroupsByIDEndpoint = async (request, response) => {
   try {
     const method = request.method;
-    const { id, endpoint } = request.params;
+    let { id, endpoint } = request.params;
     const endpoints = ["name", "duration"];
 
     if (!endpoints.includes(endpoint)) {
@@ -1125,7 +1125,7 @@ const accommodationGroupsByID = async (request, response) => {
 const accommodationGroupsByIDEndpoint = async (request, response) => {
   try {
     const method = request.method;
-    const { id, endpoint } = request.params;
+    let { id, endpoint } = request.params;
     const endpoints = ["flat", "block", "location"];
 
     if (!endpoints.includes(endpoint)) {
