@@ -308,7 +308,7 @@ const eventsByIDEndpoint = async (request, response) => {
         response.status(404).send("No event found for ID " + id + ".");
       }
       //200- OK (Event sent)
-      response.status(200).json(event.rows[0]);
+      response.status(200).json(event);
     } else if (method == "POST") {
       const { username, password } = getAuth(request);
 

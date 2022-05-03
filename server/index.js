@@ -34,8 +34,8 @@ app.post(
   upload.single("selectedFile"),
   db.uploadProfilePic
 );
-app.get("/loggedInUserProfile",auth.userAuth,db.getLoggedInProfilePic);
-app.get("/profile/:userId",auth.userAuth,db.getProfilePic);
+app.get("/loggedInUserProfile", auth.userAuth, db.getLoggedInProfilePic);
+app.get("/profile/:userId", auth.userAuth, db.getProfilePic);
 app.post("/login", auth.loginCheck);
 app.post("/setStatus", auth.userAuth, db.postStatus);
 app.get("/logout", auth.logOut);
