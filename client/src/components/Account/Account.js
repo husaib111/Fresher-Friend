@@ -7,7 +7,6 @@ import {
   faPlane,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import pfp from "../../resources/default_pfp.png";
 import "./Account.css";
 import Interest from "./Interest";
 import Axios from "axios";
@@ -262,7 +261,7 @@ function Account() {
         <div className="settings">
             <label><input className="PrivateProfileToggle"
                  type="checkbox"
-                 defaultChecked={false}
+                 defaultChecked={priv}
                  onChange={() => togglePrivate()}
                  /> Private profile</label>
           <br />

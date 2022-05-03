@@ -8,7 +8,6 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
-import pfp from "../../resources/default_pfp.png";
 import "./Account.css";
 import Interest from "./Interest";
 import Axios from "axios";
