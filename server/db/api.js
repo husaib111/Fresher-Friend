@@ -871,8 +871,8 @@ const courseGroupsByIDEndpoint = async (request, response) => {
 
     if (method == "GET") {
       const course = await pool.query(
-        "SELECT $2 FROM courses WHERE course_id = $1",
-        [id, endpoint]
+        "SELECT * FROM courses WHERE course_id = $1",
+        [id]
       );
 
       if (!course.rows[0]) {
@@ -880,7 +880,7 @@ const courseGroupsByIDEndpoint = async (request, response) => {
         response.status(404).send("No course found for ID " + id + ".");
       }
       //200- OK (Course sent)
-      response.status(200).json(course.rows[0]);
+      response.status(200).json(course.rows[0].endpoint);
     } else if (method == "POST") {
       const { username, password } = getAuth(request);
 
