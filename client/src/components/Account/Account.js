@@ -188,7 +188,6 @@ function Account() {
   };
 
   const togglePrivate = () => {
-    handleClick(3)
     if(priv) {
       setPriv(false);
       console.log("private account: " + priv);
@@ -196,6 +195,7 @@ function Account() {
       setPriv(true);
       console.log("private account: " + priv);
     }
+    handleClick(3);
   };
 
   return (
