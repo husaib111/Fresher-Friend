@@ -25,4 +25,8 @@
   .EventButton {
     margin-right: 1rem;
   }
+
+  .Button {
+    color: var(--ff-purple);
+  }
   
