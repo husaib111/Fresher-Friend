@@ -23,9 +23,6 @@ function EventButton(props) {
   );
 }
 
-
-
-
 function makeEventButton(name) {
     const { event_name, location, starttime, endtime } = name;
     console.log(event_name);
