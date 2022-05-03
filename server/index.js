@@ -14,7 +14,7 @@ require("./db/passport");
 //middleware
 
 app.use(express.static("./uploads"));
-// app.use(express.json()); //req.body
+app.use(express.json()); //req.body
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(
