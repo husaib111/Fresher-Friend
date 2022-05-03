@@ -66,7 +66,18 @@ function EventsList(props) {
   useEffect(() => {
     getInfo();
   },[getInfo]);
-  return <table className="EventList">{info}</table>;
+  return <table className="EventList">{info}
+  {makeEventButton({event_name: "Test1"})}
+  {makeEventButton({event_name: "Test2"})}
+  {makeEventButton({event_name: "Test3"})}
+  {makeEventButton({event_name: "Test4"})}
+  {makeEventButton({event_name: "Test5"})}
+  {makeEventButton({event_name: "Test6"})}
+  {makeEventButton({event_name: "Test7"})}
+  {makeEventButton({event_name: "Test8"})}
+  {makeEventButton({event_name: "Test9"})}
+
+  </table>;
 
 /*
   return <div className="groupsList">

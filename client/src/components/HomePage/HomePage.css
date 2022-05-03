@@ -11,14 +11,16 @@
 }
 
 .tabPanel{
-    width: 90%;
+    width: border-box;
     max-width: 650px;
 }
 .Tabs{
-    width: 90%;
+    width: border-box;
     max-width: 60px;
 }
-
+.react-tabs{
+    width: 90%;
+}
 .div-1 {
     background-color: var(--ff-gray);
     min-height: 650px;
