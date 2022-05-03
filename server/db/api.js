@@ -289,6 +289,10 @@ const eventsByIDEndpoint = async (request, response) => {
     let { id, endpoint } = request.params;
     const endpoints = ["name", "location", "organiser", "starttime", "endtime"];
 
+    if (endpoint == "invites") {
+      eventsByIDInvites(request, response);
+    }
+
     if (!endpoints.includes(endpoint)) {
       //400 - Bad Request (wrong endpoint, should not happen)
       response.status(400).send("Wrong endpoint requested.");
