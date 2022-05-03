@@ -195,13 +195,16 @@ function PrivacyPolicy(props) {
         <div>
           <h3>How to contact us</h3>
           <label>Harrison Hughes</label>
+          <br></br>
           <label>
             Email:&nbsp;
             <a href="mailto:HRH901@student.bham.ac.uk">
               HRH901@student.bham.ac.uk
             </a>
           </label>
+          <br></br>
           <label>Telephone: +44 (0)121 414 3344</label>
+          <br></br>
           <label>Postal Address:</label>
           <ul>
             <li>The University of Birmingham</li>

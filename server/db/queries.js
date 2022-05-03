@@ -81,6 +81,25 @@ const getLoggedInUserInterests = async (request, response) => {
   }
 };
 
+getLoggedUserEmailForFrontEnd = async (request, response) =>{
+  try {
+    const userEmail = getLoggedUserEmail(request);
+    console.log(userEmail);
+
+    const users = await pool.query(
+        "select email from users where email=$1",
+        [userEmail]
+    );
+
+    response.json(users.rows);
+  } catch (e) {
+    response.status(400).send({
+      message: "Not logged in!",
+    });
+    console.log(e.message);
+  }
+};
+
 const getUserInterests = async (request, response) => {
   try {
     const { userId } = request.params;
@@ -382,7 +401,7 @@ const getCourseMessages = async (request, response) => {
 
     console.log("ok to here");
     const messages = await pool.query(
-      "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM CourseMessages NATURAL JOIN Users WHERE course_id = $1 ORDER BY posted_at DESC",
+      "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM CourseMessages NATURAL JOIN Users WHERE course_id = $1 ORDER BY posted_at ASC",
       [course_id]
     );
     console.log(messages);
@@ -401,9 +420,16 @@ const getAccMessages = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);
 
+    const acc_ids = await pool.query(
+        "SELECT acc_id FROM Users WHERE email = $1",
+        [userEmail]
+    );
+
+    const { acc_id } = acc_ids.rows[0];
+
     const messages = await pool.query(
-      "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM AccommodationMessages INNER JOIN Users ON AccommodationMessages.user_id=Users.user_id WHERE acc_id = (SELECT acc_id FROM Users WHERE email = $1) ORDER BY posted_at DESC",
-      [userEmail]
+        "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM AccommodationMessages NATURAL JOIN Users WHERE acc_id = $1 ORDER BY posted_at ASC",
+        [acc_id]
     );
 
     response.json(messages.rows);
@@ -418,7 +444,7 @@ const postCourseMessage = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);
 
-    const { message } = request.params;
+    const { message } = request.body;
 
     const postedMessage = pool.query(
       "INSERT INTO CourseMessages(msg_text, posted_at, course_id, user_id) VALUES ($1, (SELECT CURRENT_TIMESTAMP), (SELECT course_id FROM Users WHERE email = $2), (SELECT user_id FROM Users WHERE email = $2))",
@@ -437,7 +463,7 @@ const postAccMessage = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);
 
-    const { message } = request.params;
+    const { message } = request.body;
 
     const postedMessage = pool.query(
       "INSERT INTO AccommodationMessages(msg_text, posted_at, acc_id, user_id) VALUES ($1, (SELECT CURRENT_TIMESTAMP), (SELECT acc_id FROM Users WHERE email = $2), (SELECT user_id FROM Users WHERE email = $2))",
@@ -461,11 +487,11 @@ const getAllEvents = async (request, response) => {
       [userEmail]
     );
     const { user_id } = userIds.rows[0];
-    // console.log(user_id);
+    console.log(user_id);
 
     const events = await pool.query(
-      "select * from event natural join invites where user_id=$1;",
-      [user_id]
+      "select * from event;",
+      //"select * from event natural join invites where user_id=$1;",
     );
 
     console.log(events);
@@ -484,7 +510,12 @@ const uploadProfilePic = async (request, response) => {
       "select user_id from users where email=$1",
       [userEmail]
     );
+      console.log("~={-}('-{='");
     const { user_id } = userIds.rows[0];
+     const current = await pool.query("select * from profiles where user_id=$1",[user_id]);
+      console.log(current.rows);
+
+      await pool.query("delete from profiles where user_id=$1",[user_id]);
 
     await pool.query("insert into profiles(user_id,filename) values ($1,$2)", [
       user_id,
@@ -496,6 +527,44 @@ const uploadProfilePic = async (request, response) => {
     console.log(e.message);
   }
 };
+const getLoggedInProfilePic = async (request, response) =>{
+  try {
+    const userEmail = getLoggedUserEmail(request);
+
+    const userIds = await pool.query(
+      "select user_id from users where email=$1",
+      [userEmail]
+    );
+      console.log("~={-}('-{='");
+    const { user_id } = userIds.rows[0];
+     const current = await pool.query("select * from profiles where user_id=$1",[user_id]);
+      console.log(current.rows);
+      response.json(current.rows[0]);
+  } catch (e) {
+    console.log(e.message);
+  }
+
+}
+
+const getProfilePic = async (request, response) =>{
+  try {
+const { userId } = request.params;
+    const userIds = await pool.query(
+      "select user_id from users where email=$1",
+      [userId + "@student.bham.ac.uk"]
+    );
+    console.log(userIds);
+
+    const { user_id } = userIds.rows[0];
+
+     const current = await pool.query("select * from profiles where user_id=$1",[user_id]);
+      console.log(current.rows);
+      response.json(current.rows[0]);
+  } catch (e) {
+    console.log(e.message);
+  }
+
+}
 
 const createAccount = async (request, response) => {
   try {
@@ -561,6 +630,8 @@ const createAccount = async (request, response) => {
 };
 
 module.exports = {
+    getProfilePic,
+    getLoggedInProfilePic,
   uploadProfilePic,
   getEventInfo,
   getUserStatus,
@@ -585,4 +656,5 @@ module.exports = {
   postCourseMessage,
   postAccMessage,
   createAccount,
+  getLoggedUserEmailForFrontEnd
 };

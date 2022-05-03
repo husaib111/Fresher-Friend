@@ -10,7 +10,7 @@ import Popup from 'reactjs-popup';
 import { SocialIcon } from 'react-social-icons';
 
 const ShareEvent = () => (
-  <Popup trigger={<button>Share</button>} position="right bottom">
+  <Popup trigger={<button aria-label="share event button" className="share btn" >Share</button>} position="right bottom">
     <div>Share an Event to your friends!</div>
     <SocialIcon url="https://twitter.com/" />
     <SocialIcon url="https://facebook.com/" />
@@ -75,21 +75,19 @@ const HomePage = () => {
     <Navbar />
     <div className="HomePage">
       <GroupsList />
-      <div class="div-1">
+      <div aria-label="events section" class="div-1">
       <Tabs>
         <TabList>
           <Tab>Upcoming Events</Tab>
-          <Tab>Previous Events</Tab>
           <Tab>Create Event</Tab>
         </TabList>
         <TabPanel>
+          <h3>Check out some upcoming Events here</h3>
           <div><EventsList></EventsList></div>
+          <div><h6>Invite your friends along by pressing the button below</h6></div>
           <div className = "popupp">
           <ShareEvent></ShareEvent>
           </div>
-        </TabPanel>
-        <TabPanel>
-          <h2>Check out some of the previous events</h2>
         </TabPanel>
         <TabPanel>
         <form onSubmit={insertEvents}>

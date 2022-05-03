@@ -1,3 +1,17 @@
+/* COLOR PALETTE */
+:root {
+  --ff-lightlilac: #c7bbff;
+  --ff-lilac: #6556b1;
+  --ff-lightpurple: #4b3c96;
+  --ff-indigo: #251c52;
+  --ff-purple: #362b6a;
+  --ff-red: #d8313f;
+  --ff-black: #141414;
+  --ff-gray: #3e3e3e;
+  --ff-white: #ffffff;
+}
+/* COLOR PALETTE */
+
 * {
   font-family: "Fredoka", sans-serif;
   font-weight: 300;
@@ -20,15 +34,30 @@ hr {
   }
 }
 
+.logo {
+  font-size: 4em;
+  text-align: center;
+}
+
+.maintitle {
+  font-size: 3rem;
+  color: var(--ff-lightlilac);
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+}
+
 .dropdown {
   position: relative;
   display: inline-block;
-  color: #212529;
+  color: var(--ff-black);
 }
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: var(--ff-indigo);
 
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -36,6 +65,30 @@ hr {
   z-index: 1;
 }
 
+
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.loginForm {
+  margin: 0 auto;
+  padding: 15px 3% 15px 3%;
+  width: 90%;
+  background-color: var(--ff-gray);
+  border-radius: 15px;
+}
+
+/* for desktop: */
+@media only screen and (min-width: 768px) {
+  .loginForm {
+    margin: 0 auto;
+    padding: 15px 25px 15px 25px;
+    width: 690px;
+    background-color: var(--ff-gray);
+    border-radius: 15px;
+  }
+  hr {
+    width: 70%;
+    margin: 2% auto;
+  }
 }

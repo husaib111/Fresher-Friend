@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Axios from "axios";
+import "./profileUpload.css";
 
 function ProfileUpload() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -11,9 +12,10 @@ function ProfileUpload() {
     try {
 	console.log("hi");
 	console.log(formData);
+	// window.location.href = "/myAccount";
 	await Axios({
 	    method: "post",
-	    url: "https://fresher-friend.bham.team:5001/profile",
+	    url: "https://www.fresher-friend.bham.team/profile",
 	    data: formData,
 	    withCredentials: true,
 	    headers: { "Content-Type": "multipart/form-data" }
@@ -29,13 +31,13 @@ function ProfileUpload() {
   }
 
     return (
-	<React.Fragment>
-	    <p>hi</p>
+	<div className="profileUpload">
+	    <h1>Profile Upload</h1>
 	    <form onSubmit={handleSubmit}>
 		<input type="file" name="data" onChange={handleFileSelect} encType="multipart/form-data"/>
 		<input type="submit" value="Upload File" />
 	    </form>
-	    </React.Fragment>
+	    </div>
   )
 }
 

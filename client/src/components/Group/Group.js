@@ -51,7 +51,7 @@ function Group() {
           <h1 className="title">{info}</h1>
           <ProfileList />
           <div className="chat-window-holder">
-          <ChatWindow />
+          <ChatWindow type={params.type}/>
           </div>
       </div>
 

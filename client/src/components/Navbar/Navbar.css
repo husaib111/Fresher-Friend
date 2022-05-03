@@ -69,6 +69,7 @@
 
 .NavigationMenu{
     display: flow;
+    visibility: ''; /* changes to NavigationMenuShown when opened. */
     position: fixed;
     align-items: center;
     padding-top: 15px;
@@ -77,11 +78,10 @@
     background-color: var(--ff-lightpurple);
     color: var(--ff-white);
     z-index: 10;
-
 }
 
 .NavigationMenu.O{
-    overflow-y:hidden;
+    overflow-y: scroll;
 }
 
 .NavigationMenu a{

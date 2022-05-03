@@ -8,7 +8,6 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
-import pfp from "../../resources/default_pfp.png";
 import "./Account.css";
 import Interest from "./Interest";
 import Axios from "axios";
@@ -85,9 +84,34 @@ function Account() {
       })
       .catch((e) => {
         console.log(e);
-        window.location.href = "/";
+        // window.location.href = "/";
       }
       )},[userName])
+
+    const getPF = async() => {
+	await Axios.get(
+	    "https://www.fresher-friend.bham.team/profile/"+userName,
+	    {
+		withCredentials:true,
+		headers: {
+		    "Content-Type": "application/json",
+		},
+	    }
+	)
+	    .then((response) => {
+		console.log(response);
+		const {data} = response;
+		const {filename} = data;
+		console.log(filename);
+		setpf(filename);
+	    })
+	    .catch((e) => {
+		console.log(e);
+	    });
+    };
+
+  const [pf, setpf] = useState(() => getPF());
+
 
   const getStatus = useCallback(async () =>{
       await Axios.get(
@@ -129,7 +153,7 @@ function Account() {
       <div className="Account">
         <div className="basicInfo">
           <div className="pfpContainer">
-            <img className="pfp" src={pfp} alt="Profile" />
+            <img className="pfp" src={"https://www.fresher-friend.bham.team/"+pf} alt="Profile" />
           </div>
           <h1>
             {info[0]} {info[1]} {info[2]}

@@ -8,17 +8,57 @@ import Axios from "axios";
 
 
 
-function ChatWindow(params){
-    function generateChatMessage(message){
-        console.log(message);
-        const {msg_text, posted_at, first_name} = message
-        return ChatMessage({author: first_name, time: posted_at, text: msg_text});
+function ChatWindow(props){
+    let groupType;
+    if(props.type==="course"){
+        groupType = "Course"
+    }
+    else{
+        groupType= "Acc"
     }
 
-    let getInfo;
-    getInfo = useCallback (async () => {
+    function generateChatMessage(message){
+        console.log("Generating chat message: " + message);
+        const {msg_text, posted_at, first_name} = message
+        let type = first_name==="you" ? "self":"other";
+        return ChatMessage({author: first_name, time: posted_at, text: msg_text, type: type});
+    }
+
+
+    let getServerMessages;
+    let getUserEmail;
+    const [userEmail, setUserEmail] = useState("");
+
+
+    getUserEmail = useCallback (async () => {
         await Axios.get(
-            "https://www.fresher-friend.bham.team:5001/getCourseMessages",
+            "https://www.fresher-friend.bham.team:5001/getLoggedUserEmailForFrontEnd ",
+            {
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        )
+            .then((response) => {
+                const {data} = response;
+                console.log("Logged In As " + data);
+                console.log(data);
+                setUserEmail(data);
+                console.log(userEmail);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }, [userEmail, setUserEmail]);
+    useEffect( () => {
+        getUserEmail()
+    }, [getUserEmail])
+
+
+    getServerMessages = useCallback (async () => {
+        await Axios.get(
+            "https://www.fresher-friend.bham.team:5001/get" + groupType + "Messages",
             {
                 withCredentials: true,
                 headers: {
@@ -29,27 +69,58 @@ function ChatWindow(params){
             .then((response) => {
                 const {data} = response;
                 console.log("Data" + data);
-                setInfo(data.map((message) => generateChatMessage(message) ));
+                setServerMessages(data.map((message) => generateChatMessage(message)));
             })
             .catch((e) => {
                 console.log(e);
             });
-    }, []);
+    }, [groupType]);
 
-    const [info, setInfo] = useState([]);
+    /*let getFakeServerMessages;
+    getFakeServerMessages = () => { return (setServerMessages([
+        generateChatMessage({
+            msg_text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            first_name:"Test Bob",
+            posted_at:"2022-04-30T17:18:35.084Z"}),
+
+        generateChatMessage({
+            msg_text: "Quisque pellentesque facilisis dapibus.",
+            first_name:"Test Jane",
+            posted_at:"2022-04-30T17:18:35.084Z"}),
+
+        generateChatMessage({
+            msg_text: "Ut ut eros dignissim, blandit massa vel, tincidunt magna. Phasellus pharetra nisl eu tristique tempus. Donec sodales enim ac tortor lobortis rutrum. Sed sodales nibh sed consequat ultricies. Donec sed feugiat lorem. Nullam eu tempor libero, nec ultrices erat. Duis in ipsum quis dui facilisis ornare.",
+            first_name:"Test Bob",
+            posted_at:"2022-04-30T17:18:35.084Z"}),
+
+        generateChatMessage({
+            msg_text: "Integer rhoncus",
+            first_name:"Test Bob",
+            posted_at:"2022-04-30T17:18:35.084Z"}),
+
+        generateChatMessage({
+            msg_text: "quis",
+            first_name:"Test Bob",
+            posted_at:"2022-04-30T17:18:35.084Z"}),
+
+    ]))}
+
+     */
+
+    const [serverMessages, setServerMessages] = useState([]);
     useEffect(() => {
-        getInfo();
-    },[getInfo]);
+        getServerMessages();
+        /*getFakeServerMessages();*/
+    },[getServerMessages]);
 
 
+    const [textBoxText, setTextBoxText] = useState("");
 
-    const [currentMessage, setCurrentMessage] = useState("");
-    /*const [messageList, setMessageList] = useState([]);*/
-    let sendMessage;
-    sendMessage = async () => {
+    let sendMessageToServer, AddUserPostedMessageToFrontEnd;
+    sendMessageToServer = async () => {
         await Axios.post(
-            "https://www.fresher-friend.bham.team:5001/postCourseMessage",
-            {message: "POSTED: " + currentMessage},
+            "https://www.fresher-friend.bham.team:5001/post" + groupType + "Message",
+            {message: textBoxText},
             {
                 withCredentials: true,
                 headers: {
@@ -60,10 +131,29 @@ function ChatWindow(params){
     }
 
 
+    const [userPostedMessages, setUserPostedMessages] = useState([]);
+
+    AddUserPostedMessageToFrontEnd = async () => {
+        let newUserPostedMessages = [...userPostedMessages];
+
+        let currentDate = new Date();
+
+        let newMessage = generateChatMessage({
+            msg_text: textBoxText, first_name: "you", posted_at:currentDate.toISOString(), type: "you"}
+        );
+        newUserPostedMessages.push(newMessage);
+        setUserPostedMessages(newUserPostedMessages);
+    }
+
+
     function sendMessageInTextbox() {
-        console.log("Posting Message: " + currentMessage)
-        sendMessage();
-        setCurrentMessage("")
+        console.log("Posting Message: " + textBoxText);
+        AddUserPostedMessageToFrontEnd();
+
+        sendMessageToServer();
+
+
+        setTextBoxText("");
     }
 
     return (
@@ -73,7 +163,8 @@ function ChatWindow(params){
             </div>
             <div className="chat-body">
                 <ScrollToBottom className="message-container">
-                    {info}
+                    {serverMessages}
+                    {userPostedMessages}
                 </ScrollToBottom>
             </div>
 
@@ -81,10 +172,10 @@ function ChatWindow(params){
                 <input
                     aria-label="chatInput"
                     type="text"
-                    value={currentMessage}
+                    value={textBoxText}
                     placeholder="Hey..."
                     onChange={(event) => {
-                        setCurrentMessage(event.target.value);
+                        setTextBoxText(event.target.value);
                     }}
                     onKeyPress={(event) => {
                         event.key === "Enter" && sendMessageInTextbox();

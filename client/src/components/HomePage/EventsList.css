@@ -14,10 +14,10 @@
     flex-wrap: nowrap;
     gap: 25px;
     background-color: var(--ff-gray);
-    overflow: auto;
+    overflow: scroll;
     border-radius: 10px;
     width: 95%;
-    max-width: 750px;
+    max-width: 650px;
     margin: auto;
     padding: 10px;
   }

@@ -14,7 +14,9 @@
     background-color: var(--ff-gray);
     height: 650px;
     width: 650px;
-    margin: left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
     padding: 5px;
     border-radius: 20px;
     display: flex;
@@ -38,7 +40,4 @@
     width: 100px;
     height: 100px;
   
-  }  
-/* Colour Scheme used
-https://paletton.com/#uid=54x0E0kjgus5OV6bYLGoYmjtJgW
- */
+  }

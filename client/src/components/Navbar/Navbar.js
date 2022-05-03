@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaUniversalAccess } from "react-icons/fa";
+//import { FaUniversalAccess } from "react-icons/fa";
 import { GiThreeFriends } from "react-icons/gi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Navbar.css";
@@ -40,11 +40,8 @@ function AccessibilitySwitch() {
 
 
 AccessibilitySwitch.onclick = function () { swapStyleSheet("./Navbar-Accessible.css") };
-
-function swapStyleSheet(sheet) {
-  Navbar.getElementById("stylesheet").setAttribute("href", sheet);  
-}
 */
+
 
 function MenuBarButton() {
   const [MenuStatus, setMenuStatus] = useState(["I"]);
@@ -61,6 +58,7 @@ function MenuBarButton() {
 
   const toggleNavbarMenu = (e) => {
     let oldMenuStatus = MenuStatus;
+    tabAccessSidebar();
     switch (oldMenuStatus[e]) {
       case "I": {
         oldMenuStatus[e] = "O";
@@ -87,16 +85,16 @@ function MenuBarButton() {
     <div>
       <div className="MenuBarButton" >
         <GiHamburgerMenu
-          tabindex="0"
+          tabIndex="0"
           aria-label="show side-bar menu"
           className={`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
           onClick={() => toggleNavbarMenu(0)}
         />
       </div>
-      <div className={`NavigationMenu ${MenuStatus[0]}`}>
+      <div id="NavMenu" className={`NavigationMenu ${MenuStatus[0]}`} >
         <GiHamburgerMenu
           aria-label="hide side-bar menu"
-          tabindex="0"
+          tabIndex="0"
           className={`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
           onClick={() => toggleNavbarMenu(0)}
         />
@@ -143,16 +141,34 @@ function MenuBarButton() {
             </a>
           </li>
         </ul>
-        <ul className="BottomNavbarMenuItems">
-          <li>
-              <FaUniversalAccess className="FresherFriendLogo"/>
-              Accessibilty supported
-          </li>
-        </ul>
       </div>
       <div className={`PageDimmer ${MenuStatus[0]}`} />
     </div>
   );
 }
+
+let isShown = false;
+
+function tabAccessSidebar() {
+  if(isShown && document.getElementById("NavMenu")) {
+    document.getElementById("NavMenu").style.visibility = 'hidden';
+    document.getElementById("NavMenu").style.zIndex = -1;
+    isShown = false;
+  } else {
+    document.getElementById("NavMenu").style.visibility= 'visible';
+    document.getElementById("NavMenu").style.zIndex = 10;
+    isShown = true;
+  }
+
+}
+/*
+<ul className="BottomNavbarMenuItems">
+          <li>
+              <FaUniversalAccess className="FresherFriendLogo"/>
+              Accessibilty supported
+          </li>
+        </ul>
+
+*/
 
 export default Navbar;
