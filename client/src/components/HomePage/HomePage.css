@@ -12,8 +12,9 @@
 
 .div-1 {
     background-color: var(--ff-gray);
-    height: 650px;
-    width: 650px;
+    min-height: 650px;
+    width: 90%;
+    max-width: 650px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;

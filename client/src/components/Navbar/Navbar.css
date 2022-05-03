@@ -48,6 +48,13 @@
     color: var(--ff-white);
 }
 
+/* Mobile View */
+@media (max-width: 550px) {
+    .title{
+        display: none;
+    }
+}
+
 .NavbarIcon{
     height: 50px;
     width: 50px;
