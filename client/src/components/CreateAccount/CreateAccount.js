@@ -195,9 +195,14 @@ const CreateAccount = () => {
           <option class="dropdown" value="1">
             Jarratt
           </option>
-          <option class="dropdown" value="2">
-            demo
-          </option>
+          <option class="dropdown" value="2">Aitken</option>
+		<option class="dropdown" value="3">Ashcroft</option>
+		<option class="dropdown" value="4">Battery Park</option>
+		<option class="dropdown" value="5">Bournbrook</option>
+		<option class="dropdown" value="6">Elgar Court</option>
+		<option class="dropdown" value="7">Mason</option>
+		<option class="dropdown" value="8">Shackleton</option>
+		<option class="dropdown" value="9">Tennis Court</option>
         </select>
         </p>
         <p>
@@ -214,23 +219,66 @@ const CreateAccount = () => {
             <option class="dropdown" value="1">
               Computer Science
             </option>
-            <option class="dropdown" value="2">
-              demo
-            </option>
+            <option class="dropdown" value="2">English Lang</option>
+		<option class="dropdown" value="3">History of Art</option>
+		<option class="dropdown" value="4">Mech Engineering</option>
+		<option class="dropdown" value="5">Philosophy</option>
+		<option class="dropdown" value="6">Physics/Astrophysics</option>
+		<option class="dropdown" value="7">Sociology</option>
+		<option class="dropdown" value="8">Applied Maths</option>
+		<option class="dropdown" value="9">Geology</option>
+		<option class="dropdown" value="10">Human Biology</option>
+		<option class="dropdown" value="11">Music</option>
+		<option class="dropdown" value="12">Law</option>
+		<option class="dropdown" value="13">Business</option>
+		<option class="dropdown" value="14">Medicine</option>
+		<option class="dropdown" value="15">Finance</option>
+		<option class="dropdown" value="16">Sport Science</option>
+
           </select>
         </p>
         <p>
           Interests
           <label className="check-container">
-            <input
-              aria-label="interest checkbox"
-              className="checkbox"
-              type="checkbox"
-              //checked={checked}
-              //onChange={handleChange}
-            />
-            Demo Interest
-          </label>
+          <input
+            aria-label="checkPrivacy"
+            className="checkbox"
+            type="checkbox"
+            //checked={checked1}
+            //onChange={handleChange1}
+          />
+          Football
+        </label>
+		<label className="check-container">
+          <input
+            aria-label="checkPrivacy"
+            className="checkbox"
+            type="checkbox"
+            //checked={checked2}
+            //onChange={handleChange2}
+          />
+          Games
+        </label>
+		<label className="check-container">
+          <input
+            aria-label="checkPrivacy"
+            className="checkbox"
+            type="checkbox"
+            //checked={checked3}
+            //onChange={handleChange3}
+          />
+          Travel
+        </label>
+		<label className="check-container">
+          <input
+            aria-label="checkPrivacy"
+            className="checkbox"
+            type="checkbox"
+            //checked={checked4}
+            //onChange={handleChange4}
+          />
+          Cycling
+        </label>
         </p>
         <p>
           In order to register to Fresher Friend, you must agree to the &nbsp;
