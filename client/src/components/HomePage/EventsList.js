@@ -4,16 +4,26 @@ import "./HomePage.css";
 import Axios from "axios";
 import React, { useCallback, useState, useEffect } from "react";
 /*import {useParams} from "react-router-dom";*/
+import { FaBeer } from 'react-icons/fa';
+
+
+function myfunction(props) {
+  alert("Welcome to Event: " + props.event_name + "\n Located at: " + props.location + "\n Starting at: " + props.starttime + "\n And ending at: " + props.endtime);
+}
 
 function EventButton(props) {
   return (
+    <button onClick={myfunction}> <FaBeer></FaBeer>
     <div className="event">
         <div className="EventButtonTitle">
           <h1>{props.name}</h1>
         </div>
     </div>
+    </button>
   );
 }
+
+
 
 
 function makeEventButton(name) {
@@ -24,6 +34,7 @@ function makeEventButton(name) {
     console.log(endtime);
   return <EventButton name={event_name}/>;
 }
+
 
 function EventsList(props) {
   /*let params = useParams();*/
