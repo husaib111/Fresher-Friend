@@ -79,17 +79,15 @@ const HomePage = () => {
       <Tabs>
         <TabList>
           <Tab>Upcoming Events</Tab>
-          <Tab>Previous Events</Tab>
           <Tab>Create Event</Tab>
         </TabList>
         <TabPanel>
+          <h3>Check out some upcoming Events here</h3>
           <div><EventsList></EventsList></div>
+          <div><h6>Invite your friends along by pressing the button below</h6></div>
           <div className = "popupp">
           <ShareEvent></ShareEvent>
           </div>
-        </TabPanel>
-        <TabPanel>
-          <h2>Check out some of the previous events</h2>
         </TabPanel>
         <TabPanel>
         <form onSubmit={insertEvents}>
