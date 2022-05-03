@@ -13,6 +13,7 @@ require("./db/passport");
 
 //middleware
 
+app.use(express.static("./uploads"));
 app.use(express.json()); //req.body
 app.use(cookieParser());
 app.use(passport.initialize());
@@ -33,6 +34,8 @@ app.post(
   upload.single("selectedFile"),
   db.uploadProfilePic
 );
+app.get("/loggedInUserProfile",auth.userAuth,db.getLoggedInProfilePic);
+app.get("/profile/:userId",auth.userAuth,db.getProfilePic);
 app.post("/login", auth.loginCheck);
 app.post("/setStatus", auth.userAuth, db.postStatus);
 app.get("/logout", auth.logOut);

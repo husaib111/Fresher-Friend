@@ -491,7 +491,12 @@ const uploadProfilePic = async (request, response) => {
       "select user_id from users where email=$1",
       [userEmail]
     );
+      console.log("~={-}('-{='");
     const { user_id } = userIds.rows[0];
+     const current = await pool.query("select * from profiles where user_id=$1",[user_id]);
+      console.log(current.rows);
+
+      await pool.query("delete from profiles where user_id=$1",[user_id]);
 
     await pool.query("insert into profiles(user_id,filename) values ($1,$2)", [
       user_id,
@@ -503,6 +508,44 @@ const uploadProfilePic = async (request, response) => {
     console.log(e.message);
   }
 };
+const getLoggedInProfilePic = async (request, response) =>{
+  try {
+    const userEmail = getLoggedUserEmail(request);
+
+    const userIds = await pool.query(
+      "select user_id from users where email=$1",
+      [userEmail]
+    );
+      console.log("~={-}('-{='");
+    const { user_id } = userIds.rows[0];
+     const current = await pool.query("select * from profiles where user_id=$1",[user_id]);
+      console.log(current.rows);
+      response.json(current.rows[0]);
+  } catch (e) {
+    console.log(e.message);
+  }
+
+}
+
+const getProfilePic = async (request, response) =>{
+  try {
+const { userId } = request.params;
+    const userIds = await pool.query(
+      "select user_id from users where email=$1",
+      [userId + "@student.bham.ac.uk"]
+    );
+    console.log(userIds);
+
+    const { user_id } = userIds.rows[0];
+
+     const current = await pool.query("select * from profiles where user_id=$1",[user_id]);
+      console.log(current.rows);
+      response.json(current.rows[0]);
+  } catch (e) {
+    console.log(e.message);
+  }
+
+}
 
 const createAccount = async (request, response) => {
   try {
@@ -568,6 +611,8 @@ const createAccount = async (request, response) => {
 };
 
 module.exports = {
+    getProfilePic,
+    getLoggedInProfilePic,
   uploadProfilePic,
   getEventInfo,
   getUserStatus,

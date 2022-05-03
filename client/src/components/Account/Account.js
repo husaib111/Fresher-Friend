@@ -104,6 +104,31 @@ function Account() {
       });
   };
 
+
+    const getPF = async() => {
+	await Axios.get(
+	    "https://www.fresher-friend.bham.team/loggedInUserProfile/",
+	    {
+		withCredentials:true,
+		headers: {
+		    "Content-Type": "application/json",
+		},
+	    }
+	)
+	    .then((response) => {
+		console.log(response);
+		const {data} = response;
+		const {filename} = data;
+		console.log(filename);
+		setpf(filename);
+	    })
+	    .catch((e) => {
+		console.log(e);
+	    });
+    };
+
+  const [pf, setpf] = useState(() => getPF());
+
   useEffect(() => {
     getInfo();
     const getInterests = async () => {
@@ -128,6 +153,7 @@ function Account() {
     };
     getInterests();
     getStatus();
+    getPF();
   }, []);
 
   // useEffect(() => {
@@ -173,7 +199,7 @@ function Account() {
         <hr />
         <div className="basicInfo" aria-label="Profile information">
           <div className="pfpContainer">
-            <img className="pfp" src={pfp} alt="Profile" aria-label="Profile picture"/>
+            <a href="/profileUpload"><img className="pfp" src={"https://www.fresher-friend.bham.team/"+pf} alt="Profile" aria-label="Profile picture"/></a>
           </div>
           <h1>
             {info[0]} {info[1]} {info[2]}

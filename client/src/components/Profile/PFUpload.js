@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
-function PFUpload() {
-  const [selectedFile, setSelectedFile] = React.useState(null);
+function ProfileUpload() {
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -28,12 +28,15 @@ function PFUpload() {
     setSelectedFile(event.target.files[0])
   }
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <input type="file" name="data" onChange={handleFileSelect} encType="multipart/form-data"/>
-      <input type="submit" value="Upload File" />
-    </form>
+    return (
+	<React.Fragment>
+	    <p>hi</p>
+	    <form onSubmit={handleSubmit}>
+		<input type="file" name="data" onChange={handleFileSelect} encType="multipart/form-data"/>
+		<input type="submit" value="Upload File" />
+	    </form>
+	    </React.Fragment>
   )
 }
 
-export default PFUpload;
+export default ProfileUpload;
