@@ -25,7 +25,6 @@ function makeEventButton(name) {
 }
 
 function EventsList(props) {
-    props;
   /*let params = useParams();*/
   const getInfo = useCallback(async () => {
 
