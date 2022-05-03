@@ -10,6 +10,15 @@
 .HomePage {
 }
 
+.tabPanel{
+    width: 90%;
+    max-width: 650px;
+}
+.Tabs{
+    width: 90%;
+    max-width: 60px;
+}
+
 .div-1 {
     background-color: var(--ff-gray);
     min-height: 650px;
