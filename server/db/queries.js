@@ -81,6 +81,25 @@ const getLoggedInUserInterests = async (request, response) => {
   }
 };
 
+getLoggedUserEmailForFrontEnd = async (request, response) =>{
+  try {
+    const userEmail = getLoggedUserEmail(request);
+    console.log(userEmail);
+
+    const users = await pool.query(
+        "select email from users where email=$1",
+        [userEmail]
+    );
+
+    response.json(users.rows);
+  } catch (e) {
+    response.status(400).send({
+      message: "Not logged in!",
+    });
+    console.log(e.message);
+  }
+};
+
 const getUserInterests = async (request, response) => {
   try {
     const { userId } = request.params;
@@ -592,4 +611,5 @@ module.exports = {
   postCourseMessage,
   postAccMessage,
   createAccount,
+  getLoggedUserEmailForFrontEnd
 };
