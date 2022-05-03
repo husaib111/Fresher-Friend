@@ -261,7 +261,7 @@ function Account() {
         <div className="settings">
             <label><input className="PrivateProfileToggle"
                  type="checkbox"
-                 defaultChecked={false}
+                 defaultChecked={priv}
                  onChange={() => togglePrivate()}
                  /> Private profile</label>
           <br />
