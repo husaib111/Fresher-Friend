@@ -1,4 +1,3 @@
-
 .ChatMessage {
     width: 100%;
     height: auto;
@@ -39,7 +38,9 @@
 }
 
 .ChatMessage.self > .MessageBubble{
-    border-radius: 25px 25px 3px 25px;
+
+    border-radius: 25px 25px 25px 3px;
+    /*border-radius: 25px 25px 3px 25px;*/
 }
 
 .ChatMessage.other .MessageBubble{
@@ -53,5 +54,5 @@
 }
 
 .ChatMessage.self {
-    align-items: flex-end;
+    /*align-items: flex-end;*/
 }
