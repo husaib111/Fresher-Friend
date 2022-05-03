@@ -48,6 +48,7 @@
     border: 1px solid #263238;
     border-top: none;
     display: flex;
+    background: var(--ff-white);
 }
 
 .chat-window .chat-footer input {
