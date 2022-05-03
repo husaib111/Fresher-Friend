@@ -26,8 +26,37 @@ function ChatWindow(props){
 
 
     let getServerMessages;
-    getServerMessages = useCallback (async () => {
+    let getUserEmail;
+    const [userEmail, setUserEmail] = useState("");
 
+
+    getUserEmail = useCallback (async () => {
+        await Axios.get(
+            "https://www.fresher-friend.bham.team:5001/getLoggedUserEmailForFrontEnd ",
+            {
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        )
+            .then((response) => {
+                const {data} = response;
+                console.log("Logged In As " + data);
+                console.log(data);
+                setUserEmail(data);
+                console.log(userEmail);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }, [userEmail, setUserEmail]);
+    useEffect( () => {
+        getUserEmail()
+    }, [getUserEmail])
+
+
+    getServerMessages = useCallback (async () => {
         await Axios.get(
             "https://www.fresher-friend.bham.team:5001/get" + groupType + "Messages",
             {
@@ -46,8 +75,6 @@ function ChatWindow(props){
                 console.log(e);
             });
     }, [groupType]);
-
-
 
     /*let getFakeServerMessages;
     getFakeServerMessages = () => { return (setServerMessages([

@@ -104,9 +104,9 @@ function GroupsList(props) {
   useEffect(() => {
     getCourse();
   });
-  return <div className="groupsList">
-    <GroupButton name={"Flat "+accom} type="accommodation"/>
-    <GroupButton name={course} type="course"/>
+  return <div aria-label="Group chats" className="groupsList">
+    <GroupButton aria-label="Accommodation chat button" name={"Flat "+accom} type="accommodation"/>
+    <GroupButton aria-label="Course chat button" name={course} type="course"/>
   </div>;
   }
 

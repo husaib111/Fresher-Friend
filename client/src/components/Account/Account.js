@@ -187,8 +187,15 @@ function Account() {
     // console.log("got status" + status);
     // console.log(status);
   };
+
   const togglePrivate = () => {
-    setPriv(!priv);
+    if(priv) {
+      setPriv(false);
+      console.log("private account: " + priv);
+    } else {
+      setPriv(true);
+      console.log("private account: " + priv);
+    }
   };
 
   return (
@@ -255,7 +262,7 @@ function Account() {
         <div className="settings">
             <label><input className="PrivateProfileToggle"
                  type="checkbox"
-                 defaultChecked={priv}
+                 defaultChecked={false}
                  onChange={() => togglePrivate()}
                  /> Private profile</label>
           <br />

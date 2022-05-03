@@ -48,7 +48,7 @@
 }
 
 .ChatMessage.self .MessageBubble{
-    background-color: var(--ff-red);
+    background-color: var(--ff-lightpurple);
     color: var(--ff-white)
 }
 
