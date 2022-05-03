@@ -1,17 +1,32 @@
 import "./GroupsList.css"
 import "./GroupButton.css";
 import "./HomePage.css";
-import {IoHome} from "react-icons/io5";
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
+import {FaHome, FaUniversity} from "react-icons/fa";
+import {BsFillQuestionDiamondFill} from "react-icons/bs";
 // import React from 'react';
 
 function GroupButton(props) {
+
+    let groupButtonIcon ;
+    groupButtonIcon = () => {
+        if(props.type==="accommodation"){
+            return(<FaHome className={"GroupButtonIcon"} />)
+        }
+        else if (props.type==="course"){
+            return(<FaUniversity className={"GroupButtonIcon"}  />)
+        }
+        else{
+            return(<BsFillQuestionDiamondFill className={"GroupButtonIcon"} />)
+        }
+    }
+
   return (
     <div className="GroupButton">
       <a href={"/group/"+props.type}>
         <div className="GroupButtonCircle">
-          <IoHome className={"GroupButtonIcon"} />
+            {groupButtonIcon()}
         </div>
         <div className="GroupButtonTitle">
           <h1>{props.name}</h1>
