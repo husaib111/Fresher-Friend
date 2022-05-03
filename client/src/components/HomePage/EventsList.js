@@ -11,12 +11,13 @@ function myfunction(props) {
   alert("Welcome to Event: " + props.event_name + "\n Located at: " + props.location + "\n Starting at: " + props.starttime + "\n And ending at: " + props.endtime);
 }
 
+
 function EventButton(props) {
   return (
-    <button onClick={myfunction}> <FaBeer></FaBeer>
+    <button onClick={myfunction(props.name)}><FaBeer></FaBeer>
     <div className="event">
         <div className="EventButtonTitle">
-          <h1>{props.name}</h1>
+          <h1>{props.event_name}</h1>
         </div>
     </div>
     </button>
@@ -29,7 +30,7 @@ function makeEventButton(name) {
     console.log(location);
     console.log(starttime);
     console.log(endtime);
-  return <EventButton name={event_name}/>;
+  return <EventButton name={name}/>;
 }
 
 

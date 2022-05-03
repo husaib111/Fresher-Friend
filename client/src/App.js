@@ -9,7 +9,7 @@ import TestExample from "./components/TestExample/TestExample";
 import PrivacyPolicy from "./components/Login/PrivacyPolicy";
 import About from "./components/Login/About";
 import CreateAccount from "./components/CreateAccount/CreateAccount";
-import PFUpload from "./components/Profile/PFUpload";
+import ProfileUpload from "./components/Profile/profileUpload";
 import {
   BrowserRouter as Router,
   Route,
@@ -31,8 +31,8 @@ class App extends React.Component {
 		  <Route path="/createAccount" element={<CreateAccount />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/about" element={<About />} />
-            <Route path="/profileUpload" element={<PFUpload />} />
-        </Routes>
+	  <Route path="/profileUpload" element={<ProfileUpload />} />
+	</Routes>
       </Router>
     );
   }
