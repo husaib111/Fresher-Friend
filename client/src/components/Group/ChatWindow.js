@@ -32,7 +32,7 @@ function ChatWindow(props){
 
     getUserEmail = useCallback (async () => {
         await Axios.get(
-            "https://www.fresher-friend.bham.team:5001/getLoggedUserEmail",
+            "https://www.fresher-friend.bham.team:5001/getLoggedUserEmailForFrontEnd ",
             {
                 withCredentials: true,
                 headers: {
@@ -56,10 +56,7 @@ function ChatWindow(props){
     }, [getUserEmail])
 
 
-
     getServerMessages = useCallback (async () => {
-
-
         await Axios.get(
             "https://www.fresher-friend.bham.team:5001/get" + groupType + "Messages",
             {
@@ -78,8 +75,6 @@ function ChatWindow(props){
                 console.log(e);
             });
     }, [groupType]);
-
-
 
     /*let getFakeServerMessages;
     getFakeServerMessages = () => { return (setServerMessages([
