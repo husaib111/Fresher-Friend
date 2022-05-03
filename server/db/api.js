@@ -286,7 +286,7 @@ const eventsByID = async (request, response) => {
 const eventsByIDEndpoint = async (request, response) => {
   try {
     const method = request.method;
-    const { id, endpoint } = request.params;
+    let { id, endpoint } = request.params;
     const endpoints = ["name", "location", "organiser", "starttime", "endtime"];
 
     if (!endpoints.includes(endpoint)) {
