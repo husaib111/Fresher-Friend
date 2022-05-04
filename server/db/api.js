@@ -290,7 +290,7 @@ const eventsByIDEndpoint = async (request, response, next) => {
     const endpoints = ["name", "location", "organiser", "starttime", "endtime"];
 
     if (endpoint == "invites") {
-      next("/api/v1/events/:id/invites");
+      next();
     } else {
       if (!endpoints.includes(endpoint)) {
         //400 - Bad Request (wrong endpoint, should not happen)
@@ -940,7 +940,7 @@ const courseGroupsByIDEndpoint = async (request, response) => {
         }
 
         const updatedCourse = await pool.query(
-          "UPDATE courses SET" +
+          "UPDATE courses SET " +
             endpoint +
             " = $2 WHERE course_id = $3 RETURNING *",
           [endpoint, value, id]

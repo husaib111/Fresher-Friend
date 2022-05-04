@@ -61,8 +61,11 @@ app.post("/postAccMessage", auth.userAuth, db.postAccMessage);
 //Events object
 app.all("/api/v1/events", api.events);
 app.all("/api/v1/events/:id", api.eventsByID);
-app.all("/api/v1/events/:id/:endpoint", api.eventsByIDEndpoint);
-app.all("/api/v1/events/:id/invites", api.eventsByIDInvites);
+app.all(
+  "/api/v1/events/:id/:endpoint",
+  api.eventsByIDEndpoint,
+  api.eventsByIDInvites
+);
 
 //Course groups object
 app.all("/api/v1/groups/courses", api.courseGroups);
