@@ -241,7 +241,7 @@ const CreateAccount = () => {
           Interests
           <label className="check-container">
           <input
-            aria-label="checkPrivacy"
+            aria-label="Interest checkbox"
             className="checkbox"
             type="checkbox"
             //checked={checked1}
@@ -251,7 +251,7 @@ const CreateAccount = () => {
         </label>
 		<label className="check-container">
           <input
-            aria-label="checkPrivacy"
+            aria-label="Interest checkbox"
             className="checkbox"
             type="checkbox"
             //checked={checked2}
@@ -261,7 +261,7 @@ const CreateAccount = () => {
         </label>
 		<label className="check-container">
           <input
-            aria-label="checkPrivacy"
+            aria-label="Interest checkbox"
             className="checkbox"
             type="checkbox"
             //checked={checked3}
@@ -271,7 +271,7 @@ const CreateAccount = () => {
         </label>
 		<label className="check-container">
           <input
-            aria-label="checkPrivacy"
+            aria-label="Interest checkbox"
             className="checkbox"
             type="checkbox"
             //checked={checked4}
