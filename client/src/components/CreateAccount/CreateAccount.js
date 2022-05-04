@@ -16,9 +16,25 @@ const CreateAccount = () => {
   const [course, setCourse] = useState("");
 
   const [checked, setChecked] = useState(false);
+  const [checked1, setChecked1] = useState(false);
+  const [checked2, setChecked2] = useState(false);
+  const [checked3, setChecked3] = useState(false);
+  const [checked4, setChecked4] = useState(false);
 
   const handleChange = () => {
     setChecked(!checked);
+  };
+  const handleChange1 = () => {
+    setChecked1(!checked1);
+  };
+  const handleChange2 = () => {
+    setChecked2(!checked2);
+  };
+  const handleChange3 = () => {
+    setChecked3(!checked3);
+  };
+  const handleChange4 = () => {
+    setChecked4(!checked4);
   };
 
   async function loginUser(event) {
@@ -64,6 +80,19 @@ const CreateAccount = () => {
                     "Before you can proceed, you need to agree to the Privacy Policy."
                   );
                 } else {
+					const interests = [];
+			if (checked1 == true){
+				interests.append('1');
+			}
+			if (checked2 == true){
+				interests.append('2');
+			}
+			if (checked3 == true){
+				interests.append('3');
+			}
+			if (checked4 == true){
+				interests.append('4');
+			}
                   const response = await Axios.post(
                     "https://www.fresher-friend.bham.team:5001/createAccount",
                     {
@@ -74,6 +103,7 @@ const CreateAccount = () => {
                       lastName: surname,
                       courseId: course,
                       accId: accom,
+					  interests: bodyFormData
                     },
                     {
                       withCredentials: true,
@@ -244,8 +274,8 @@ const CreateAccount = () => {
             aria-label="Interest football"
             className="checkbox"
             type="checkbox"
-            //checked={checked1}
-            //onChange={handleChange1}
+            checked={checked1}
+            onChange={handleChange1}
           />
           Football
         </label>
@@ -254,8 +284,8 @@ const CreateAccount = () => {
             aria-label="Interest games"
             className="checkbox"
             type="checkbox"
-            //checked={checked2}
-            //onChange={handleChange2}
+            checked={checked2}
+            onChange={handleChange2}
           />
           Games
         </label>
@@ -264,8 +294,8 @@ const CreateAccount = () => {
             aria-label="Interest travel"
             className="checkbox"
             type="checkbox"
-            //checked={checked3}
-            //onChange={handleChange3}
+            checked={checked3}
+            onChange={handleChange3}
           />
           Travel
         </label>
@@ -274,8 +304,8 @@ const CreateAccount = () => {
             aria-label="Interest cycling"
             className="checkbox"
             type="checkbox"
-            //checked={checked4}
-            //onChange={handleChange4}
+            checked={checked4}
+            onChange={handleChange4}
           />
           Cycling
         </label>
