@@ -174,7 +174,7 @@ const eventsByID = async (request, response) => {
         response.status(200).json(updatedEvent.rows[0]);
       } else {
         const user = await pool.query(
-          "SELECT user_id, email, pass FROM users NATURAL JOIN passwords WHERE email = $1",
+          "SELECT user_id, email, passwords.pass FROM users NATURAL JOIN passwords WHERE email = $1",
           [username + "@student.bham.ac.uk"]
         );
 
