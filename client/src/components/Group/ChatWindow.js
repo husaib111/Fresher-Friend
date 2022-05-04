@@ -181,7 +181,12 @@ function ChatWindow(props){
                         event.key === "Enter" && sendMessageInTextbox();
                     }}
                 />
-                <button aria-label="chatButton" onClick={sendMessageInTextbox}>&#9658;</button>
+                <button tabIndex={0} aria-label="chatButton" 
+                onClick={sendMessageInTextbox}
+                onKeyPress={(event) => {
+                    event.key === "Enter" && sendMessageInTextbox();
+                }}
+                >&#9658;</button>
             </div>
         </div>
     )

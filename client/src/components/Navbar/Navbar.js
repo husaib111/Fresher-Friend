@@ -89,6 +89,9 @@ function MenuBarButton() {
           aria-label="show side-bar menu"
           className={`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
           onClick={() => toggleNavbarMenu(0)}
+          onKeyPress={(event) => {
+            event.key === "Enter" && toggleNavbarMenu(0);
+          }}
         />
       </div>
       <div id="NavMenu" className={`NavigationMenu ${MenuStatus[0]}`} >
@@ -97,6 +100,9 @@ function MenuBarButton() {
           tabIndex="0"
           className={`NavbarIcon ${MenuStatus[0] ? "" : ""}`}
           onClick={() => toggleNavbarMenu(0)}
+          onKeyPress={(event) => {
+            event.key === "Enter" && toggleNavbarMenu(0);
+          }}
         />
 
         <ul className="TopNavbarMenuItems">

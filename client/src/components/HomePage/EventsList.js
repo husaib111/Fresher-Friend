@@ -17,9 +17,9 @@ function myfunction(name) {
 function EventButton(props) {
     const {event_name} = props.name;
   return (
-    <button className="loginButton btn btn-primary" onClick={() => myfunction(props.name)}><FaBeer></FaBeer>
-    <div className="event">
-        <div className="EventButtonTitle">
+    <button aria-label={event_name} className="loginButton btn btn-primary" onClick={() => myfunction(props.name)}><FaBeer></FaBeer>
+    <div aria-label={event_name} className="event">
+        <div aria-label={event_name} className="EventButtonTitle">
           <h1>{event_name}</h1>
         </div>
     </div>

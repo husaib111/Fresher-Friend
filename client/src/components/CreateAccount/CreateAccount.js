@@ -82,19 +82,19 @@ const CreateAccount = () => {
                 } else {
                   const interests = [];
                   if (checked1 === true) {
-                    interests.append("1");
+                    interests.push("1");
                   }
                   if (checked2 === true) {
-                    interests.append("2");
+                      interests.push("2");
                   }
                   if (checked3 === true) {
-                    interests.append("3");
+                      interests.push("3");
                   }
                   if (checked4 === true) {
-                    interests.append("4");
+                      interests.push("4");
                   }
                   const response = await Axios.post(
-                    "https://www.fresher-friend.bham.team:5001/createAccount",
+                    "http://localhost:5001/createAccount",
                     {
                       email: email,
                       password: password1,

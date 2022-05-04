@@ -568,6 +568,7 @@ const { userId } = request.params;
 
 const createAccount = async (request, response) => {
   try {
+      console.log(request.body);
     const {
       email,
       password,
@@ -582,7 +583,7 @@ const createAccount = async (request, response) => {
       const newUser = pool.query(
         "INSERT INTO users (email, first_name, middle_name, last_name, course_id, acc_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         [email, firstName, middleName, lastName, courseId, accId]
-      );
+      ).then(async (newUser)=>{
       console.log(newUser);
       console.log(newUser.rows[0]);
       if (!newUser) {
@@ -590,7 +591,7 @@ const createAccount = async (request, response) => {
           .status(500)
           .send("Unknown error, please contact the developer.");
       }
-      const newPasswordEntry = pool.query(
+      const newPasswordEntry = await pool.query(
         "INSERT INTO passwords (user_id, pass) VALUES ($1, $2) RETURNING user_id",
         [newUser.rows[0].user_id, password]
       );
@@ -601,18 +602,24 @@ const createAccount = async (request, response) => {
           .status(500)
           .send("Unknown error, please contact the developer.");
       }
-      response.status(201).json(newUser);
+	  response.status(201).json(newUser)
+      });
     } else {
-      const newUser = pool.query(
+	console.log("here");
+      const newUser = await pool.query(
         "INSERT INTO users (email, first_name, last_name, course_id, acc_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         [email, firstName, lastName, courseId, accId]
-      );
+      ).then(async(newUser)=>{;
+			      
+	console.log(newUser);
       if (!newUser) {
+	  console.log("he");
         response
           .status(500)
           .send("Unknown error, please contact the developer.");
       }
-      const newPasswordEntry = pool.query(
+	console.log("here2");
+      const newPasswordEntry = await pool.query(
         "INSERT INTO passwords (user_id, pass) VALUES ($1, $2) RETURNING user_id",
         [newUser.rows[0].user_id, password]
       );
@@ -622,7 +629,7 @@ const createAccount = async (request, response) => {
           .send("Unknown error, please contact the developer.");
       }
       response.status(201).json(newUser);
-    }
+			})}
   } catch (e) {
     console.log(e.message);
     response.status(500).send(e);
