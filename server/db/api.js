@@ -563,7 +563,7 @@ const eventsByIDInvites = async (request, response) => {
             .send("You are missing invitee(s) inside your body.");
         }
         const event = await pool.query(
-          "SELECT * FROM event WHERE event_id = $1 AND organizer = $2",
+          "SELECT * FROM event WHERE event_id = $1 AND organiser = $2",
           [id, user.rows[0].user_id]
         );
         if (!event.rows[0]) {
@@ -649,7 +649,7 @@ const eventsByIDInvites = async (request, response) => {
             .send("You are missing invitee(s) inside your body.");
         }
         const event = await pool.query(
-          "SELECT * FROM event WHERE event_id = $1 AND organizer = $2",
+          "SELECT * FROM event WHERE event_id = $1 AND organiser = $2",
           [id, user.rows[0].user_id]
         );
         if (!event.rows[0]) {
