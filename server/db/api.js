@@ -444,7 +444,7 @@ const eventsByIDInvites = async (request, response) => {
       account = "ADMIN";
     } else if (username && password) {
       user = await pool.query(
-        "SELECT user_id, email, pass FROM users NATURAL JOIN passwords WHERE email = $1",
+        "SELECT users.user_id, users.email, passwords.pass FROM users NATURAL JOIN passwords WHERE email = $1",
         [username + "@student.bham.ac.uk"]
       );
 
@@ -497,7 +497,9 @@ const eventsByIDInvites = async (request, response) => {
           //404- Not Found (No event found with event_id)
           response
             .status(404)
-            .send("No event invites found with ID " + id + "for user ");
+            .send(
+              "No event invites found with ID " + id + " for user " + username
+            );
         }
 
         //200- OK (Event invite count sent)
