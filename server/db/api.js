@@ -283,13 +283,14 @@ const eventsByID = async (request, response) => {
   }
 };
 
-const eventsByIDEndpoint = async (request, response) => {
+const eventsByIDEndpoint = async (request, response, next) => {
   try {
     const method = request.method;
     let { id, endpoint } = request.params;
     const endpoints = ["name", "location", "organiser", "starttime", "endtime"];
 
     if (endpoint == "invites") {
+      next("/api/v1/events/:id/invites");
     } else {
       if (!endpoints.includes(endpoint)) {
         //400 - Bad Request (wrong endpoint, should not happen)
