@@ -370,6 +370,11 @@ const eventsByIDEndpoint = async (request, response, next) => {
           //200- OK (Event successfully modified)
           response.status(200).json(updatedEvent.rows[0]);
         } else {
+          if ((endpoint = "organiser")) {
+            //400 - Bad Request (wrong endpoint, should not happen)
+            response.status(400).send("Wrong endpoint requested.");
+          }
+
           const user = await pool.query(
             "SELECT user_id, email, pass FROM users NATURAL JOIN passwords WHERE email = $1",
             [username + "@student.bham.ac.uk"]
