@@ -437,7 +437,7 @@ const eventsByIDInvites = async (request, response) => {
     const { id } = request.params;
     const { invitee } = request.body;
     const { username, password } = getAuth(request);
-    const account = "PUBLIC";
+    let account = "PUBLIC";
     const user = {};
 
     if (username == "admin" && password == SECRET) {
@@ -819,7 +819,7 @@ const courseGroupsByID = async (request, response) => {
         }
 
         const updatedCourse = await pool.query(
-          "UPDATE courses SET course_name = $1, duration = $2 WHERE course_id = $6 RETURNING *",
+          "UPDATE courses SET course_name = $1, duration = $2 WHERE course_id = $3 RETURNING *",
           [name, duration, id]
         );
         //200- OK (Event successfully modified)
@@ -942,8 +942,8 @@ const courseGroupsByIDEndpoint = async (request, response) => {
         const updatedCourse = await pool.query(
           "UPDATE courses SET " +
             endpoint +
-            " = $2 WHERE course_id = $3 RETURNING *",
-          [endpoint, value, id]
+            " = $1 WHERE course_id = $2 RETURNING *",
+          [value, id]
         );
         //200- OK (Event successfully modified)
         response.status(200).json(updatedCourse.rows[0]);
