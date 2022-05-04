@@ -3,8 +3,9 @@ import React from "react";
 
 function Interest(props){
   return(
-  <div className="interest">
+  <div className="interest" aria-label={props.interestName}>
     <FontAwesomeIcon
+      aria-label={props.interestName}
       className="interestIcon"
       icon={props.icon}
     />

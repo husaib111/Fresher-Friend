@@ -22,7 +22,7 @@ function Account() {
   const generateInterests = (row) => {
     const { interest_name, interest_icon } = row;
     return (
-      <Interest interestName={interest_name} key={interest_name} icon={["fas", interest_icon]} />
+      <Interest aria-label={interest_name} interestName={interest_name} key={interest_name} icon={["fas", interest_icon]} />
     );
   };
 
@@ -150,39 +150,45 @@ function Account() {
   return (
     <div>
       <Navbar />
-      <div className="Account">
-        <div className="basicInfo">
+      <div className="Account" aria-label="Other user's Profile">
+        <div className="basicInfo" aria-label="Profile information">
           <div className="pfpContainer">
             <img className="pfp" src={"https://www.fresher-friend.bham.team/"+pf} alt="Profile" />
           </div>
           <h1>
             {info[0]} {info[1]} {info[2]}
           </h1>
-          <p className="About">{info[3]}</p>
+          <p className="About" aria-label="Course information">{info[3]}</p>
           {/* <p className="About">First Year</p> */}
-          <p className="About">
+          <p className="About" aria-label="accommodation information">
             Flat {info[4]}, Block {info[5]}, {info[6]}
           </p>
         </div>
-        <div className="statusButtons">
-          <div className="statusButton">
+        <div className="statusButtons" aria-label="Profile status">
+          <div className="statusButton" aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}>
             <FontAwesomeIcon
+            aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}
               className={`statusIcon ${status[0] ? "isolating" : ""}`}
               icon={faCertificate}
+              tabIndex="0"
             />
             <p className="statusLabel">I'm isolating</p>
           </div>
-          <div className="statusButton">
+          <div className="statusButton" aria-label={`statusIcon ${status[1] ? "away" : ""}`}>
             <FontAwesomeIcon
+              aria-label={`statusIcon ${status[1] ? "away" : ""}`}
               className={`statusIcon ${status[1] ? "away" : ""}`}
               icon={faPlane}
+              tabIndex="0"
             />
             <p className="statusLabel">I'm away</p>
           </div>
-          <div className="statusButton">
+          <div className="statusButton" aria-label={`statusIcon ${status[2] ? "guest visiting" : ""}`}>
             <FontAwesomeIcon
+              aria-label={`statusIcon ${status[2] ? "guest visiting" : ""}`}
               className={`statusIcon ${status[2] ? "guest" : ""}`}
               icon={faUser}
+              tabIndex="0"
             />
             <p className="statusLabel">I have a guest</p>
           </div>

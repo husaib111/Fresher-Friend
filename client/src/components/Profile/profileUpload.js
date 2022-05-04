@@ -34,8 +34,8 @@ function ProfileUpload() {
 	<div className="profileUpload">
 	    <h1>Profile Upload</h1>
 	    <form onSubmit={handleSubmit}>
-		<input type="file" name="data" onChange={handleFileSelect} encType="multipart/form-data"/>
-		<input type="submit" value="Upload File" />
+		<input aria-label="Profile photo selection" type="file" name="data" onChange={handleFileSelect} encType="multipart/form-data"/>
+		<input aria-label="upload photo button" type="submit" value="Upload File" />
 	    </form>
 	    </div>
   )

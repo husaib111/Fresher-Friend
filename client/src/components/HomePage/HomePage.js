@@ -78,8 +78,8 @@ const HomePage = () => {
       <div aria-label="events section" class="div-1">
       <Tabs>
         <TabList>
-          <Tab>Upcoming Events</Tab>
-          <Tab>Create Event</Tab>
+          <Tab tabIndex="0" >Upcoming Events</Tab>
+          <Tab tabIndex="0" >Create Event</Tab>
         </TabList>
         <TabPanel>
           <h3>Check out some upcoming Events here</h3>
@@ -162,7 +162,7 @@ const HomePage = () => {
     </label>
     <br /><br />
     <input
-          aria-label="loginButton"
+          aria-label="Create Event button"
           type="submit"
           value="Create Event"
           className="loginButton btn btn-primary"
