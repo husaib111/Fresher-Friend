@@ -442,7 +442,7 @@ const eventsByIDInvites = async (request, response) => {
 
     if (username == "admin" && password == SECRET) {
       account = "ADMIN";
-    } else {
+    } else if (username && password) {
       user = await pool.query(
         "SELECT user_id, email, pass FROM users NATURAL JOIN passwords WHERE email = $1",
         [username + "@student.bham.ac.uk"]
