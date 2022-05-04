@@ -302,8 +302,8 @@ const eventsByIDEndpoint = async (request, response) => {
 
       if (method == "GET") {
         const event = await pool.query(
-          "SELECT $2 FROM event WHERE event_id = $1",
-          [id, endpoint]
+          "SELECT * FROM event WHERE event_id = $1",
+          [id]
         );
 
         if (!event.rows[0]) {
@@ -311,7 +311,27 @@ const eventsByIDEndpoint = async (request, response) => {
           response.status(404).send("No event found for ID " + id + ".");
         }
         //200- OK (Event sent)
-        response.status(200).json(event.rows[0]);
+        switch (endpoint) {
+          case "event_name":
+            response.status(200).json(event.rows[0].event_name);
+            break;
+          case "location":
+            response.status(200).json(event.rows[0].location);
+            break;
+          case "organiser":
+            response.status(200).json(event.rows[0].organiser);
+            break;
+          case "starttime":
+            response.status(200).json(event.rows[0].starttime);
+            break;
+          case "endtime":
+            response.status(200).json(event.rows[0].endtime);
+            break;
+          default:
+            response
+              .status(500)
+              .send("Unknown error, please contact developer.");
+        }
       } else if (method == "POST") {
         const { username, password } = getAuth(request);
 
@@ -1159,8 +1179,8 @@ const accommodationGroupsByIDEndpoint = async (request, response) => {
 
     if (method == "GET") {
       const accommodation = await pool.query(
-        "SELECT $2 FROM accommodation WHERE acc_id = $1",
-        [id, endpoint]
+        "SELECT * FROM accommodation WHERE acc_id = $1",
+        [id]
       );
 
       if (!accommodation.rows[0]) {
@@ -1168,7 +1188,19 @@ const accommodationGroupsByIDEndpoint = async (request, response) => {
         response.status(404).send("No accommodation found for ID " + id + ".");
       }
       //200- OK (Course sent)
-      response.status(200).json(accommodation.rows[0]);
+      switch (endpoint) {
+        case "flat_num":
+          response.status(200).json(accommodation.rows[0].flat_num);
+          break;
+        case "block_num":
+          response.status(200).json(accommodation.rows[0].block_num);
+          break;
+        case "acc_location":
+          response.status(200).json(accommodation.rows[0].acc_location);
+          break;
+        default:
+          response.status(500).send("Unknown error, please contact developer.");
+      }
     } else if (method == "POST") {
       const { username, password } = getAuth(request);
 
