@@ -362,8 +362,10 @@ const eventsByIDEndpoint = async (request, response, next) => {
           }
 
           const updatedEvent = await pool.query(
-            "UPDATE event SET $1 = $2 WHERE event_id = $3 RETURNING *",
-            [endpoint, value, id]
+            "UPDATE event SET " +
+              endpoint +
+              " = $1 WHERE event_id = $2 RETURNING *",
+            [value, id]
           );
           //200- OK (Event successfully modified)
           response.status(200).json(updatedEvent.rows[0]);
@@ -396,8 +398,10 @@ const eventsByIDEndpoint = async (request, response, next) => {
                 );
             }
             const updatedEvent = await pool.query(
-              "UPDATE event SET $1 = $2 WHERE event_id = $3 RETURNING *",
-              [endpoint, value, id]
+              "UPDATE event SET " +
+                endpoint +
+                " = $1 WHERE event_id = $2 RETURNING *",
+              [value, id]
             );
             //200- OK (Event successfully modified)
             response.status(200).json(updatedEvent.rows[0]);
