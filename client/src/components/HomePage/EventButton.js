@@ -6,6 +6,7 @@ import React from "react";
 function EventButton(props) {
     return (
       <div aria-label={props.name} className="EventButton">
+        <a>
           <div className="EventButtonCircle">
           </div>
           <div className="EventButtonTitle">
