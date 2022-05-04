@@ -1099,7 +1099,7 @@ const accommodationGroupsByID = async (request, response) => {
         }
 
         const updatedAcc = await pool.query(
-          "UPDATE accommodation SET flat_num = $1, block_num = $2, acc_location = $3 WHERE acc_id = $6 RETURNING *",
+          "UPDATE accommodation SET flat_num = $1, block_num = $2, acc_location = $3 WHERE acc_id = $4 RETURNING *",
           [flat, block, location, id]
         );
         //200- OK (Event successfully modified)
@@ -1233,8 +1233,10 @@ const accommodationGroupsByIDEndpoint = async (request, response) => {
         }
 
         const updatedAccommodation = await pool.query(
-          "UPDATE accommodation SET $1 = $2 WHERE acc_id = $3 RETURNING *",
-          [endpoint, value, id]
+          "UPDATE accommodation SET " +
+            endpoint +
+            " = $1 WHERE acc_id = $2 RETURNING *",
+          [value, id]
         );
         //200- OK (Event successfully modified)
         response.status(200).json(updatedAccommodation.rows[0]);
