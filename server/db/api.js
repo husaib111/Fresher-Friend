@@ -880,7 +880,16 @@ const courseGroupsByIDEndpoint = async (request, response) => {
         response.status(404).send("No course found for ID " + id + ".");
       }
       //200- OK (Course sent)
-      response.status(200).json(course.rows[0]);
+      switch (endpoint) {
+        case "course_name":
+          response.status(200).json(course.rows[0].course_name);
+          break;
+        case "duration":
+          response.status(200).json(course.rows[0].duration);
+          break;
+        default:
+          response.status(500).send("Unknown error, please contact developer.");
+      }
     } else if (method == "POST") {
       const { username, password } = getAuth(request);
 
@@ -911,7 +920,9 @@ const courseGroupsByIDEndpoint = async (request, response) => {
         }
 
         const updatedCourse = await pool.query(
-          "UPDATE courses SET $1 = $2 WHERE course_id = $3 RETURNING *",
+          "UPDATE courses SET" +
+            endpoint +
+            " = $2 WHERE course_id = $3 RETURNING *",
           [endpoint, value, id]
         );
         //200- OK (Event successfully modified)
