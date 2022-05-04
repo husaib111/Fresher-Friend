@@ -239,9 +239,9 @@ const CreateAccount = () => {
         </p>
         <p>
           Interests
-          <label className="football">
+          <label className="check-container">
           <input
-            aria-label="Interest checkbox"
+            aria-label="Interest football"
             className="checkbox"
             type="checkbox"
             //checked={checked1}
@@ -249,9 +249,9 @@ const CreateAccount = () => {
           />
           Football
         </label>
-		<label className="games">
+		<label className="check-container">
           <input
-            aria-label="Interest checkbox"
+            aria-label="Interest games"
             className="checkbox"
             type="checkbox"
             //checked={checked2}
@@ -259,9 +259,9 @@ const CreateAccount = () => {
           />
           Games
         </label>
-		<label className="travel">
+		<label className="check-container">
           <input
-            aria-label="Interest checkbox"
+            aria-label="Interest travel"
             className="checkbox"
             type="checkbox"
             //checked={checked3}
@@ -269,9 +269,9 @@ const CreateAccount = () => {
           />
           Travel
         </label>
-		<label className="cycling">
+		<label className="check-container">
           <input
-            aria-label="Interest checkbox"
+            aria-label="Interest cycling"
             className="checkbox"
             type="checkbox"
             //checked={checked4}
