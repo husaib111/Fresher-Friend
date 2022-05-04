@@ -239,7 +239,7 @@ const CreateAccount = () => {
         </p>
         <p>
           Interests
-          <label className="check-container">
+          <label className="football">
           <input
             aria-label="Interest checkbox"
             className="checkbox"
@@ -249,7 +249,7 @@ const CreateAccount = () => {
           />
           Football
         </label>
-		<label className="check-container">
+		<label className="games">
           <input
             aria-label="Interest checkbox"
             className="checkbox"
@@ -259,7 +259,7 @@ const CreateAccount = () => {
           />
           Games
         </label>
-		<label className="check-container">
+		<label className="travel">
           <input
             aria-label="Interest checkbox"
             className="checkbox"
@@ -269,7 +269,7 @@ const CreateAccount = () => {
           />
           Travel
         </label>
-		<label className="check-container">
+		<label className="cycling">
           <input
             aria-label="Interest checkbox"
             className="checkbox"
