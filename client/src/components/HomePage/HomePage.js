@@ -162,7 +162,7 @@ const HomePage = () => {
     </label>
     <br /><br />
     <input
-          aria-label="loginButton"
+          aria-label="Create Event button"
           type="submit"
           value="Create Event"
           className="loginButton btn btn-primary"
