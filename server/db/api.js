@@ -545,18 +545,18 @@ const eventsByIDInvites = async (request, response) => {
         if (inviteCheck.rows[0]) {
           //409 - Conflict (invite already exists)
           response.status(409).send("Invite in event for user already exists.");
-        }
-
-        await pool.query(
-          "INSERT INTO invites (user_id, event_id) VALUES ($1, $2)",
-          [invitee, id]
-        );
-        //201 - Created
-        response
-          .status(201)
-          .send(
-            "User " + invitee + " has been successfully invited to the event."
+        } else {
+          await pool.query(
+            "INSERT INTO invites (user_id, event_id) VALUES ($1, $2)",
+            [invitee, id]
           );
+          //201 - Created
+          response
+            .status(201)
+            .send(
+              "User " + invitee + " has been successfully invited to the event."
+            );
+        }
       } else if (account == "USER") {
         if (!invitee) {
           //400 - Bad Request (Missing body)
@@ -583,18 +583,18 @@ const eventsByIDInvites = async (request, response) => {
         if (inviteCheck.rows[0]) {
           //409 - Conflict (invite already exists)
           response.status(409).send("Invite in event for user already exists.");
-        }
-
-        await pool.query(
-          "INSERT INTO invites (user_id, event_id) VALUES ($1, $2)",
-          [invitee, id]
-        );
-        //201 - Created
-        response
-          .status(201)
-          .send(
-            "User " + invitee + " has been successfully invited to the event."
+        } else {
+          await pool.query(
+            "INSERT INTO invites (user_id, event_id) VALUES ($1, $2)",
+            [invitee, id]
           );
+          //201 - Created
+          response
+            .status(201)
+            .send(
+              "User " + invitee + " has been successfully invited to the event."
+            );
+        }
       } else {
         //500 - Internal Server Error
         response
@@ -633,16 +633,16 @@ const eventsByIDInvites = async (request, response) => {
             .send(
               "Could not be deleted because invitee is not invited to the event."
             );
+        } else {
+          await pool.query(
+            "DELETE FROM invites WHERE user_id = $1 AND event_id = $2",
+            [invitee, id]
+          );
+          //200 - OK
+          response
+            .status(200)
+            .send("Invitee successfully deleted from the event invites.");
         }
-
-        await pool.query(
-          "DELETE FROM invites WHERE user_id = $1 AND event_id = $2",
-          [invitee, id]
-        );
-        //200 - OK
-        response
-          .status(200)
-          .send("Invitee successfully deleted from the event invites.");
       } else if (account == "USER") {
         if (!invitee) {
           //400 - Bad Request (Missing body)
@@ -666,23 +666,23 @@ const eventsByIDInvites = async (request, response) => {
           "SELECT * FROM invites WHERE user_id = $1 AND event_id = $2",
           [invitee, id]
         );
-        if (!invite.rows[0]) {
+        if (!invite.rows[0] == 0 || !invite.rows[0].event_id) {
           //409 - Conflict (Invitee is not invited)
           response
             .status(409)
             .send(
               "Could not be deleted because invitee is not invited to the event."
             );
+        } else {
+          await pool.query(
+            "DELETE FROM invites WHERE user_id = $1 AND event_id = $2",
+            [invitee, id]
+          );
+          //200 - OK
+          response
+            .status(200)
+            .send("Invitee successfully deleted from the event invites.");
         }
-
-        await pool.query(
-          "DELETE FROM invites WHERE user_id = $1 AND event_id = $2",
-          [invitee, id]
-        );
-        //200 - OK
-        response
-          .status(200)
-          .send("Invitee successfully deleted from the event invites.");
       } else {
         //500 - Internal Server Error
         response
