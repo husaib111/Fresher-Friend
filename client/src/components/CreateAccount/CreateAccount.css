@@ -5,6 +5,7 @@
   --ff-lightpurple: #4b3c96;
   --ff-indigo: #251c52;
   --ff-purple: #362b6a;
+  --ff-blue: #0d6efd;
   --ff-red: #d8313f;
   --ff-black: #141414;
   --ff-gray: #3e3e3e;
@@ -15,10 +16,6 @@
 * {
   font-family: "Fredoka", sans-serif;
   font-weight: 300;
-}
-
-a, a:link, a:hover a:visited {
-	color: #0d6efd;
 }
 
 hr {

@@ -3,10 +3,12 @@
 /* COLOR PALETTE */
 :root {
   --ff-purple: #7267ab;
-  --ff-red: #d8313f;
   --ff-black: #1f1f1f;
   --ff-gray: #3d3d3d;
   --ff-white: #dfdfdf;
+  --ff-blue: #0d6efd;
+  --ff-iceblue: #7bc4ff;
+  --ff-red: #d8313f;
 }
 /* COLOR PALETTE */
 
@@ -30,11 +32,11 @@ h3 {
   color: var(--ff-purple);
 }
 
-a, a:link, a:visited {
-  color: var(--ff-purple);
+a, a:link,  a:visited {
+	color: var(--ff-iceblue);
 }
 
-a:hover {
+a, a:hover, a:focus {
   color: var(--ff-red);
 }
 
