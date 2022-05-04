@@ -81,16 +81,16 @@ const CreateAccount = () => {
                   );
                 } else {
                   const interests = [];
-                  if (checked1 == true) {
+                  if (checked1 === true) {
                     interests.append("1");
                   }
-                  if (checked2 == true) {
+                  if (checked2 === true) {
                     interests.append("2");
                   }
-                  if (checked3 == true) {
+                  if (checked3 === true) {
                     interests.append("3");
                   }
-                  if (checked4 == true) {
+                  if (checked4 === true) {
                     interests.append("4");
                   }
                   const response = await Axios.post(
