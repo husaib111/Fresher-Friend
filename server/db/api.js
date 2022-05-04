@@ -438,7 +438,7 @@ const eventsByIDInvites = async (request, response) => {
     const { invitee } = request.body;
     const { username, password } = getAuth(request);
     let account = "PUBLIC";
-    const user = {};
+    let user = {};
 
     if (username == "admin" && password == SECRET) {
       account = "ADMIN";
