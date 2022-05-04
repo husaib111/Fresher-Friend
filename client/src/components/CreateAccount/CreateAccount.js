@@ -80,19 +80,19 @@ const CreateAccount = () => {
                     "Before you can proceed, you need to agree to the Privacy Policy."
                   );
                 } else {
-					const interests = [];
-			if (checked1 == true){
-				interests.append('1');
-			}
-			if (checked2 == true){
-				interests.append('2');
-			}
-			if (checked3 == true){
-				interests.append('3');
-			}
-			if (checked4 == true){
-				interests.append('4');
-			}
+                  const interests = [];
+                  if (checked1 == true) {
+                    interests.append("1");
+                  }
+                  if (checked2 == true) {
+                    interests.append("2");
+                  }
+                  if (checked3 == true) {
+                    interests.append("3");
+                  }
+                  if (checked4 == true) {
+                    interests.append("4");
+                  }
                   const response = await Axios.post(
                     "https://www.fresher-friend.bham.team:5001/createAccount",
                     {
@@ -103,7 +103,7 @@ const CreateAccount = () => {
                       lastName: surname,
                       courseId: course,
                       accId: accom,
-					  interests: bodyFormData
+                      //interests: bodyFormData
                     },
                     {
                       withCredentials: true,
@@ -132,11 +132,18 @@ const CreateAccount = () => {
   return (
     <div>
       <h1 className="logo" aria-label="Fresher Friend Logo">
-        <GiThreeFriends className="FresherFriendLogo" aria-label="Fresher Friend Logo"/>
+        <GiThreeFriends
+          className="FresherFriendLogo"
+          aria-label="Fresher Friend Logo"
+        />
       </h1>
       <h1 className="maintitle">Fresher Friend</h1>
       <h2 className="subtitle">Create Your Account</h2>
-      <form className="loginForm" onSubmit={loginUser} aria-label="Account creation form">
+      <form
+        className="loginForm"
+        onSubmit={loginUser}
+        aria-label="Account creation form"
+      >
         <div className="mb-3 inputDiv" aria-label="Account creation">
           <input
             aria-label="firstNameInput"
@@ -212,28 +219,44 @@ const CreateAccount = () => {
           />
         </div>
         <p>
-         Accommodation:&emsp;
-         <select
-         aria-label="Accommodation drop-down menu"
-          class="dropdown"
-          value={accom}
-          onChange={(e) => setAccom(e.target.value)}
-         >
-          <option class="dropdown" value="0">
-            Choose your accommodation
-          </option>
-          <option class="dropdown" value="1">
-            Jarratt
-          </option>
-          <option class="dropdown" value="2">Aitken</option>
-		<option class="dropdown" value="3">Ashcroft</option>
-		<option class="dropdown" value="4">Battery Park</option>
-		<option class="dropdown" value="5">Bournbrook</option>
-		<option class="dropdown" value="6">Elgar Court</option>
-		<option class="dropdown" value="7">Mason</option>
-		<option class="dropdown" value="8">Shackleton</option>
-		<option class="dropdown" value="9">Tennis Court</option>
-        </select>
+          Accommodation:&emsp;
+          <select
+            aria-label="Accommodation drop-down menu"
+            class="dropdown"
+            value={accom}
+            onChange={(e) => setAccom(e.target.value)}
+          >
+            <option class="dropdown" value="0">
+              Choose your accommodation
+            </option>
+            <option class="dropdown" value="1">
+              Jarratt
+            </option>
+            <option class="dropdown" value="2">
+              Aitken
+            </option>
+            <option class="dropdown" value="3">
+              Ashcroft
+            </option>
+            <option class="dropdown" value="4">
+              Battery Park
+            </option>
+            <option class="dropdown" value="5">
+              Bournbrook
+            </option>
+            <option class="dropdown" value="6">
+              Elgar Court
+            </option>
+            <option class="dropdown" value="7">
+              Mason
+            </option>
+            <option class="dropdown" value="8">
+              Shackleton
+            </option>
+            <option class="dropdown" value="9">
+              Tennis Court
+            </option>
+          </select>
         </p>
         <p>
           Course:&emsp;
@@ -249,71 +272,100 @@ const CreateAccount = () => {
             <option class="dropdown" value="1">
               Computer Science
             </option>
-            <option class="dropdown" value="2">English Lang</option>
-		<option class="dropdown" value="3">History of Art</option>
-		<option class="dropdown" value="4">Mech Engineering</option>
-		<option class="dropdown" value="5">Philosophy</option>
-		<option class="dropdown" value="6">Physics/Astrophysics</option>
-		<option class="dropdown" value="7">Sociology</option>
-		<option class="dropdown" value="8">Applied Maths</option>
-		<option class="dropdown" value="9">Geology</option>
-		<option class="dropdown" value="10">Human Biology</option>
-		<option class="dropdown" value="11">Music</option>
-		<option class="dropdown" value="12">Law</option>
-		<option class="dropdown" value="13">Business</option>
-		<option class="dropdown" value="14">Medicine</option>
-		<option class="dropdown" value="15">Finance</option>
-		<option class="dropdown" value="16">Sport Science</option>
-
+            <option class="dropdown" value="2">
+              English Lang
+            </option>
+            <option class="dropdown" value="3">
+              History of Art
+            </option>
+            <option class="dropdown" value="4">
+              Mech Engineering
+            </option>
+            <option class="dropdown" value="5">
+              Philosophy
+            </option>
+            <option class="dropdown" value="6">
+              Physics/Astrophysics
+            </option>
+            <option class="dropdown" value="7">
+              Sociology
+            </option>
+            <option class="dropdown" value="8">
+              Applied Maths
+            </option>
+            <option class="dropdown" value="9">
+              Geology
+            </option>
+            <option class="dropdown" value="10">
+              Human Biology
+            </option>
+            <option class="dropdown" value="11">
+              Music
+            </option>
+            <option class="dropdown" value="12">
+              Law
+            </option>
+            <option class="dropdown" value="13">
+              Business
+            </option>
+            <option class="dropdown" value="14">
+              Medicine
+            </option>
+            <option class="dropdown" value="15">
+              Finance
+            </option>
+            <option class="dropdown" value="16">
+              Sport Science
+            </option>
           </select>
         </p>
         <p>
           Interests
           <label className="check-container">
-          <input
-            aria-label="Interest football"
-            className="checkbox"
-            type="checkbox"
-            checked={checked1}
-            onChange={handleChange1}
-          />
-          Football
-        </label>
-		<label className="check-container">
-          <input
-            aria-label="Interest games"
-            className="checkbox"
-            type="checkbox"
-            checked={checked2}
-            onChange={handleChange2}
-          />
-          Games
-        </label>
-		<label className="check-container">
-          <input
-            aria-label="Interest travel"
-            className="checkbox"
-            type="checkbox"
-            checked={checked3}
-            onChange={handleChange3}
-          />
-          Travel
-        </label>
-		<label className="check-container">
-          <input
-            aria-label="Interest cycling"
-            className="checkbox"
-            type="checkbox"
-            checked={checked4}
-            onChange={handleChange4}
-          />
-          Cycling
-        </label>
+            <input
+              aria-label="Interest football"
+              className="checkbox"
+              type="checkbox"
+              checked={checked1}
+              onChange={handleChange1}
+            />
+            Football
+          </label>
+          <label className="check-container">
+            <input
+              aria-label="Interest games"
+              className="checkbox"
+              type="checkbox"
+              checked={checked2}
+              onChange={handleChange2}
+            />
+            Games
+          </label>
+          <label className="check-container">
+            <input
+              aria-label="Interest travel"
+              className="checkbox"
+              type="checkbox"
+              checked={checked3}
+              onChange={handleChange3}
+            />
+            Travel
+          </label>
+          <label className="check-container">
+            <input
+              aria-label="Interest cycling"
+              className="checkbox"
+              type="checkbox"
+              checked={checked4}
+              onChange={handleChange4}
+            />
+            Cycling
+          </label>
         </p>
         <p>
           In order to register to Fresher Friend, you must agree to the &nbsp;
           <a data-testid="privacy policy Link" href="/privacy">
-          Privacy Policy
+            Privacy Policy
           </a>
         </p>
         <p>
@@ -324,7 +376,8 @@ const CreateAccount = () => {
             checked={checked}
             onChange={handleChange}
           />
-          By continuing, I acknowledge and accept Fresher Friend’s Privacy Policy
+          By continuing, I acknowledge and accept Fresher Friend’s Privacy
+          Policy
         </p>
         <input
           aria-label="create Account Button"
@@ -333,7 +386,10 @@ const CreateAccount = () => {
           className="loginButton btn btn-primary"
         ></input>
         <form action="/#">
-          <button aria-label="Return to login Button" className="btn btn-primary">
+          <button
+            aria-label="Return to login Button"
+            className="btn btn-primary"
+          >
             Return to Login
           </button>
         </form>
