@@ -490,7 +490,7 @@ const eventsByIDInvites = async (request, response) => {
           [id]
         );
         const event = await pool.query(
-          "SELECT * FROM event WHERE organizer = $1 AND event_id = $2",
+          "SELECT * FROM event WHERE organiser = $1 AND event_id = $2",
           [user.rows[0].user_id, id]
         );
         if (!invites.rows[0] || !event.rows[0]) {
