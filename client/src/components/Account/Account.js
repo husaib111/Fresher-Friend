@@ -220,7 +220,7 @@ function Account() {
         <div className="statusButtons" aria-label="Profile status">
           <div className="statusButton" aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}>
             <FontAwesomeIcon 
-              aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}
+              aria-label={`statusIcon ${status[0] ? "isolating" : "not isolating"}`}
               className={`statusIcon ${status[0] ? "isolating" : ""}`}
               id={`statusIcon ${status[0] ? "isolating" : ""}`}
               icon={faCertificate}
@@ -231,7 +231,7 @@ function Account() {
           </div>
           <div className="statusButton" aria-label={`statusIcon ${status[1] ? "away" : ""}`}>
             <FontAwesomeIcon 
-              aria-label={`statusIcon ${status[1] ? "away" : ""}`}
+              aria-label={`statusIcon ${status[1] ? "away" : "here"}`}
               className={`statusIcon ${status[1] ? "away" : ""}`}
               id={`statusIcon ${status[1] ? "away" : ""}`}
               icon={faPlane}
@@ -242,7 +242,7 @@ function Account() {
           </div>
           <div className="statusButton" aria-label={`statusIcon ${status[2] ? "guest visiting" : ""}`}>
             <FontAwesomeIcon
-              aria-label={`statusIcon ${status[2] ? "guest visiting" : ""}`}
+              aria-label={`statusIcon ${status[2] ? "guest visiting" : "no guests visiting"}`}
               className={`statusIcon ${status[2] ? "guest" : ""}`}
               id={`statusIcon ${status[2] ? "guest" : ""}`}
               icon={faUser}
