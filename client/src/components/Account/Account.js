@@ -30,7 +30,7 @@ function Account() {
   const generateInterests = (row) => {
     const { interest_name, interest_icon } = row;
     return (
-      <Interest interestName={interest_name} icon={["fas", interest_icon]} />
+      <Interest aria-label={interest_name} interestName={interest_name} icon={["fas", interest_icon]} />
     );
   };
 
