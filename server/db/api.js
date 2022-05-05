@@ -631,6 +631,8 @@ const eventsByIDInvites = async (request, response) => {
           "SELECT * FROM invites WHERE user_id = $1 AND event_id = $2",
           [invitee, id]
         );
+        //TEST
+        response.status(200).json(invite);
         if (!invite.rows[0]) {
           //409 - Conflict (Invitee is not invited)
           response
