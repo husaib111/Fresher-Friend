@@ -241,9 +241,7 @@ const eventsByID = async (request, response) => {
 
         await pool.query("DELETE FROM event WHERE event_id = $1", [id]);
         //200- OK (Event successfully deleted)
-        response
-          .status(200)
-          .send("Successfully deleted event with ID $1.", [id]);
+        response.status(200).send("Successfully deleted event with ID " + id);
       } else {
         const user = await pool.query(
           "SELECT user_id, email, pass FROM users NATURAL JOIN passwords WHERE email = $1",
@@ -265,9 +263,7 @@ const eventsByID = async (request, response) => {
           }
           await pool.query("DELETE FROM event WHERE event_id = $1", [id]);
           //200- OK (Event successfully deleted)
-          response
-            .status(200)
-            .send("Successfully deleted event with ID $1.", [id]);
+          response.status(200).send("Successfully deleted event with ID " + id);
         } else {
           //401- Unauthorized (Incorrect authorization credentials)
           response.status(401).send("Your authorization is incorrect.");
