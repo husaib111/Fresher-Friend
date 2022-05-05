@@ -15,7 +15,6 @@ import Navbar from "../Navbar/Navbar";
 function Account() {
   library.add(fas);
   const [status, setStatus] = useState([]);
-  const [priv, setPriv] = useState(true);
 
   const doLogout = async () => {
     await Axios.get("https://www.fresher-friend.bham.team:5001/logout/", {
@@ -187,17 +186,6 @@ function Account() {
     // console.log(status);
   };
 
-  const togglePrivate = () => {
-    if(priv) {
-      setPriv(false);
-      console.log("private account: " + priv);
-    } else {
-      setPriv(true);
-      console.log("private account: " + priv);
-    }
-    handleClick(3);
-  };
-
   return (
     <div>
       <Navbar />
@@ -265,8 +253,8 @@ function Account() {
         <div className="settings">
             <label><input className="PrivateProfileToggle"
                  type="checkbox"
-                 defaultChecked={priv}
-                 onChange={() => togglePrivate()}
+                 defaultChecked={status[3]}
+			  onClick={() => handleClick(3)}
                  /> Private profile</label>
           <br />
           <form onSubmit={doLogout}>
