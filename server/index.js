@@ -89,6 +89,7 @@ app.get("/userInfo/:userId", db.getUserBasicInfo);
 app.get("/test", auth.userAuth, db.testFunction);
 app.get("/userInterests/:userId", db.getUserInterests);
 app.get("/accLocations", db.getAccLocationList);
+app.get("/Courses", db.getCourseList);
 app.get("/flats/:AccLocationName", db.getFlatsFromAccLocation);
 
 module.exports = app;

@@ -241,7 +241,7 @@ const getAccLocationList = async(request, response) => {
 
 const getFlatsFromAccLocation =  async(request, response) => {
   try {
-    const {accLocationName} = request.body;
+    const {accLocationName} = request.params;
     const data = await pool.query(
         "SELECT acc_id, flat_num FROM accommodation WHERE acc_location = $1",
         [accLocationName]
