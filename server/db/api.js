@@ -627,7 +627,7 @@ const eventsByIDInvites = async (request, response) => {
           //404- Not Found (No event found with event_id)
           response.status(404).send("No event found for ID " + id + ".");
         }
-        const invite = pool.query(
+        const invite = await pool.query(
           "SELECT * FROM invites WHERE user_id = $1 AND event_id = $2",
           [invitee, id]
         );
@@ -669,7 +669,7 @@ const eventsByIDInvites = async (request, response) => {
               "No event found with ID " + id + " for user " + username + "."
             );
         }
-        const invite = pool.query(
+        const invite = await pool.query(
           "SELECT * FROM invites WHERE user_id = $1 AND event_id = $2",
           [invitee, id]
         );
