@@ -226,6 +226,46 @@ const testFunction = async (request, response) => {
   }
 };
 
+const getAccLocationList = async(request, response) => {
+  try {
+    const data = await pool.query(
+        "SELECT DISTINCT acc_location FROM accommodation"
+    );
+    response.json(data.rows)
+  }
+  catch (e) {
+    console.log(e.message);
+  }
+}
+
+
+const getFlatsFromAccLocation =  async(request, response) => {
+  try {
+    const {accLocationName} = request.body;
+    const data = await pool.query(
+        "SELECT acc_id, flat_num FROM accommodation WHERE acc_location = $1",
+        [accLocationName]
+    );
+    response.json(data.rows)
+  }
+  catch (e) {
+    console.log(e.message);
+  }
+}
+
+const getCourseList = async(request, response) => {
+  try {
+    const data = await pool.query(
+        "SELECT course_id, course_name FROM courses"
+    );
+    response.json(data.rows)
+  }
+  catch (e) {
+    console.log(e.message);
+  }
+}
+
+
 const getAccomInfo = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);
@@ -663,5 +703,7 @@ module.exports = {
   postCourseMessage,
   postAccMessage,
   createAccount,
-  getLoggedUserEmailForFrontEnd
+  getFlatsFromAccLocation,
+  getAccLocationList,
+  getCourseList
 };
