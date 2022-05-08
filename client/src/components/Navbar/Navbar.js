@@ -163,7 +163,7 @@ function MenuBarButton() {
     </div>
   );
 }
-
+let prevWebpage = document.referrer;
 let userAnon = true;
 let isShown = false;
 
@@ -187,6 +187,11 @@ function tabAccessSidebar() {
 }
 
 function disableMenuItems() {
+  if(prevWebpage === "https://www.fresher-friend.bham.team/#" || 
+  prevWebpage === "https://www.fresher-friend.bham.team/createAccount?") {
+    userAnon = true;
+
+  }
   if(userAnon && document.getElementById("NavMenu")) {
     document.getElementById("homeM").style.display = 'none';
     document.getElementById("homeM").style.zIndex = -1;
@@ -201,7 +206,6 @@ function disableMenuItems() {
   } else {
     document.getElementById("returnM").style.display = 'none';
     document.getElementById("returnM").style.zIndex = -1;
-
   }
 }
 /*
