@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 //import { FaUniversalAccess } from "react-icons/fa";
 import { GiThreeFriends } from "react-icons/gi";
+//import { GrReturn } from "react-icons/gr";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Navbar.css";
 import {
@@ -58,7 +59,9 @@ function MenuBarButton() {
 
   const toggleNavbarMenu = (e) => {
     let oldMenuStatus = MenuStatus;
+    disableMenuItems();
     tabAccessSidebar();
+
     switch (oldMenuStatus[e]) {
       case "I": {
         oldMenuStatus[e] = "O";
@@ -106,7 +109,7 @@ function MenuBarButton() {
         />
 
         <ul className="TopNavbarMenuItems">
-          <li aria-label="home">
+          <li id="homeM" aria-label="home">
             {" "}
             <a href={"/home"} aria-label="Home button">
               {" "}
@@ -114,7 +117,7 @@ function MenuBarButton() {
               Home
             </a>
           </li>
-          <li aria-label="My profile">
+          <li id="profileM" aria-label="My profile">
             {" "}
             <a href={"/myAccount"} aria-label="My Profile button">
               {" "}
@@ -122,7 +125,7 @@ function MenuBarButton() {
               My Profile
             </a>
           </li>
-          <li aria-label="About us">
+          <li id="aboutM" aria-label="About us">
             {" "}
             <a href={"/about"} aria-label="About us button">
               {" "}
@@ -130,7 +133,7 @@ function MenuBarButton() {
               About Us{" "}
             </a>
           </li>
-          <li aria-label="Privacy policy">
+          <li id="privacyM" aria-label="Privacy policy">
             {" "}
             <a href={"/privacy"} aria-label="Privacy policy button">
               {" "}
@@ -138,12 +141,20 @@ function MenuBarButton() {
               Privacy Policy
             </a>
           </li>
-          <li aria-label="log out">
+          <li id="logOutM" aria-label="log out">
             {" "}
             <a href={"/#"} onClick={doLogout} aria-label="log out button">
               {" "}
               <MdLogout className="NavbarMenuIcon" />
               Log Out
+            </a>
+          </li>
+          <li id="returnM" aria-label="Return to login" >
+            {" "}
+            <a href={"/#"} aria-label="return to login button">
+              {" "}
+              <MdLogout className="NavbarMenuIcon" />
+              Return to Login
             </a>
           </li>
         </ul>
@@ -153,7 +164,14 @@ function MenuBarButton() {
   );
 }
 
+let userAnon = true;
 let isShown = false;
+
+/*
+function userAnonymous() {
+  userAnon = false;
+}
+*/
 
 function tabAccessSidebar() {
   if(isShown && document.getElementById("NavMenu")) {
@@ -166,6 +184,25 @@ function tabAccessSidebar() {
     isShown = true;
   }
 
+}
+
+function disableMenuItems() {
+  if(userAnon && document.getElementById("NavMenu")) {
+    document.getElementById("homeM").style.display = 'none';
+    document.getElementById("homeM").style.zIndex = -1;
+    document.getElementById("profileM").style.display = 'none';
+    document.getElementById("profileM").style.zIndex = -1;
+    document.getElementById("aboutM").style.display = 'none';
+    document.getElementById("aboutM").style.zIndex = -1;
+    document.getElementById("privacyM").style.display = 'none';
+    document.getElementById("privacyM").style.zIndex = -1;
+    document.getElementById("logOutM").style.display = 'none';
+    document.getElementById("logOutM").style.zIndex = -1;
+  } else {
+    document.getElementById("returnM").style.display = 'none';
+    document.getElementById("returnM").style.zIndex = -1;
+
+  }
 }
 /*
 <ul className="BottomNavbarMenuItems">

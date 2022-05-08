@@ -187,8 +187,8 @@ function PrivacyPolicy(props) {
           <h3>Privacy policies of external websites</h3>
           <p>
             The Fresher Friend website may contain links to other external
-            sites. Our privacy policy applies only to our website.By clicking
-            these links,it is then your responsibility to read their additional
+            sites. Our privacy policy applies only to our website. By clicking
+            these links, it is then your responsibility to read their additional
             privacy policies.
           </p>
         </div>
@@ -225,7 +225,9 @@ function PrivacyPolicy(props) {
             Email:&nbsp;
             <a href="mailto:icocasework@ico.org.uk">icocasework@ico.org.uk</a>
           </label>
+          <br></br>
           <label>Telephone: 0303 123 1113</label>
+          <br></br>
           <label>Postal Address:</label>
           <ul>
             <li>Information Commissioner’s Office</li>

@@ -37,6 +37,7 @@ const Login = () => {
 
       if (data.success) {
         alert("Login Successful!");
+        Navbar.userAnon = false;
         window.location.href = "/home";
       } else {
         alert(
