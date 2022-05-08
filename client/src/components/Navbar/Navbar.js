@@ -164,7 +164,6 @@ function MenuBarButton() {
   );
 }
 
-let anonUser = false;
 let prevWebpage = document.referrer;
 let currWebpage = window.location.href;
 let isShown = false;
@@ -183,12 +182,13 @@ function tabAccessSidebar() {
 }
 
 function disableMenuItems() {
+  let anonUser = false;
   if((prevWebpage === "https://www.fresher-friend.bham.team/#" || 
   prevWebpage === "https://www.fresher-friend.bham.team/createAccount?" || 
   prevWebpage === "http://localhost:3000/#" ||
   prevWebpage === "http://localhost:3000/createAccount?") 
-  && currWebpage === "https://www.fresher-friend.bham.team/privacy" 
-  || currWebpage === "http://localhost:3000/privacy") {
+  && (currWebpage === "https://www.fresher-friend.bham.team/privacy" 
+  || currWebpage === "http://localhost:3000/privacy")) {
     anonUser = true;
   }
   if(anonUser && document.getElementById("NavMenu")) {
