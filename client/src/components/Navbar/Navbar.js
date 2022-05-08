@@ -163,15 +163,11 @@ function MenuBarButton() {
     </div>
   );
 }
-let prevWebpage = document.referrer;
-let userAnon = true;
-let isShown = false;
 
-/*
-function userAnonymous() {
-  userAnon = false;
-}
-*/
+let anonUser = false;
+let prevWebpage = document.referrer;
+let currWebpage = window.location.href;
+let isShown = false;
 
 function tabAccessSidebar() {
   if(isShown && document.getElementById("NavMenu")) {
@@ -187,12 +183,15 @@ function tabAccessSidebar() {
 }
 
 function disableMenuItems() {
-  if(prevWebpage === "https://www.fresher-friend.bham.team/#" || 
-  prevWebpage === "https://www.fresher-friend.bham.team/createAccount?") {
-    userAnon = true;
-
+  if((prevWebpage === "https://www.fresher-friend.bham.team/#" || 
+  prevWebpage === "https://www.fresher-friend.bham.team/createAccount?" || 
+  prevWebpage === "http://localhost:3000/#" ||
+  prevWebpage === "http://localhost:3000/createAccount?") 
+  && currWebpage === "https://www.fresher-friend.bham.team/privacy" 
+  || currWebpage === "http://localhost:3000/privacy") {
+    anonUser = true;
   }
-  if(userAnon && document.getElementById("NavMenu")) {
+  if(anonUser && document.getElementById("NavMenu")) {
     document.getElementById("homeM").style.display = 'none';
     document.getElementById("homeM").style.zIndex = -1;
     document.getElementById("profileM").style.display = 'none';
