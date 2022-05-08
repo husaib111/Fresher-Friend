@@ -182,7 +182,6 @@ function tabAccessSidebar() {
 }
 
 function disableMenuItems() {
-  console.log("A");
   let anonUser = false;
   if((prevWebpage === "https://www.fresher-friend.bham.team/#" || 
   prevWebpage === "https://www.fresher-friend.bham.team/" || 
@@ -193,7 +192,6 @@ function disableMenuItems() {
   && (currWebpage === "https://www.fresher-friend.bham.team/privacy" 
   || currWebpage === "http://localhost:3000/privacy")) {
     anonUser = true;
-    console.log("B");
   }
   console.log(currWebpage);
   console.log(prevWebpage);
@@ -208,11 +206,9 @@ function disableMenuItems() {
     document.getElementById("privacyM").style.zIndex = -1;
     document.getElementById("logOutM").style.display = 'none';
     document.getElementById("logOutM").style.zIndex = -1;
-    console.log("C");
   } else {
     document.getElementById("returnM").style.display = 'none';
     document.getElementById("returnM").style.zIndex = -1;
-    console.log("D");
   }
 }
 /*
