@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-//import { FaUniversalAccess } from "react-icons/fa";
 import { GiThreeFriends } from "react-icons/gi";
-//import { GrReturn } from "react-icons/gr";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Navbar.css";
 import {
@@ -28,21 +26,6 @@ function Navbar() {
    </div>
   );
 }
-
-/*
-function AccessibilitySwitch() {
-  return (
-    <div className="AccessibilitySwitch">
-        <FaUniversalAccess className={"NavbarIcon"} />
-        Accessibilty
-    </div>
-  );
-}
-
-
-AccessibilitySwitch.onclick = function () { swapStyleSheet("./Navbar-Accessible.css") };
-*/
-
 
 function MenuBarButton() {
   const [MenuStatus, setMenuStatus] = useState(["I"]);
@@ -149,6 +132,8 @@ function MenuBarButton() {
               Log Out
             </a>
           </li>
+        </ul>
+        <ul className="BottomNavbarMenuItems">
           <li id="returnM" aria-label="Return to login" >
             {" "}
             <a href={"/#"} aria-label="return to login button">
@@ -211,14 +196,5 @@ function disableMenuItems() {
     document.getElementById("returnM").style.zIndex = -1;
   }
 }
-/*
-<ul className="BottomNavbarMenuItems">
-          <li>
-              <FaUniversalAccess className="FresherFriendLogo"/>
-              Accessibilty supported
-          </li>
-        </ul>
-
-*/
 
 export default Navbar;
