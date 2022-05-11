@@ -170,7 +170,7 @@ function Account() {
           <div className="statusButton" aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}>
             <FontAwesomeIcon
             aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}
-              className={`statusIcon ${status[0] ? "isolating" : ""}`}
+              className={`statusIcon ${status[0] ? "isolating" : ""}`}    
               icon={faCertificate}
               tabIndex="0"
             />
@@ -195,7 +195,9 @@ function Account() {
             <p className="statusLabel">I have a guest</p>
           </div>
         </div>
-        <div className="interestBox" tabIndex={status[3] ? "-1" : "0"}>
+        <div className="interestBox" 
+        tabIndex={status[3] ? "-1" : "0"}
+        style={`display:${status[3] ? "none" : ""}`}>
           <h2>Interests</h2>
           <div className="interests">
             {interests}
