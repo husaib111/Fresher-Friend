@@ -146,6 +146,16 @@ function Account() {
     getStatus();
   },[getStatus,getInfo,getInterests]);
 
+  document.addEventListener('DOMContentLoaded', function() {
+    if(status[3] === 1) {
+      document.getElementById("interestB").style.display = 'none';
+      document.getElementById("interestB").style.zIndex = -1;
+      document.getElementById("accommodationI").innerText = "Private Account"
+    }
+ }, false);
+
+  
+  
   return (
     <div>
       <Navbar />
@@ -159,14 +169,11 @@ function Account() {
           </h1>
           <p className="About" aria-label="Course information">{info[3]}</p>
           {/* <p className="About">First Year</p> */}
-          <p className="About" aria-label="accommodation information">
+          <p id="accommodationI" className="About" aria-label="accommodation information">
             Flat {info[4]}, Block {info[5]}, {info[6]}
           </p>
         </div>
-        <div className="statusButtons" 
-             aria-label="Profile status" 
-             tabIndex={status[3] ? "-1" : "0"}
-             /*style={`display: ${status[3] ? "flex" : "flex"}`}*/ >
+        <div className="statusButtons" aria-label="Profile status">
           <div className="statusButton" aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}>
             <FontAwesomeIcon
             aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}
@@ -195,9 +202,9 @@ function Account() {
             <p className="statusLabel">I have a guest</p>
           </div>
         </div>
-        <div className="interestBox" 
-        tabIndex={status[3] ? "-1" : "0"}
-        style={`display:${status[3] ? "none" : ""}`}>
+        <div id="interestB" className="interestBox" 
+        /*tabIndex={status[3] ? "-1" : "0"}*/ >
+  
           <h2>Interests</h2>
           <div className="interests">
             {interests}
