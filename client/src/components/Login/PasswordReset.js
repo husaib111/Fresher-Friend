@@ -8,7 +8,7 @@ import Axios from "axios";
 const PasswordReset = () => {
 
     const [email, setEmail] = useState("");
-    const [user, setUser] = useState("");
+    //const [user, setUser] = useState("");
 
     async function resetP(event) {
       event.preventDefault();
@@ -32,7 +32,7 @@ const PasswordReset = () => {
 
         if(data.success) {
             console.log("User valid: " + email);
-            setUser(email);
+            //setUser(email);
         } else {
             alert("Your account is not recognised, please check your email address.");
         }
