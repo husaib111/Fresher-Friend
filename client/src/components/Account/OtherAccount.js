@@ -166,7 +166,7 @@ function Account() {
         <div className="statusButtons" 
              aria-label="Profile status" 
              tabIndex={status[3] ? "-1" : "0"}
-             style={`display: ${status[3] ? "none" : "flex"}`} >
+             style={`display: ${status[3] ? "flex" : "flex"}`} >
           <div className="statusButton" aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}>
             <FontAwesomeIcon
             aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}
