@@ -1,7 +1,7 @@
 import "./PasswordReset.css";
 import React, { useState } from "react";
 import { GiThreeFriends } from "react-icons/gi";
-import Axios from "axios";
+//import Axios from "axios";
 
 //const email = "fxa307@student.bham.ac.uk";
 
@@ -9,7 +9,7 @@ const PasswordReset = () => {
 
     const [email, setEmail] = useState("");
     //const [user, setUser] = useState("");
-
+    /*
     async function resetP(event) {
       event.preventDefault();
 
@@ -39,7 +39,7 @@ const PasswordReset = () => {
     
   
     }
-
+    */
     return (
         <div>
           <h1 className="logo" aria-label="Fresher Friend Logo">
@@ -60,7 +60,7 @@ const PasswordReset = () => {
                 className="form-control loginInput"
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)} 
                 placeholder="example@student.bham.ac.uk"
           />
         </div><input
@@ -68,7 +68,7 @@ const PasswordReset = () => {
           type="submit"
           value="Reset Password"
           className="loginButton btn btn-primary"
-          onClick={resetP}
+          /*onClick={resetP} */
         ></input>
         <form action="/#">
           <button

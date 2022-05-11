@@ -163,7 +163,10 @@ function Account() {
             Flat {info[4]}, Block {info[5]}, {info[6]}
           </p>
         </div>
-        <div className="statusButtons" aria-label="Profile status" tabIndex={status[3] ? "-1" : "0"} >
+        <div className="statusButtons" 
+             aria-label="Profile status" 
+             tabIndex={status[3] ? "-1" : "0"}
+             style={`display: ${status[3] ? "none" : "flex"}`} >
           <div className="statusButton" aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}>
             <FontAwesomeIcon
             aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}
