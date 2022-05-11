@@ -9,6 +9,7 @@ import TestExample from "./components/TestExample/TestExample";
 import PrivacyPolicy from "./components/Login/PrivacyPolicy";
 import About from "./components/Login/About";
 import CreateAccount from "./components/CreateAccount/CreateAccount";
+import PasswordReset from "./components/Login/PasswordReset";
 import ProfileUpload from "./components/Profile/profileUpload";
 import {
   BrowserRouter as Router,
@@ -28,10 +29,11 @@ class App extends React.Component {
           <Route path="account/:userName" element={<OtherAccount />} />
           <Route path="/group/:type" element={<Group />} />
           <Route path="/test" element={<TestExample />} />
-		  <Route path="/createAccount" element={<CreateAccount />} />
+		      <Route path="/createAccount" element={<CreateAccount />} />
+          <Route path="/passwordReset" element={<PasswordReset />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/about" element={<About />} />
-	  <Route path="/profileUpload" element={<ProfileUpload />} />
+	        <Route path="/profileUpload" element={<ProfileUpload />} />
 	</Routes>
       </Router>
     );

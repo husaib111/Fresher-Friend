@@ -130,6 +130,7 @@ function Account() {
           // console.log(isolating);
           console.log("setting status to"+isolating+away+guest+priv);
           setStatus([parseInt(isolating),parseInt(away),parseInt(guest),parseInt(priv)]);
+
         })
         .catch((e) => {
           console.log(e);
@@ -144,8 +145,6 @@ function Account() {
     getInterests();
     getStatus();
   },[getStatus,getInfo,getInterests]);
-
-
 
   return (
     <div>
@@ -164,7 +163,7 @@ function Account() {
             Flat {info[4]}, Block {info[5]}, {info[6]}
           </p>
         </div>
-        <div className="statusButtons" aria-label="Profile status">
+        <div className="statusButtons" aria-label="Profile status" tabIndex={status[3] ? "-1" : "0"} >
           <div className="statusButton" aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}>
             <FontAwesomeIcon
             aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}
@@ -193,7 +192,7 @@ function Account() {
             <p className="statusLabel">I have a guest</p>
           </div>
         </div>
-        <div className="interestBox">
+        <div className="interestBox" tabIndex={status[3] ? "-1" : "0"}>
           <h2>Interests</h2>
           <div className="interests">
             {interests}

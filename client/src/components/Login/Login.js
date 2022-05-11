@@ -20,7 +20,7 @@ const Login = () => {
       alert("Before you can proceed, you must agree to our Privacy Policy.");
     } else {
       const response = await Axios.post(
-        "https://www.fresher-friend.bham.team:5001/login",
+        "http://localhost:3000/passwordReset?",
         {
           email: email,
           password: password,
@@ -95,7 +95,7 @@ const Login = () => {
           className="loginButton btn btn-primary"
         ></input>
         <p>
-          <a href="/login" aria-label="forgot Password Link">
+          <a href="/passwordReset" aria-label="forgot Password Link">
             Forgot password
           </a>
         </p>
