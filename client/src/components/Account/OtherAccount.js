@@ -131,7 +131,13 @@ function Account() {
     getStatus();
   }, [getStatus, getInfo, getInterests]);
 
-  const accomodationInfo = "Flat " + info[4] + ", Block " + info[5] + ", " + info[6];
+  let accomodationInfo = "";
+
+  if(info[5] === null) {
+    accomodationInfo = "Flat " + info[4] + ", " + info[6];
+  } else {
+    accomodationInfo = "Flat " + info[4] + ", Block " + info[5] + ", " + info[6];
+  }
   
   return (
     <div>
@@ -193,7 +199,6 @@ function Account() {
         <div
           id="interestB"
           className="interestBox"
-          /*tabIndex={status[3] ? "-1" : "0"}*/
         >
           <h2>Interests</h2>
           <div className="interests" onLoad={privateProfile(status[3])}>
@@ -207,6 +212,7 @@ function Account() {
       </div>
     </div>
   );
+  
 }
 
 function privateProfile(privateStatus) {

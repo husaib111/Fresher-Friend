@@ -166,6 +166,14 @@ function Account() {
     // console.log(status);
   };
 
+  let accomodationInfo = "";
+
+  if(info[5] === null) {
+    accomodationInfo = "Flat " + info[4] + ", " + info[6];
+  } else {
+    accomodationInfo = "Flat " + info[4] + ", Block " + info[5] + ", " + info[6];
+  }
+
   return (
     <div>
       <Navbar />
@@ -184,7 +192,7 @@ function Account() {
           </p>
           {/* <p className="About">First Year</p> */}
           <p className="About" aria-label="accommodation information">
-            Flat {info[4]}, Block {info[5]}, {info[6]}
+            {accomodationInfo}
           </p>
         </div>
         <div className="statusButtons" aria-label="Profile status">
@@ -262,7 +270,7 @@ function Account() {
                  /> Private profile</label>
           <br />
           <form onSubmit={doLogout}>
-            <button className="logout btn btn-primary" type="submit">
+            <button className="logout btn btn-primacry" type="submit">
               Log out
             </button>
           </form>
