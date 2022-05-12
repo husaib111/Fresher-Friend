@@ -140,9 +140,9 @@ const CreateAccount = () => {
       <h1 className="maintitle">Fresher Friend</h1>
       <h2 className="subtitle">Create Your Account</h2>
       <form
-        className="loginForm"
-        onSubmit={loginUser}
+        className="loginForm"   
         aria-label="Account creation form"
+        onSubmit={loginUser}
       >
         <div className="mb-3 inputDiv" aria-label="Account creation">
           <input

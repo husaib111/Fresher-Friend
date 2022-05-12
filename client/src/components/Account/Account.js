@@ -201,6 +201,9 @@ function Account() {
               icon={faCertificate}
               tabIndex="0"
               onClick={(e) => handleClick(0)}
+              onKeyPress={(event) => {
+                event.key === "Enter" && handleClick(0);
+              }}
             />
             <p className="statusLabel">I'm isolating</p>
           </div>
@@ -215,6 +218,9 @@ function Account() {
               icon={faPlane}
               tabIndex="0"
               onClick={(e) => handleClick(1)}
+              onKeyPress={(event) => {
+                event.key === "Enter" && handleClick(1);
+              }}
             />
             <p className="statusLabel">I'm away</p>
           </div>
@@ -231,6 +237,9 @@ function Account() {
               icon={faUser}
               tabIndex="0"
               onClick={(e) => handleClick(2)}
+              onKeyPress={(event) => {
+                event.key === "Enter" && handleClick(2);
+              }}
             />
             <p className="statusLabel">I have a guest</p>
           </div>
@@ -246,15 +255,11 @@ function Account() {
           </div>
         </div>
         <div className="settings">
-          <label>
-            <input
-              className="PrivateProfileToggle"
-              type="checkbox"
-              defaultChecked={status[3]}
-              onClick={() => handleClick(3)}
-            />{" "}
-            Private profile
-          </label>
+            <label><input className="PrivateProfileToggle"
+                 type="checkbox"
+                 defaultChecked={status[3]}
+			           onClick={() => handleClick(3)}
+                 /> Private profile</label>
           <br />
           <form onSubmit={doLogout}>
             <button className="logout btn btn-primary" type="submit">

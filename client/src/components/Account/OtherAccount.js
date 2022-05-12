@@ -14,11 +14,13 @@ import Interest from "./Interest";
 import Axios from "axios";
 import Navbar from "../Navbar/Navbar";
 
+const [status,setStatus] = useState([]);
+
 function Account() {
   library.add(fas);
-  let { userName } = useParams();
-  const [status, setStatus] = useState([]);
-
+  
+  let {userName} = useParams();
+  
   const generateInterests = (row) => {
     const { interest_name, interest_icon } = row;
     return (
@@ -130,18 +132,8 @@ function Account() {
     getStatus();
   }, [getStatus, getInfo, getInterests]);
 
-  document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-      if (status[3] === 1) {
-        document.getElementById("interestB").style.display = "none";
-        document.getElementById("interestB").style.zIndex = -1;
-        document.getElementById("accommodationI").innerText = "Private Account";
-      }
-    },
-    false
-  );
-
+  const accomodationInfo = "Flat " + info[4] + ", Block " + info[5] + ", " + info[6];
+  
   return (
     <div>
       <Navbar />
@@ -157,12 +149,8 @@ function Account() {
             {info[3]}
           </p>
           {/* <p className="About">First Year</p> */}
-          <p
-            id="accommodationI"
-            className="About"
-            aria-label="accommodation information"
-          >
-            Flat {info[4]}, Block {info[5]}, {info[6]}
+          <p id="accommodationI" className="About" aria-label="accommodation information">
+            {accomodationInfo}
           </p>
         </div>
         <div className="statusButtons" aria-label="Profile status">
@@ -220,6 +208,12 @@ function Account() {
       </div>
     </div>
   );
+}
+
+if(status[3] === 1) {
+  document.getElementById("interestB").style.display = 'none';
+  document.getElementById("interestB").style.zIndex = -1;
+  document.getElementById("accommodationI").innerHTML = "Private Account";
 }
 
 export default Account;
