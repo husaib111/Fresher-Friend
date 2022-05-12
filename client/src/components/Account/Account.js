@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
+import pfp from "../../resources/default_pfp.png";
 import {
   faCertificate,
   faPlane,
@@ -29,7 +30,11 @@ function Account() {
   const generateInterests = (row) => {
     const { interest_name, interest_icon } = row;
     return (
-      <Interest aria-label={interest_name} interestName={interest_name} icon={["fas", interest_icon]} />
+      <Interest
+        aria-label={interest_name}
+        interestName={interest_name}
+        icon={["fas", interest_icon]}
+      />
     );
   };
 
@@ -52,6 +57,7 @@ function Account() {
           middle_name,
           last_name,
           course_name,
+
           flat_num,
           block_num,
           acc_location,
@@ -102,31 +108,6 @@ function Account() {
       });
   };
 
-
-    const getPF = async() => {
-	await Axios.get(
-	    "https://www.fresher-friend.bham.team/loggedInUserProfile/",
-	    {
-		withCredentials:true,
-		headers: {
-		    "Content-Type": "application/json",
-		},
-	    }
-	)
-	    .then((response) => {
-		console.log(response);
-		const {data} = response;
-		const {filename} = data;
-		console.log(filename);
-		setpf(filename);
-	    })
-	    .catch((e) => {
-		console.log(e);
-	    });
-    };
-
-  const [pf, setpf] = useState(() => getPF());
-
   useEffect(() => {
     getInfo();
     const getInterests = async () => {
@@ -151,7 +132,6 @@ function Account() {
     };
     getInterests();
     getStatus();
-    getPF();
   }, []);
 
   // useEffect(() => {
@@ -194,21 +174,28 @@ function Account() {
         <hr />
         <div className="basicInfo" aria-label="Profile information">
           <div className="pfpContainer">
-            <a href="/profileUpload"><img className="pfp" src={"https://www.fresher-friend.bham.team/"+pf} alt="Profile" aria-label="Profile picture"/></a>
+            <img className="pfp" src={pfp} alt="Profile" />
           </div>
           <h1>
             {info[0]} {info[1]} {info[2]}
           </h1>
-          <p className="About" aria-label="Course information">{info[3]}</p>
+          <p className="About" aria-label="Course information">
+            {info[3]}
+          </p>
           {/* <p className="About">First Year</p> */}
           <p className="About" aria-label="accommodation information">
             Flat {info[4]}, Block {info[5]}, {info[6]}
           </p>
         </div>
         <div className="statusButtons" aria-label="Profile status">
-          <div className="statusButton" aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}>
-            <FontAwesomeIcon 
-              aria-label={`statusIcon ${status[0] ? "isolating" : "not isolating"}`}
+          <div
+            className="statusButton"
+            aria-label={`statusIcon ${status[0] ? "isolating" : ""}`}
+          >
+            <FontAwesomeIcon
+              aria-label={`statusIcon ${
+                status[0] ? "isolating" : "not isolating"
+              }`}
               className={`statusIcon ${status[0] ? "isolating" : ""}`}
               id={`statusIcon ${status[0] ? "isolating" : ""}`}
               icon={faCertificate}
@@ -217,8 +204,11 @@ function Account() {
             />
             <p className="statusLabel">I'm isolating</p>
           </div>
-          <div className="statusButton" aria-label={`statusIcon ${status[1] ? "away" : ""}`}>
-            <FontAwesomeIcon 
+          <div
+            className="statusButton"
+            aria-label={`statusIcon ${status[1] ? "away" : ""}`}
+          >
+            <FontAwesomeIcon
               aria-label={`statusIcon ${status[1] ? "away" : "here"}`}
               className={`statusIcon ${status[1] ? "away" : ""}`}
               id={`statusIcon ${status[1] ? "away" : ""}`}
@@ -228,9 +218,14 @@ function Account() {
             />
             <p className="statusLabel">I'm away</p>
           </div>
-          <div className="statusButton" aria-label={`statusIcon ${status[2] ? "guest visiting" : ""}`}>
+          <div
+            className="statusButton"
+            aria-label={`statusIcon ${status[2] ? "guest visiting" : ""}`}
+          >
             <FontAwesomeIcon
-              aria-label={`statusIcon ${status[2] ? "guest visiting" : "no guests visiting"}`}
+              aria-label={`statusIcon ${
+                status[2] ? "guest visiting" : "no guests visiting"
+              }`}
               className={`statusIcon ${status[2] ? "guest" : ""}`}
               id={`statusIcon ${status[2] ? "guest" : ""}`}
               icon={faUser}
@@ -251,11 +246,15 @@ function Account() {
           </div>
         </div>
         <div className="settings">
-            <label><input className="PrivateProfileToggle"
-                 type="checkbox"
-                 defaultChecked={status[3]}
-			  onClick={() => handleClick(3)}
-                 /> Private profile</label>
+          <label>
+            <input
+              className="PrivateProfileToggle"
+              type="checkbox"
+              defaultChecked={status[3]}
+              onClick={() => handleClick(3)}
+            />{" "}
+            Private profile
+          </label>
           <br />
           <form onSubmit={doLogout}>
             <button className="logout btn btn-primary" type="submit">
