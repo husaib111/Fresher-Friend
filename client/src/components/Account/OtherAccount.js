@@ -14,12 +14,11 @@ import Interest from "./Interest";
 import Axios from "axios";
 import Navbar from "../Navbar/Navbar";
 
-const [status,setStatus] = useState([]);
-
 function Account() {
   library.add(fas);
   
   let {userName} = useParams();
+  const [status,setStatus] = useState([]);
   
   const generateInterests = (row) => {
     const { interest_name, interest_icon } = row;
@@ -197,7 +196,7 @@ function Account() {
           /*tabIndex={status[3] ? "-1" : "0"}*/
         >
           <h2>Interests</h2>
-          <div className="interests">
+          <div className="interests" onLoad={privateProfile(status[3])}>
             {interests}
             {/* <Interest icon={faFutbol} interestName="Football"/> */}
             {/* <Interest icon={faGamepad} interestName="Games"/> */}
@@ -210,10 +209,12 @@ function Account() {
   );
 }
 
-if(status[3] === 1) {
-  document.getElementById("interestB").style.display = 'none';
-  document.getElementById("interestB").style.zIndex = -1;
-  document.getElementById("accommodationI").innerHTML = "Private Account";
+function privateProfile(privateStatus) {
+  if(privateStatus === 1) {
+    document.getElementById("interestB").style.display = 'none';
+    document.getElementById("interestB").style.zIndex = -1;
+    document.getElementById("accommodationI").innerHTML = "Private Account";
+  }
 }
 
 export default Account;
