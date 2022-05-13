@@ -94,7 +94,7 @@ const CreateAccount = () => {
                       interests.push("4");
                   }
                   const response = await Axios.post(
-                    "http://localhost:5001/createAccount",
+                    "http://localhost:5001/createAccount", //localhost
                     {
                       email: email,
                       password: password1,
@@ -140,9 +140,9 @@ const CreateAccount = () => {
       <h1 className="maintitle">Fresher Friend</h1>
       <h2 className="subtitle">Create Your Account</h2>
       <form
-        className="loginForm"
-        onSubmit={loginUser}
+        className="loginForm"   
         aria-label="Account creation form"
+        onSubmit={loginUser}
       >
         <div className="mb-3 inputDiv" aria-label="Account creation">
           <input

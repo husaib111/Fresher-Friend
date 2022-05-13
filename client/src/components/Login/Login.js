@@ -94,11 +94,6 @@ const Login = () => {
           value="Login"
           className="loginButton btn btn-primary"
         ></input>
-        <p>
-          <a href="/login" aria-label="forgot Password Link">
-            Forgot password
-          </a>
-        </p>
       </form>
       <hr />
       <div className="createAccount">

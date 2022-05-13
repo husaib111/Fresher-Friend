@@ -4,6 +4,7 @@ import "./Group.css";
 import Axios from "axios";
 import React, { useCallback, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { IoPersonCircle } from "react-icons/io5";
 
 function ProfileList(props) {
   const [pfs, setPfs] = useState([]);
@@ -31,29 +32,35 @@ function ProfileList(props) {
   }, [params.type]);
 
   const getPfs = useCallback(async () => {
-    await Axios.get("https://www.fresher-friend.bham.team/" + params.type + "Users", {
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    await Axios.get(
+      "https://www.fresher-friend.bham.team/" + params.type + "Users",
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((response) => {
         const { data } = response;
         // console.log(data);
         data.map(async (name) => {
-          const {  email } = name;
+          const { email } = name;
           const username = email.substring(0, email.lastIndexOf("@"));
 
-          await Axios.get("https://www.fresher-friend.bham.team/profile/" + username, {
-            withCredentials: true,
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }).then((response) => {
+          await Axios.get(
+            "https://www.fresher-friend.bham.team/profile/" + username,
+            {
+              withCredentials: true,
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          ).then((response) => {
             console.log(response);
             const { data } = response;
             const { filename } = data;
-              console.log("pfs:" + pfs);
+            console.log("pfs:" + pfs);
             setPfs(pfs.push(filename));
           });
         });
@@ -67,7 +74,7 @@ function ProfileList(props) {
   useEffect(() => {
     getPfs();
     getInfo();
-  }, [getInfo,getPfs]);
+  }, [getInfo, getPfs]);
 
   function ProfileButton(props) {
     console.log(pfs[props.add]);
@@ -75,11 +82,7 @@ function ProfileList(props) {
       <div className="ProfileButton">
         <a href={"/account/" + props.username}>
           <div className="ProfileButtonCircle">
-            <img
-		alt="Profile"
-              src={"https://www.fresher-friend.bham.team/" + pfs[props.add]}
-              className={"ProfileButtonIcon"}
-            />
+            <IoPersonCircle className={"ProfileButtonIcon"} />
           </div>
           <h1 className="ProfileButtonTitle">{props.name}</h1>
         </a>

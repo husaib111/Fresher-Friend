@@ -28,10 +28,10 @@ class App extends React.Component {
           <Route path="account/:userName" element={<OtherAccount />} />
           <Route path="/group/:type" element={<Group />} />
           <Route path="/test" element={<TestExample />} />
-		  <Route path="/createAccount" element={<CreateAccount />} />
+		      <Route path="/createAccount" element={<CreateAccount />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/about" element={<About />} />
-	  <Route path="/profileUpload" element={<ProfileUpload />} />
+	        <Route path="/profileUpload" element={<ProfileUpload />} />
 	</Routes>
       </Router>
     );
