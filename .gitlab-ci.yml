@@ -116,7 +116,7 @@ deploy-server:
   stage: deploy
   script:
     - echo "Deploying server..."
-    - rsync -a --delete-after . $SERVER_DEPLOY_LOCATION
+    - rsync -a . $SERVER_DEPLOY_LOCATION
     - cd $SERVER_DEPLOY_LOCATION
     - cd server
     - pm2 restart server.js
