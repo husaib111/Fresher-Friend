@@ -9,6 +9,7 @@ const auth = require("./db/auth");
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
+require("dotenv").config();
 require("./db/passport");
 
 //middleware
