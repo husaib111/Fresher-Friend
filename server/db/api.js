@@ -1,7 +1,8 @@
 const { response } = require("express");
 const pool = require("./dbconnect");
+require("dotenv").config();
 
-const SECRET = "admin";
+const SECRET = process.env.API_ADMIN_TOKEN;
 
 const getAuth = (request) => {
   if (!request.headers.authorization) {
@@ -359,8 +360,8 @@ const eventsByIDEndpoint = async (request, response, next) => {
 
           const updatedEvent = await pool.query(
             "UPDATE event SET " +
-              endpoint +
-              " = $1 WHERE event_id = $2 RETURNING *",
+            endpoint +
+            " = $1 WHERE event_id = $2 RETURNING *",
             [value, id]
           );
           //200- OK (Event successfully modified)
@@ -400,8 +401,8 @@ const eventsByIDEndpoint = async (request, response, next) => {
             }
             const updatedEvent = await pool.query(
               "UPDATE event SET " +
-                endpoint +
-                " = $1 WHERE event_id = $2 RETURNING *",
+              endpoint +
+              " = $1 WHERE event_id = $2 RETURNING *",
               [value, id]
             );
             //200- OK (Event successfully modified)
@@ -948,8 +949,8 @@ const courseGroupsByIDEndpoint = async (request, response) => {
 
         const updatedCourse = await pool.query(
           "UPDATE courses SET " +
-            endpoint +
-            " = $1 WHERE course_id = $2 RETURNING *",
+          endpoint +
+          " = $1 WHERE course_id = $2 RETURNING *",
           [value, id]
         );
         //200- OK (Event successfully modified)
@@ -1241,8 +1242,8 @@ const accommodationGroupsByIDEndpoint = async (request, response) => {
 
         const updatedAccommodation = await pool.query(
           "UPDATE accommodation SET " +
-            endpoint +
-            " = $1 WHERE acc_id = $2 RETURNING *",
+          endpoint +
+          " = $1 WHERE acc_id = $2 RETURNING *",
           [value, id]
         );
         //200- OK (Event successfully modified)
