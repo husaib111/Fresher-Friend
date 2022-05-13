@@ -2,6 +2,8 @@ const passport = require("passport");
 const { Strategy } = require("passport-jwt");
 const pool = require("./dbconnect");
 
+require("dotenv").config();
+
 const cookieExtractor = function (request) {
   let token = null;
   if (request && request.cookies) token = request.cookies["token"];
@@ -9,7 +11,7 @@ const cookieExtractor = function (request) {
 };
 
 const opts = {
-  secretOrKey: "fresherFriend",
+  secretOrKey: process.env.SECRET_JWT_PHRASE,
   jwtFromRequest: cookieExtractor,
 };
 

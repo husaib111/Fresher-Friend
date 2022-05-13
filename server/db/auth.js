@@ -3,6 +3,8 @@ const passport = require("passport");
 const pool = require("./dbconnect");
 const jwt = require("jsonwebtoken");
 
+require("dotenv").config();
+
 const loginCheck = async (request, response) => {
   try {
     console.log("logging in");
@@ -32,7 +34,7 @@ const loginCheck = async (request, response) => {
           {
             email: user.rows[0].email,
           },
-          "fresherFriend"
+          process.env.SECRET_JWT_PHRASE
         );
 
         response

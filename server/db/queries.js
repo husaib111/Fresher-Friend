@@ -2,8 +2,10 @@ const { response } = require("express");
 const pool = require("./dbconnect");
 const jwt = require("jsonwebtoken");
 
+require("dotenv").config();
+
 const getLoggedUserEmail = (request) => {
-  return jwt.verify(request.cookies["token"], "fresherFriend").email;
+  return jwt.verify(request.cookies["token"], process.env.SECRET_JWT_PHRASE).email;
 };
 
 const getUsers = async (request, response) => {
@@ -81,14 +83,14 @@ const getLoggedInUserInterests = async (request, response) => {
   }
 };
 
-getLoggedUserEmailForFrontEnd = async (request, response) =>{
+getLoggedUserEmailForFrontEnd = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);
     console.log(userEmail);
 
     const users = await pool.query(
-        "select email from users where email=$1",
-        [userEmail]
+      "select email from users where email=$1",
+      [userEmail]
     );
 
     response.json(users.rows);
@@ -226,10 +228,10 @@ const testFunction = async (request, response) => {
   }
 };
 
-const getAccLocationList = async(request, response) => {
+const getAccLocationList = async (request, response) => {
   try {
     const data = await pool.query(
-        "SELECT DISTINCT acc_location FROM accommodation"
+      "SELECT DISTINCT acc_location FROM accommodation"
     );
     response.json(data.rows)
   }
@@ -239,12 +241,12 @@ const getAccLocationList = async(request, response) => {
 }
 
 
-const getFlatsFromAccLocation =  async(request, response) => {
+const getFlatsFromAccLocation = async (request, response) => {
   try {
-    const {accLocationName} = request.params;
+    const { accLocationName } = request.params;
     const data = await pool.query(
-        "SELECT acc_id, flat_num FROM accommodation WHERE acc_location = $1",
-        [accLocationName]
+      "SELECT acc_id, flat_num FROM accommodation WHERE acc_location = $1",
+      [accLocationName]
     );
     response.json(data.rows)
   }
@@ -253,10 +255,10 @@ const getFlatsFromAccLocation =  async(request, response) => {
   }
 }
 
-const getCourseList = async(request, response) => {
+const getCourseList = async (request, response) => {
   try {
     const data = await pool.query(
-        "SELECT course_id, course_name FROM courses"
+      "SELECT course_id, course_name FROM courses"
     );
     response.json(data.rows)
   }
@@ -461,15 +463,15 @@ const getAccMessages = async (request, response) => {
     const userEmail = getLoggedUserEmail(request);
 
     const acc_ids = await pool.query(
-        "SELECT acc_id FROM Users WHERE email = $1",
-        [userEmail]
+      "SELECT acc_id FROM Users WHERE email = $1",
+      [userEmail]
     );
 
     const { acc_id } = acc_ids.rows[0];
 
     const messages = await pool.query(
-        "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM AccommodationMessages NATURAL JOIN Users WHERE acc_id = $1 ORDER BY posted_at ASC",
-        [acc_id]
+      "SELECT msg_text, posted_at, email, first_name, middle_name, last_name FROM AccommodationMessages NATURAL JOIN Users WHERE acc_id = $1 ORDER BY posted_at ASC",
+      [acc_id]
     );
 
     response.json(messages.rows);
@@ -550,12 +552,12 @@ const uploadProfilePic = async (request, response) => {
       "select user_id from users where email=$1",
       [userEmail]
     );
-      console.log("~={-}('-{='");
+    console.log("~={-}('-{='");
     const { user_id } = userIds.rows[0];
-     const current = await pool.query("select * from profiles where user_id=$1",[user_id]);
-      console.log(current.rows);
+    const current = await pool.query("select * from profiles where user_id=$1", [user_id]);
+    console.log(current.rows);
 
-      await pool.query("delete from profiles where user_id=$1",[user_id]);
+    await pool.query("delete from profiles where user_id=$1", [user_id]);
 
     await pool.query("insert into profiles(user_id,filename) values ($1,$2)", [
       user_id,
@@ -567,7 +569,7 @@ const uploadProfilePic = async (request, response) => {
     console.log(e.message);
   }
 };
-const getLoggedInProfilePic = async (request, response) =>{
+const getLoggedInProfilePic = async (request, response) => {
   try {
     const userEmail = getLoggedUserEmail(request);
 
@@ -575,20 +577,20 @@ const getLoggedInProfilePic = async (request, response) =>{
       "select user_id from users where email=$1",
       [userEmail]
     );
-      console.log("~={-}('-{='");
+    console.log("~={-}('-{='");
     const { user_id } = userIds.rows[0];
-     const current = await pool.query("select * from profiles where user_id=$1",[user_id]);
-      console.log(current.rows);
-      response.json(current.rows[0]);
+    const current = await pool.query("select * from profiles where user_id=$1", [user_id]);
+    console.log(current.rows);
+    response.json(current.rows[0]);
   } catch (e) {
     console.log(e.message);
   }
 
 }
 
-const getProfilePic = async (request, response) =>{
+const getProfilePic = async (request, response) => {
   try {
-const { userId } = request.params;
+    const { userId } = request.params;
     const userIds = await pool.query(
       "select user_id from users where email=$1",
       [userId + "@student.bham.ac.uk"]
@@ -597,9 +599,9 @@ const { userId } = request.params;
 
     const { user_id } = userIds.rows[0];
 
-     const current = await pool.query("select * from profiles where user_id=$1",[user_id]);
-      console.log(current.rows);
-      response.json(current.rows[0]);
+    const current = await pool.query("select * from profiles where user_id=$1", [user_id]);
+    console.log(current.rows);
+    response.json(current.rows[0]);
   } catch (e) {
     console.log(e.message);
   }
@@ -608,7 +610,7 @@ const { userId } = request.params;
 
 const createAccount = async (request, response) => {
   try {
-      console.log(request.body);
+    console.log(request.body);
     const {
       email,
       password,
@@ -623,53 +625,55 @@ const createAccount = async (request, response) => {
       const newUser = pool.query(
         "INSERT INTO users (email, first_name, middle_name, last_name, course_id, acc_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         [email, firstName, middleName, lastName, courseId, accId]
-      ).then(async (newUser)=>{
-      console.log(newUser);
-      console.log(newUser.rows[0]);
-      if (!newUser) {
-        response
-          .status(500)
-          .send("Unknown error, please contact the developer.");
-      }
-      const newPasswordEntry = await pool.query(
-        "INSERT INTO passwords (user_id, pass) VALUES ($1, $2) RETURNING user_id",
-        [newUser.rows[0].user_id, password]
-      );
-      console.log(newPasswordEntry);
-      console.log(newPasswordEntry.rows[0]);
-      if (!newPasswordEntry) {
-        response
-          .status(500)
-          .send("Unknown error, please contact the developer.");
-      }
-	  response.status(201).json(newUser)
+      ).then(async (newUser) => {
+        console.log(newUser);
+        console.log(newUser.rows[0]);
+        if (!newUser) {
+          response
+            .status(500)
+            .send("Unknown error, please contact the developer.");
+        }
+        const newPasswordEntry = await pool.query(
+          "INSERT INTO passwords (user_id, pass) VALUES ($1, $2) RETURNING user_id",
+          [newUser.rows[0].user_id, password]
+        );
+        console.log(newPasswordEntry);
+        console.log(newPasswordEntry.rows[0]);
+        if (!newPasswordEntry) {
+          response
+            .status(500)
+            .send("Unknown error, please contact the developer.");
+        }
+        response.status(201).json(newUser)
       });
     } else {
-	console.log("here");
+      console.log("here");
       const newUser = await pool.query(
         "INSERT INTO users (email, first_name, last_name, course_id, acc_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         [email, firstName, lastName, courseId, accId]
-      ).then(async(newUser)=>{;
-			      
-	console.log(newUser);
-      if (!newUser) {
-	  console.log("he");
-        response
-          .status(500)
-          .send("Unknown error, please contact the developer.");
-      }
-	console.log("here2");
-      const newPasswordEntry = await pool.query(
-        "INSERT INTO passwords (user_id, pass) VALUES ($1, $2) RETURNING user_id",
-        [newUser.rows[0].user_id, password]
-      );
-      if (!newPasswordEntry) {
-        response
-          .status(500)
-          .send("Unknown error, please contact the developer.");
-      }
-      response.status(201).json(newUser);
-			})}
+      ).then(async (newUser) => {
+        ;
+
+        console.log(newUser);
+        if (!newUser) {
+          console.log("he");
+          response
+            .status(500)
+            .send("Unknown error, please contact the developer.");
+        }
+        console.log("here2");
+        const newPasswordEntry = await pool.query(
+          "INSERT INTO passwords (user_id, pass) VALUES ($1, $2) RETURNING user_id",
+          [newUser.rows[0].user_id, password]
+        );
+        if (!newPasswordEntry) {
+          response
+            .status(500)
+            .send("Unknown error, please contact the developer.");
+        }
+        response.status(201).json(newUser);
+      })
+    }
   } catch (e) {
     console.log(e.message);
     response.status(500).send(e);
@@ -677,8 +681,8 @@ const createAccount = async (request, response) => {
 };
 
 module.exports = {
-    getProfilePic,
-    getLoggedInProfilePic,
+  getProfilePic,
+  getLoggedInProfilePic,
   uploadProfilePic,
   getEventInfo,
   getUserStatus,

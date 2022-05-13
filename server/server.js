@@ -1,22 +1,20 @@
 const fs = require("fs");
 const https = require("https");
-// const http = require("http");
 const app = require("./index");
 require("dotenv").config();
 
-const port = 5001;
+const port = process.env.SERVER_PORT;
 
 const options = {
   cert: fs.readFileSync(
-    "/etc/letsencrypt/live/fresher-friend.bham.team/fullchain.pem"
+    process.env.OPTION_CERT_PATH
   ),
   key: fs.readFileSync(
-    "/etc/letsencrypt/live/fresher-friend.bham.team/privkey.pem"
+    process.env.OPTION_KEY_PATH
   ),
 };
 
 const server = https.createServer(options, app).listen(port, () => {
   // const server = http.createServer(app).listen(port, () => {
   console.log("Server started on port %d", port);
-  console.log(process.env);
 });
